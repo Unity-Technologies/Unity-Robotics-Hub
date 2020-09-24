@@ -3,6 +3,12 @@
 **TODO** Brief Intro
 
 ## Unity Robotics Tutorials
+
+### Repos
+- [TCP Endpont ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
+- [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
+- [URDF Importer](https://github.cds.internal.unity3d.com/unity/URDF-Importer)
+
 ### Prerequisites
 - Knowlege of [ROS](https://www.ros.org/) and a working [ROS environment](https://www.ros.org/install/)
 	- This tutorial was made using ROS Melodic and Python 2.
