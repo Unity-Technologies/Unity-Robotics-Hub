@@ -1,13 +1,15 @@
-# Generate C# code from ROS Message File
+# Generate C# code from ROS Message, Service, or Action
 
-Assumes Robotics-Tutorial repo has been downloaded
+This example demonstrates how to generate the C# code for a ROS message using the `MessageGeneration` scripts but the same steps can be used to generate code for a ROS Service or Action as well.
 
-- Create a new Unity project 2020.2+
-- Create a new directory under `Assets` name `Plugins`
-- Download the latest `MessageGeneration` DLL file from [here](https://github.com/Unity-Technologies/Robotics-Tutorials/releases) and save them to the newly created `Plugins` directory
-- `RosMessageGeneration` -> `AutoGenerateMessages` -> `Single Message...`
-- Set the input file path to `PATH/TO/Robotics-Tutorials/robotics_demo/msg/PosRot.msg` and click `GENERATE!`
-    - The generated file will be saved in the default directory `Assets/RosMessages/msg`
+- In a Unity project 2020.2+ create a new directory under `Assets` name `Plugins`
+- Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repo to your local machine and copy the `MessageGeneraton` directory to the newly created `Plugins` directory
+- After the scripts load there should be a new option in the menu bar
 
+- Select `RosMessageGeneration` -> `Auto Generate Messages` and choose one of the options
+	- Single Message
+	- Package Message
+	- All Messages in directory
 
-**TODO UPDATE!!**
+- Change the input path to the desired msg file, ROS package directory, or directory and click `GENERATE!`
+- The generated file will be saved in the default directory `Assets/RosMessages/`

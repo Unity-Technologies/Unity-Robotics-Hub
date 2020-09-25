@@ -1,14 +1,18 @@
 # Importing a UR3 Robot using URDF importer
 
 ## Requirements
--  Unity Version 2020.2+
--  UR3 URDF file 
--  [URDF importer unity package](TODO!!!insert Link here)
+- Unity Version 2020.2+
+- UR3 URDF file
+- [URDF importer dll files and source code](https://github.cds.internal.unity3d.com/unity/URDF-Importer/releases)
 
 ## Setting up the URDF importer in Unity Editor 
 - Create a new Unity project.
-- Copy the associated URDF file and meshes into the Assets folder. The files should follow [this](urdf_appendix.md#File-Hierarchy) hierarchy 
-- From the menu click `Assets` -> `Import Package` -> `Import Robot from URDF` or in the Unity file explorer, open the folder containing URDF file and select the option `Import Robot from URDF`.
+- Copy UnityEditorScripts folder into the assets directory of your unity project.
+- Create a new folder in the Assets directory and name it Plugins.
+- Copy Urdf.dll in the plugins folder. Click on the urdf.dll in the Unity Editor and uncheck "Validate References".
+- Copy the associated ur3 URDF file and meshes into the Assets folder. The files should follow [this](urdf_tutorials/urdf_appendix.md#File-Hierarchy) hierarchy
+- Find the ur3.urdf file in the assets folder and select it.
+- From the menu click `Assets` -> `Import Robot from URDF` or in file explorer right click on the selected file and click `Import Robot from URDF`.
 - Select the co-ordinate system in which the meshes were designed. Default mesh orientation is Y-up which is supported by Unity but some packages often use Z-up and X-up configuration. For more [information](https://docs.unity3d.com/Manual/HOWTO-FixZAxisIsUp.html). 
 - Click `Import`
    
