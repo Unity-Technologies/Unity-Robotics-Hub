@@ -1,6 +1,15 @@
 # Unity ROS Integration
 
-TODO: Describe a ROS Unity integration
+## ROS Unity Communication
+![](images/unity_ros.png)
+
+
+An TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS.
+
+The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this the `MessageGeneration` plugin can generate C# classes, including serialization and deserialization functions, from ROS `.msg` files.
+
+The `TCPConnector` plugin provides the Unity scripts necessary to publish, subscribe, or call a service.
+
 
 ## Tutorials
 - [Setup](setup.md) - Minimum setup required ffor a ROS Unity integration
