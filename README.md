@@ -1,6 +1,8 @@
 # Unity Robotics Hub
 
-**TODO** Brief Intro
+This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
+
+If you have questions please feel free to contact us [here](mailto:unity-robotics@unity3d.com )
 
 ## Unity Robotics Tutorials
 
