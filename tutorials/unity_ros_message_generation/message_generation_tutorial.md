@@ -1,6 +1,6 @@
 # Generate C# code from ROS Message, Service, or Action
 
-This example demonstrates how to generate the C# code for a ROS message using the `MessageGeneration` scripts but the same steps can be used to generate code for a ROS Service or Action as well.
+This example demonstrates how to generate the C# code for a ROS message using the `MessageGeneration` scripts but the same steps can be used to generate code for a ROS Service.
 
 - In a Unity project 2020.2+ create a new directory under `Assets` name `Plugins`
 - Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repo to your local machine and copy the `MessageGeneraton` directory to the newly created `Plugins` directory
