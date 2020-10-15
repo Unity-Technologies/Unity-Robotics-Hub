@@ -7,7 +7,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 ## Unity Robotics Tutorials
 
 ### Repos
-- [TCP Endpont ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
+- [TCP Endpoint ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
 - [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 - [URDF Importer](https://github.cds.internal.unity3d.com/unity/URDF-Importer)
 
