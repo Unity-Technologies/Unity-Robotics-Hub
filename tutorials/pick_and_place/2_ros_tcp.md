@@ -1,5 +1,16 @@
 # Pick and Place Tutorial [DRAFT]
 
+## Table of Contents
+- [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
+  - [Table of Contents](#table-of-contents)
+  - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
+  - [The Unity Side](#the-unity-side)
+  - [The ROS side](#the-ros-side)
+  - [Troubleshooting](#troubleshooting)
+  - [Resources](#resources)
+
+---
+
 ## Step 2: Unity & ROS Integration
 
 - ROS INTRO [PLACEHOLDER]
@@ -90,6 +101,8 @@ public class RosPublisher : MonoBehaviour
 
 This script will create a TCP connection and send messages to the ROS server endpoint--which has yet to be created!
 
+---
+
 ## The ROS side
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
@@ -147,14 +160,22 @@ This script imports the necessary dependencies from the tcp_endpoint package (fo
 
 - Return to Unity, and press Play. The `rostopic echo ur3_topic` console should print the pose of the cube every 2.0 seconds. ROS and Unity have now successfully connected!
 
-## Troubleshooting:
+---
+
+## Troubleshooting
 
 - If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x ~/catkin_ws/src/ros_unity_control/scripts/server_endpoint.py`.
   
 - If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the Motion Planning Service component in Unity. Additionally, ensure that the `ros_tcp_ip` address matches in the `server_endpoint.py` value, and that `unity_machine_ip` is your Unity machine's IP.
-  
-## Resources:
+
+---
+
+## Resources
 
 - Setting up a ROS workspace
     - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
     - http://wiki.ros.org/catkin/Tutorials/CreatingPackage 
+
+---
+
+Proceed to [Step 3](3_naive.md).

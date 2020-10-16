@@ -1,6 +1,13 @@
 # Pick and Place Tutorial [DRAFT]
 
-## Step 1: Create Unity scene with imported UR3 URDF
+## Table of Contents
+- [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
+  - [Table of Contents](#table-of-contents)
+  - [Step 1: Create Unity scene with imported URDF](#step-1-create-unity-scene-with-imported-urdf)
+  
+---
+
+## Step 1: Create Unity scene with imported URDF
   
 - Install [Unity Hub](https://unity3d.com/get-unity/download).
   
@@ -20,11 +27,15 @@
   
 ![](img/1_dll.png) 
 
+[PLACEHOLDER] UPDATE UR3
+
 - Find and select the URDF file in the Project window (`Assets/PickAndPlace/URDF/ur3_with_gripper/ur3_with_gripper.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   
 - Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
 > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
+
+[PLACEHOLDER] update position with niryo 
 
 - The UR3 should now be visible in the scene! Select the `ur3_with_gripper` object and set its position to `(0,0.77,0)` to place it on top of the table.
   
@@ -41,3 +52,7 @@
 ![](img/1_end.png) 
 
 - Learn more about the URDF importer tool [here](https://github.com/Unity-Technologies/Robotics-Tutorials/blob/master/urdf_tutorial.md).
+
+---
+
+Proceed to [Step 2](2_ros_tcp.md).

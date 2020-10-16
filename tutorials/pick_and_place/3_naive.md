@@ -1,20 +1,69 @@
 # Pick and Place Tutorial [DRAFT]
 
+## Table of Contents
+- [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
+  - [Table of Contents](#table-of-contents)
+  - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
+  - [The Unity Side](#the-unity-side)
+  - [The ROS Side](#the-ros-side)
+  - [Unity & ROS Communication](#unity--ros-communication)
+  - [Troubleshooting](#troubleshooting)
+    - [Errors and Warnings](#errors-and-warnings)
+    - [Hangs, Timeouts, and Freezes](#hangs-timeouts-and-freezes)
+    - [Miscellaneous Issues](#miscellaneous-issues)
+
+---
+
 ## Step 3: Naive Pick & Place
 
 ## The Unity Side
 
-- The PickAndPlace.unitypackage includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select RosMessageGeneration -> Auto Generate Services and select Single Service. 
+- The `PickAndPlace.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
-- In the Service Auto Generation window that appears, next to the Input Package Path, click Browse Package… and navigate to <>. Choose the MotionPlanningService.srv file, and then click GENERATE! If this is successful, 2 new C# scripts should populate the Assets/RosMessages/RosUnityControl/srv directory: MotionPlanningServiceRequest and MotionPlanningServiceResponse. 
+- In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control/srv directory, e.g. `~/catkin_ws/src/ros_unity_control/srv`.. Choose the `MotionPlanningService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/RosUnityControl/srv` directory: MotionPlanningServiceRequest and MotionPlanningServiceResponse. 
   
 > [PLACEHOLDER]: what’s happening in Service Generation?
 
 [PLACEHOLDER] everything that will be changed significantly
 
+- Create MotionPlanningService
+
+- Update controller stiffness/damping
+
+- Enter Play mode. The robot arm should initialize to the default joint configuration!
+
 ![](img/3_init.gif)
 
+- Create GripperController?
+
+- Return to the MotionPlanningService script. The previously written `MoveToInitialPosition()` function had a commented out call to a `SendPose()` method--uncomment that line, and create the `SendPose()` method:
+
+``` csharp
+/// <summary>
+/// Send the cube pose to create gripping information.
+/// </summary>
+private void SendPose()
+{
+   var pos = m_cube.transform.position;
+   var rot = m_cube.transform.rotation;
+ 
+   float[] position = { (float)pos.x, (float)pos.y, (float)pos.z };
+   Quaternion quaternion = new Quaternion((float)rot.x, (float)rot.y, (float)rot.z , (float) rot.w);
+   float[] rotation = {quaternion.eulerAngles.x, quaternion.eulerAngles.y, quaternion.eulerAngles.z};
+   PickPlaceCube(position, rotation);
+}
+```
+This will format the cube’s position and rotation to be later read by the motion planning service.
+
+- Pick place cube 
+
+- Invoke motion planning
+
+- Verify things compile in the Unity Editor, and fix any syntax errors that may have appeared. Add the GripperController script to the `ur3_with_gripper` object. In the Hierarchy window, click and drag the Cube object into the cube Inspector field on the MotionPlanningService script. In the search bar on the Hierarchy window, search `ee_link`. Drag and drop this component onto the End Effector Inspector field of the MotionPlanningService Script.
+
 - The Unity side is now ready to communicate with ROS to motion plan!
+
+---
 
 ## The ROS Side
 
@@ -35,7 +84,15 @@ This will add the motion planning service to the list of destinations for the Ro
 
 [PLACEHOLDER] everything that will be changed significantly
 
+- create motion planning script (motion planner, trajectory solution, format ros response)
+
+- discussion on moveit configs 
+
 - Save all of the edited scripts. Navigate to your ROS workspace directory (e.g. `cd ~/catkin_ws`) and run `catkin_make`. Source the workspace (e.g. `source /opt/ros/melodic/setup.bash`).
+
+--- 
+
+## Unity & ROS Communication
 
 - The ROS side is now ready to interface with the Unity side! There are now four ROS commands that are necessary to begin the communication process. In a new terminal window, start ROS core:
 
@@ -86,6 +143,8 @@ Once this process is ready, it will print a message similar to `[INFO] [16004613
   - The pick-and-place process should repeat is initially set to run twice. This Number of Runs value can be changed on the `ur3_with_gripper` object.
 
   - There may be a slight delay between the robot arm "waking up," calculating a path, and sending the information to Unity, causing the ROS messages to be missed. Refer to the [Troubleshooting](#troubleshooting) section if issues arise.
+
+---
 
 ## Troubleshooting
 

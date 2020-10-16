@@ -2,7 +2,7 @@
 
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
-If you have questions please feel free to contact us [here](mailto:unity-robotics@unity3d.com )
+If you have questions please feel free to contact us [here](mailto:unity-robotics@unity3d.com).
 
 ## Unity Robotics Tutorials
 
@@ -20,6 +20,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - [C# ROS Message Class Generation](tutorials/unity_ros_message_generation/message_generation_tutorial.md)
 - [Unity ROS Integration](tutorials/ros_unity_integration/README.md)
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
+- [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
 
 ### ROS Packages
 
