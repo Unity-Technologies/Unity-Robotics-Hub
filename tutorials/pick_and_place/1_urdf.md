@@ -1,5 +1,7 @@
 # Pick and Place Tutorial [DRAFT]
 
+This step includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF importer.
+
 ## Table of Contents
 - [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
   - [Table of Contents](#table-of-contents)

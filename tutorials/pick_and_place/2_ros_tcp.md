@@ -1,5 +1,10 @@
 # Pick and Place Tutorial [DRAFT]
 
+This step assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started.
+
+Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS .msg file, and publishing a Unity GameObject's pose to a ROS topic. 
+
+
 ## Table of Contents
 - [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
   - [Table of Contents](#table-of-contents)
@@ -24,6 +29,8 @@
 - If the PickAndPlace Unity project is not already open, select and open it from the Unity Hub.
   
 - The `PickAndPlace.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
+
+![](img/2_gen.png)
    
 - In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control directory, e.g. `~/catkin_ws/src/ros_unity_control/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 4 new C# scripts should populate the `Assets/RosMessages/RosUnityControl/msg` directory: Pose, Rotation, Trajectory, and URJointConfig. Only Pose will be used in this tutorial.
   
@@ -160,6 +167,8 @@ This script imports the necessary dependencies from the tcp_endpoint package (fo
 
 - Return to Unity, and press Play. The `rostopic echo ur3_topic` console should print the pose of the cube every 2.0 seconds. ROS and Unity have now successfully connected!
 
+![](img/2_echo.png)
+
 ---
 
 ## Troubleshooting
@@ -172,9 +181,11 @@ This script imports the necessary dependencies from the tcp_endpoint package (fo
 
 ## Resources
 
-- Setting up a ROS workspace
-    - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
-    - http://wiki.ros.org/catkin/Tutorials/CreatingPackage 
+- Setting up a ROS workspace:
+   -  http://wiki.ros.org/ROS/Installation
+   > Note: this tutorial was made using ROS Melodic.
+   -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
+   - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
 ---
 
