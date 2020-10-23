@@ -2,9 +2,11 @@
 
 ![](img/0_pick_place.gif)
 
-Placeholder introduction. Something about using ROS, Unity, MoveIt, and pick & place as a task. 
+<!-- PLACEHOLDER introduction. Something about using ROS, Unity, MoveIt, and pick & place as a task.  -->
 
-This document breaks down the current status of Jacob & Jonathan’s Pick & Place demo into smaller tutorials that start from scratch (with provided assets). 
+This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task. 
+
+<!-- This document breaks down the current status of Jacob & Jonathan’s Pick & Place demo into smaller tutorials that start from scratch (with provided assets).  -->
 
 ## Table of Contents
 
@@ -16,8 +18,8 @@ This document breaks down the current status of Jacob & Jonathan’s Pick & Plac
 
 Download the provided assets here:
 
-1. [Unity Package](https://drive.google.com/file/d/1XVgXX_z_jlbT3s5NeKMbVpBpMrLlT9pY/view?usp=sharing)
-2. [ROS Package](https://drive.google.com/file/d/1IF29DtmP-eX-0iP5gG4aWUs6yNM1iL5p/view?usp=sharing) (DRAFT)
+1. [Unity Package PLACEHOLDER]()
+2. [ROS Package PLACEHOLDER]()
 
 ---
 
@@ -27,7 +29,7 @@ Download the provided assets here:
 
 [PLACEHOLDER]
 
-This step includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF importer.
+This step includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot--the [Niryo One](https://niryo.com/niryo-one/)--using the URDF importer. 
 
 <!-- Assumptions: ?
 
@@ -43,7 +45,7 @@ Verification: Pressing Play in the editor does nothing and throws no errors, the
 
 [PLACEHOLDER]
 
-This step assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS .msg file, and publishing a Unity GameObject's pose to a ROS topic. 
+This step assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and running a ROS Service to set the robot arm's joint positions.
 
 <!-- Assumptions: Previous steps have been completed (Unity environment). Access to a ROS workspace. Basic understanding of C#.
 
@@ -59,7 +61,7 @@ Verification: Running rostopic echo ur3_topic will successfully find the publish
 
 [PLACEHOLDER]
 
-This step includes the preparation and setup necessary to run a naive pick and place task using MoveIt. Steps covered include creating and invoking a motion planning service in ROS, moving a Unity Articulation Body based on a calculated trajectory, and controlling a gripping tool to successfully grab an object.
+This step includes the preparation and setup necessary to run a naive pick and place task using MoveIt. Steps covered include creating and invoking a motion planning service in ROS, moving a Unity Articulation Body based on a calculated trajectory, and controlling a gripping tool to successfully grasp and drop an object.
 
 <!-- Assumptions: Previous steps have been completed. Basic understanding of Python.
 

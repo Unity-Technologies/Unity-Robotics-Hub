@@ -18,48 +18,29 @@
 
 ## The Unity Side
 
-- The `PickAndPlace.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
+- The `PLACEHOLDER.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
-- In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control/srv directory, e.g. `~/catkin_ws/src/ros_unity_control/srv`.. Choose the `MotionPlanningService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/RosUnityControl/srv` directory: MotionPlanningServiceRequest and MotionPlanningServiceResponse. 
+- In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
   
 > [PLACEHOLDER]: what’s happening in Service Generation?
 
-[PLACEHOLDER] everything that will be changed significantly
+- PLACEHOLDER add pick and place to RosController
 
-- Create MotionPlanningService
+- Select the RosConnector GameObject. Note that the RosConnect component now shows the new member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
 
-- Update controller stiffness/damping
+- In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the PLACEHOLDER Right Gripper GO field, and the right_gripper object to the Left Gripper GO field.
 
-- Enter Play mode. The robot arm should initialize to the default joint configuration!
+- Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
+  - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
 
-![](img/3_init.gif)
+![](img/3_rosconnect.png)
 
-- Create GripperController?
+- In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. In the Game view, you will see the button appear in the bottom left corner as an overlay. 
+  
+- Select the newly made Button object, and scroll to see the Button component. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnector object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select RosConnect > PublishJoints().
+  - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
 
-- Return to the MotionPlanningService script. The previously written `MoveToInitialPosition()` function had a commented out call to a `SendPose()` method--uncomment that line, and create the `SendPose()` method:
-
-``` csharp
-/// <summary>
-/// Send the cube pose to create gripping information.
-/// </summary>
-private void SendPose()
-{
-   var pos = m_cube.transform.position;
-   var rot = m_cube.transform.rotation;
- 
-   float[] position = { (float)pos.x, (float)pos.y, (float)pos.z };
-   Quaternion quaternion = new Quaternion((float)rot.x, (float)rot.y, (float)rot.z , (float) rot.w);
-   float[] rotation = {quaternion.eulerAngles.x, quaternion.eulerAngles.y, quaternion.eulerAngles.z};
-   PickPlaceCube(position, rotation);
-}
-```
-This will format the cube’s position and rotation to be later read by the motion planning service.
-
-- Pick place cube 
-
-- Invoke motion planning
-
-- Verify things compile in the Unity Editor, and fix any syntax errors that may have appeared. Add the GripperController script to the `ur3_with_gripper` object. In the Hierarchy window, click and drag the Cube object into the cube Inspector field on the MotionPlanningService script. In the search bar on the Hierarchy window, search `ee_link`. Drag and drop this component onto the End Effector Inspector field of the MotionPlanningService Script.
+![](img/3_onclick.png)
 
 - The Unity side is now ready to communicate with ROS to motion plan!
 
@@ -67,24 +48,11 @@ This will format the cube’s position and rotation to be later read by the moti
 
 ## The ROS Side
 
-- Open the server_endpoint.py script. In the `source_destination_dict`, add the RosService:
-
-``` python
-source_destination_dict = {
-   'ur3_topic': RosPublisher('ur3_topic', Pose, queue_size=10),
-   'motion_planning_srv': RosService('motion_planning_service', MotionPlanningService)
-}
-```
-
-This will add the motion planning service to the list of destinations for the RosCommunicator class.
-
-- Install MoveIt on your ROS machine via `sudo apt install ros-<distro>-moveit`. This tutorial was created using Melodic, i.e. `sudo apt install ros-melodic-moveit`.
-
-> Note: A class wrapper for MoveIt has been provided in the ROS package. This class returns an explicit motion plan for a given robot, including functions to add objects to the MoveIt planning scene, format pose values, and create a constrained motion plan. This can be viewed in the `robot_motion_planning_interface.py` script. 
+- Ensure MoveIt is installed on your ROS machine via `sudo apt install ros-<distro>-moveit`. This tutorial was created using Melodic, i.e. `sudo apt install ros-melodic-moveit`.
 
 [PLACEHOLDER] everything that will be changed significantly
 
-- create motion planning script (motion planner, trajectory solution, format ros response)
+- update plan_pick_and_place()
 
 - discussion on moveit configs 
 
@@ -94,25 +62,19 @@ This will add the motion planning service to the list of destinations for the Ro
 
 ## Unity & ROS Communication
 
-- The ROS side is now ready to interface with the Unity side! There are now four ROS commands that are necessary to begin the communication process. In a new terminal window, start ROS core:
+- The ROS side is now ready to interface with the Unity side! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
-roscore
+roscore &
+rosparam set ROS_IP <your ROS IP>
+rosparam set ROS_TCP_PORT 10000
+rosparam set UNITY_IP <your Unity IP>
+rosparam set UNITY_SERVER_PORT 5005
+rosrun niryo_moveit server_endpoint.py
 ```
 
-Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
-
-- Open a new terminal window and start the MoveIt Planning Environment Node. This is the node that will actually run motion planning computations and load the UR3 configuration.
-
-``` bash
-cd ~/catkin_ws/ && source devel/setup.bash
-
-# Start the ur3 MoveIt planning environment
-roslaunch ur3_with_gripper_moveit gazebo.launch sim:=true
-```
-
-This may print out various error messages regarding the controller_spawner, such as `[controller_spawner-4] process has died`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
+Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window. Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 - Open a new terminal window and start the Motion Planning Node. This is the node that controls which pose the UR3 will travel to within the Unity Editor.
 
@@ -120,30 +82,27 @@ This may print out various error messages regarding the controller_spawner, such
 cd ~/catkin_ws/ && source devel/setup.bash
 
 # Start motion planning script
-rosrun ros_unity_control ur3_gripper_motion_planning_script.py
+rosrun niryo_moveit mover.py
 ```
 
 Once this process is ready, it will print `Ready to motion plan!` to the console.
 
-- Open a new terminal window and start the server. This is the node that will communicate with Unity.
+- Open a new terminal window and start the Moveit Node. This is the node that will actually run motion planning computations and load the configuration.
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
 
-# Start the server endpoint
-rosrun ros_unity_control server_endpoint.py
+# Start the planning environment
+roslaunch niryo_moveit demo.launch
 ```
 
-Once this process is ready, it will print a message similar to `[INFO] [1600461327.722720, 0.000000]: Starting server on 192.168.0.66:10000`.
+This may print out various error messages regarding the controller_spawner, such as `[controller_spawner-4] process has died`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
 
-- The ROS side of the setup is ready! Ensure you now have four active ROS processes running each of the above steps.
+- The ROS side of the setup is ready! 
 
-- Return to the Unity Editor, or open the Pick & Place project if it is not already open. Ensure all of the ROS processes are still running. Press Play in the editor. The robot should initialize to the defined starting position as before, “think” for a moment, then pick and place the cube!
+- Return to the Unity Editor, or open the Pick & Place project if it is not already open. Ensure all of the ROS processes are still running. Press Play in the editor. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+  - The cubes can be moved around during runtime for different pick and place calculations. 
   
-  - The pick-and-place process should repeat is initially set to run twice. This Number of Runs value can be changed on the `ur3_with_gripper` object.
-
-  - There may be a slight delay between the robot arm "waking up," calculating a path, and sending the information to Unity, causing the ROS messages to be missed. Refer to the [Troubleshooting](#troubleshooting) section if issues arise.
-
 ---
 
 ## Troubleshooting

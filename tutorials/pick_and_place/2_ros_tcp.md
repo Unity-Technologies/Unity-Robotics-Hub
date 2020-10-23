@@ -2,15 +2,16 @@
 
 This step assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started.
 
-Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS .msg file, and publishing a Unity GameObject's pose to a ROS topic. 
+Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and setting Unity joint values via a ROS Service.
 
 
-## Table of Contents
 - [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
-  - [Table of Contents](#table-of-contents)
   - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
+    - [Server Endpoint](#server-endpoint)
+    - [Mover](#mover)
+    - [MoveIt [PLACEHOLDER]](#moveit-placeholder)
   - [Troubleshooting](#troubleshooting)
   - [Resources](#resources)
 
@@ -22,91 +23,80 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-- Download the provided ROS-side assets from [here](https://drive.google.com/file/d/1IF29DtmP-eX-0iP5gG4aWUs6yNM1iL5p/view?usp=sharing) and unzip the directory. Place the contents inside the source directory of your ROS workspace, e.g. `~/catkin_ws/src`. This package includes skeleton scripts to be filled out in this tutorial, utility classes, MoveIt configs, and the ROS msg and srv definition files.
+- Download the provided ROS-side assets from [PLACEHOLDER]() and unzip the directory. Place the contents inside the source directory of your ROS workspace, e.g. `~/catkin_ws/src`. This package includes Python scripts, MoveIt configs, and the ROS msg and srv definition files.
   
 ## The Unity Side
 
-- If the PickAndPlace Unity project is not already open, select and open it from the Unity Hub.
+- If the current Unity project is not already open, select and open it from the Unity Hub.
   
-- The `PickAndPlace.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
+- The `PLACEHOLDER.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
 
 ![](img/2_gen.png)
    
-- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control directory, e.g. `~/catkin_ws/src/ros_unity_control/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 4 new C# scripts should populate the `Assets/RosMessages/RosUnityControl/msg` directory: Pose, Rotation, Trajectory, and URJointConfig. Only Pose will be used in this tutorial.
+- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 1 new C# script should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints.
   
     > [PLACEHOLDER] explain what's happening in message generation?
 
-- In the Project window, right click the Assets folder. Create a new folder called Scripts. Then, right click and create a new C# script in `Assets/Scripts` called TCPValues. Double click the script to open. Replace the script with the following:
+- In the Project window, right click the Assets folder. Create a new folder called Scripts. Then, right click and create a new C# script in `Assets/Scripts` called RosConnect. Double click the script to open. Replace the script with the following:
 
 ``` csharp
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using RosMessageTypes.Geometry;
+using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
- 
-public class TCPValues : MonoBehaviour
+using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
+
+public class RosConnect : MonoBehaviour
 {
-   public string hostName = "192.168.0.66";
+   // ROS Connector
+   private TcpConnector tcpCon;
+
+   private readonly float jointAssignmentWait = 0.06f;
+   private readonly float poseAssignmentWait = 1f;
+
+   // Variables required for ROS communication
+   public string rosServiceName = "niryo_moveit";
+   public string hostName = "192.168.50.149";
    public int hostPort = 10000;
+   public int connectionTimeout = 10;
+
+   // GameObjects used to get Articulation Bodies
+   public GameObject[] jointGameObjects;
+
+   // Articulation Bodies
+   private ArticulationBody[] jointArticulationBodies;
+   
+   void Start()
+   {
+      TcpClient client = new TcpClient();
+
+      // Instantiate the connector with ROS host name and port.
+      tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
+      
+      jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
+      
+      // Setup articulation bodies
+      for (int i = 0; i < jointGameObjects.Length; i++)
+      {
+         jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
+      }
+   }
+
+   // PLACEHOLDER
 }
 ``` 
 
-This script serves as a central location for the reference values in the TCP connection that will be made. Other components will look to this one when trying to make the connection. 
+This script will communicate with ROS, and will soon be able to receive a set of joint values to set the robot arm to.
 
-- Add the newly created TCPValues component to the `ur3_with_gripper` GameObject by selecting the TCPValues script in the Project window and dragging it onto the `ur3_with_gripper` object in the Hierarchy window.
+- Add the newly created RosConnect component to the `niryo_one` GameObject by selecting the RosConnect script in the Project window and dragging it onto the `niryo_one` object in the Hierarchy window.
 
 - The `hostName` should be the IP address of your ROS machine (not the one running Unity).
 
-  - Find the IP address of your ROS machine. On Ubuntu, open a terminal window, and enter `hostname -I`.
+  - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-  - In the TCP Values component in the Inspector, replace the Host Name value with the IP address of your ROS machine. Ensure that the Host Port is set to `10000`.
-
-- Create a new C# script and name it RosPublisher. Open the file for editing, and replace it with the following:
-
-``` csharp
-using RosMessageTypes.RosUnityControl;
-using RosMessageTypes.Geometry;
-using UnityEngine;
-using Pose = RosMessageTypes.Geometry.Pose;
-using Quaternion = RosMessageTypes.Geometry.Quaternion;
- 
-public class RosPublisher : MonoBehaviour
-{
-  public GameObject cube;
-  public float publishMessageFreq = 2.0f;
- 
-  private TcpConnector tcpCon;
-  private float timeElapsed;
-  void Start()
-  {
-     var tcpValues = GetComponent<TCPValues>();
-     var hostName = tcpValues.hostName;
-     var hostPort = tcpValues.hostPort;
- 
-     tcpCon = new TcpConnector(hostName, hostPort);
-  }
- 
-  void Update(){
- 
-     timeElapsed += Time.deltaTime;
-      
-     if (timeElapsed > publishMessageFreq)
-     {
-        var pos = cube.transform.position;
-        var rot = cube.transform.rotation;
-        Pose pose = new Pose(
-           new Point(pos.x, pos.y, pos.z),
-           new Quaternion(rot.x, rot.y, rot.z, rot.w)
-        );
- 
-        tcpCon.SendMessage("ur3_topic", pose);
- 
-        timeElapsed = 0;
-     }
-  }
-}
-```
-
-This script will create a TCP connection and send messages to the ROS server endpoint--which has yet to be created!
+  - In the RosConnect component in the Inspector, replace the Host Name value with the IP address of your ROS machine. Ensure that the Host Port is set to `10000`.
 
 ---
 
@@ -114,58 +104,85 @@ This script will create a TCP connection and send messages to the ROS server end
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-- In your ROS workspace, find the directory `~/catkin_ws/ros_unity_control/scripts`. Select and open `server_endpoint.py` in a text editor. The script is mostly empty--replace the file with the following contents:
+- The provided files require the following packages to be installed:
 
-``` python
-#!/usr/bin/env python
- 
-import rospy
- 
-from tcp_endpoint.RosTCPServer import TCPServer
-from tcp_endpoint.RosPublisher import RosPublisher
-from tcp_endpoint.RosSubscriber import RosSubscriber
-from tcp_endpoint.RosService import RosService
- 
-from ros_unity_control.msg import *
-from ros_unity_control.srv import *
- 
- 
-def main():
-   ros_tcp_ip = '192.168.0.66'
-   ros_tcp_port = 10000
-   ros_node_name = 'TCPServer'
-   buffer_size = 1024
-   connections = 10
-   unity_machine_ip = '192.168.0.48'
-   unity_machine_port = 5005
- 
-   rospy.init_node(ros_node_name, anonymous=True)
-   rate = rospy.Rate(10)  # 10hz
- 
-   source_destination_dict = {
-       'ur3_topic': RosPublisher('ur3_topic', Pose, queue_size=10)
-   }
- 
-   tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict, buffer_size, connections)
-   tcp_server.start()
-   rospy.spin()
- 
- 
-if __name__ == "__main__":
-   main()
-```
+   ```bash
+   sudo apt-get install ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
+   ```
 
-This script imports the necessary dependencies from the tcp_endpoint package (for creating the TCP connection with Unity), defines the address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+   ```bash
+   sudo -H pip install jsonpickle
+   ```
 
-  - Replace the `ros_tcp_ip` value with the value of your ROS IP address--this should match the one set in TCPValues in Unity. Then, find the IP address of your local machine (the one running Unity). On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection. Replace the `unity_machine_ip` value with your local machine’s IP address. 
+### Server Endpoint
+
+- In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from the tcp_endpoint package (for creating the TCP connection with Unity), defines the address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+
+  <!-- - Replace the `ros_tcp_ip` value with the value of your ROS IP address--this should match the one set in TCPValues in Unity. Then, find the IP address of your local machine (the one running Unity). On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection. Replace the `unity_machine_ip` value with your local machine’s IP address.  -->
   
-- Open a terminal in the ROS workspace. Run `roscore`.
+- If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
+
+- Open a new terminal in the ROS workspace and navigate to your catkin workspace. Run:
+   ```bash
+   roscore &
+   ```
+
+Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
+
+- Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
+   - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `hostName` on the RosConnect component in Unity.
+   - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
+     - On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection.
+     - On Windows, open `Wi-Fi network` on the taskbar, and open `Properties`. The IP address should be listed next to "IPv4 address."
+
+- Set the parameter values by running the following commands:
+
+   ```bash
+   rosparam set ROS_IP <your ROS IP>
+   rosparam set ROS_TCP_PORT 10000
+   rosparam set UNITY_IP <your Unity IP>
+   rosparam set UNITY_SERVER_PORT 5005
+   ```
+   e.g.,
+
+   ```bash
+   rosparam set ROS_IP 192.168.50.149
+   rosparam set ROS_TCP_PORT 10000
+   rosparam set UNITY_IP 192.168.50.13
+   rosparam set UNITY_SERVER_PORT 5005
+   ```
+
+- Once the parameter values have been set, you can run the server_endpoint. In this same terminal, run:
   
-- Open a second terminal in the ROS workspace. `rosrun` the new server_endpoint, e.g. `rosrun ros_unity_control server_endpoint.py`.
+   ```bash
+   rosrun niryo_moveit server_endpoint.py
+   ```
+Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-- Open a third terminal in the ROS workspace. Run `rostopic echo ur3_topic`.
+### Mover
 
-- Return to Unity, and press Play. The `rostopic echo ur3_topic` console should print the pose of the cube every 2.0 seconds. ROS and Unity have now successfully connected!
+- Note the file `mover.py`. PLACEHOLDER DESCRIPTION
+
+- Open a second terminal in the ROS workspace. `rosrun` this mover script, e.g. 
+   ```bash
+   rosrun niryo_moveit mover.py
+   ```
+
+Once this process is ready, it will print `Ready to motion plan!` to the console.
+
+
+### MoveIt [PLACEHOLDER]
+
+- Open a third terminal in the ROS workspace to start the Niryo Moveit Node. This is the node that will actually run the motion planning and output a trajectory. Run:
+   ```bash
+   roslaunch niryo_moveit demo.launch
+   ```
+This may print out various error messages regarding the controller_spawner, such as `[controller_spawner-4] process has died`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
+
+
+- Return to Unity, and press Play. PLACEHOLDER for what happens here
+  
+ROS and Unity have now successfully connected!
 
 ![](img/2_echo.png)
 
@@ -173,9 +190,9 @@ This script imports the necessary dependencies from the tcp_endpoint package (fo
 
 ## Troubleshooting
 
-- If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x ~/catkin_ws/src/ros_unity_control/scripts/server_endpoint.py`.
+- If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x ~/catkin_ws/src/niryo_moveit/scripts/server_endpoint.py`.
   
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the Motion Planning Service component in Unity. Additionally, ensure that the `ros_tcp_ip` address matches in the `server_endpoint.py` value, and that `unity_machine_ip` is your Unity machine's IP.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnector component in Unity. 
 
 ---
 
