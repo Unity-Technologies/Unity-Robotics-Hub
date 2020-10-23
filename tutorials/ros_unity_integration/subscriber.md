@@ -8,22 +8,7 @@ Follow the [Initial ROS Setup](setup.md) guide.
 
 Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/unity_ros_message_generation/message_generation_tutorial.md) guide.
 
-## Setting Up ROS
-- Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
-- Run the `catkin_make` command and source the directory
-- Run each of the following commands with values that reflect your current set up
-
-```bash
-    rosparam set ROS_IP YOUR_ROS_CORE_IP_OR_HOSTNAME
-    rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP MACHINCE_RUNNING_UNITY_IP
-    rosparam set UNITY_SERVER_PORT 5005
-```
-
-- Run each of the following commands in a separate terminal window:
-	- `roscore`
-	- `rosrun robotics_demo server_endpoint.py`
-
+Follow the [Setting Up ROS](ros_setup.md) guide.
 
 ## Setting Up Unity Scene
 - Generate the C# code for `UnityColor` message by going to `RosMessageGeneration` -> `AutoGenerateMessages` -> `Single Message...`
