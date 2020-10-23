@@ -17,7 +17,7 @@ Follow the [Setting Up ROS](ros_setup.md) guide.
 - Generate the C# code for `PositionService`'s messages by going to `RosMessageGeneration` -> `AutoGenerateServices` -> `Single Service...`
 - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/srv/PositionService.srv` and click `GENERATE!`
     - The generated files will be saved in the default directory `Assets/RosMessages/srv`
-- Creat a script and name it `RosServiceExample.cs`
+- Create a script and name it `RosServiceExample.cs`
 - Paste the following code into `RosServiceExample.cs`
 - **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
 
