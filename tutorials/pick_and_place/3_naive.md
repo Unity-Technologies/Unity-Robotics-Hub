@@ -24,7 +24,144 @@
   
 > [PLACEHOLDER]: what’s happening in Service Generation?
 
-- PLACEHOLDER add pick and place to RosController
+- PLACEHOLDER add pick and place to RosController (Poses enum, gripper)
+
+- Edit the member variables of the RosConnect script to be as follows:
+
+```csharp
+// ROS Connector
+private TcpConnector tcpCon;
+
+private readonly float jointAssignmentWait = 0.06f;
+private readonly float poseAssignmentWait = 1f;
+private readonly float pickPoseOffset = 0.08f;
+private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
+
+// Variables required for ROS communication
+public string rosServiceName = "niryo_moveit";
+public string hostName = "192.168.50.149";
+public int hostPort = 10000;
+public int connectionTimeout = 10;
+
+// The game objects
+public GameObject target;
+public GameObject targetPlacement;
+
+// GameObjects used to get Articulation Bodies
+public GameObject[] jointGameObjects;
+public GameObject leftGripperGO;
+public GameObject rightGripperGO;
+
+// Articulation Bodies
+private ArticulationBody[] jointArticulationBodies;
+private ArticulationBody leftGripper;
+private ArticulationBody rightGripper;
+
+private enum Poses
+{
+    PreGrasp,
+    Grasp,
+    PickUp,
+    Place
+};
+```
+
+This adds references to enable grasping.
+
+- PLACEHOLDER
+
+```csharp
+public void PublishJoints()
+{
+    MoverServiceRequest request = new MoverServiceRequest();
+    request.joints_input = CurrentJointConfig();
+    
+    // Pick Pose
+    request.pick_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            target.transform.position.z,
+            -target.transform.position.x,
+            target.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
+
+    // Place Pose
+    request.place_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            targetPlacement.transform.position.z,
+            -targetPlacement.transform.position.x,
+            targetPlacement.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
+
+    var response = (MoverServiceResponse)tcpCon.SendServiceMessage(rosServiceName, request, new MoverServiceResponse());
+    if (response.trajectories != null)
+    {
+        Debug.Log("Trajectory returned.");
+        StartCoroutine(PrintTrajectories(response));
+    }
+}
+```
+
+> PLACEHOLDER Unity (x,y,z) -> ROS (z, -x, y)
+
+- PLACEHOLDER Define the gripping functions as follows:
+
+```csharp
+private void CloseGripper()
+{
+    var leftDrive = leftGripper.xDrive;
+    var rightDrive = rightGripper.xDrive;
+
+    leftDrive.target = -0.01f;
+    rightDrive.target = 0.01f;
+
+    leftGripper.xDrive = leftDrive;
+    rightGripper.xDrive = rightDrive;
+}
+
+private void OpenGripper()
+{
+    var leftDrive = leftGripper.xDrive;
+    var rightDrive = rightGripper.xDrive;
+
+    leftDrive.target = 0;
+    rightDrive.target = 0;
+
+    leftGripper.xDrive = leftDrive;
+    rightGripper.xDrive = rightDrive;
+}
+```
+
+PLACEHOLDER 
+
+- Edit the `Start()` function to assign the appropriate ArticulationBody variables for the gripper.
+
+```csharp
+void Start()
+{ 
+    TcpClient client = new TcpClient();
+
+    // Instantiate the connector with ROS host name and port.
+    tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
+    
+    jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
+    // Setup articulation bodies
+    for (int i = 0; i < jointGameObjects.Length; i++)
+    {
+        jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
+    }
+
+    leftGripper = leftGripperGO.GetComponent<ArticulationBody>();
+    rightGripper = rightGripperGO.GetComponent<ArticulationBody>();
+}
+```
+
+- Save the edited script and return to Unity! Ensure there are no syntax errors.
 
 - Select the RosConnector GameObject. Note that the RosConnect component now shows the new member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
 

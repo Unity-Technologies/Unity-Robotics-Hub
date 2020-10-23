@@ -20,6 +20,7 @@ This step includes downloading and installing the Unity Editor, setting up a bas
 - In the Unity Hub, go to the Projects tab. Click the dropdown arrow next to `NEW`, and select the newly downloaded 2020.2 version. Create a new project using the 3D Template.
   
 - Download the provided Unity assets [PLACEHOLDER](). Once Unity has opened, double click the `.unitypackage` file. In the Import Unity Package window that has opened in Unity, ensure everything is selected, and click `Import`. Once this is done, a folder titled PLACEHOLDER should be created in the Assets folder, containing Environment, Materials, Models, Prefabs, Plugins, and URDF subfolders.
+  - If a window prompts you to reload the SampleScene, click Reload!
   
 - Load the SampleScene if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view with position and rotation `(0,0,0)`. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
@@ -38,6 +39,14 @@ This step includes downloading and installing the Unity Editor, setting up a bas
 - Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
 > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
+> Note: PLACEHOLDER origin position
+  ```xml
+  <joint name="joint_world" type="fixed">
+    <parent link="world" />
+    <child link="base_link" />
+    <origin xyz="0 0 0.765" rpy="0 0 0" />
+  </joint>
+  ```
 
 - The UR3 should now be visible in the scene! Select the `niryo_one` object and set its position to `(0,0.765,0)` to place it on top of the table.
   

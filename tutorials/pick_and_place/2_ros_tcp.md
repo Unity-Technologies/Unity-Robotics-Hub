@@ -90,7 +90,7 @@ public class RosConnect : MonoBehaviour
 
 This script will communicate with ROS, and will soon be able to receive a set of joint values to set the robot arm to.
 
-- Add the newly created RosConnect component to the `niryo_one` GameObject by selecting the RosConnect script in the Project window and dragging it onto the `niryo_one` object in the Hierarchy window.
+- Create a new GameObject and call it RosConnect. Add the newly created RosConnect component to the RosConnect GameObject by selecting the RosConnect script in the Project window and dragging it onto the RosConnect object in the Hierarchy window.
 
 - The `hostName` should be the IP address of your ROS machine (not the one running Unity).
 
