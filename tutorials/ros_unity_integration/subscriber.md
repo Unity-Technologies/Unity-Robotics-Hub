@@ -10,18 +10,18 @@ Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-
 
 ## Setting Up ROS
 - Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
-- Run the `catkin_make` command and source the directory
-- Run each of the following commands with values that reflect your current set up
+- Run the `catkin_make` command and source the directory.
+- Run `roscore &`.
+- Run each of the following commands with values that reflect your current set up, or `rosparam load rosparams.yaml` if you already dumped them to a file.
 
 ```bash
-    rosparam set ROS_IP YOUR_ROS_CORE_IP_OR_HOSTNAME
+    rosparam set ROS_IP $ROS_IP
     rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP MACHINCE_RUNNING_UNITY_IP
+    rosparam set UNITY_IP <ip of your unity machine>
     rosparam set UNITY_SERVER_PORT 5005
 ```
 
-- Run each of the following commands in a separate terminal window:
-	- `roscore`
+- Finally, run the following command in a separate terminal window:
 	- `rosrun robotics_demo server_endpoint.py`
 
 
@@ -41,7 +41,6 @@ using RosColor = RosMessageTypes.RoboticsDemo.UnityColor;
 
 public class RosSubscriberExample : RosSubscriber
 {
-
     public GameObject cube;
 
     protected override async Task HandleConnectionAsync(TcpClient tcpClient)
@@ -58,7 +57,7 @@ public class RosSubscriberExample : RosSubscriber
 
     void Start()
     {
-        StartMessageServer(hostPort);
+        StartMessageServer();
     }
 
 }
@@ -66,7 +65,7 @@ public class RosSubscriberExample : RosSubscriber
 
 - Create an empty game object and name it `RosSubscriber`
 - Attach the `RosSubscriberExample` script to the `RosSubscriber` game object and drag the cube game object onto the `cube` parameter ni the Inspector window.
-- In the Inspector window of the Editor change the `hostName` parameter on the `RosSubscriber ` game object to the ROS master URI. 
+- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` game object to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address the VM connects to. Don't just use your machine's main IP address.)
 - Press play in the editor
 
 ### In ROS Terminal Window
