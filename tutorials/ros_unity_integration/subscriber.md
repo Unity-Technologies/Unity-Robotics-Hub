@@ -12,7 +12,7 @@ Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-
 - Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
 - Run the `catkin_make` command and source the directory.
 - Run `roscore &`.
-- Run each of the following commands with values that reflect your current set up, or `rosparam load rosparams.yaml` if you already dumped them to a file.
+- Run each of the following commands with values that reflect your current set up.
 
 ```bash
     rosparam set ROS_IP $ROS_IP
