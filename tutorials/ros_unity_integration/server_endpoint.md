@@ -5,7 +5,7 @@ A walkthrough of the important components of a ROS TCP endpoint script using the
 The following is an example of a server endpoint python script that:
 
 - Gets parameters from `rosparam`
-- Creates correspondng ROS Publisher, Subscriber, and Service objects to interact with topics and services runninig in in ROS network
+- Creates corresponding ROS Publisher, Subscriber, and Service objects to interact with topics and services running in in ROS network
 - Starts TCP Server process to handle incoming and outgoing connections
 
 

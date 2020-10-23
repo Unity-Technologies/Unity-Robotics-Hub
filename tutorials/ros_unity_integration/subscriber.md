@@ -14,7 +14,7 @@ Follow the [Setting Up ROS](ros_setup.md) guide.
 - Generate the C# code for `UnityColor` message by going to `RosMessageGeneration` -> `AutoGenerateMessages` -> `Single Message...`
 - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/msg/UnityColor.msg` and click `GENERATE!`
     - The generated file will be saved in the default directory `Assets/RosMessages/msg`
-- Creat a script and name it `RosSubscriberExample.cs`
+- Create a script and name it `RosSubscriberExample.cs`
 - Paste the following code into `RosSubscriberExample.cs`
 	- **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
 

@@ -4,7 +4,8 @@ This example demonstrates how to generate the C# code for a ROS message using th
 
 - In a Unity project 2020.2+ create a new directory under `Assets` name `Plugins`
 - Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repo to your local machine and copy the `MessageGeneraton` directory to the newly created `Plugins` directory
-- After the scripts load there should be a new option in the menu bar
+- After the scripts load there should be a new option in the menu bar:
+  ![menu](images/RosMessageGeneration_menu.png)
 
 - Select `RosMessageGeneration` -> `Auto Generate Messages` and choose one of the options
 	- Single Message
