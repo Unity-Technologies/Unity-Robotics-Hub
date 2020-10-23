@@ -65,7 +65,7 @@ public class RosSubscriberExample : RosSubscriber
 
 - Create an empty game object and name it `RosSubscriber`
 - Attach the `RosSubscriberExample` script to the `RosSubscriber` game object and drag the cube game object onto the `cube` parameter ni the Inspector window.
-- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` game object to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address the VM connects to. Don't just use your machine's main IP address.)
+- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` game object to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address ROS is connecting to. That's not necessarily the same as your machine's main IP address.)
 - Press play in the editor
 
 ### In ROS Terminal Window
