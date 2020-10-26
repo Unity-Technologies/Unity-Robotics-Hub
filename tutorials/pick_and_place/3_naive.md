@@ -7,6 +7,7 @@
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
   - [Unity & ROS Communication](#unity--ros-communication)
+  - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)
     - [Hangs, Timeouts, and Freezes](#hangs-timeouts-and-freezes)
@@ -18,52 +19,12 @@
 
 ## The Unity Side
 
-- The `PLACEHOLDER.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
-
-- In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
-  
-> [PLACEHOLDER]: what’s happening in Service Generation?
-
 - PLACEHOLDER add pick and place to RosController (Poses enum, gripper)
 
 - Edit the member variables of the RosConnect script to be as follows:
 
 ```csharp
-// ROS Connector
-private TcpConnector tcpCon;
-
-private readonly float jointAssignmentWait = 0.06f;
-private readonly float poseAssignmentWait = 1f;
-private readonly float pickPoseOffset = 0.08f;
-private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
-
-// Variables required for ROS communication
-public string rosServiceName = "niryo_moveit";
-public string hostName = "192.168.50.149";
-public int hostPort = 10000;
-public int connectionTimeout = 10;
-
-// The game objects
-public GameObject target;
-public GameObject targetPlacement;
-
-// GameObjects used to get Articulation Bodies
-public GameObject[] jointGameObjects;
-public GameObject leftGripperGO;
-public GameObject rightGripperGO;
-
-// Articulation Bodies
-private ArticulationBody[] jointArticulationBodies;
-private ArticulationBody leftGripper;
-private ArticulationBody rightGripper;
-
-private enum Poses
-{
-    PreGrasp,
-    Grasp,
-    PickUp,
-    Place
-};
+// PLACEHOLDER
 ```
 
 This adds references to enable grasping.
@@ -170,14 +131,7 @@ void Start()
 - Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
   - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
 
-![](img/3_rosconnect.png)
-
-- In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. In the Game view, you will see the button appear in the bottom left corner as an overlay. 
-  
-- Select the newly made Button object, and scroll to see the Button component. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnector object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select RosConnect > PublishJoints().
-  - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
-
-![](img/3_onclick.png)
+![](img/2_joints.gif)
 
 - The Unity side is now ready to communicate with ROS to motion plan!
 
@@ -186,6 +140,18 @@ void Start()
 ## The ROS Side
 
 - Ensure MoveIt is installed on your ROS machine via `sudo apt install ros-<distro>-moveit`. This tutorial was created using Melodic, i.e. `sudo apt install ros-melodic-moveit`.
+
+> Note: This project was built using the ROS Melodic distro, and Python 2.
+
+- The provided files require the following packages to be installed; run the following if the packages are not already present:
+
+   ```bash
+   sudo apt-get install ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
+   ```
+
+   ```bash
+   sudo -H pip install jsonpickle
+   ```
 
 [PLACEHOLDER] everything that will be changed significantly
 
@@ -240,6 +206,13 @@ This may print out various error messages regarding the controller_spawner, such
 - Return to the Unity Editor, or open the Pick & Place project if it is not already open. Ensure all of the ROS processes are still running. Press Play in the editor. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
   - The cubes can be moved around during runtime for different pick and place calculations. 
   
+---
+
+## Resources
+
+- [MoveIt!](https://github.com/ros-planning/moveit)
+- All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case
+
 ---
 
 ## Troubleshooting

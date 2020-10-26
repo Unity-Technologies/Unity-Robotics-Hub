@@ -25,7 +25,7 @@ Download the provided assets here:
 
 ## [Step 1: Create Unity scene with imported URDF](1_urdf.md) 
 
-<img src="img/1_end.png" width="400"/>
+<img src="img/1_end.gif" width="400"/>
 
 [PLACEHOLDER]
 

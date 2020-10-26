@@ -22,7 +22,7 @@ This step includes downloading and installing the Unity Editor, setting up a bas
 - Download the provided Unity assets [PLACEHOLDER](). Once Unity has opened, double click the `.unitypackage` file. In the Import Unity Package window that has opened in Unity, ensure everything is selected, and click `Import`. Once this is done, a folder titled PickAndPlace should be created in the Assets folder, containing Environment, Materials, Plugins, Prefabs, RosMessages, and URDF subfolders.
   <!-- - If a window prompts you that `The open scene(s) have been modified externally`, select `Reload` to open the imported files. -->
   
-- Load the Assets/Scenes/SampleScene if it is not already open. In the Unity Project window, navigate to `Assets/PickAndPlace/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view with position and rotation `(0,0.4,0)`. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
+- Load the Assets/Scenes/SampleScene if it is not already open. In the Unity Project window, navigate to `Assets/PickAndPlace/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
 ![](img/1_cube.png) 
 
@@ -40,12 +40,12 @@ This step includes downloading and installing the Unity Editor, setting up a bas
   
 > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
 
-> Note: PLACEHOLDER The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at (0, 0.8, 0) in Unity coordinates.
+> Note: PLACEHOLDER The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at (0, 0.249, 0) in Unity coordinates.
   ```xml
   <joint name="joint_world" type="fixed">
     <parent link="world" />
     <child link="base_link" />
-    <origin xyz="0 0 0.8" rpy="0 0 0" />
+    <origin xyz="0 0 0.249" rpy="0 0 0" />
   </joint>
   ```
 
@@ -61,7 +61,7 @@ This step includes downloading and installing the Unity Editor, setting up a bas
 
 ![](img/1_controller.png) 
 
-- Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to `(0, 1.8, -0.8)`, and the Rotation to `(45, 0, 0)` in the Inspector.
+- Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to PLACEHOLDER `(0, 1.8, -0.8)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
 - Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor. 
   
@@ -79,10 +79,12 @@ This step includes downloading and installing the Unity Editor, setting up a bas
 
 ---
 
-<!-- ## Resources
+## Resources
 
-- Niryo One?
---- -->
+- More on the URDF importer tool [here](https://github.com/Unity-Technologies/Robotics-Tutorials/blob/master/urdf_tutorial.md)
+- All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case
+
+---
 
 
 Proceed to [Step 2](2_ros_tcp.md).
