@@ -23,19 +23,25 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-- Download the provided ROS-side assets from [PLACEHOLDER]() and unzip the directory. Place the contents inside the source directory of your ROS workspace, e.g. `~/catkin_ws/src`. This package includes Python scripts, MoveIt configs, and the ROS msg and srv definition files.
+- Download the provided ROS-side assets from [PLACEHOLDER](). Place the contents inside the source directory of your ROS workspace, e.g. `~/catkin_ws/src`. This package includes Python scripts, MoveIt configs, and the ROS msg and srv definition files.
   
 ## The Unity Side
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
   
-- The `PLACEHOLDER.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
+- The `PickAndPlace.unitypackage` includes a Plugins folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
 
 ![](img/2_gen.png)
    
-- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the ros_unity_control directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 1 new C# script should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints.
+- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 1 new C# script should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints.
   
-    > [PLACEHOLDER] explain what's happening in message generation?
+   > [PLACEHOLDER] explain what's happening in message generation?
+
+- Now that the message has been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
+
+- In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
+  
+   > [PLACEHOLDER]: what’s happening in Service Generation?
 
 - In the Project window, right click the Assets folder. Create a new folder called Scripts. Then, right click and create a new C# script in `Assets/Scripts` called RosConnect. Double click the script to open. Replace the script with the following:
 
@@ -67,22 +73,6 @@ public class RosConnect : MonoBehaviour
 
    // Articulation Bodies
    private ArticulationBody[] jointArticulationBodies;
-   
-   void Start()
-   {
-      TcpClient client = new TcpClient();
-
-      // Instantiate the connector with ROS host name and port.
-      tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
-      
-      jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
-      
-      // Setup articulation bodies
-      for (int i = 0; i < jointGameObjects.Length; i++)
-      {
-         jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
-      }
-   }
 
    // PLACEHOLDER
 }
@@ -90,13 +80,20 @@ public class RosConnect : MonoBehaviour
 
 This script will communicate with ROS, and will soon be able to receive a set of joint values to set the robot arm to.
 
-- Create a new GameObject and call it RosConnect. Add the newly created RosConnect component to the RosConnect GameObject by selecting the RosConnect script in the Project window and dragging it onto the RosConnect object in the Hierarchy window.
+- Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Rename it as RosConnect. Add the newly created RosConnect component to the RosConnect GameObject by selecting the RosConnect script in the Project window and dragging it onto the RosConnect object in the Hierarchy window.
 
-- The `hostName` should be the IP address of your ROS machine (not the one running Unity).
+- The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
 
   - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
   - In the RosConnect component in the Inspector, replace the Host Name value with the IP address of your ROS machine. Ensure that the Host Port is set to `10000`.
+<!-- 
+- In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the PLACEHOLDER Right Gripper GO field, and the right_gripper object to the Left Gripper GO field. -->
+
+- Expand the Joint Game Objects list on the Ros Connect script. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
+  - This can be done by expanding the `niryo_one` Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy window.
+
+![](img/2_joints.gif)
 
 ---
 
