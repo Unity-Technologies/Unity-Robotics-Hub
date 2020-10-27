@@ -1,11 +1,10 @@
-﻿using System.Net.Sockets;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using UnityEngine;
 using RosColor = RosMessageTypes.RoboticsDemo.UnityColor;
 
 public class RosSubscriberExample : RosSubscriber
 {
-
     public GameObject cube;
 
     protected override async Task HandleConnectionAsync(TcpClient tcpClient)
@@ -22,7 +21,7 @@ public class RosSubscriberExample : RosSubscriber
 
     void Start()
     {
-        StartMessageServer(hostPort);
+        StartMessageServer();
     }
 
 }
