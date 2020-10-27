@@ -112,6 +112,14 @@ This script will communicate with ROS, grabbing the positions of the target and 
 
 - Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Rename it as RosConnect. Add the newly created SourceDestinationPublisher component to the RosConnect GameObject by selecting the SourceDestinationPublisher script in the Project window and dragging it onto the RosConnect object in the Hierarchy window.
 
+![](img/2_component.gif)
+
+Confirm that the component has been added to the RosConnector object successfully by checking for it in the Inspector.
+
+- Select the Target object in the Hierarchy and assign it to the Target field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the TargetPlacement field.
+
+![](img/2_target.gif)
+
 - The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
 
   - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
@@ -131,16 +139,6 @@ This script will communicate with ROS, grabbing the positions of the target and 
 ## The ROS side
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
-
-- The provided files require the following packages to be installed:
-
-   ```bash
-   sudo apt-get install ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
-   ```
-
-   ```bash
-   sudo -H pip install jsonpickle
-   ```
 
 <!-- ### Server Endpoint -->
 

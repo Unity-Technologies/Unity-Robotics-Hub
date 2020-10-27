@@ -40,7 +40,7 @@ This step includes downloading and installing the Unity Editor, setting up a bas
   
 > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
 
-> Note: PLACEHOLDER The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at (0, 0.249, 0) in Unity coordinates.
+> Note: PLACEHOLDER The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.249, 0)` in Unity coordinates.
   ```xml
   <joint name="joint_world" type="fixed">
     <parent link="world" />
@@ -49,19 +49,19 @@ This step includes downloading and installing the Unity Editor, setting up a bas
   </joint>
   ```
 
-- The UR3 should now be in the scene, but under the table. Select the `niryo_one` object and set its position to `(0, 0.8, 0)` to place it on top of the table.
+- The UR3 should now be in the scene, but under the table. Select the `niryo_one` object and set its position to `(0, 0.249, 0)` to place it on top of the table.
   
 - In the Hierarchy window, click the arrow to the left of the name to expand the GameObject tree, down to `niryo_one/world/base_link`. Toggle on `Immovable` for the `base_link`.
 
 ![](img/1_base.png) 
 
-> Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. 
+> Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/PickAndPlace/Plugins/UnityEditorScripts/Urdf/Controller.cs`.
 
 - On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`.
 
 ![](img/1_controller.png) 
 
-- Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to PLACEHOLDER `(0, 1.8, -0.8)`, and the Rotation to `(45, 0, 0)` in the Inspector.
+- Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to PLACEHOLDER `(0, 1, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
 - Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor. 
   

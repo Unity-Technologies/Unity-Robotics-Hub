@@ -139,8 +139,6 @@ void Start()
 
 ## The ROS Side
 
-- Ensure MoveIt is installed on your ROS machine via `sudo apt install ros-<distro>-moveit`. This tutorial was created using Melodic, i.e. `sudo apt install ros-melodic-moveit`.
-
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
 - The provided files require the following packages to be installed; run the following if the packages are not already present:
