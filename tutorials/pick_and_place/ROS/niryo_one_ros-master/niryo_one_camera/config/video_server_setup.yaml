@@ -1,0 +1,20 @@
+# -- Editable settings
+undistort_stream:   false
+frame_rate:         15  # 15, 25 or 30
+subsampling:        5
+camera_port:        -1
+calibration_grid_shape:
+  - 9
+  - 6
+
+# For expert
+obj_calib_name:     "cam_intrinsics"
+frame_size: # Available resolutions : 320x240, 352x288, 640x360, 640x480, 1280x720, 1920x1080
+  - 640  # width
+  - 480  # height
+
+buffer_size: 5
+display:            false # Useful only on computer
+
+stream_compression_quality: 65
+debug_compression_quality: 75

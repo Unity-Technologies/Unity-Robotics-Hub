@@ -1,0 +1,33 @@
+<package>
+
+    <name>niryo_one_moveit_config</name>
+    <version>2.3.1</version>
+    <description>
+        An automatically generated package with all the configuration and launch files for using the niryo_one with the
+        MoveIt! Motion Planning Framework
+    </description>
+    <author email="e.renard@niryo.com">Edouard Renard</author>
+    <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+
+    <license>GPLv3</license>
+
+    <url type="website">http://moveit.ros.org/</url>
+    <url type="bugtracker">https://github.com/ros-planning/moveit/issues</url>
+    <url type="repository">https://github.com/ros-planning/moveit</url>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <run_depend>moveit_ros_move_group</run_depend>
+    <run_depend>moveit_kinematics</run_depend>
+    <run_depend>moveit_planners_ompl</run_depend>
+    <run_depend>moveit_ros_visualization</run_depend>
+    <run_depend>joint_state_publisher</run_depend>
+    <run_depend>robot_state_publisher</run_depend>
+    <run_depend>xacro</run_depend>
+    <!-- This package is referenced in the warehouse launch files, but does not build out of the box at the moment. Commented the dependency until this works. -->
+    <!-- <run_depend>warehouse_ros_mongo</run_depend> -->
+    <build_depend>niryo_one_description</build_depend>
+    <run_depend>niryo_one_description</run_depend>
+
+
+</package>

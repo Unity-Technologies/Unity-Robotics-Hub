@@ -1,0 +1,14 @@
+{
+  "name": "blockly_code_generator_server",
+  "version": "1.0.0",
+  "description": "Blockly code generator for Niryo One.",
+  "main": "blockly_code_generator_server.js",
+  "preferGlobal": true,
+  "bin": "./blockly_code_generator_server.js",
+  "author": "Edouard Renard",
+  "license": "GPLv3",
+  "dependencies": {
+    "blockly": "^3.20200123.1",
+    "commander": "^2.11.0"
+  }
+}

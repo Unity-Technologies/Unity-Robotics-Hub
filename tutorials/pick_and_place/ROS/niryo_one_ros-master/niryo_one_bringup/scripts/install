@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+import robot_upstart
+import os
+
+home_dir = os.getenv('HOME') 
+log_dir = str(home_dir) + '/.ros/log'
+
+j = robot_upstart.Job(name="niryo_one_ros", log_path=log_dir)
+
+# other launch files will be launched in niryo_one_ros_setup
+j.add(package="niryo_one_bringup", filename="launch/rpi_setup.launch")
+
+j.install()
+

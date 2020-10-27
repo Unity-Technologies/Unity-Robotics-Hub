@@ -1,0 +1,30 @@
+<launch>
+    <!-- Will not work on Raspberry Pi, to use on a non-ARM computer only 
+        Hardware communication is disabled with simulation_mode flag
+        The hardware interface will just follow the command given by the chosen controller (ros_controllers)
+    -->
+    
+    <arg name="execute_on_niryo_one_raspberry_pi_image" value="false"/>
+    <arg name="urdf_without_meshes" default="false" />
+    <include file="$(find niryo_one_bringup)/launch/niryo_one_base.launch" pass_all_args="true"/>
+
+    <include file="$(find niryo_one_bringup)/launch/controllers.launch">
+        <arg name="simulation_mode" value="true" />
+    </include>
+
+    <include file="$(find niryo_one_bringup)/launch/robot_commander.launch">
+        <arg name="simulation_mode" value="true" />
+    </include>
+
+    <include file="$(find niryo_one_bringup)/launch/user_interface.launch">
+        <arg name="simulation_mode" value="true" />
+    </include>
+ 
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher"/>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+        <arg name="port" value="9090"/>
+    </include>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find niryo_one_description)/config/default_config.rviz" />
+
+</launch>

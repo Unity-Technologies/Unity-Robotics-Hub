@@ -1,0 +1,9 @@
+# goal
+niryo_one_msgs/ToolCommand cmd
+---
+# result
+int32 status
+string message
+---
+# feedback
+int32 progression

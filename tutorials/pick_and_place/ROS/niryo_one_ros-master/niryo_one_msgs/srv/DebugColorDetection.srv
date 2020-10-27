@@ -1,0 +1,3 @@
+string color
+---
+sensor_msgs/CompressedImage img

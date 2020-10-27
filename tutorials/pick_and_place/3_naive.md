@@ -1,5 +1,9 @@
 # Pick and Place Tutorial [DRAFT]
 
+This step assumes you have access to a functional ROS workspace and that the previous two steps ([Step 1](1_urdf.md), [Step 2](2_ros_tcp.md)) have been completed.
+
+Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
+
 ## Table of Contents
 - [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
   - [Table of Contents](#table-of-contents)
@@ -19,58 +23,13 @@
 
 ## The Unity Side
 
-- PLACEHOLDER add pick and place to RosController (Poses enum, gripper)
+- If you have not already cloned this [PLACEHOLDER] repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
 
-- Edit the member variables of the RosConnect script to be as follows:
+<!-- - Note the SourceDestinationPublisher script. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port. The `Publish()` function is defined as follows: -->
 
-```csharp
-// PLACEHOLDER
-```
+- If the current Unity project is not already open, select and open it from the Unity Hub.
 
-This adds references to enable grasping.
-
-- PLACEHOLDER
-
-```csharp
-public void PublishJoints()
-{
-    MoverServiceRequest request = new MoverServiceRequest();
-    request.joints_input = CurrentJointConfig();
-    
-    // Pick Pose
-    request.pick_pose = new RosMessageTypes.Geometry.Pose
-    {
-        position = new Point(
-            target.transform.position.z,
-            -target.transform.position.x,
-            target.transform.position.y + pickPoseOffset
-        ),
-        orientation = pickOrientation
-    };
-
-    // Place Pose
-    request.place_pose = new RosMessageTypes.Geometry.Pose
-    {
-        position = new Point(
-            targetPlacement.transform.position.z,
-            -targetPlacement.transform.position.x,
-            targetPlacement.transform.position.y + pickPoseOffset
-        ),
-        orientation = pickOrientation
-    };
-
-    var response = (MoverServiceResponse)tcpCon.SendServiceMessage(rosServiceName, request, new MoverServiceResponse());
-    if (response.trajectories != null)
-    {
-        Debug.Log("Trajectory returned.");
-        StartCoroutine(PrintTrajectories(response));
-    }
-}
-```
-
-> PLACEHOLDER Unity (x,y,z) -> ROS (z, -x, y)
-
-- PLACEHOLDER Define the gripping functions as follows:
+- Note the Assets/Scripts/RosConnect.cs script. PLACEHOLDER description
 
 ```csharp
 private void CloseGripper()
@@ -100,7 +59,37 @@ private void OpenGripper()
 
 PLACEHOLDER 
 
-- Edit the `Start()` function to assign the appropriate ArticulationBody variables for the gripper.
+```csharp
+private IEnumerator PrintTrajectories(MoverServiceResponse response)
+{
+    if (response.trajectories != null)
+    {
+        for (int poseIndex  = 0 ; poseIndex < response.trajectories.Length; poseIndex++)
+        {
+            for (int jointConfigIndex  = 0 ; jointConfigIndex < response.trajectories[poseIndex].joint_trajectory.points.Length; jointConfigIndex++)
+            {
+                var jointPositions = response.trajectories[poseIndex].joint_trajectory.points[jointConfigIndex].positions;
+                float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
+                
+                for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
+                {
+                    var joint1XDrive  = jointArticulationBodies[joint].xDrive;
+                    joint1XDrive.target = result[joint];
+                    jointArticulationBodies[joint].xDrive = joint1XDrive;
+                }
+                yield return new WaitForSeconds(jointAssignmentWait);
+            }
+
+            if (poseIndex == (int)Poses.Grasp)
+                CloseGripper();
+            
+            yield return new WaitForSeconds(poseAssignmentWait);
+        }
+        // Open Gripper at end of sequence
+        OpenGripper();
+    }
+}
+```
 
 ```csharp
 void Start()
@@ -122,9 +111,9 @@ void Start()
 }
 ```
 
-- Save the edited script and return to Unity! Ensure there are no syntax errors.
+- Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the RosConnect script to the RosConnector object.
 
-- Select the RosConnector GameObject. Note that the RosConnect component now shows the new member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
+- Note that the RosConnect component shows its member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
 
 - In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the PLACEHOLDER Right Gripper GO field, and the right_gripper object to the Left Gripper GO field.
 
@@ -132,6 +121,8 @@ void Start()
   - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
 
 ![](img/2_joints.gif)
+
+- PLACEHOLDER reassign button OnClick
 
 - The Unity side is now ready to communicate with ROS to motion plan!
 
@@ -151,13 +142,11 @@ void Start()
    sudo -H pip install jsonpickle
    ```
 
-[PLACEHOLDER] everything that will be changed significantly
-
-- update plan_pick_and_place()
+- PLACEHOLDER describe mover.py
 
 - discussion on moveit configs 
 
-- Save all of the edited scripts. Navigate to your ROS workspace directory (e.g. `cd ~/catkin_ws`) and run `catkin_make`. Source the workspace (e.g. `source /opt/ros/melodic/setup.bash`).
+- If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 --- 
 
@@ -201,8 +190,8 @@ This may print out various error messages regarding the controller_spawner, such
 
 - The ROS side of the setup is ready! 
 
-- Return to the Unity Editor, or open the Pick & Place project if it is not already open. Ensure all of the ROS processes are still running. Press Play in the editor. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
-  - The cubes can be moved around during runtime for different pick and place calculations. 
+- Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+  - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ---
 

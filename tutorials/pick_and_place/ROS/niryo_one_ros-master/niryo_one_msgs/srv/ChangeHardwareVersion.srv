@@ -1,0 +1,5 @@
+int32 old_version
+int32 new_version
+---
+int32 status
+string message

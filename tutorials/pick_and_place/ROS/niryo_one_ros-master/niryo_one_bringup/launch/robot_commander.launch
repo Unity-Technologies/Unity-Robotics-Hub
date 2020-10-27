@@ -1,0 +1,32 @@
+<launch>
+    <arg name="simulation_mode" default="false" />
+
+    <!-- Moveit move_group -->
+    <include file="$(find niryo_one_moveit_config)/launch/move_group.launch" />
+
+    <!-- Disable Moveit! controller timeout -->
+    <param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
+
+    <!-- Change start tolerance from 0.01 to 0.0 to avoid this error : "Invalid Trajectory: start point deviates from current robot state more than"-->
+    <!-- more info http://moveit.ros.org/moveit!/ros/2017/01/03/firstIndigoRelease.html -->
+    <param name="/move_group/trajectory_execution/allowed_start_tolerance" value="0.0" />
+
+    <!-- Change from 0.1 to 0.3 rad -->
+    <!-- Allows joints to be outside of min and max values when starting -->
+    <param name="/move_group/start_state_max_bounds_error" value="0.3" />
+
+    <!-- Robot commander -->
+    <node name="niryo_one_commander" pkg="niryo_one_commander" type="niryo_one_commander_node.py" output="screen" respawn="false">
+        <param name="reference_frame"            type="string" value="world" />
+        <param name="move_group_commander_name"  type="string" value="arm" />
+        <param name="allow_replanning"           type="bool"   value="true" />
+        <param name="goal_joint_tolerance"       type="double" value="0.0001" />
+        <param name="goal_position_tolerance"    type="double" value="0.0001" />
+        <param name="goal_orientation_tolerance" type="double" value="0.001" />
+        <param name="positions_dir" type="string"  value="/home/niryo/niryo_one_positions" unless="$(arg simulation_mode)"/>
+        <param name="positions_dir" type="string"  value="~/niryo_one_positions"           if="$(arg simulation_mode)"/>
+        <param name="trajectories_dir" type="string"  value="/home/niryo/niryo_one_trajectories" unless="$(arg simulation_mode)"/>
+        <param name="trajectories_dir" type="string"  value="~/niryo_one_trajectories"           if="$(arg simulation_mode)"/>
+
+    </node>
+</launch>

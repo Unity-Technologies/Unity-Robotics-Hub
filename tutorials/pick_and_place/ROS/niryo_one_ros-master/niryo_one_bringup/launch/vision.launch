@@ -1,0 +1,9 @@
+<launch>
+  <node name="niryo_one_pose_converter" pkg="niryo_one_pose_converter" type="pose_converter.py" output="screen">
+    <param name="workspace_dir" type="string" value="~/niryo_one_workspaces/"/>
+    <param name="grip_dir" type="string" value="$(find niryo_one_pose_converter)/grips"/>
+  </node>
+  <node name="niryo_one_vision" pkg="niryo_one_camera" type="camera_publisher_and_services.py" output="screen">
+    <rosparam file="$(find niryo_one_camera)/config/video_server_setup.yaml"/>
+  </node>
+</launch>

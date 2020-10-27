@@ -1,0 +1,39 @@
+<launch>
+    
+    <arg name="execute_on_niryo_one_raspberry_pi_image" default="true" />
+  
+    <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+    <arg name="urdf_without_meshes" default="true" />
+    <include file="$(find niryo_one_bringup)/launch/niryo_one_base.launch" pass_all_args="true"/>
+
+    <!-- rosbridge websocket server -->
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher"/>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+        <arg name="port" value="9090"/>
+    </include>
+
+    <!-- Setup interface -->
+    <node name="niryo_one_rpi" pkg="niryo_one_rpi" type="niryo_one_rpi_node.py" output="screen">
+        
+        <param name="launch_ros_processes"  type="boolean" value="true" />
+        <param name="process_state_publish_rate" type="double" value="0.33" />
+        <param name="wifi_manager_enabled"  type="boolean" value="true" />
+        <param name="hotspot_ssid"          type="string"  value="Niryo_One" />
+        <param name="hotspot_password"      type="string"  value="niryoone" />
+        <param name="filename_robot_name"   type="string"  value="/home/niryo/niryo_one_saved_values/robot_name_for_user.txt" />
+        <rosparam file="$(find niryo_one_bringup)/config/rpi_ros_processes.yaml" />
+        
+        <param name="publish_io_state_frequency" type="double" value="10.0" />
+        
+        <param name="modbus_server_enabled" type="boolean" value="true" />
+        <param name="modbus_server_address" type="string"  value="0.0.0.0" />
+        <param name="modbus_server_port"    type="int"     value="5020" />
+
+        <param name="ros_log_size_treshold" type="int"    value="1024" /> <!-- 1024 MB -->
+        <param name="should_purge_ros_log_on_startup_file" type="string" 
+            value="/home/niryo/niryo_one_saved_values/purge_ros_log_at_startup.txt" />
+
+        <!-- don't change that unless you manually change ros log location --> 
+        <param name="ros_log_location"      type="string" value="/home/niryo/.ros/log" /> 
+    </node>
+</launch>

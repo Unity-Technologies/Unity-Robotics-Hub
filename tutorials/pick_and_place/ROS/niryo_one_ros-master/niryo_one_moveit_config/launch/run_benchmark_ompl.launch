@@ -1,0 +1,22 @@
+<launch>
+
+  <!-- This argument must specify the list of .cfg files to process for benchmarking -->
+  <arg name="cfg" />
+
+  <!-- Load URDF -->
+  <include file="$(find niryo_one_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <!-- Start the database -->
+  <include file="$(find niryo_one_moveit_config)/launch/warehouse.launch">
+    <arg name="moveit_warehouse_database_path" value="moveit_ompl_benchmark_warehouse"/>
+  </include>  
+
+  <!-- Start Benchmark Executable -->
+  <node name="$(anon moveit_benchmark)" pkg="moveit_ros_benchmarks" type="moveit_run_benchmark" args="$(arg cfg) --benchmark-planners" respawn="false" output="screen">
+    <rosparam command="load" file="$(find niryo_one_moveit_config)/config/kinematics.yaml"/>
+    <rosparam command="load" file="$(find niryo_one_moveit_config)/config/ompl_planning.yaml"/>
+  </node>
+
+</launch>

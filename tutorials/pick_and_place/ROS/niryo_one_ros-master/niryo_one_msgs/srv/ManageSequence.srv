@@ -1,0 +1,10 @@
+int32 cmd_type
+
+int32 sequence_id
+niryo_one_msgs/Sequence sequence
+
+---
+int32 status
+string message
+
+niryo_one_msgs/Sequence sequence

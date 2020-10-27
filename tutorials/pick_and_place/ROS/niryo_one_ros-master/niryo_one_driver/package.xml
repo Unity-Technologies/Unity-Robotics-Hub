@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<package>
+    <name>niryo_one_driver</name>
+    <version>2.3.1</version>
+    <description>Niryo One driver. Provides a hardware interface between ros_control and RPI3 hardware. Also provides
+        user interface to directly interact with hardware
+    </description>
+    <author>Edouard Renard</author>
+    <maintainer email="e.rey-coquais@niryo.com">Etienne Rey-Coquais</maintainer>
+    <license>GPLv3</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>roscpp</build_depend>
+    <build_depend>rospy</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>niryo_one_msgs</build_depend>
+
+    <!-- ros_control -->
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>hardware_interface</build_depend>
+    <build_depend>controller_manager</build_depend>
+    <build_depend>actionlib</build_depend>
+    <build_depend>control_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>trajectory_msgs</build_depend>
+    <build_depend>dynamixel_sdk</build_depend>
+    <build_depend>mcp_can_rpi</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>rospy</run_depend>
+    <run_depend>std_msgs</run_depend>
+    <run_depend>niryo_one_msgs</run_depend>
+    <run_depend>dynamixel_sdk</run_depend>
+    <run_depend>mcp_can_rpi</run_depend>
+
+    <!-- ros_control -->
+    <run_depend>hardware_interface</run_depend>
+    <run_depend>controller_manager</run_depend>
+    <run_depend>ros_controllers</run_depend>
+    <run_depend>actionlib</run_depend>
+    <run_depend>control_msgs</run_depend>
+    <run_depend>geometry_msgs</run_depend>
+    <run_depend>sensor_msgs</run_depend>
+    <run_depend>trajectory_msgs</run_depend>
+
+    <export>
+    </export>
+</package>

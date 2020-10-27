@@ -1,0 +1,9 @@
+int32 pin
+---
+int32 status
+string message
+
+int32 pin
+string name
+int32 mode
+int32 state

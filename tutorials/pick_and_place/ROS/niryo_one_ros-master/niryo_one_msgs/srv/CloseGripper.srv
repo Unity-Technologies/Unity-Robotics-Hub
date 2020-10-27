@@ -1,0 +1,9 @@
+
+uint8 id
+
+int16 close_position
+int16 close_speed
+int16 close_hold_torque
+int16 close_max_torque
+---
+uint8 state

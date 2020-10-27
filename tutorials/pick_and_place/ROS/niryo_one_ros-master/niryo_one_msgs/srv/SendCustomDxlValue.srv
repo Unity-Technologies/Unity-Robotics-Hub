@@ -1,0 +1,11 @@
+# Check XL-320 and XL-430 reference doc for
+# the complete register table
+
+int32 motor_type # 1 (XL-320) or 2 (XL-430)
+uint8 id
+int32 value
+int32 reg_address
+int32 byte_number
+---
+int32 status
+string message

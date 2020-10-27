@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package>
+  <name>niryo_one_commander</name>
+  <version>2.3.1</version>
+  <description>Interface between user and Moveit! to easily control Niryo One (arm + tools). Validates params, checks if previous trajectory has not finished, ...</description>
+  <author>Edouard Renard</author>
+  <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>control_msgs</build_depend>
+  <build_depend>diagnostic_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>moveit_msgs</build_depend>
+  <build_depend>niryo_one_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>shape_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+
+  <run_depend>actionlib</run_depend>
+  <run_depend>control_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+  <run_depend>niryo_one_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>shape_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>std_srvs</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+
+  <export>
+  </export>
+</package>

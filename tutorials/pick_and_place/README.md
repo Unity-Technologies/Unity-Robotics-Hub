@@ -2,32 +2,24 @@
 
 ![](img/0_pick_place.gif)
 
+PLACEHOLDER image
+
 <!-- PLACEHOLDER introduction. Something about using ROS, Unity, MoveIt, and pick & place as a task.  -->
 
-This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task. 
-
-<!-- This document breaks down the current status of Jacob & Jonathan’s Pick & Place demo into smaller tutorials that start from scratch (with provided assets).  -->
+This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task using MoveIt trajectory planning. 
 
 ## Table of Contents
-
 - [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
   - [Table of Contents](#table-of-contents)
   - [Step 1: Create Unity scene with imported URDF](#step-1-create-unity-scene-with-imported-urdf)
   - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
   - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
 
-Download the provided assets here:
-
-1. [Unity Package PLACEHOLDER]()
-2. [ROS Package PLACEHOLDER]()
-
 ---
 
 ## [Step 1: Create Unity scene with imported URDF](1_urdf.md) 
 
 <img src="img/1_end.gif" width="400"/>
-
-[PLACEHOLDER]
 
 This step includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot--the [Niryo One](https://niryo.com/niryo-one/)--using the URDF importer. 
 
@@ -43,9 +35,7 @@ Verification: Pressing Play in the editor does nothing and throws no errors, the
 
 <img src="img/2_echo.png" width="400"/>
 
-[PLACEHOLDER]
-
-This step assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and running a ROS Service to set the robot arm's joint positions.
+This step assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and publishing and subscribing to a ROS topic.
 
 <!-- Assumptions: Previous steps have been completed (Unity environment). Access to a ROS workspace. Basic understanding of C#.
 

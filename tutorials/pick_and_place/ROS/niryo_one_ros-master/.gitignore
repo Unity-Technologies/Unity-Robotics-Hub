@@ -1,0 +1,11 @@
+*.pyc
+*.swp
+urdf.rviz
+node_modules/
+tmp_blockly/
+tmp_code_to_execute/
+.vscode
+*_test.py
+/CMakeLists.txt
+*.egg-info
+*__pycache__

@@ -1,0 +1,24 @@
+<launch>
+  <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
+  <arg name="load_robot_description" default="false"/>
+
+  <!-- The name of the parameter under which the URDF is loaded -->
+  <arg name="robot_description" default="robot_description"/>
+
+  <!-- Load universal robot description format (URDF) -->
+  <param if="$(arg load_robot_description)" name="$(arg robot_description)" command="$(find xacro)/xacro --inorder $(find niryo_one_description)/urdf/v2/niryo_one.urdf.xacro"/>
+
+  <!-- The semantic description that corresponds to the URDF -->
+  <param name="$(arg robot_description)_semantic" textfile="$(find niryo_one_moveit_config)/config/niryo_one.srdf" />
+  
+  <!-- Load updated joint limits (override information from URDF) -->
+  <group ns="$(arg robot_description)_planning">
+    <rosparam command="load" file="$(find niryo_one_moveit_config)/config/joint_limits.yaml"/>
+  </group>
+
+  <!-- Load default settings for kinematics; these settings are overridden by settings in a node's namespace -->
+  <group ns="$(arg robot_description)_kinematics">
+    <rosparam command="load" file="$(find niryo_one_moveit_config)/config/kinematics.yaml"/>
+  </group>
+  
+</launch>

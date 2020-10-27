@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>niryo_one_tcp_server</name>
+  <version>2.3.1</version>
+  <description>Niryo One TCP Server</description>
+  <author>Corentin Ducatez</author>
+  <maintainer email="c.ducatez@niryo.com">Corentin Ducatez</maintainer>
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>niryo_one_msgs</build_depend>
+  <build_depend>niryo_one_python_api</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>niryo_one_msgs</run_depend>
+  <run_depend>python-rpi.gpio</run_depend>
+  <run_depend>niryo_one_python_api</run_depend>
+
+  <export>
+  </export>
+</package>

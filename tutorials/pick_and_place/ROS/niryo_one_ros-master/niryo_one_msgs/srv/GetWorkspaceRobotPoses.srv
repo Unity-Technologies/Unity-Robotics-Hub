@@ -1,0 +1,8 @@
+string workspace
+---
+int32 status
+string message
+niryo_one_msgs/RobotState pose_origin
+niryo_one_msgs/RobotState pose_1
+niryo_one_msgs/RobotState pose_2
+niryo_one_msgs/RobotState pose_3

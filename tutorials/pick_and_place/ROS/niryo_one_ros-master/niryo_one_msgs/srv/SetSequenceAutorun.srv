@@ -1,0 +1,6 @@
+bool enable
+int32 mode
+int32[] sequence_ids
+---
+int32 status
+string message

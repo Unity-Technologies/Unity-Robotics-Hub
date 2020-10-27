@@ -1,0 +1,16 @@
+<launch>
+
+  <arg name="debug" default="false" />
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+  <arg     if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args" />
+
+  <arg name="config" default="false" />
+  <arg unless="$(arg config)" name="command_args" value="" />
+  <arg     if="$(arg config)" name="command_args" value="-d $(find niryo_one_moveit_config)/launch/moveit.rviz" />
+  
+  <node name="$(anon rviz)" launch-prefix="$(arg launch_prefix)" pkg="rviz" type="rviz" respawn="false"
+	args="$(arg command_args)" output="screen">
+    <rosparam command="load" file="$(find niryo_one_moveit_config)/config/kinematics.yaml"/>
+  </node>
+
+</launch>

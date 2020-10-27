@@ -1,0 +1,15 @@
+<launch>
+
+  <arg name="reset" default="false"/>
+  <!-- If not specified, we'll use a default database location -->
+  <arg name="moveit_warehouse_database_path" default="$(find niryo_one_moveit_config)/default_warehouse_mongo_db" />
+
+  <!-- Launch the warehouse with the configured database location -->
+  <include file="$(find niryo_one_moveit_config)/launch/warehouse.launch">
+    <arg name="moveit_warehouse_database_path" value="$(arg moveit_warehouse_database_path)" />
+  </include>
+
+  <!-- If we want to reset the database, run this node -->
+  <node if="$(arg reset)" name="$(anon moveit_default_db_reset)" type="moveit_init_demo_warehouse" pkg="moveit_ros_warehouse" respawn="false" output="screen" />
+
+</launch>

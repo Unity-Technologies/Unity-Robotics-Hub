@@ -1,0 +1,18 @@
+<package>
+    <name>niryo_one</name>
+    <version>2.3.1</version>
+    <description>Niryo One metapackage</description>
+    <author>Edouard Renard</author>
+    <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+    <maintainer email="c.ducatez@niryo.com">Corentin Ducatez</maintainer>
+    <license>GPLv3</license>
+    <url type="website">https://niryo.com</url>
+    <url type="repository">https://github.com/niryorobotics/niryo_one_ros</url>
+    <url type="bugtracker">https://github.com/niryorobotics/niryo_one_ros/issues</url>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <export>
+        <metapackage/>
+    </export>
+</package>

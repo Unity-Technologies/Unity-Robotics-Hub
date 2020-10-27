@@ -1,0 +1,10 @@
+int32 CREATE = 1
+int32 REMOVE = -1
+
+int32 cmd
+string name
+string workspace
+niryo_one_msgs/RobotState robot_pose
+---
+int32 status
+string message

@@ -1,0 +1,41 @@
+#
+#
+# Processes to launch from niryo_one_rpi node
+# (don't put circular dependencies)
+#
+
+processes:
+    - name: 'controllers'
+      launch_on_startup: true
+      delay_before_start: 0.0
+      cmd: 'roslaunch niryo_one_bringup controllers.launch'
+      args:
+          []
+      dependencies:
+          []
+    - name: 'robot_commander'
+      launch_on_startup: true
+      delay_before_start: 4.0 # Additional delay for Moveit to load controllers
+      cmd: 'roslaunch niryo_one_bringup robot_commander.launch'
+      args:
+          []
+      dependencies:
+          - controllers
+    - name: 'user_interface'
+      launch_on_startup: true
+      delay_before_start: 0.0
+      cmd: 'roslaunch niryo_one_bringup user_interface.launch'
+      args:
+        []
+      dependencies:
+          - controllers
+          - robot_commander
+    - name: 'vision_node'
+      launch_on_startup: true
+      delay_before_start: 5.0
+      cmd: 'roslaunch niryo_one_bringup vision.launch'
+      args:
+        []
+      dependencies:
+          - controllers
+          - robot_commander

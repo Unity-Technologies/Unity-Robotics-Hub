@@ -1,0 +1,9 @@
+# goal
+float64[] joy_values
+float64 duration
+---
+# result
+int32 has_succeeded
+---
+# feedback 
+bool is_in_joints_limit

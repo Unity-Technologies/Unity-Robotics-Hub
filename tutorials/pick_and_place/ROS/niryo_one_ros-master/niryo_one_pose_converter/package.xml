@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+    <name>niryo_one_pose_converter</name>
+    <version>2.3.1</version>
+    <description>Handles the convertion of workspace-relative poses to robot poses</description>
+    <author email="a.voigt@niryo.com">Andreas Voigt</author>
+    <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+    <maintainer email="e.rey-coquais@niryo.com">Etienne Rey-Coquais</maintainer>
+    <license>GPLv3</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>rospy</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>std_srvs</build_depend>
+    <build_depend>tf</build_depend>
+    <build_depend>niryo_one_msgs</build_depend>
+    <build_depend>niryo_one_commander</build_depend>
+
+    <run_depend>rospy</run_depend>
+    <run_depend>std_msgs</run_depend>
+    <run_depend>std_srvs</run_depend>
+    <run_depend>tf</run_depend>
+    <run_depend>niryo_one_msgs</run_depend>
+    <run_depend>niryo_one_commander</run_depend>
+
+    <export>
+    </export>
+</package>

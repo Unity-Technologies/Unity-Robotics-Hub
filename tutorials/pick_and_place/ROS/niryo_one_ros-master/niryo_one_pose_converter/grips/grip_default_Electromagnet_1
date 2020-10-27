@@ -1,0 +1,18 @@
+{
+  "name": "default_Electromagnet_1", 
+  "transform": {
+    "header_frame_id": "object_base", 
+    "translation": [
+      -0.025, 
+      0.0, 
+      0.032
+    ], 
+    "quaternion": [
+      0.0, 
+      0.0, 
+      0.0, 
+      1.0
+    ], 
+    "child_frame_id": "tool_link_target"
+  }
+}

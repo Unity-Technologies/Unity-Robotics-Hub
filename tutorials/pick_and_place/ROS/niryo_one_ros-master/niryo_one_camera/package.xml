@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>niryo_one_camera</name>
+  <version>2.3.1</version>
+  <description>Niryo vision package</description>
+  <author>Rémi Lux</author>
+  <author>Andreas Voigt</author>
+  <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+
+  <license>GPLv3</license>
+
+  <build_depend>message_generation</build_depend>
+  <build_export_depend>message_generation</build_export_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+
+  <export>
+
+  </export>
+</package>

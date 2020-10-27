@@ -1,0 +1,86 @@
+#
+#
+# Config for all the end-effectors
+#
+#
+
+command_list:
+    # Gripper
+    open_gripper: 1
+    close_gripper: 2
+    # Vacuump pump
+    pull_air_vacuum_pump: 10
+    push_air_vacuum_pump: 11
+    # Tools controlled by digital I/Os
+    setup_digital_io: 20
+    activate_digital_io: 21
+    deactivate_digital_io: 22
+
+# Important note:
+# All the values finishing with "_hold_torque" have been computed so the
+# DXL-320 motor won't become too hot.
+# If you increase those values you may destroy (burn) the motor after a few minutes.
+
+tool_list:
+    - name: "Gripper 1"
+      type: "gripper"
+      id: 11
+      available_commands:
+          - open_gripper
+          - close_gripper
+      specs:
+          open_position: 600
+          open_hold_torque: 128
+          close_position: 230
+          close_hold_torque: 128
+          close_max_torque: 1023
+          open_speed: 300 
+          close_speed: 300
+    - name: "Gripper 2"
+      type: "gripper"
+      id: 12
+      available_commands:
+          - open_gripper
+          - close_gripper
+      specs:
+          open_position: 640
+          open_hold_torque: 128
+          close_position: 400
+          close_hold_torque: 128
+          close_max_torque: 1023
+          open_speed: 300 
+          close_speed: 300
+    - name: "Gripper 3"
+      type: "gripper"
+      id: 13
+      available_commands:
+          - open_gripper
+          - close_gripper
+      specs:
+          open_position: 450
+          open_hold_torque: 128
+          close_position: 220
+          close_hold_torque: 160
+          close_max_torque: 1023
+          open_speed: 300 
+          close_speed: 300
+    - name: "Electromagnet 1"
+      type: "electromagnet"
+      id: 30
+      available_commands:
+          - activate_digital_io
+          - deactivate_digital_io
+          - setup_digital_io
+      specs:
+          []
+    - name: "Vacuum Pump 1"
+      type: "vacuum_pump"
+      id: 31
+      available_commands:
+          - pull_air_vacuum_pump
+          - push_air_vacuum_pump
+      specs:
+          pull_air_position: 250
+          pull_air_hold_torque: 128
+          push_air_position: 760
+

@@ -1,0 +1,20 @@
+<launch>
+
+  <!-- This file makes it easy to include the settings for trajectory execution  -->  
+
+  <!-- Flag indicating whether MoveIt! is allowed to load/unload  or switch controllers -->
+  <arg name="moveit_manage_controllers" default="true"/>
+  <param name="moveit_manage_controllers" value="$(arg moveit_manage_controllers)"/>
+
+  <!-- When determining the expected duration of a trajectory, this multiplicative factor is applied to get the allowed duration of execution -->
+  <param name="trajectory_execution/allowed_execution_duration_scaling" value="1.2"/> <!-- default 1.2 -->
+  <!-- Allow more than the expected execution time before triggering a trajectory cancel (applied after scaling) -->
+  <param name="trajectory_execution/allowed_goal_duration_margin" value="0.5"/> <!-- default 0.5 -->
+  <!-- Allowed joint-value tolerance for validation that trajectory's first point matches current robot state -->
+  <param name="trajectory_execution/allowed_start_tolerance" value="0.0"/> <!-- default 0.01 -->
+  
+  <!-- Load the robot specific controller manager; this sets the moveit_controller_manager ROS parameter -->
+  <arg name="moveit_controller_manager" default="niryo_one" />
+  <include file="$(find niryo_one_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml" />
+  
+</launch>

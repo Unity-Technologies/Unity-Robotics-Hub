@@ -1,0 +1,8 @@
+
+uint8 id
+
+int16 open_position
+int16 open_speed
+int16 open_hold_torque
+---
+uint8 state

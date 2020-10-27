@@ -1,0 +1,6 @@
+string name
+---
+int32 status
+int32 SUCCESSFULLY_SET = 0
+int32 OVERWRITTEN = 1
+int32 NOT_SET = -1

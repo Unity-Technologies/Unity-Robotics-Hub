@@ -1,0 +1,39 @@
+#
+#  Stepper caracteristics for hardware V2
+#
+
+stepper_1_gear_ratio: 6.0625
+stepper_2_gear_ratio: 8.3125
+stepper_3_gear_ratio: 7.875
+
+stepper_6_gear_ratio: 5.0
+stepper_7_gear_ratio: 5.0
+
+stepper_1_offset_position: 3.05433
+stepper_2_offset_position: 0.640187
+stepper_3_offset_position: -1.397485
+
+stepper_1_home_position: 0.0
+stepper_2_home_position: 0.640187
+stepper_3_home_position: -1.397485
+
+stepper_1_direction: -1.0
+stepper_2_direction: -1.0
+stepper_3_direction: 1.0
+
+stepper_6_direction: -1.0
+stepper_7_direction: -1.0
+
+stepper_1_max_effort: 90
+stepper_2_max_effort: 130
+stepper_3_max_effort: 120
+
+stepper_6_max_effort: 90
+stepper_7_max_effort: 90
+
+# Params still used in the driver code but motor 4 will be disabled
+stepper_4_gear_ratio: 5.0
+stepper_4_offset_position: 2.791
+stepper_4_home_position: 0.0
+stepper_4_direction: -1.0
+stepper_4_max_effort: 90
