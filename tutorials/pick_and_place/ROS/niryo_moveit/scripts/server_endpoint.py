@@ -8,7 +8,7 @@ from tcp_endpoint.RosSubscriber import RosSubscriber
 from tcp_endpoint.RosService import RosService
 
 from niryo_moveit.msg import NiryoMoveitJoints, NiryoTrajectory
-
+from niryo_moveit.srv import MoverService
 
 def main():
     # Get variables set in rosparam used for
@@ -27,7 +27,8 @@ def main():
     # Create ROS communication objects dictionary for routing messages
     source_destination_dict = {
         'SourceDestination_input': RosPublisher('SourceDestination', NiryoMoveitJoints, queue_size=10),
-        'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, unity_machine_ip, unity_machine_port)
+        'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, unity_machine_ip, unity_machine_port),
+        'niryo_moveit': RosService('niryo_moveit', MoverService)
     }
 
     # Start the Server Endpoint

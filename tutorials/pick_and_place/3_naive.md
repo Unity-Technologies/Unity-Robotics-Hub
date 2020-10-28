@@ -1,11 +1,11 @@
-# Pick and Place Tutorial [DRAFT]
+# Pick and Place Tutorial
 
 This step assumes you have access to a functional ROS workspace and that the previous two steps ([Step 1](1_urdf.md), [Step 2](2_ros_tcp.md)) have been completed.
 
 Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
 
 ## Table of Contents
-- [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
+- [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
   - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
   - [The Unity Side](#the-unity-side)
@@ -23,41 +23,54 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-- If you have not already cloned this [PLACEHOLDER] repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
-
-<!-- - Note the SourceDestinationPublisher script. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port. The `Publish()` function is defined as follows: -->
+- If you have not already cloned this repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
 
-- Note the Assets/Scripts/RosConnect.cs script. PLACEHOLDER description
+- Note the `Assets/Scripts/RosConnect.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
+
+The UI button `OnClick` callback will be reassigned later in this tutorial to the following function, `PublishJoints`, as defined:
 
 ```csharp
-private void CloseGripper()
+public void PublishJoints()
 {
-    var leftDrive = leftGripper.xDrive;
-    var rightDrive = rightGripper.xDrive;
+    MoverServiceRequest request = new MoverServiceRequest();
+    request.joints_input = CurrentJointConfig();
+    
+    // Pick Pose
+    request.pick_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            target.transform.position.z,
+            -target.transform.position.x,
+            target.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
 
-    leftDrive.target = -0.01f;
-    rightDrive.target = 0.01f;
+    // Place Pose
+    request.place_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            targetPlacement.transform.position.z,
+            -targetPlacement.transform.position.x,
+            targetPlacement.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
 
-    leftGripper.xDrive = leftDrive;
-    rightGripper.xDrive = rightDrive;
-}
-
-private void OpenGripper()
-{
-    var leftDrive = leftGripper.xDrive;
-    var rightDrive = rightGripper.xDrive;
-
-    leftDrive.target = 0;
-    rightDrive.target = 0;
-
-    leftGripper.xDrive = leftDrive;
-    rightGripper.xDrive = rightDrive;
+    var response = (MoverServiceResponse)tcpCon.SendServiceMessage(rosServiceName, request, new MoverServiceResponse());
+    if (response.trajectories != null)
+    {
+        Debug.Log("Trajectory returned.");
+        StartCoroutine(PrintTrajectories(response));
+    }
 }
 ```
 
-PLACEHOLDER 
+This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
+
+At the end of the function, the `MoverServiceResponse` receives a `response.trajectories`. This is passed to the `PrintTrajectories` method below:
 
 ```csharp
 private IEnumerator PrintTrajectories(MoverServiceResponse response)
@@ -91,38 +104,24 @@ private IEnumerator PrintTrajectories(MoverServiceResponse response)
 }
 ```
 
-```csharp
-void Start()
-{ 
-    TcpClient client = new TcpClient();
+`PrintTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-    // Instantiate the connector with ROS host name and port.
-    tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
-    
-    jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
-    // Setup articulation bodies
-    for (int i = 0; i < jointGameObjects.Length; i++)
-    {
-        jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
-    }
+- Return to Unity. Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the RosConnect script to the RosConnector object.
 
-    leftGripper = leftGripperGO.GetComponent<ArticulationBody>();
-    rightGripper = rightGripperGO.GetComponent<ArticulationBody>();
-}
-```
-
-- Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the RosConnect script to the RosConnector object.
+![](img/3_swap.gif)
 
 - Note that the RosConnect component shows its member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
 
-- In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the PLACEHOLDER Right Gripper GO field, and the right_gripper object to the Left Gripper GO field.
+- In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the Right Gripper GO field, and the right_gripper object to the Left Gripper GO field.
 
 - Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
   - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
 
-![](img/2_joints.gif)
+![](img/3_target.png)
 
-- PLACEHOLDER reassign button OnClick
+- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the `SourceDestinationPublisher.Publish()`. Replace this call with RosConnect > PublishJoints().
+
+![](img/3_onclick.png)
 
 - The Unity side is now ready to communicate with ROS to motion plan!
 
@@ -141,10 +140,31 @@ void Start()
    ```bash
    sudo -H pip install jsonpickle
    ```
+<!-- - Additionally, note the file `niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard.  -->
 
-- PLACEHOLDER describe mover.py
+- Note the file `niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
 
-- discussion on moveit configs 
+```python
+def plan_trajectory(move_group, destination_pose, start_joint_angles): 
+    current_joint_state = JointState()
+    current_joint_state.name = joint_names
+    current_joint_state.position = start_joint_angles
+
+    moveit_robot_state = RobotState()
+    moveit_robot_state.joint_state = current_joint_state
+    move_group.set_start_state(moveit_robot_state)
+
+    move_group.set_pose_target(destination_pose)
+    plan = move_group.go(wait=True)
+
+    if not plan:
+        print("RAISE NO PLAN ERROR")
+
+    return move_group.plan()
+```
+This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
+
+- PLACEHOLDER discussion on moveit configs 
 
 - If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -152,37 +172,38 @@ void Start()
 
 ## Unity & ROS Communication
 
-- The ROS side is now ready to interface with the Unity side! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
+- The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
+
 roscore &
+
 rosparam set ROS_IP <your ROS IP>
 rosparam set ROS_TCP_PORT 10000
 rosparam set UNITY_IP <your Unity IP>
 rosparam set UNITY_SERVER_PORT 5005
+
 rosrun niryo_moveit server_endpoint.py
 ```
 
 Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window. Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-- Open a new terminal window and start the Motion Planning Node. This is the node that controls which pose the UR3 will travel to within the Unity Editor.
+- Open a new terminal window and start the Mover Service node.
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
 
-# Start motion planning script
 rosrun niryo_moveit mover.py
 ```
 
-Once this process is ready, it will print `Ready to motion plan!` to the console.
+Once this process is ready, it will print `Ready to plan` to the console.
 
-- Open a new terminal window and start the Moveit Node. This is the node that will actually run motion planning computations and load the configuration.
+- Open a new terminal window and launch MoveIt. PLACEHOLDER what does this do?
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
 
-# Start the planning environment
 roslaunch niryo_moveit demo.launch
 ```
 
@@ -198,6 +219,7 @@ This may print out various error messages regarding the controller_spawner, such
 ## Resources
 
 - [MoveIt!](https://github.com/ros-planning/moveit)
+- Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
 - All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case
 
 ---
@@ -206,21 +228,21 @@ This may print out various error messages regarding the controller_spawner, such
 
 ### Errors and Warnings
 
-- If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch ur3_with_gripper_moveit gazebo.launch sim:=true` process launched correctly and has printed `You can start planning now!`.
+- If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch niryo_moveit demo.launch` process launched correctly and has printed `You can start planning now!`.
   
 - `[ WARN] [1600887082.269260191, 1270.407000000]: Fail: ABORTED: No motion plan found. No execution attempted. WARNING: the motion planner failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the Motion Planning Service component in Unity. Additionally, ensure that the `ros_tcp_ip` address matches in the `server_endpoint.py` value, and that `unity_machine_ip` is your Unity machine's IP.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the RosConnector component in Unity. Additionally, ensure that the ROS parameter values are set correctly.
   
-- The VM-side calculations may take longer than expected on different machines. If the Unity console throws an error saying `No data available on network stream after <number> attempts`, open the `Unity3D/Assets/Scripts/ROS Services/PoseEstimationService.cs` script. Edit the number after `serviceResponseRetry`.
-    > E.g. `tcpCon = new TcpConnector(hostName, hostPort, networkTimeout: 3000, serviceResponseRetry: 30, serviceResponseSleep: 2000);`
+<!-- - The VM-side calculations may take longer than expected on different machines. If the Unity console throws an error saying `No data available on network stream after <number> attempts`, open the `Unity3D/Assets/Scripts/ROS Services/PoseEstimationService.cs` script. Edit the number after `serviceResponseRetry`.
+    > E.g. `tcpCon = new TcpConnector(hostName, hostPort, networkTimeout: 3000, serviceResponseRetry: 30, serviceResponseSleep: 2000);` -->
 
-- If running `roslaunch ur3_with_gripper_moveit gazebo.launch sim:=true` does not appear to throw breaking errors but does not proceed to print `You can start planning now!`, wait for up to five minutes. If it still does not proceed, the memory allowance may need to be increased.
+<!-- - If running `roslaunch ur3_with_gripper_moveit gazebo.launch sim:=true` does not appear to throw breaking errors but does not proceed to print `You can start planning now!`, wait for up to five minutes. If it still does not proceed, the memory allowance may need to be increased. -->
 
 ### Miscellaneous Issues
 
-- If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `ur3_with_gripper` object are set to `10000` and `1000`, respectively.
+- If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `ur3_with_gripper` object are set to `10000` and `100`, respectively.
 
 - Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint.py` script may time out, and will need to be re-run.

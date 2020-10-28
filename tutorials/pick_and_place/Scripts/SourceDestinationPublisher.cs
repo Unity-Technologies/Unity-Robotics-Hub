@@ -5,7 +5,6 @@ using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
-
     private TcpConnector tcpCon;
     
     // Variables required for ROS communication
@@ -15,21 +14,35 @@ public class SourceDestinationPublisher : MonoBehaviour
 
     public GameObject target;
     public GameObject targetPlacement;
+    public GameObject[] jointGameObjects;
     
     private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
-    
+    private ArticulationBody[] jointArticulationBodies;
     
     // Start is called before the first frame update
     void Start()
     {
         // Instantiate the connector with ROS host name and port.
         tcpCon = new TcpConnector(hostName, hostPort);
+
+        jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
+        // Setup articulation bodies
+        for (int i = 0; i < jointGameObjects.Length; i++)
+        {
+            jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
+        }
     }
 
-    // Update is called once per frame
     public void Publish()
     {
         NiryoMoveitJoints sourceDestinationMessage = new NiryoMoveitJoints();
+
+        sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
+        sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
+        sourceDestinationMessage.joint_02 = jointArticulationBodies[2].xDrive.target;
+        sourceDestinationMessage.joint_03 = jointArticulationBodies[3].xDrive.target;
+        sourceDestinationMessage.joint_04 = jointArticulationBodies[4].xDrive.target;
+        sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
 
         // Pick Pose
         sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
@@ -52,7 +65,6 @@ public class SourceDestinationPublisher : MonoBehaviour
             ),
             orientation = pickOrientation
         };
-
 
         // Finally send the message to server_endpoint.py running in ROS
         tcpCon.SendMessage(topicName, sourceDestinationMessage);
