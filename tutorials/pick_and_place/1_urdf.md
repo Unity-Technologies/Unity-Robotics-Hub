@@ -25,9 +25,6 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - Clone this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/UnityAssets` directory. Copy all of the subfolders in UnityAssets (Environment, Materials, Plugins, etc.), and paste them into the `Assets` folder of your newly made Unity project.
   
-<!-- - Download the provided Unity assets [PLACEHOLDER](). Once Unity has opened, double click the `.unitypackage` file. In the Import Unity Package window that has opened in Unity, ensure everything is selected, and click `Import`. Once this is done, a folder titled PickAndPlace should be created in the Assets folder, containing Environment, Materials, Plugins, Prefabs, RosMessages, and URDF subfolders. -->
-  <!-- - If a window prompts you that `The open scene(s) have been modified externally`, select `Reload` to open the imported files. -->
-  
 - Load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
 ![](img/1_cube.png) 
@@ -63,9 +60,13 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/PickAndPlace/Plugins/UnityEditorScripts/Urdf/Controller.cs`.
 
-- On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`.
+- On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
 
 ![](img/1_controller.png) 
+
+- On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5`. On the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc), set the X Drive Force Limit to `1000`.
+
+![](img/1_force.png)
 
 - Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
