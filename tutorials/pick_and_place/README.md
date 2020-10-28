@@ -1,4 +1,4 @@
-# Pick and Place Tutorial [DRAFT]
+# Pick and Place Tutorial
 
 ![](img/0_pick_place.gif)
 
@@ -9,12 +9,12 @@ PLACEHOLDER image
 This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task using MoveIt trajectory planning. 
 
 ## Table of Contents
-- [Pick and Place Tutorial [DRAFT]](#pick-and-place-tutorial-draft)
+- [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
   - [Step 1: Create Unity scene with imported URDF](#step-1-create-unity-scene-with-imported-urdf)
   - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
   - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
-
+  
 ---
 
 ## [Step 1: Create Unity scene with imported URDF](1_urdf.md) 

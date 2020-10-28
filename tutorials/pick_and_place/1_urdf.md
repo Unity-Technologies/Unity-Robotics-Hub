@@ -40,7 +40,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   
 <!-- ![](img/1_dll.png)  -->
 
-- Find and select the URDF file in the Project window (`Assets/URDF/niryo_one_gripper/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
+- Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   
 - Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
