@@ -1,0 +1,13 @@
+string GRIP_AUTO = auto
+
+string workspace
+string grip
+int32 tool_id           # Used if grip_name = GRIP_AUTO
+float32 height_offset
+float32 x_rel
+float32 y_rel
+float32 yaw_rel
+---
+int32 status
+string message
+niryo_one_msgs/RobotState target_pose

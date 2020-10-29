@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>mcp_can_rpi</name>
+  <version>1.0.0</version>
+  <description>RPI3 library for MCP2515 module (CAN bus interface) through SPI GPIOs</description>
+  <author>Edouard Renard</author>
+  <maintainer email="e.renard@niryo.com">Edouard Renard</maintainer>
+
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+
+  <export>
+  </export>
+</package>

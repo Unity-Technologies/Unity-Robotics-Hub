@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package>
+    <name>niryo_one_msgs</name>
+    <version>2.3.1</version>
+    <description>Niryo One ROS messages used in other Niryo One packages</description>
+    <author>Edouard Renard</author>
+    <maintainer email="r.lux@niryo.com">Rémi Lux</maintainer>
+    <license>GPLv3</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>rospy</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>actionlib_msgs</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>message_generation</build_depend>
+    <build_depend>moveit_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>rospy</run_depend>
+    <run_depend>std_msgs</run_depend>
+    <run_depend>actionlib_msgs</run_depend>
+    <run_depend>geometry_msgs</run_depend>
+    <run_depend>message_generation</run_depend>
+    <run_depend>message_runtime</run_depend>
+    <run_depend>moveit_msgs</run_depend>
+    <run_depend>sensor_msgs</run_depend>
+
+    <export>
+    </export>
+</package>

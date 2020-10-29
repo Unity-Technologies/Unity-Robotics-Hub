@@ -1,0 +1,5 @@
+int32[] can_required_motor_id_list
+int32[] dxl_required_motor_id_list
+---
+int32 status
+string message

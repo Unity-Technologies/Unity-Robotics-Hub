@@ -1,0 +1,10 @@
+int32 cmd_type
+
+string position_name
+niryo_one_msgs/Position position
+
+---
+int32 status
+string message
+
+niryo_one_msgs/Position position 

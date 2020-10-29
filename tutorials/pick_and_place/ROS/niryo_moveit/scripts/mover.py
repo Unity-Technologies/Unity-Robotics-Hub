@@ -4,15 +4,13 @@ from __future__ import print_function
 
 import rospy
 
-from niryo_moveit.srv import MoverService, MoverServiceRequest, MoverServiceResponse
-
 import sys
 import copy
 import math
 import moveit_commander
+
 import moveit_msgs.msg
 from moveit_msgs.msg import Constraints, JointConstraint, PositionConstraint, OrientationConstraint, BoundingVolume
-
 from sensor_msgs.msg import JointState
 from moveit_msgs.msg import RobotState
 import geometry_msgs.msg
@@ -20,8 +18,13 @@ from geometry_msgs.msg import Quaternion, Pose
 from std_msgs.msg import String
 from moveit_commander.conversions import pose_to_list
 
-joint_names = ['joint_1','joint_2','joint_3','joint_4','joint_5','joint_6']
+from niryo_moveit.srv import MoverService, MoverServiceRequest, MoverServiceResponse
 
+joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5', 'joint_6']
+
+"""
+    Given the start angles of the robot, plan a trajectory that ends at the destination pose.
+"""
 def plan_trajectory(move_group, destination_pose, start_joint_angles): 
     current_joint_state = JointState()
     current_joint_state.name = joint_names
@@ -40,7 +43,20 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
     return move_group.plan()
 
 
-# https://github.com/ros-planning/moveit/blob/master/moveit_commander/src/moveit_commander/move_group.py
+"""
+    Creates a pick and place plan using the four states below.
+    
+    1. Pre Grasp - position gripper directly above target object
+    2. Grasp - lower gripper so that fingers are on either side of object
+    3. Pick Up - raise gripper back to the pre grasp position
+    4. Place - move gripper to desired placement position
+
+    Gripper behaviour is handled outside of this trajectory planning.
+        - Gripper close occurs after 'grasp' position has been achieved
+        - Gripper open occurs after 'place' position has been achieved
+
+    https://github.com/ros-planning/moveit/blob/master/moveit_commander/src/moveit_commander/move_group.py
+"""
 def plan_pick_and_place(req):
     response = MoverServiceResponse()
 
@@ -57,41 +73,28 @@ def plan_pick_and_place(req):
         math.radians(req.joints_input.joint_05),
     ]
 
-
-    # Pre grasp
+    # Pre grasp - position gripper directly above target object
     pre_grasp_pose = plan_trajectory(move_group, req.pick_pose, current_robot_joint_configuration)
-
-    if not pre_grasp_pose:
-        print("RAISE ERROR PRE GRASP POSE")
 
     previous_ending_joint_angles = pre_grasp_pose.joint_trajectory.points[-1].positions
     response.trajectories.append(pre_grasp_pose)
 
-    # Grasp
-    pick_pose = req.pick_pose
-    pick_pose.position.z += 0.05 # Static value coming from Unity, TODO: pass along with request
+    # Grasp - lower gripper so that fingers are on either side of object
+    pick_pose = copy.deepcopy(req.pick_pose)
+    pick_pose.position.z -= 0.05  # Static value coming from Unity, TODO: pass along with request
     grasp_pose = plan_trajectory(move_group, pick_pose, previous_ending_joint_angles)
-
-    if not grasp_pose:
-        print("RAISE ERROR GRASP POSE")
 
     previous_ending_joint_angles = grasp_pose.joint_trajectory.points[-1].positions
     response.trajectories.append(grasp_pose)
 
-    # Pick Up
+    # Pick Up - raise gripper back to the pre grasp position
     pick_up_pose = plan_trajectory(move_group, req.pick_pose, previous_ending_joint_angles)
-
-    if not pick_up_pose:
-        print("RAISE ERROR PICK UP POSE")
 
     previous_ending_joint_angles = pick_up_pose.joint_trajectory.points[-1].positions
     response.trajectories.append(pick_up_pose)
 
-    # Place
+    # Place - move gripper to desired placement position
     place_pose = plan_trajectory(move_group, req.place_pose, previous_ending_joint_angles)
-
-    if not place_pose:
-        print("RAISE ERROR PLACE POSE")
 
     previous_ending_joint_angles = place_pose.joint_trajectory.points[-1].positions
     response.trajectories.append(place_pose)
@@ -100,6 +103,7 @@ def plan_pick_and_place(req):
 
     return response
 
+
 def moveit_server():
     moveit_commander.roscpp_initialize(sys.argv)
     rospy.init_node('niryo_moveit_server')
@@ -107,6 +111,7 @@ def moveit_server():
     s = rospy.Service('niryo_moveit', MoverService, plan_pick_and_place)
     print("Ready to plan")
     rospy.spin()
+
 
 if __name__ == "__main__":
     moveit_server()

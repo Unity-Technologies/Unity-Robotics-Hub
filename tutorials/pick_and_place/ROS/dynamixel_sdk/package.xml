@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <name>dynamixel_sdk</name>
+  <version>3.4.7</version>
+  <description>
+      (This package has been adapted to be used on the Niryo One custom RPI3 shield.)
+
+      This package is wrapping version of ROBOTIS Dynamxel SDK for ROS. The ROBOTIS Dynamixel SDK, or SDK, is a software development library that provides Dynamixel control functions for packet communication. The API is designed for Dynamixel actuators and Dynamixel-based platforms.</description>
+  <license>BSD</license>
+  <author email="zerom@robotis.com">Zerom</author>
+  <author email="rwjung@robotis.com">Leon</author>
+  <maintainer email="pyo@robotis.com">Pyo</maintainer>
+  <url type="bugtracker">https://github.com/ROBOTIS-GIT/DynamixelSDK/issues</url>
+  <url type="repository">https://github.com/ROBOTIS-GIT/DynamixelSDK</url>
+  <url type="website">http://wiki.ros.org/dynamixel_sdk</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+  <export></export>
+</package>

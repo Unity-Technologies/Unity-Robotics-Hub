@@ -1,0 +1,17 @@
+string obj_type
+string obj_color
+float32 workspace_ratio
+bool ret_image
+---
+int32 status
+int32 SUCCESSFUL = 1
+int32 VIDEO_STREAM_NOT_RUNNING = -1
+int32 OBJECT_NOT_FOUND = -2
+int32 MARKERS_NOT_FOUND = -3
+
+niryo_one_msgs/ObjectPose obj_pose
+
+string obj_type
+string obj_color
+
+sensor_msgs/CompressedImage img

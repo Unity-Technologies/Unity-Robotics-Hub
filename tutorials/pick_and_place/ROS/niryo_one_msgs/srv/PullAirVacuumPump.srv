@@ -1,0 +1,6 @@
+uint8 id
+
+int16 pull_air_position
+int16 pull_air_hold_torque
+---
+uint8 state

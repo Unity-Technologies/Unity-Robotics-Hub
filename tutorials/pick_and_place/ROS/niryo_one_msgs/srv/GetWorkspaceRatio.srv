@@ -1,0 +1,5 @@
+string workspace
+---
+int32 status
+string message
+float32 ratio  # width/height

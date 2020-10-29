@@ -1,0 +1,8 @@
+uint8 id
+
+bool control_on
+int16 speed
+int8 direction 
+---
+uint8 status
+string message

@@ -1,0 +1,9 @@
+# goal
+niryo_one_msgs/RobotMoveCommand cmd
+---
+# result
+int32 status
+string message
+---
+# feedback
+niryo_one_msgs/RobotState state
