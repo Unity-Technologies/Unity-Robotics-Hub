@@ -1,4 +1,0 @@
-std_msgs/Empty empty
----
-bool is_set
-sensor_msgs/CameraInfo camera_info
