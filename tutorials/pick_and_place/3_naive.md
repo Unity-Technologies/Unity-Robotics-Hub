@@ -23,7 +23,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-- If you have not already cloned this repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
+- If you have not already cloned or downloaded this repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
 
@@ -121,6 +121,10 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 ![](img/3_onclick.png)
 
+- The gripper may need some adjustment to fully be able to pick and place the cube. In the Hierarchy window, search for `gripper_base`. Expand this object in the hierarchy to `gripper_base/Collisions/unnamed`, and disable the unnamed object.
+
+![](img/3_gripper.gif)
+
 - The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
@@ -165,7 +169,7 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 - PLACEHOLDER discussion on moveit configs 
 
-- If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
+- If you have not already built and sourced the ROS workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 --- 
 

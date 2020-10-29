@@ -23,7 +23,14 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 - If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
 
-- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. These packages include Python scripts, MoveIt configs, necessary Niryo files, and the ROS message and service files.
+- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. This `niryo_moveit` package contains Python scripts, MoveIt configurations, and other necessary files.
+   > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases). PLACEHOLDER any extra info about what is or isn't in here
+
+- Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
+
+-  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories to the `src` directory of your ROS workspace.
+
+- Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. PLACEHOLDER does the user need to put this in the catkin workspace?
 
 ## The Unity Side
 
@@ -35,11 +42,13 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_gen.png)
    
-- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 3 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints, NiryoTrajectory, and RobotTrajectory.
+- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
   
    > [PLACEHOLDER]: explain what's happening in message generation?
 
-- Now that the message has been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
+- Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`. In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse File...` and navigate to the newly downloaded MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 1 new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
+
+- Now that the messages have been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
 - In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
   
@@ -137,7 +146,9 @@ Confirm that the component has been added to the RosConnector object successfull
    sudo -H pip install rospkg jsonpickle
    ```
 
-- Note the `tcp_endpoint` package provided. This package creates the server endpoint to accept ROS messages from Unity.
+- If you have not already, download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the tcp_endpoint package to your ROS workspace.
+
+<!-- - Note the `tcp_endpoint` package provided. This package creates the server endpoint to accept ROS messages from Unity. -->
 
 - In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
