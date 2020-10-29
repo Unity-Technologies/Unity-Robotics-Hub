@@ -23,7 +23,10 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - In the Unity Hub, go to the Projects tab. Click the dropdown arrow next to `NEW`, and select the newly downloaded 2020.2 version. Create a new project using the 3D Template.
 
-- Clone this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/UnityAssets` directory. Copy all of the subfolders in UnityAssets (Environment, Materials, Plugins, etc.), and paste them into the `Assets` folder of your newly made Unity project.
+- Clone this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/` directory. Find the `PickAndPlace.unitypackage` file, and double click it.
+  > Note: this .unitypackage can also be found in the latest [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases).
+
+- In the Import Unity Package window that has opened, ensure everything is selected, and click `Import`. Once this is done, new folders in the Assets directory will appear, including Environment, Materials, Prefabs, and URDF.
   
 - Load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
@@ -33,9 +36,13 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ![](img/1_physics.png)
 
-<!-- - Find and select `Assets/Plugins/Urdf.dll` in the Project window and uncheck `Validate References` in the Inspector. -->
+- Download the latest `Urdf.dll` and `Source code` from the [URDF Importer Releases](https://github.cds.internal.unity3d.com/unity/URDF-Importer/releases). Unzip the compressed folder (named `URDF-Importer...zip`). In this folder, copy the `UnityEditorScripts` directory and contents into the Assets directory of your Unity project. 
+
+- Create another new folder in your Unity project's Assets directory titled Plugins. Copy the downloaded `Urdf.dll` into this Plugins directory.
+
+- Find and select `Assets/Plugins/Urdf.dll` in the Project window and uncheck `Validate References` in the Inspector. Apply these changes.
   
-<!-- ![](img/1_dll.png)  -->
+![](img/1_dll.png) 
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   
@@ -64,7 +71,9 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ![](img/1_controller.png) 
 
-- On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5`. On the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc), set the X Drive Force Limit to `1000`.
+- On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5`. 
+<!-- - On the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, set the X Drive Force Limit to `1000`. PLACEHOLDER do i need this?
+  - These components can be accessed by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy. -->
 
 ![](img/1_force.png)
 

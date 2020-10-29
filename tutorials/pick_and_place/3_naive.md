@@ -11,6 +11,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
   - [Unity & ROS Communication](#unity--ros-communication)
+  - [!](#img-srcimg0_pick_placegif-alt)
   - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)
@@ -27,7 +28,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
 
-- Note the `Assets/Scripts/RosConnect.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
+- Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
 The UI button `OnClick` callback will be reassigned later in this tutorial to the following function, `PublishJoints`, as defined:
 
@@ -63,17 +64,17 @@ public void PublishJoints()
     if (response.trajectories != null)
     {
         Debug.Log("Trajectory returned.");
-        StartCoroutine(PrintTrajectories(response));
+        StartCoroutine(ExecuteTrajectories(response));
     }
 }
 ```
 
 This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
 
-At the end of the function, the `MoverServiceResponse` receives a `response.trajectories`. This is passed to the `PrintTrajectories` method below:
+At the end of the function, the `MoverServiceResponse` receives a `response.trajectories`. This is passed to the `ExecuteTrajectories` method below:
 
 ```csharp
-private IEnumerator PrintTrajectories(MoverServiceResponse response)
+private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 {
     if (response.trajectories != null)
     {
@@ -104,22 +105,20 @@ private IEnumerator PrintTrajectories(MoverServiceResponse response)
 }
 ```
 
-`PrintTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
+`ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-- Return to Unity. Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the RosConnect script to the RosConnector object.
+- Return to Unity. Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnector object.
 
-![](img/3_swap.gif)
+![](img/3_swap.gif) 
 
-- Note that the RosConnect component shows its member variables in the Inspector window, which are unassigned. Drag and drop the Target and TargetPlacement objects onto the Target and Target Placement Inspector fields, respectively.
+- Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Finally, assign the `niryo_one` robot to the Niryo One field.
 
-- In the Search bar in the Hierarchy, search for "_gripper". Drag the left_gripper object to the Right Gripper GO field, and the right_gripper object to the Left Gripper GO field.
+![](img/3_target.gif)
 
-- Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
-  - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
+- The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
+  - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-![](img/3_target.png)
-
-- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the `SourceDestinationPublisher.Publish()`. Replace this call with RosConnect > PublishJoints().
+- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the `SourceDestinationPublisher.Publish()`. Replace this call with TrajectoryPlanner > PublishJoints().
 
 ![](img/3_onclick.png)
 
@@ -134,11 +133,12 @@ private IEnumerator PrintTrajectories(MoverServiceResponse response)
 - The provided files require the following packages to be installed; run the following if the packages are not already present:
 
    ```bash
-   sudo apt-get install ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
+   sudo apt-get update && sudo apt-get upgrade
+   sudo apt-get install python-pip ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
    ```
 
    ```bash
-   sudo -H pip install jsonpickle
+   sudo -H pip install rospkg jsonpickle
    ```
 
 - Note the file `niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
@@ -213,6 +213,7 @@ This may print out various error messages regarding the controller_spawner, such
 - Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
   - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
+![](img/0_pick_place.gif)
 ---
 
 ## Resources
@@ -229,7 +230,7 @@ This may print out various error messages regarding the controller_spawner, such
 
 - If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch niryo_moveit demo.launch` process launched correctly and has printed `You can start planning now!`.
   
-- `[ WARN] [1600887082.269260191, 1270.407000000]: Fail: ABORTED: No motion plan found. No execution attempted. WARNING: the motion planner failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
+- `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
 
 ### Hangs, Timeouts, and Freezes
 

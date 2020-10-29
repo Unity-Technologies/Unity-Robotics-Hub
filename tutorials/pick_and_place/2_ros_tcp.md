@@ -2,7 +2,7 @@
 
 This step assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
 
-Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg, and publishing and subscribing to a ROS Topic.
+Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic.
 
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
@@ -21,29 +21,29 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-- If you have not already cloned this repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project. 
+- If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
 
-- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS (niryo_moveit, niryo_one_ros-master, etc.). Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. These packages include Python scripts, MoveIt configs, and the ROS message and service files.
+- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. These packages include Python scripts, MoveIt configs, necessary Niryo files, and the ROS message and service files.
 
 ## The Unity Side
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
 
-- Note the contents of the `Assets/Plugins` folder. This contains the MessageGeneration scripts, which have created a new menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
+- Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repository. In the ROS-TCP-Connector, copy the `MessageGeneration` and `TcpConnector` directories to the Unity project's Assets/Plugins directory.
+
+- Adding `MessageGeneration` creates a new Unity menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
 
 ![](img/2_gen.png)
    
-- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
+- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` If this is successful, 3 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints, NiryoTrajectory, and RobotTrajectory.
   
-   > [PLACEHOLDER] explain what's happening in message generation?
+   > [PLACEHOLDER]: explain what's happening in message generation?
 
 - Now that the message has been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
 - In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
   
-   > [PLACEHOLDER]: what’s happening in Service Generation?
-
-<!-- - In the Project window, right click the Assets folder. Create a new folder called Scripts. Then, right click and create a new C# script in `Assets/Scripts` called SourceDestinationPublisher. Double click the script to open. Replace the script with the following: -->
+   > [PLACEHOLDER]: explain what’s happening in Service Generation?
 
 - In this cloned repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
@@ -98,14 +98,14 @@ This function first takes in the current joint target values. Then, it grabs the
 
 Confirm that the component has been added to the RosConnector object successfully by checking for it in the Inspector.
 
-- Select the Target object in the Hierarchy and assign it to the Target field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the TargetPlacement field.
+- Select the Target object in the Hierarchy and assign it to the Target field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the TargetPlacement field. Finally, assign the niryo_one robot to the Niryo One field.
 
 ![](img/2_target.gif)
 
-- Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
+<!-- - Expand the Joint Game Objects list. In this order, drag and drop the following objects into the Joint Game Objects list: shoulder_link, arm_link, elbow_link, forearm_link, wrist_link, hand_link. 
   - This can be done by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy.
 
-![](img/2_joints.gif)
+![](img/2_joints.gif) -->
 
 - The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
 
@@ -125,6 +125,17 @@ Confirm that the component has been added to the RosConnector object successfull
 ## The ROS side
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
+
+- The provided files require the following packages to be installed; run the following if the packages are not already present:
+
+   ```bash
+   sudo apt-get update && sudo apt-get upgrade
+   sudo apt-get install python-pip ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
+   ```
+
+   ```bash
+   sudo -H pip install rospkg jsonpickle
+   ```
 
 - Note the `tcp_endpoint` package provided. This package creates the server endpoint to accept ROS messages from Unity.
 
@@ -201,6 +212,8 @@ ROS and Unity have now successfully connected!
 ## Troubleshooting
 
 - If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x ~/catkin_ws/src/niryo_moveit/scripts/server_endpoint.py`.
+
+- `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
   
 - If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnector in Unity. 
 
