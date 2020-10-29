@@ -1,1 +1,1 @@
-moveit_msgs/RobotTrajectory[] trajectory
+RobotTrajectory[] trajectory

@@ -11,7 +11,6 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
   - [Unity & ROS Communication](#unity--ros-communication)
-  - [!](#img-srcimg0_pick_placegif-alt)
   - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)
@@ -214,6 +213,7 @@ This may print out various error messages regarding the controller_spawner, such
   - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ![](img/0_pick_place.gif)
+
 ---
 
 ## Resources
@@ -240,6 +240,7 @@ This may print out various error messages regarding the controller_spawner, such
 
 - If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `ur3_with_gripper` object are set to `10000` and `100`, respectively.
 
-- If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`. Also verify that the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc.) X Drive Force Limit is `1000`.
+- If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`.
+<!-- -  Also verify that the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc.) X Drive Force Limit is `1000`. -->
 
 - Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint.py` script may time out, and will need to be re-run.

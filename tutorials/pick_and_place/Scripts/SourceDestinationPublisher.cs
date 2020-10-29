@@ -5,18 +5,22 @@ using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
+    // ROS Connector
     private TcpConnector tcpCon;
+    private int numRobotJoints = 6;
     
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
     public string hostName = "192.168.50.149";
     public int hostPort = 10000;
 
+    public GameObject niryoOne;
     public GameObject target;
     public GameObject targetPlacement;
-    public GameObject[] jointGameObjects;
     
     private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
+    
+    // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
     
     // Start is called before the first frame update
@@ -24,13 +28,31 @@ public class SourceDestinationPublisher : MonoBehaviour
     {
         // Instantiate the connector with ROS host name and port.
         tcpCon = new TcpConnector(hostName, hostPort);
+    }
 
-        jointArticulationBodies = new ArticulationBody[jointGameObjects.Length];
-        // Setup articulation bodies
-        for (int i = 0; i < jointGameObjects.Length; i++)
-        {
-            jointArticulationBodies[i] = jointGameObjects[i].GetComponent<ArticulationBody>();
-        }
+    /// <summary>
+    /// 
+    /// </summary>
+    void Awake()
+    {
+        jointArticulationBodies = new ArticulationBody[numRobotJoints];
+        string shoulder_link = "world/base_link/shoulder_link";
+        jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
+
+        string arm_link = shoulder_link + "/arm_link";
+        jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
+        
+        string elbow_link = arm_link + "/elbow_link";
+        jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
+        
+        string forearm_link = elbow_link + "/forearm_link";
+        jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
+        
+        string wrist_link = forearm_link + "/wrist_link";
+        jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
+        
+        string hand_link = wrist_link + "/hand_link";
+        jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
     }
 
     public void Publish()
