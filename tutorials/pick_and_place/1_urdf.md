@@ -17,13 +17,13 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   
 - Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-- Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b8 as of the latest revision).
+- Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b9 as of the latest revision).
    
 ![](img/1_hub.png) 
 
 - In the Unity Hub, go to the Projects tab. Click the dropdown arrow next to `NEW`, and select the newly downloaded 2020.2 version. Create a new project using the 3D Template.
 
-- Clone this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/` directory. Find the `PickAndPlace.unitypackage` file, and double click it.
+- Clone or download this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/` directory. Find the `PickAndPlace.unitypackage` file, and double click it.
   > Note: this .unitypackage can also be found in the latest [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases).
 
 - In the Import Unity Package window that has opened, ensure everything is selected, and click `Import`. Once this is done, new folders in the Assets directory will appear, including Environment, Materials, Prefabs, and URDF.
@@ -40,7 +40,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - Create another new folder in your Unity project's Assets directory titled Plugins. Copy the downloaded `Urdf.dll` into this Plugins directory.
 
-- Find and select `Assets/Plugins/Urdf.dll` in the Project window and uncheck `Validate References` in the Inspector. Apply these changes.
+- Return to Unity. Find and select `Assets/Plugins/Urdf.dll` in the Project window and uncheck `Validate References` in the Inspector. Apply these changes.
   
 ![](img/1_dll.png) 
 

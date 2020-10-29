@@ -117,7 +117,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 - The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
   - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the `SourceDestinationPublisher.Publish()`. Replace this call with TrajectoryPlanner > PublishJoints().
+- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
 
 ![](img/3_onclick.png)
 
@@ -160,6 +160,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
     return move_group.plan()
 ```
+
 This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
 - PLACEHOLDER discussion on moveit configs 
