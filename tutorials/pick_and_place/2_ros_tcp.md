@@ -19,11 +19,17 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS. The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this, our MessageGeneration plugin generates C# classes, including serialization and deserialization functions, from ROS messages. On the Unity side, a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node.
+**Quick Descripton:**
+
+To enable communication between Unity and ROS a TCP endpoint running as a ROS node handles all message passing. On the Unity side, a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node. The ROS messages being passed between Unity and ROS are expected to be serialized exactly as ROS serializes them internally. This is achieved with the MessageGeneration plugin which generates C# classes, including serialization and deserialization functions, from ROS messages.
+
+--
 
 - If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
 
-- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. This `niryo_moveit` package contains Python scripts, MoveIt configurations, and other necessary files.
+- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Place the `niryo_moveit` directory inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. 
+	- This package contains Python scripts, MoveIt configurations, and other necessary files for the pick and place task.
+	
    > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as only a small subset of the files in the packages to be downloaded below are required for this demo.
 
 - Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
@@ -38,15 +44,17 @@ A TCP endpoint running as a ROS node facilitates message passing to and from Uni
 
 - Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repository. In the ROS-TCP-Connector, copy the `MessageGeneration` and `TcpConnector` directories to the Unity project's Assets/Plugins directory.
 
-- Adding `MessageGeneration` creates a new Unity menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`.
+- Adding `MessageGeneration` creates a new Unity menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`.
 
 ![](img/2_gen.png)
+
+-  In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse File...` and navigate to the newly downloaded MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. 
+	-  If this is successful, 1 new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
    
-- In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
+- Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`. In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the `niryo_moveit` directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. 
+	- If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
   
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes.
-
-- Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`. In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse File...` and navigate to the newly downloaded MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 1 new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
 
 - Now that the messages have been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
@@ -105,7 +113,7 @@ This function first takes in the current joint target values. Then, it grabs the
 
 ![](img/2_component.gif)
 
-Confirm that the component has been added to the RosConnector object successfully by checking for it in the Inspector.
+Confirm that the component has been added to the RosConnect object successfully by checking for it in the Inspector.
 
 - Select the Target object in the Hierarchy and assign it to the `Target` field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Finally, assign the niryo_one robot to the `Niryo One` field.
 
@@ -122,9 +130,10 @@ Confirm that the component has been added to the RosConnector object successfull
 
   - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-- In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. In the Game view, you will see the button appear in the bottom left corner as an overlay. 
+- In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+	- **NOTE** In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
   
-- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnector object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
+- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnect object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
   - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
 
 ![](img/2_onclick.png)
@@ -145,10 +154,6 @@ Confirm that the component has been added to the RosConnector object successfull
    ```bash
    sudo -H pip install rospkg jsonpickle
    ```
-
-- If you have not already, download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the tcp_endpoint package to your ROS workspace.
-
-<!-- - Note the `tcp_endpoint` package provided. This package creates the server endpoint to accept ROS messages from Unity. -->
 
 - In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
@@ -226,7 +231,7 @@ ROS and Unity have now successfully connected!
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
   
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnector in Unity. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity. 
 
 ---
 
