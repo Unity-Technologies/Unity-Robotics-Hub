@@ -1,19 +1,19 @@
 # Pick and Place Tutorial
 
-This step includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF importer.
+This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF importer.
 
 If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball) to get started.
 
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
-  - [Step 1: Create Unity scene with imported URDF](#step-1-create-unity-scene-with-imported-urdf)
+  - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Troubleshooting](#troubleshooting)
   - [Resources](#resources)
-  
+
 ---
 
-## Step 1: Create Unity scene with imported URDF
+## Part 1: Create Unity scene with imported URDF
   
 - Install [Unity Hub](https://unity3d.com/get-unity/download).
   
@@ -102,4 +102,4 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 
-Proceed to [Step 2](2_ros_tcp.md).
+Proceed to [Part 2](2_ros_tcp.md).
