@@ -38,7 +38,11 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
     plan = move_group.go(wait=True)
 
     if not plan:
-        print("RAISE NO PLAN ERROR")
+        exception_str = """
+            Trajectory could not be planned for a destination of {} with starting joint angles {}.
+            Please make sure target and destination are reachable by the robot.
+        """.format(destination_pose, destination_pose)
+        raise Exception(exception_str)
 
     return move_group.plan()
 
