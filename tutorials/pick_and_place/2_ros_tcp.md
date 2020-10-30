@@ -17,20 +17,20 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ## Step 2: Unity & ROS Integration
 
-- ROS INTRO [PLACEHOLDER]
-
 ![](img/2_ros_unity.png)
+
+A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS. The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this our MessageGeneration plugin generates C# classes, including serialization and deserialization functions, from ROS messages. On the Unity side a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node.
 
 - If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
 
 - Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. This `niryo_moveit` package contains Python scripts, MoveIt configurations, and other necessary files.
-   > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases). PLACEHOLDER any extra info about what is or isn't in here
+   > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as only a small subset of the files in the packages to be downloaded below are required for this demo.
 
 - Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
 
 -  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories to the `src` directory of your ROS workspace.
 
-- Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. PLACEHOLDER does the user need to put this in the catkin workspace?
+- Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the subdirectories to the `src` directory of your ROS workspace.
 
 ## The Unity Side
 
@@ -44,7 +44,7 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
    
 - In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
   
-   > [PLACEHOLDER]: explain what's happening in message generation?
+   > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes.
 
 - Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`. In the Message Auto Generation window that appears, next to the Input Package Path, click `Browse File...` and navigate to the newly downloaded MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. If this is successful, 1 new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
 
@@ -52,7 +52,7 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 - In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
   
-   > [PLACEHOLDER]: explain what’s happening in Service Generation?
+   > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes.
 
 - In this cloned or downloaded repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 

@@ -202,7 +202,9 @@ rosrun niryo_moveit mover.py
 
 Once this process is ready, it will print `Ready to plan` to the console.
 
-- Open a new terminal window and launch MoveIt. PLACEHOLDER what does this do?
+- Open a new terminal window and launch MoveIt by calling `demo.launch`.
+	- This launch file loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot.
+	- Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md)
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
