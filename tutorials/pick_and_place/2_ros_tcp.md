@@ -12,25 +12,25 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
   - [The ROS side](#the-ros-side)
   - [Troubleshooting](#troubleshooting)
   - [Resources](#resources)
-  
+
 ---
 
 ## Step 2: Unity & ROS Integration
 
 ![](img/2_ros_unity.png)
 
-A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS. The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this our MessageGeneration plugin generates C# classes, including serialization and deserialization functions, from ROS messages. On the Unity side a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node.
+A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS. The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this, our MessageGeneration plugin generates C# classes, including serialization and deserialization functions, from ROS messages. On the Unity side, a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node.
 
 - If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
 
-- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. This `niryo_moveit` package contains Python scripts, MoveIt configurations, and other necessary files.
+- Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Copy all of the contents in ROS. Place the contents inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. This `niryo_moveit` package contains Python scripts, MoveIt configurations, and other necessary files.
    > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as only a small subset of the files in the packages to be downloaded below are required for this demo.
 
 - Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
 
--  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories to the `src` directory of your ROS workspace.
+-  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories (e.g. dynamixel_sdk/, mcp_can_rpi/, niryo_one/, etc.) to the `src` directory of your ROS workspace.
 
-- Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the subdirectories to the `src` directory of your ROS workspace.
+- Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
 
 ## The Unity Side
 
@@ -107,7 +107,7 @@ This function first takes in the current joint target values. Then, it grabs the
 
 Confirm that the component has been added to the RosConnector object successfully by checking for it in the Inspector.
 
-- Select the Target object in the Hierarchy and assign it to the Target field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the TargetPlacement field. Finally, assign the niryo_one robot to the Niryo One field.
+- Select the Target object in the Hierarchy and assign it to the `Target` field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Finally, assign the niryo_one robot to the `Niryo One` field.
 
 ![](img/2_target.gif)
 
@@ -124,7 +124,7 @@ Confirm that the component has been added to the RosConnector object successfull
 
 - In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. In the Game view, you will see the button appear in the bottom left corner as an overlay. 
   
-- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnector object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > Publish().
+- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnector object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
   - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
 
 ![](img/2_onclick.png)
@@ -238,8 +238,11 @@ ROS and Unity have now successfully connected!
    -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
    - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 - More on [ROS Topics](http://wiki.ros.org/Topics)
+- [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package
 - [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package
-- All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case
+- [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros)
+- [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs)
+<!-- - All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case -->
   
 ---
 

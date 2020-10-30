@@ -167,7 +167,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-- PLACEHOLDER discussion on moveit configs 
+<!-- - PLACEHOLDER discussion on moveit configs  -->
 
 - If you have not already built and sourced the ROS workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -204,7 +204,7 @@ Once this process is ready, it will print `Ready to plan` to the console.
 
 - Open a new terminal window and launch MoveIt by calling `demo.launch`.
 	- This launch file loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot.
-	- Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md)
+	> Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
 
 ``` bash
 cd ~/catkin_ws/ && source devel/setup.bash
@@ -227,7 +227,7 @@ This may print out various error messages regarding the controller_spawner, such
 
 - [MoveIt!](https://github.com/ros-planning/moveit)
 - Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
-- All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case
+<!-- - All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case -->
 
 ---
 
