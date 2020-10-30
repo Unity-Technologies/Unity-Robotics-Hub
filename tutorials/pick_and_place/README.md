@@ -10,6 +10,7 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
   - [Step 1: Create Unity scene with imported URDF](#step-1-create-unity-scene-with-imported-urdf)
   - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
   - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
+  - [MoveIt Launch & Config Files Description](moveit_file_descriptions.md)
   
 ---
 
