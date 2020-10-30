@@ -19,7 +19,7 @@ Single launch file for all MoveIt and Niryo requirements for pick and place tuto
 
 **controllers.launch**
 
-Starts the Niryo One driver, controlller manager, and robot state publisher nodes
+Starts the Niryo One driver, controller manager, and robot state publisher nodes
 
 - Starts ROS node `niryo_one_driver` with debugging arguments
 	- Loads `niryo_one_driver.yaml` into rosparam
