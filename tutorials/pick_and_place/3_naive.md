@@ -1,13 +1,13 @@
 # Pick and Place Tutorial
 
-This step assumes you have access to a functional ROS workspace and that the previous two steps ([Step 1](1_urdf.md), [Step 2](2_ros_tcp.md)) have been completed.
+This part assumes you have access to a functional ROS workspace and that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
 
 Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
 
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
-  - [Step 3: Naive Pick & Place](#step-3-naive-pick--place)
+  - [Part 3: Naive Pick & Place](#part-3-naive-pick--place)
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
   - [Unity & ROS Communication](#unity--ros-communication)
@@ -19,11 +19,11 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ---
 
-## Step 3: Naive Pick & Place
+## Part 3: Naive Pick & Place
 
 ## The Unity Side
 
-- If you have not already cloned or downloaded this repository, do so now, and follow the steps in [Step 1](1_urdf.md) to set up the Unity project, and [Step 2](2_ros_tcp.md) to integrate ROS with Unity. 
+- If you have not already cloned or downloaded this repository, do so now, and follow the steps in [Part 1](1_urdf.md) to set up the Unity project, and [Part 2](2_ros_tcp.md) to integrate ROS with Unity. 
 
 - If the current Unity project is not already open, select and open it from the Unity Hub.
 

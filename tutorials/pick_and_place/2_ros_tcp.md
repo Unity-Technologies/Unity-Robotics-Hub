@@ -1,13 +1,13 @@
 # Pick and Place Tutorial
 
-This step assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
+This part assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
 
 Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic.
 
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
-  - [Step 2: Unity & ROS Integration](#step-2-unity--ros-integration)
+  - [Part 2: Unity & ROS Integration](#part-2-unity--ros-integration)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
   - [Troubleshooting](#troubleshooting)
@@ -15,7 +15,7 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ---
 
-## Step 2: Unity & ROS Integration
+## Part 2: Unity & ROS Integration
 
 ![](img/2_ros_unity.png)
 
@@ -25,7 +25,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 ---
 
-- If you have not already, complete [Step 1](1_urdf.md) to set up the Unity project. 
+- If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
 - Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Place the `niryo_moveit` directory inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. 
 	- This package contains Python scripts, MoveIt configurations, and other necessary files for the pick and place task.
@@ -251,4 +251,4 @@ ROS and Unity have now successfully connected!
   
 ---
 
-Proceed to [Step 3](3_naive.md).
+Proceed to [Part 3](3_naive.md).
