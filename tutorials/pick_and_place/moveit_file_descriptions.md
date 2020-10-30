@@ -32,7 +32,7 @@ Starts the Niryo One driver, controlller manager, and robot state publisher node
 
 **move_group.launch**
 
-Starts the Move Group node which is the entry point into using MoveIt. the Also calls planning pipeline, planning context, and trajectory execution to load their relavant parameters.
+Starts the Move Group node which is the entry point into using MoveIt. Also calls planning pipeline, planning context, and trajectory execution to load their relevant parameters.
 
 - Call `planning_pipeline.launch.xml` with `pipeline` argument set to `ompl`
 
@@ -68,7 +68,7 @@ Loads the Niryo One URDF with accompanying parameters for command validation, se
 
 **niryo_one_moveit_controller_manager.launch.xml**
 
-Set controllers availabe to MoveIt
+Set controllers available to MoveIt
 
 - Sets rosparam `moveit_controller_manager` to `moveit_simple_controller_manager/MoveItSimpleControllerManager`
 
@@ -107,11 +107,11 @@ Loads config files required for the joints of the Niryo One.
 Calls for OMPL pipeline launch
 
 - Argument `pipeline` defaults to `ompl`
-- Launch `ompl_planning_pipeline.launch.xml` usinig `pipeline` argument in name
+- Launch `ompl_planning_pipeline.launch.xml` using `pipeline` argument in name
 
 **trajectory_execution.launch.xml**
 
-Sets ROS params required for trajectory executon and then 
+Sets ROS params required for trajectory execution and then calls controller manager launch
 
 - Sets rosparam `moveit_manage_controllers` to true
 - Sets rosparam `trajectory_execution/allowed_execution_duration_scaling` to 1.2
@@ -128,7 +128,7 @@ Sets ROS params required for trajectory executon and then
 
 **joint_limits.yaml**
 
-- Velocity and acceleratoin limits for individual joints on robot used when planning a trajectory that is time constrained.
+- Velocity and acceleration limits for individual joints on robot used when planning a trajectory that is time constrained.
 
 **kinematics.yaml**
 
@@ -142,8 +142,7 @@ Sets ROS params required for trajectory executon and then
 
 **niryo_one_controllers.yaml**
 
-- Defines the 
-	- Ties `niryo_one_follow_joint_trajectory_controller` to the `controller_manager` node
+- Ties `niryo_one_follow_joint_trajectory_controller` to the `controller_manager` node
 
 **niryo_one_driver.yaml**
 
