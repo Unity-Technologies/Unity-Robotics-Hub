@@ -32,17 +32,15 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ![](img/1_cube.png) 
 
-- Open the Physics Project Settings (Edit > Project Settings > Physics). Set the `Solver Type` to Temporal Gauss Seidel. This prevents erratic behavior in the joints that may be caused by the default solver.
+- Move the camera to a more convenient location for viewing the robot, e.g. assign the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
+
+- Open the Physics Project Settings (Edit > Project Settings > Physics). Set the `Solver Type` to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
 ![](img/1_physics.png)
 
-- Download the latest `Urdf.dll` and `Source code` from the [URDF Importer Releases](https://github.cds.internal.unity3d.com/unity/URDF-Importer/releases). Unzip the compressed folder (named `URDF-Importer...zip`). In this folder, copy the `UnityEditorScripts` directory and contents into the Assets directory of your Unity project. 
+- Create a new folder in your Unity project's Assets directory titled `Plugins`.
 
-- Create another new folder in your Unity project's Assets directory titled Plugins. Copy the downloaded `Urdf.dll` into this Plugins directory.
-
-- Return to Unity. Find and select `Assets/Plugins/Urdf.dll` in the Project window and uncheck `Validate References` in the Inspector. Apply these changes.
-  
-![](img/1_dll.png) 
+- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). Copy the `UnityEditorScripts` and `URDFLibrary` directories into the `Assets/Plugins` directory of your Unity project. 
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   
@@ -60,24 +58,23 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   ```
 
 - The Niryo arm should now be in the scene, but under the table. Select the `niryo_one` object and set its position to `(0, 0.63, 0)` to place it on top of the table to match the URDF definition.
+
+- On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
+	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide but for our purposes these settings will allow the robot to stay in position without the joints slipping.
+
+![](img/1_controller.png) 
   
 - In the Hierarchy window, click the arrow to the left of the name to expand the GameObject tree, down to `niryo_one/world/base_link`. Toggle on `Immovable` for the `base_link`.
 
 ![](img/1_base.png) 
 
-> Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/PickAndPlace/Plugins/UnityEditorScripts/Urdf/Controller.cs`.
-
-- On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
-
-![](img/1_controller.png) 
+> Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Plugins/UnityEditorScripts/Urdf/Controller/Controller.cs`.
 
 - On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5`. 
 <!-- - On the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, set the X Drive Force Limit to `1000`. PLACEHOLDER do i need this?
   - These components can be accessed by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy. -->
 
 ![](img/1_force.png)
-
-- Move the camera to a more convenient location for viewing the robot, e.g. assign the Main Camera's Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
 - Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor. 
   
