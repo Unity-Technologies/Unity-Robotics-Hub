@@ -14,7 +14,7 @@ public class RosSubscriberExample : RosSubscriber
         using (var networkStream = tcpClient.GetStream())
         {
             RosColor colorMessage = (RosColor)ReadMessage(networkStream, new RosColor());
-            Debug.Log("Color(" + colorMessage.r + ", "+ colorMessage.g + ", "+ colorMessage.b + ", "+ colorMessage.a +")");
+            Debug.Log("Color(" + colorMessage.r + ", " + colorMessage.g + ", " + colorMessage.b + ", " + colorMessage.a + ")");
             cube.GetComponent<Renderer>().material.color = new Color32((byte)colorMessage.r, (byte)colorMessage.g, (byte)colorMessage.b, (byte)colorMessage.a);
         }
     }

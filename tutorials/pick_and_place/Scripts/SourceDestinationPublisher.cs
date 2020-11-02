@@ -6,13 +6,11 @@ using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
 public class SourceDestinationPublisher : MonoBehaviour
 {
     // ROS Connector
-    private TcpConnector tcpCon;
+    public ROSConnection ros;
     private int numRobotJoints = 6;
     
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
-    public string hostName = "192.168.50.149";
-    public int hostPort = 10000;
 
     public GameObject niryoOne;
     public GameObject target;
@@ -23,13 +21,6 @@ public class SourceDestinationPublisher : MonoBehaviour
     // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Instantiate the connector with ROS host name and port.
-        tcpCon = new TcpConnector(hostName, hostPort);
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -89,6 +80,6 @@ public class SourceDestinationPublisher : MonoBehaviour
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        tcpCon.SendMessage(topicName, sourceDestinationMessage);
+        ros.SendMessage(topicName, sourceDestinationMessage);
     }
 }
