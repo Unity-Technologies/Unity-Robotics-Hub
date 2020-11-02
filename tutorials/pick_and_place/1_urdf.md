@@ -40,7 +40,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - Create a new folder in your Unity project's Assets directory titled `Plugins`.
 
-- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). Copy the `UnityEditorScripts` and `URDFLibrary` directories into the `Assets/Plugins` directory of your Unity project. 
+- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). First, copy the `URDFLibrary` directory into the `Assets/Plugins` directory of your Unity Project, then copy the `UnityEditorScripts` directory into the same Plugins folder.
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
