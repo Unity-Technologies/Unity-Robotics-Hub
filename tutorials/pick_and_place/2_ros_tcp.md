@@ -30,7 +30,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 - Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Place the `niryo_moveit` directory inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. 
 	- This package contains Python scripts, MoveIt configurations, and other necessary files for the pick and place task.
 	
-   > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as only a small subset of the files in the packages to be downloaded below are required for this demo.
+   <!-- > Note: The reduced version of all the packages needed in this tutorial can be downloaded on the [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as only a small subset of the files in the packages to be downloaded below are required for this demo. -->
 
 - Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
 
