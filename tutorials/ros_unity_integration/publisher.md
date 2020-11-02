@@ -42,13 +42,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
-    // Create a new ROS 
-    private TcpConnector tcpCon;
-
-    // Variables required for ROS communication
+    public ROSConnection ros;
     public string topicName = "pos_rot";
-    public string hostName = "192.168.1.116";
-    public int hostPort = 10000;
 
     // The game object 
     public GameObject cube;
@@ -58,20 +53,14 @@ public class RosPublisherExample : MonoBehaviour
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
-    void Start()
-    {
-        // Instantiate the connector with ROS host name and port.
-        tcpCon = new TcpConnector(hostName, hostPort);
-    }
-
     private void Update()
     {
         timeElapsed += Time.deltaTime;
-        
-        if (timeElapsed > 0.5f)
+
+        if (timeElapsed > publishMessageFrequency)
         {
             cube.transform.rotation = Random.rotation;
-            
+
             PosRot cubePos = new PosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
@@ -83,11 +72,10 @@ public class RosPublisherExample : MonoBehaviour
             );
 
             // Finally send the message to server_endpoint.py running in ROS
-            tcpCon.SendMessage(topicName, cubePos);
-            
+            ros.Send(topicName, cubePos);
+
             timeElapsed = 0;
         }
-
     }
 }
 ```

@@ -96,7 +96,7 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Create a new MoverServiceRequest with the current values of the robot's joint angles,
     ///     the target cube's current position and rotation, and the targetPlacement position and rotation.
     ///
-    ///     Call the MoverService using the TCPConnector and if a trajectory is successfully planned,
+    ///     Call the MoverService using the ROSConnection and if a trajectory is successfully planned,
     ///     execute the trajectories in a coroutine.
     /// </summary>
     public void PublishJoints()
@@ -130,10 +130,10 @@ public class TrajectoryPlanner : MonoBehaviour
             orientation = pickOrientation
         };
 
-        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResult);
+        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
     }
 
-    void TrajectoryResult(MoverServiceResponse response)
+    void TrajectoryResponse(MoverServiceResponse response)
     {
         if (response.trajectories != null)
         {

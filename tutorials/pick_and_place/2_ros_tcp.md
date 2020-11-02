@@ -19,9 +19,9 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-**Quick Descripton:**
+**Quick Description:**
 
-To enable communication between Unity and ROS a TCP endpoint running as a ROS node handles all message passing. On the Unity side, a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node. The ROS messages being passed between Unity and ROS are expected to be serialized exactly as ROS serializes them internally. This is achieved with the MessageGeneration plugin which generates C# classes, including serialization and deserialization functions, from ROS messages.
+To enable communication between Unity and ROS a TCP endpoint running as a ROS node handles all message passing. On the Unity side, a ROSConnection component provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node. The ROS messages being passed between Unity and ROS are expected to be serialized exactly as ROS serializes them internally. This is achieved with the MessageGeneration plugin which generates C# classes, including serialization and deserialization functions, from ROS messages.
 
 ---
 
@@ -101,7 +101,7 @@ public void Publish()
    };
 
    // Finally send the message to server_endpoint.py running in ROS
-   tcpCon.SendMessage(topicName, sourceDestinationMessage);
+   ros.SendMessage(topicName, sourceDestinationMessage);
 }
 ```
 

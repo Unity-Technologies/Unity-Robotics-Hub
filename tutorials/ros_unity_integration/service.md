@@ -41,11 +41,9 @@ using Debug = UnityEngine.Debug;
 
 public class RosServiceExample : MonoBehaviour
 {
-    private TcpConnector tcpCon;
+    public ROSConnection ros;
 
     public string serviceName = "pos_srv";
-    public string hostName = "192.168.1.116";
-    public int hostPort = 10000;
 
     public GameObject cube;
 
@@ -54,17 +52,20 @@ public class RosServiceExample : MonoBehaviour
     public float speed = 2.0f;
     private Vector3 destination;
 
+    float awaitingResponseUntilTimestamp = -1;
+
     void Start()
     {
-        tcpCon = new TcpConnector(hostName, hostPort);
-
         destination = cube.transform.position;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        // Move our position a step closer to the target.
+        float step = speed * Time.deltaTime; // calculate distance to move
+        cube.transform.position = Vector3.MoveTowards(cube.transform.position, destination, step);
 
-        if (Vector3.Distance(cube.transform.position, destination) < delta)
+        if (Vector3.Distance(cube.transform.position, destination) < delta && Time.time > awaitingResponseUntilTimestamp)
         {
             Debug.Log("Destination reached.");
 
@@ -81,19 +82,16 @@ public class RosServiceExample : MonoBehaviour
             PositionServiceRequest positionServiceRequest = new PositionServiceRequest(cubePos);
 
             // Send message to ROS and return the response
-            var response = (PositionServiceResponse) tcpCon.SendServiceMessage(serviceName, positionServiceRequest, new PositionServiceResponse());
-
-            destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.pos_z);
-
-            Debug.Log("New Destination: " + destination);
+            ros.SendServiceMessage<PositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
+            awaitingResponseUntilTimestamp = Time.time+1.0f; // don't send again for 1 second, or until we receive a response
         }
-        // Translate cube to destination
-        else
-        {
-            // Move our position a step closer to the target.
-            float step =  speed * Time.deltaTime; // calculate distance to move
-            cube.transform.position = Vector3.MoveTowards(cube.transform.position, destination, step);
-        }
+    }
+
+    void Callback_Destination(PositionServiceResponse response)
+    {
+        awaitingResponseUntilTimestamp = -1;
+        destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.@for);
+        Debug.Log("New Destination: " + destination);
     }
 }
 ```
