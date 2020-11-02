@@ -57,8 +57,6 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   </joint>
   ```
 
-- The Niryo arm should now be in the scene, but under the table. Select the `niryo_one` object and set its position to `(0, 0.63, 0)` to place it on top of the table to match the URDF definition.
-
 - On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
 	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide but for our purposes these settings will allow the robot to stay in position without the joints slipping.
 
