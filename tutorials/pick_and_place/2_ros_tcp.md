@@ -38,7 +38,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 - Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
 
-- Copy the `niryo_one_urdf` in Unity at `Assets/URDF/niryo_one/niryo_one_urdf` to the `src` directory of your ROS workspace.
+- Copy the `niryo_one_urdf/` directory in Unity (located at `Assets/URDF/niryo_one/niryo_one_urdf`) to the `src` directory of your ROS workspace.
 
 ## The Unity Side
 
