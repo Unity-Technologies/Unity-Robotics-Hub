@@ -4,6 +4,7 @@ using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
 using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
+using Transform = UnityEngine.Transform;
 
 public class TrajectoryPlanner : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class TrajectoryPlanner : MonoBehaviour
     private ArticulationBody[] jointArticulationBodies;
     private ArticulationBody leftGripper;
     private ArticulationBody rightGripper;
+
+    private Transform gripperBase;
+    private Transform leftGripperGameObject;
+    private Transform rightGripperGameObject;
 
     private enum Poses
     {
@@ -170,6 +175,7 @@ public class TrajectoryPlanner : MonoBehaviour
                     // Set the joint values for every joint
                     for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
                     {
+
                         var joint1XDrive  = jointArticulationBodies[joint].xDrive;
                         joint1XDrive.target = result[joint];
                         jointArticulationBodies[joint].xDrive = joint1XDrive;
@@ -218,12 +224,22 @@ public class TrajectoryPlanner : MonoBehaviour
         // Find left and right fingers
         string right_gripper = hand_link + "/tool_link/gripper_base/servo_head/control_rod_right/right_gripper";
         string left_gripper = hand_link + "/tool_link/gripper_base/servo_head/control_rod_left/left_gripper";
-        leftGripper = niryoOne.transform.Find(left_gripper).GetComponent<ArticulationBody>();
-        rightGripper = niryoOne.transform.Find(right_gripper).GetComponent<ArticulationBody>();
+        string gripper_base = hand_link + "/tool_link/gripper_base/Collisions/unnamed";
+
+        gripperBase = niryoOne.transform.Find(gripper_base);
+        leftGripperGameObject = niryoOne.transform.Find(left_gripper);
+        rightGripperGameObject = niryoOne.transform.Find(right_gripper);
+
+        rightGripper = rightGripperGameObject.GetComponent<ArticulationBody>();
+        leftGripper = leftGripperGameObject.GetComponent<ArticulationBody>();
     }
 
     void Start()
     {
+        // Ignore collisions between gripper base and left/right grippers as the grippers slide along the base's edge
+        Physics.IgnoreCollision(gripperBase.GetComponentInChildren<Collider>(), rightGripperGameObject.GetComponentInChildren<Collider>());
+        Physics.IgnoreCollision(leftGripperGameObject.GetComponentInChildren<Collider>(), gripperBase.GetComponentInChildren<Collider>());
+
         // Instantiate the connector with ROS host name and port.
         tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
     }

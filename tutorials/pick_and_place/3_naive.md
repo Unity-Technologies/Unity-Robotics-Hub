@@ -121,12 +121,6 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 ![](img/3_onclick.png)
 
-TODO: PLACEHOLDER Check with Vidur if he has finished updatnig the URDF collision meshes.
-
-- The gripper may need some adjustment to fully be able to pick and place the cube. In the Hierarchy window, search for `gripper_base`. Expand this object in the hierarchy to `gripper_base/Collisions/unnamed`, and disable the unnamed object.
-
-![](img/3_gripper.gif)
-
 - The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
