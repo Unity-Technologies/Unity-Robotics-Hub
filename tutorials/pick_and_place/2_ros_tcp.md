@@ -134,9 +134,12 @@ Confirm that the component has been added to the RosConnect object successfully 
 	- **NOTE** In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
   
 - Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnect object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
-  - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
 
 ![](img/2_onclick.png)
+
+  - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component to "Publish".
+
+![](img/2_text.png)
 
 ---
 
