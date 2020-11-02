@@ -163,8 +163,6 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-<!-- - PLACEHOLDER discussion on moveit configs  -->
-
 - If you have not already built and sourced the ROS workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 --- 

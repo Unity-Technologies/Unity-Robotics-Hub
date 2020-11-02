@@ -70,9 +70,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Plugins/UnityEditorScripts/Urdf/Controller/Controller.cs`.
 
-- On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5`. 
-<!-- - On the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, set the X Drive Force Limit to `1000`. PLACEHOLDER do i need this?
-  - These components can be accessed by expanding the niryo_one Hierarchy through `niryo_one/world/base_link/shoulder_link/arm_link/...`, or by searching for these objects in the Hierarchy. -->
+- On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5` which will increase the speed at which the shoulder joint can rotate.
 
 ![](img/1_force.png)
 
