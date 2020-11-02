@@ -4,13 +4,14 @@
 
 This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task using MoveIt trajectory planning. 
 
+> Note: this tutorial was made using ROS Melodic.
+
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: Unity & ROS Integration](#part-2-unity--ros-integration)
   - [Part 3: Naive Pick & Place](#part-3-naive-pick--place)
-  - [MoveIt Launch & Config Files Description](moveit_file_descriptions.md)
   
 ---
 
