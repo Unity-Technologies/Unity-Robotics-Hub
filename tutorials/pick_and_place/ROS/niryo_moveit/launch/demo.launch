@@ -1,0 +1,22 @@
+<launch>
+    <arg name="urdf_without_meshes" default="false" />
+    <include file="$(find niryo_moveit)/launch/niryo_one_base.launch" pass_all_args="true"/>
+
+    <include file="$(find niryo_moveit)/launch/controllers.launch">
+        <arg name="simulation_mode" value="true" />
+    </include>
+
+    <!-- Moveit move_group -->
+    <include file="$(find niryo_moveit)/launch/move_group.launch" />
+
+    <!-- Disable Moveit! controller timeout -->
+    <param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
+
+    <!-- Change start tolerance from 0.01 to 0.0 to avoid this error : "Invalid Trajectory: start point deviates from current robot state more than"-->
+    <!-- more info http://moveit.ros.org/moveit!/ros/2017/01/03/firstIndigoRelease.html -->
+    <param name="/move_group/trajectory_execution/allowed_start_tolerance" value="0.0" />
+
+    <!-- Change from 0.1 to 0.3 rad -->
+    <!-- Allows joints to be outside of min and max values when starting -->
+    <param name="/move_group/start_state_max_bounds_error" value="0.3" />
+</launch>

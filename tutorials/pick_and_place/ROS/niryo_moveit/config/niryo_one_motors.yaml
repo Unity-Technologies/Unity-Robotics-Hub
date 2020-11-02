@@ -1,0 +1,44 @@
+#
+#
+# List of all required and authorized motors (motors ids) for Niryo One V2
+#
+# (please read carefuly before editing anything)
+#
+# You should not need to edit this file, unless 
+#   - you want to debug on some detached motors
+#   - you are developing new features
+#   - you really know what you are doing
+#
+#
+
+can_required_motors: # Axis 1-3 of Niryo One (stepper 1 -> id 1, stepper 2 -> id 2, ...)
+    # Edit only for debug purposes (ex : you want to test some motors separately and detached from the robot)
+    # --> Commented ids will make associated motor disable (and thus not trigger an error if not connected)
+    # Before editing, please be sure that you know what you're doing
+    - 1 # Axis 1 enabled if not commented
+    - 2 # Axis 2 enabled if not commented
+    - 3 # Axis 3 enabled if not commented
+
+can_authorized_motors:
+    - 1 # Axis 1 enabled if not commented
+    - 2 # Axis 2 enabled if not commented
+    - 3 # Axis 3 enabled if not commented
+    - 6 # id  for conveyor belt 1
+    - 7 # id for conveyor belt  2
+
+dxl_required_motors: # axis 4, 5 and 6 of Niryo One.
+    # Edit only for debug purposes (ex : you want to test some motors separately and detached from the robot)
+    # --> Commented ids will make associated motor disable (and thus not trigger an error if not connected)
+    # Before editing, please be sure that you know what you're doing
+    - 2 # -> id of Axis 4
+    - 3 # -> id of Axis 5
+    - 6 # -> id of Axis 6
+
+dxl_authorized_motors: # here include all Dynamixel tools that can possibly be attached to Niryo One
+    - 2 # -> id of Axis 4
+    - 3 # -> id of Axis 5
+    - 6 # -> id of Axis 6
+    - 11 # id of Gripper 1
+    - 12 # id of Gripper 2
+    - 13 # id of Gripper 3
+    - 31 # if of Vacuum Pump 1

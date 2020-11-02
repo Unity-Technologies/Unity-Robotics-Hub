@@ -2,12 +2,12 @@
 
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
-If you have questions please feel free to contact us [here](mailto:unity-robotics@unity3d.com )
+If you have questions please feel free to contact us [here](mailto:unity-robotics@unity3d.com).
 
 ## Unity Robotics Tutorials
 
 ### Repos
-- [TCP Endpont ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
+- [TCP Endpoint ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
 - [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 - [URDF Importer](https://github.cds.internal.unity3d.com/unity/URDF-Importer)
 
@@ -20,6 +20,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - [C# ROS Message Class Generation](tutorials/unity_ros_message_generation/message_generation_tutorial.md)
 - [Unity ROS Integration](tutorials/ros_unity_integration/README.md)
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
+- [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
 
 ### ROS Packages
 
