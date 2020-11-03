@@ -101,11 +101,11 @@ public void Publish()
    };
 
    // Finally send the message to server_endpoint.py running in ROS
-   ros.SendMessage(topicName, sourceDestinationMessage);
+   ros.Send(topicName, sourceDestinationMessage);
 }
 ```
 
-This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `SendMessage()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
+This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
 
 > Note that going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
@@ -117,7 +117,7 @@ This function first takes in the current joint target values. Then, it grabs the
 
 Confirm that the components have been added to the two objects successfully by checking for them in the Inspector.
 
-- Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the Ros field.
+- Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
 
 ![](img/2_target.gif)
 

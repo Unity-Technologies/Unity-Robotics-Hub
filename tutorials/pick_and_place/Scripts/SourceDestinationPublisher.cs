@@ -80,6 +80,6 @@ public class SourceDestinationPublisher : MonoBehaviour
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        ros.SendMessage(topicName, sourceDestinationMessage);
+        ros.Send(topicName, sourceDestinationMessage);
     }
 }
