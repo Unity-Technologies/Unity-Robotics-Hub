@@ -19,9 +19,9 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ![](img/2_ros_unity.png)
 
-**Quick Descripton:**
+**Quick Description:**
 
-To enable communication between Unity and ROS a TCP endpoint running as a ROS node handles all message passing. On the Unity side, a TCPConnector plugin provides the necessary scripts to publish, subscribe, or call a service using the TCP endpoint ROS node. The ROS messages being passed between Unity and ROS are expected to be serialized exactly as ROS serializes them internally. This is achieved with the MessageGeneration plugin which generates C# classes, including serialization and deserialization functions, from ROS messages.
+To enable communication between Unity and ROS a TCP endpoint running as a ROS node handles all message passing. On the Unity side, a ROSConnection component provides the necessary functions to publish, subscribe, or call a service using the TCP endpoint ROS node. The ROS messages being passed between Unity and ROS are expected to be serialized exactly as ROS serializes them internally. This is achieved with the MessageGeneration plugin which generates C# classes, including serialization and deserialization functions, from ROS messages.
 
 ---
 
@@ -101,21 +101,23 @@ public void Publish()
    };
 
    // Finally send the message to server_endpoint.py running in ROS
-   tcpCon.SendMessage(topicName, sourceDestinationMessage);
+   ros.Send(topicName, sourceDestinationMessage);
 }
 ```
 
-This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `SendMessage()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
+This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
 
 > Note that going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-- Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Name it RosConnect. Add the newly created SourceDestinationPublisher component to the RosConnect GameObject by selecting the SourceDestinationPublisher script in the Project window and dragging it onto the RosConnect object in the Hierarchy window.
+- Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Name it Publisher. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the SourceDestinationPublisher script in the Project window and dragging it onto the Publisher object in the Hierarchy window.
 
 ![](img/2_component.gif)
 
-Confirm that the component has been added to the RosConnect object successfully by checking for it in the Inspector.
+- Create another GameObject, name it RosConnect, and add the script Plugins/TCPConnector/ROSConnection to it in the same way.
 
-- Select the Target object in the Hierarchy and assign it to the `Target` field in the SourceDestinationPublisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Finally, assign the niryo_one robot to the `Niryo One` field.
+Confirm that the components have been added to the two objects successfully by checking for them in the Inspector.
+
+- Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
 
 ![](img/2_target.gif)
 
@@ -133,7 +135,7 @@ Confirm that the component has been added to the RosConnect object successfully 
 - In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	- **NOTE** In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
   
-- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the RosConnect object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
+- Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the Publisher object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
   - To change the text of the Button, expand the Button Hierarchy and select Text. Change the value in Text on the associated component.
 
 ![](img/2_onclick.png)

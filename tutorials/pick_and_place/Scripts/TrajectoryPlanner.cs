@@ -9,7 +9,7 @@ using Transform = UnityEngine.Transform;
 public class TrajectoryPlanner : MonoBehaviour
 {
     // ROS Connector
-    private TcpConnector tcpCon;
+    public ROSConnection ros;
     private int numRobotJoints = 6;
 
     // Hardcoded variables 
@@ -22,9 +22,6 @@ public class TrajectoryPlanner : MonoBehaviour
 
     // Variables required for ROS communication
     public string rosServiceName = "niryo_moveit";
-    public string hostName = "192.168.50.149";
-    public int hostPort = 10000;
-    public int connectionTimeout = 10;
 
     public GameObject niryoOne;
     public GameObject target;
@@ -99,7 +96,7 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Create a new MoverServiceRequest with the current values of the robot's joint angles,
     ///     the target cube's current position and rotation, and the targetPlacement position and rotation.
     ///
-    ///     Call the MoverService using the TCPConnector and if a trajectory is successfully planned,
+    ///     Call the MoverService using the ROSConnection and if a trajectory is successfully planned,
     ///     execute the trajectories in a coroutine.
     /// </summary>
     public void PublishJoints()
@@ -133,7 +130,11 @@ public class TrajectoryPlanner : MonoBehaviour
             orientation = pickOrientation
         };
 
-        var response = (MoverServiceResponse)tcpCon.SendServiceMessage(rosServiceName, request, new MoverServiceResponse());
+        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
+    }
+
+    void TrajectoryResponse(MoverServiceResponse response)
+    {
         if (response.trajectories != null)
         {
             Debug.Log("Trajectory returned.");
@@ -175,7 +176,6 @@ public class TrajectoryPlanner : MonoBehaviour
                     // Set the joint values for every joint
                     for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
                     {
-
                         var joint1XDrive  = jointArticulationBodies[joint].xDrive;
                         joint1XDrive.target = result[joint];
                         jointArticulationBodies[joint].xDrive = joint1XDrive;
@@ -239,8 +239,5 @@ public class TrajectoryPlanner : MonoBehaviour
         // Ignore collisions between gripper base and left/right grippers as the grippers slide along the base's edge
         Physics.IgnoreCollision(gripperBase.GetComponentInChildren<Collider>(), rightGripperGameObject.GetComponentInChildren<Collider>());
         Physics.IgnoreCollision(leftGripperGameObject.GetComponentInChildren<Collider>(), gripperBase.GetComponentInChildren<Collider>());
-
-        // Instantiate the connector with ROS host name and port.
-        tcpCon = new TcpConnector(hostName, hostPort, serviceResponseRetry: 10, serviceResponseSleep: 1000);
     }
 }

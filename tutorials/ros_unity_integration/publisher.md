@@ -42,13 +42,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
-    // Create a new ROS 
-    private TcpConnector tcpCon;
-
-    // Variables required for ROS communication
+    public ROSConnection ros;
     public string topicName = "pos_rot";
-    public string hostName = "192.168.1.116";
-    public int hostPort = 10000;
 
     // The game object 
     public GameObject cube;
@@ -58,20 +53,14 @@ public class RosPublisherExample : MonoBehaviour
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
-    void Start()
-    {
-        // Instantiate the connector with ROS host name and port.
-        tcpCon = new TcpConnector(hostName, hostPort);
-    }
-
     private void Update()
     {
         timeElapsed += Time.deltaTime;
-        
-        if (timeElapsed > 0.5f)
+
+        if (timeElapsed > publishMessageFrequency)
         {
             cube.transform.rotation = Random.rotation;
-            
+
             PosRot cubePos = new PosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
@@ -83,20 +72,21 @@ public class RosPublisherExample : MonoBehaviour
             );
 
             // Finally send the message to server_endpoint.py running in ROS
-            tcpCon.SendMessage(topicName, cubePos);
-            
+            ros.Send(topicName, cubePos);
+
             timeElapsed = 0;
         }
-
     }
 }
 ```
 
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
-- Create an empty game object and name it `RosPublisher` and attach the `RosPublisherExample` script
-	- Change the host name and port to match the ROS Param variables defined in the previous section
+- Create an empty game object, name it `RosPublisher` and attach the `RosPublisherExample` script.
 	- Drag the cube game object onto the `Cube` parameter
+- Create another empty game object, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
+	- Change the host name and port to match the ROS IP and port variables defined in the previous section
+	- Select the RosPublisher object again, and drag the RosConnection object onto its `Ros` parameter.
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
 
