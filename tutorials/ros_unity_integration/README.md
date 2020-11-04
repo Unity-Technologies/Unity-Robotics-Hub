@@ -8,7 +8,7 @@ An TCP endpoint running as a ROS node facilitates message passing to and from Un
 
 The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this the `MessageGeneration` plugin can generate C# classes, including serialization and deserialization functions, from ROS `.msg` files.
 
-The `ROSConnection` plugin provides the Unity scripts necessary to publish, subscribe, or call a service.
+The `TCPConnector` plugin provides the Unity scripts necessary to publish, subscribe, or call a service.
 
 
 ## Tutorials

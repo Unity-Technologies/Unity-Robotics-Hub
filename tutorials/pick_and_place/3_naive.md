@@ -34,49 +34,37 @@ The UI button `OnClick` callback will be reassigned later in this tutorial to th
 ```csharp
 public void PublishJoints()
 {
-	MoverServiceRequest request = new MoverServiceRequest();
-	request.joints_input = CurrentJointConfig();
-	
-	// Pick Pose
-	request.pick_pose = new RosMessageTypes.Geometry.Pose
-	{
-		position = new Point(
-			target.transform.position.z,
-			-target.transform.position.x,
-			// Add pick pose offset to position the gripper above target to avoid collisions
-			target.transform.position.y + pickPoseOffset
-		),
-		// Orientation is hardcoded for this example so the gripper is always directly above the target object
-		orientation = pickOrientation
-	};
+    MoverServiceRequest request = new MoverServiceRequest();
+    request.joints_input = CurrentJointConfig();
+    
+    // Pick Pose
+    request.pick_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            target.transform.position.z,
+            -target.transform.position.x,
+            target.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
 
-	// Place Pose
-	request.place_pose = new RosMessageTypes.Geometry.Pose
-	{
-		position = new Point(
-			targetPlacement.transform.position.z,
-			-targetPlacement.transform.position.x,
-			// Use the same pick pose offset so the target cube can be seen dropping into position
-			targetPlacement.transform.position.y + pickPoseOffset
-		),
-		// Orientation is hardcoded for this example so the gripper is always directly above the target object
-		orientation = pickOrientation
-	};
+    // Place Pose
+    request.place_pose = new RosMessageTypes.Geometry.Pose
+    {
+        position = new Point(
+            targetPlacement.transform.position.z,
+            -targetPlacement.transform.position.x,
+            targetPlacement.transform.position.y + pickPoseOffset
+        ),
+        orientation = pickOrientation
+    };
 
-	ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
-}
-
-void TrajectoryResponse(MoverServiceResponse response)
-{
-	if (response.trajectories != null)
-	{
-		Debug.Log("Trajectory returned.");
-		StartCoroutine(ExecuteTrajectories(response));
-	}
-	else
-	{
-		Debug.LogError("No trajectory returned from MoverService.");
-	}
+    var response = (MoverServiceResponse)tcpCon.SendServiceMessage(rosServiceName, request, new MoverServiceResponse());
+    if (response.trajectories != null)
+    {
+        Debug.Log("Trajectory returned.");
+        StartCoroutine(ExecuteTrajectories(response));
+    }
 }
 ```
 
@@ -141,7 +129,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-- The provided files require the following packages to be installed; run the following if the packages are not already present:
+- The provided files require the following packages. These commands have already been run in [Part 2](2_ros_tcp.md), but have been added again here for convenience. This step can be skipped if the packages are already installed.
 
    ```bash
    sudo apt-get update && sudo apt-get upgrade

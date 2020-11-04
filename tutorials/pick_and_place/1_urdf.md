@@ -24,11 +24,11 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 - In the Unity Hub, go to the Projects tab. Click the dropdown arrow next to `NEW`, and select the newly downloaded 2020.2 version. Create a new project using the 3D Template.
 
 - Clone or download this repository to your local machine. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/` directory. Find the `PickAndPlace.unitypackage` file, and double click it.
-  > Note: this .unitypackage can also be found in the latest [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as "PickAndPlace.zip".
+  <!-- > Note: this .unitypackage can also be found in the latest [Pick and Place Release](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) as "PickAndPlace.zip". -->
 
 - In the Import Unity Package window that has opened, ensure everything is selected, and click `Import`. Once this is done, new folders in the Assets directory will appear, including Environment, Materials, Prefabs, and URDF.
   
-- Load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
+- Double click to load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
 ![](img/1_cube.png) 
 
@@ -40,15 +40,19 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - Create a new folder in your Unity project's Assets directory titled `Plugins`.
 
-- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). Copy the `UnityEditorScripts` and `URDFLibrary` directories into the `Assets/Plugins` directory of your Unity project. 
+- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). First, copy the `URDFLibrary` directory into the `Assets/Plugins` directory of your Unity Project, then copy the `UnityEditorScripts` directory into the same Plugins folder.
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
+  > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
+
+  > Note: If the menu option does not appear, check the Console window to check for any compilation errors. 
   
 - Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
-> Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
+  > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
 
-> Note: The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.63, 0)` in Unity coordinates.
+  > Note: The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.63, 0)` in Unity coordinates.
+  
   ```xml
   <joint name="joint_world" type="fixed">
     <parent link="world" />
@@ -56,8 +60,6 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     <origin xyz="0 0 0.63" rpy="0 0 0" />
   </joint>
   ```
-
-- The Niryo arm should now be in the scene, but under the table. Select the `niryo_one` object and set its position to `(0, 0.63, 0)` to place it on top of the table to match the URDF definition.
 
 - On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
 	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide but for our purposes these settings will allow the robot to stay in position without the joints slipping.
