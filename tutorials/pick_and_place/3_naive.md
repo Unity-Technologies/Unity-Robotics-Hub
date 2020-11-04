@@ -82,7 +82,7 @@ void TrajectoryResponse(MoverServiceResponse response)
 
 This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
 
-At the end of the function, the `MoverServiceResponse` receives a `response.trajectories`. This is passed to the `ExecuteTrajectories` method below:
+At the end of the function, it calls ros.SendServiceMessage, and receives a `MoverServiceResponse` in the TrajectoryResponse callback. The trajectory data is then passed to the `ExecuteTrajectories` method below:
 
 ```csharp
 private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
@@ -118,7 +118,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-- Return to Unity. Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnector object.
+- Return to Unity. Select the `Publisher` GameObject. Disable it by toggling off the object's checkmark at the top left of the Inspector window. Create a new gameobject called TrajectoryPlanner, and add the `Assets/Scripts/TrajectoryPlanner` script to this new object.
 
 ![](img/3_swap.gif) 
 
@@ -126,10 +126,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 ![](img/3_target.gif)
 
-- The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
-  - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
-
-- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
+- Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, drag your new TrajectoryPlanner object into the target slot, then click the dropdown to select the function TrajectoryPlanner > `PublishJoints()`.
 
 ![](img/3_onclick.png)
 
@@ -247,7 +244,7 @@ This may print out various error messages regarding the controller_spawner, such
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the RosConnector component in Unity. Additionally, ensure that the ROS parameter values are set correctly.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the ROSConnection component in Unity. Additionally, ensure that the ROS parameter values are set correctly.
 
 ### Miscellaneous Issues
 
