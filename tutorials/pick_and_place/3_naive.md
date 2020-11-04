@@ -141,7 +141,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-- The provided files require the following packages to be installed; run the following if the packages are not already present:
+- The provided files require the following packages. These commands have already been run in [Part 2](2_ros_tcp.md), but have been added again here for convenience. This step can be skipped if the packages are already installed.
 
    ```bash
    sudo apt-get update && sudo apt-get upgrade

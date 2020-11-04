@@ -4,6 +4,8 @@
 
 This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a naive pick and place task using MoveIt trajectory planning. 
 
+> Note: This project was built using the ROS Melodic distro and Python 2.
+
 ## Table of Contents
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Table of Contents](#table-of-contents)
