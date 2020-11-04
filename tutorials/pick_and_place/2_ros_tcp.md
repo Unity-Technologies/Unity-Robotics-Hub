@@ -161,7 +161,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
    sudo -H pip install rospkg jsonpickle
    ```
 
-1. In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+2. In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
@@ -175,53 +175,17 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 1. If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. Open a new terminal in the ROS workspace and navigate to your catkin workspace. Run:
-   ```bash
-   cd ~/catkin_ws/ && source devel/setup.bash
-   
-   roscore &
-   ```
+1. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
 
-   Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
+1.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
 
-1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
-   -  The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `hostName` on the RosConnect component in Unity.
-   -  Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
-      -  On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection.
-      -  On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
+    ```bash
+    cd ~/catkin_ws/ && source devel/setup.bash
 
-1. Set the parameter values by running the following commands:
+    rosrun niryo_moveit TrajectorySubscriber.py
+    ```
 
-   ```bash
-   rosparam set ROS_IP <your ROS IP>
-   rosparam set ROS_TCP_PORT 10000
-   rosparam set UNITY_IP <your Unity IP>
-   rosparam set UNITY_SERVER_PORT 5005
-   ```
-   e.g.,
-
-   ```bash
-   rosparam set ROS_IP 192.168.50.149
-   rosparam set ROS_TCP_PORT 10000
-   rosparam set UNITY_IP 192.168.50.13
-   rosparam set UNITY_SERVER_PORT 5005
-   ```
-
-1. Once the parameter values have been set, you can run the server_endpoint. In this same terminal, run:
-  
-   ```bash
-   rosrun niryo_moveit server_endpoint.py
-   ```
-   Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
-
-1. Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
-   ```bash
-   cd ~/catkin_ws/ && source devel/setup.bash
-
-   rosrun niryo_moveit TrajectorySubscriber.py
-   ```
-
-   This won't print anything to the terminal window until something is published to the ROS Topic it's subscribed to. 
+    This won't print anything to the terminal window until something is published to the ROS Topic it's subscribed to. 
 
 1. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `rosrun niryo_moveit TrajectorySubscriber.py` command is running--it should now print `I heard:` with the data.
   

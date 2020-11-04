@@ -140,17 +140,6 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-1. The provided files require the following packages. These commands have already been run in [Part 2](2_ros_tcp.md), but have been added again here for convenience. This step can be skipped if the packages are already installed.
-
-    ```bash
-    sudo apt-get update && sudo apt-get upgrade
-    sudo apt-get install python-pip ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
-    ```
-
-    ```bash
-    sudo -H pip install rospkg jsonpickle
-    ```
-
 1. Note the file `niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
 
     ```python
@@ -180,24 +169,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## ROS-Unity Communication
 
-1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
+1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
 
-    ``` bash
-    cd ~/catkin_ws/ && source devel/setup.bash
-
-    roscore &
-
-    rosparam set ROS_IP <your ROS IP>
-    rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP <your Unity IP>
-    rosparam set UNITY_SERVER_PORT 5005
-
-    rosrun niryo_moveit server_endpoint.py
-    ```
-
-    Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window. Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
-
-1. Open a new terminal window and start the Mover Service node.
+2. Open a new terminal window and start the Mover Service node.
 
     ``` bash
     cd ~/catkin_ws/ && source devel/setup.bash
@@ -207,7 +181,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     Once this process is ready, it will print `Ready to plan` to the console.
 
-1. Open a new terminal window and launch MoveIt by calling `demo.launch`.
+3. Open a new terminal window and launch MoveIt by calling `demo.launch`.
 	- This launch file loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot.
 	> Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
 
