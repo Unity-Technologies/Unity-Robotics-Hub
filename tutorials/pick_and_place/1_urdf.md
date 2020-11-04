@@ -4,9 +4,8 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball) to get started.
 
-## Table of Contents
+**Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Table of Contents](#table-of-contents)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Troubleshooting](#troubleshooting)
   - [Resources](#resources)
@@ -32,7 +31,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ![](img/1_cube.png) 
 
-- Move the camera to a more convenient location for viewing the robot, e.g. assign the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
+- Select the `Main Camera` in the Hierarchy. Move the camera to a more convenient location for viewing the robot by assigning the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
 - Open the Physics Project Settings (Edit > Project Settings > Physics). Set the `Solver Type` to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
@@ -40,7 +39,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 - Create a new folder in your Unity project's Assets directory titled `Plugins`.
 
-- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). First, copy the `URDFLibrary` directory into the `Assets/Plugins` directory of your Unity Project, then copy the `UnityEditorScripts` directory into the same Plugins folder.
+- Clone or download the [URDF Importer Repo](https://github.cds.internal.unity3d.com/unity/URDF-Importer). First, copy the `UrdfLibrary` directory into the `Assets/Plugins` directory of your Unity Project, then copy the `UnityEditorScripts` directory into the same Plugins folder.
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
   > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
@@ -52,7 +51,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
 
   > Note: The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.63, 0)` in Unity coordinates.
-  
+
   ```xml
   <joint name="joint_world" type="fixed">
     <parent link="world" />
@@ -60,6 +59,8 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     <origin xyz="0 0 0.63" rpy="0 0 0" />
   </joint>
   ```
+
+  > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
 - On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
 	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide but for our purposes these settings will allow the robot to stay in position without the joints slipping.

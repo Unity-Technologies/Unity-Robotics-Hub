@@ -4,10 +4,10 @@ This part assumes you have access to a functional ROS workspace. If you do not y
 
 Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic.
 
-## Table of Contents
+**Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Table of Contents](#table-of-contents)
   - [Part 2: Unity & ROS Integration](#part-2-unity--ros-integration)
+  - [Setup](#setup)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
   - [Troubleshooting](#troubleshooting)
@@ -25,6 +25,8 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 ---
 
+## Setup
+
 - If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
 - Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Place the `niryo_moveit` directory inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. 
@@ -37,6 +39,8 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 - Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
 
 - Copy the `niryo_one_urdf/` directory in Unity (located at `Assets/URDF/niryo_one/niryo_one_urdf`) to the `src` directory of your ROS workspace.
+
+---
 
 ## The Unity Side
 
@@ -107,13 +111,13 @@ public void Publish()
 
 This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
 
-> Note that going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
+> Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
 - Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Name it Publisher. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the SourceDestinationPublisher script in the Project window and dragging it onto the Publisher object in the Hierarchy window.
 
 ![](img/2_component.gif)
 
-- Create another GameObject, name it RosConnect, and add the script Plugins/TCPConnector/ROSConnection to it in the same way.
+- Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
 
 - Confirm that the components have been added to the two objects successfully by checking for them in the Inspector.
 

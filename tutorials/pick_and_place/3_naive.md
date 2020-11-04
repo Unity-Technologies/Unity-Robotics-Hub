@@ -4,10 +4,9 @@ This part assumes you have access to a functional ROS workspace and that the pre
 
 Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
 
-## Table of Contents
+**Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Table of Contents](#table-of-contents)
-  - [Part 3: Naive Pick & Place](#part-3-naive-pick--place)
+  - [Part 3: Pick & Place](#part-3-pick--place)
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
   - [Unity & ROS Communication](#unity--ros-communication)
@@ -19,7 +18,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ---
 
-## Part 3: Naive Pick & Place
+## Part 3: Pick & Place
 
 ## The Unity Side
 
@@ -118,7 +117,7 @@ private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
 
 `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-- Return to Unity. Select the RosConnector GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnector object.
+- Return to Unity. Select the RosConnect GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnect object.
 
 ![](img/3_swap.gif) 
 
