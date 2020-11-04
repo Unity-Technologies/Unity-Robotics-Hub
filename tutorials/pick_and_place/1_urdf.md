@@ -5,45 +5,50 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball) to get started.
 
 **Table of Contents**
-- [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
+  - [Part 0: Setting up the Unity Scene](#part-0-setting-up-unity)
+  - [Part 1: Create Unity scene with imported URDF](#part-1-setting-up-the-robot)
   - [Troubleshooting](#troubleshooting)
   - [Resources](#resources)
+  - [Proceed to Part 2](#proceed-to-part-2)
 
 ---
 
-## Part 1: Create Unity scene with imported URDF
-  
-1. Install [Unity Hub](https://unity3d.com/get-unity/download).
-  
-1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b10 as of the latest revision).
-   
-    ![](img/1_hub.png)
-
-1. Clone or download this repository to your local machine.
+## Part 0: Setting up Unity
+* Clone this repo to a location on your local machine
     ```bash
     git clone --recurse-submodules git@github.com:Unity-Technologies/Unity-Robotics-Hub.git
     ```
 
-1. In the Unity Hub, go to the Projects tab. Click `ADD`, and navigate to and select the `Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject/` directory. Click `Open` to open the project. Note the folders in the Assets directory, including Environment, Materials, and Prefabs. These contain the provided Unity assets that will be used to set up the scene. PLACEHOLDER: update wiht appropriate given subdirectories
+* Install [Unity Hub](https://unity3d.com/get-unity/download).
+  
+* Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b9 as of the latest revision). If you can not find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b)
+   
+    ![](img/1_hub.png)
 
-1. Double click to load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
-    ![](img/1_cube.png)
+* Click the "Add" button in the top right of the "Projects" tab on Unity hub, navigate to, and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject`) to add the tutorial project to your hub
+
+![](img/hub_addproject.png)
+
+* Click the newly added project to open it
+
+* Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Scenes directory, and double-click to open it now.
+    > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Part 1](#part-1-setting-up-the-robot)
+
+* In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
+
+![](img/1_cube.png) 
 
 1. Select the `Main Camera` in the Hierarchy. Move the camera to a more convenient location for viewing the robot by assigning the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
-1. Open the Physics Project Settings (Edit > Project Settings > Physics). Ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
+## Part 1: Setting Up the Robot 
 
-    ![](img/1_physics.png)
+- Open the Physics Project Settings (Edit > Project Settings > Physics) and ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
-1. TODO: PLACEHOLDER; to be updated with submodules and packages, and potentially routing out to a more specific URDF tutorial?
-    > Note: the [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) package has already been added to this template project. To add it to your own project, follow the steps listed [here](https://github.com/Unity-Technologies/URDF-Importer#integrate-urdf-importer-into-unity-project).
+![](img/1_physics.png)
 
-1. Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
-    > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
-
-    > Note: If the menu option does not appear, check the Console window to check for any compilation errors.
+- Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
+  > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
   
 1. Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
@@ -64,7 +69,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
   > Note: You can find information on how these parameters are used in calculations by articulation bodies by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) technical guide for writing a custom controller. For our purposes these settings will allow the robot to stay in position without the joints slipping.
 
-    ![](img/1_controller.png)
+   ![](img/1_controller.png)
   
 1. In the Hierarchy window, click the arrow to the left of the name to expand the GameObject tree, down to `niryo_one/world/base_link`. Toggle on `Immovable` for the `base_link`.
 
@@ -85,7 +90,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 ## Troubleshooting
-
+- If you are not seeing `Import Robot from URDF` in the `Assets` menu, check the console for compile errors. The project must compile correctly before the editor tools become available. 
 - If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `niryo_one` object are set to `10000` and `100`, respectively.
 
 ---
@@ -99,4 +104,4 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 
-Proceed to [Part 2](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/pick_and_place/2_ros_tcp.md).
+####Proceed to [Part 2](2_ros_tcp.md).
