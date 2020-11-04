@@ -9,7 +9,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
   - [Part 3: Pick & Place](#part-3-pick--place)
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
-  - [Unity & ROS Communication](#unity--ros-communication)
+  - [ROS-Unity Communication](#ros-unity-communication)
   - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)
@@ -178,7 +178,7 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 --- 
 
-## Unity & ROS Communication
+## ROS-Unity Communication
 
 - The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
 
