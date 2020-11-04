@@ -4,19 +4,19 @@
 ![](images/unity_ros.png)
 
 
-An TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS.
+A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS.
 
-The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this the `MessageGeneration` plugin can generate C# classes, including serialization and deserialization functions, from ROS `.msg` files.
+The messages being passed between Unity and ROS are expected to be serialized as ROS would internally serialize them. To achieve this the `MessageGeneration` plugin (from the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repo) can generate C# classes, including serialization and deserialization functions, from ROS `.msg` files.
 
-The `ROSConnection` plugin provides the Unity scripts necessary to publish, subscribe, or call a service.
+The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector)) provides the Unity scripts necessary to publish, subscribe, or call a service.
 
 
 ## Tutorials
-- [Setup](setup.md) - Minimum setup required ffor a ROS Unity integration
-- [Publisher](publisher.md) - Adding a Publisher to a Unity Scene
-- [Subscriber](subscriber.md) - Adding a Subscriber to a Unity Scene
-- [Service](service.md) - Adding a Service call to a Unity Scene
-- [Server Endpoint](server_endpoint.md) - How to write a Server Endpoint
+- [Unity ROS Initial Setup](setup.md) - Minimum setup required for a ROS Unity integration
+- [Unity ROS Integration Publisher](publisher.md) - Adding a Publisher to a Unity Scene
+- [Unity ROS Integration Subscriber](subscriber.md) - Adding a Subscriber to a Unity Scene
+- [Unity ROS Integration Service](service.md) - Adding a Service call to a Unity Scene
+- [Unity ROS Integration Server Endpoint](server_endpoint.md) - How to write a Server Endpoint
 
 ## Example Unity Scripts
 

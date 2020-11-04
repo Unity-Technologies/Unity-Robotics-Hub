@@ -4,32 +4,14 @@ Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.or
 
 **NOTE:** If following from [Publisher](publisher.md) tutorial proceed to [Setting Up Unity Scene](subscriber.md#setting-up-unity-scene) step.
 
-Follow the [Initial ROS Setup](setup.md) guide.
-
-Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/unity_ros_message_generation/message_generation_tutorial.md) guide.
-
 ## Setting Up ROS
-- Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
-- Run the `catkin_make` command and source the directory.
-- Run `roscore &`.
-- Run each of the following commands with values that reflect your current set up.
-
-```bash
-    rosparam set ROS_IP $ROS_IP
-    rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP <ip of your unity machine>
-    rosparam set UNITY_SERVER_PORT 5005
-```
-
-- Finally, run the following command in a separate terminal window:
-	- `rosrun robotics_demo server_endpoint.py`
-
+- Follow the [Unity ROS Initial Setup](setup.md) guide. (You can skip this if you already did it during the [Unity ROS Integration Publisher](publisher.md) tutorial.)
 
 ## Setting Up Unity Scene
 - Generate the C# code for `UnityColor` message by going to `RosMessageGeneration` -> `AutoGenerateMessages` -> `Single Message...`
 - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/msg/UnityColor.msg` and click `GENERATE!`
     - The generated file will be saved in the default directory `Assets/RosMessages/msg`
-- Creat a script and name it `RosSubscriberExample.cs`
+- Create a script and name it `RosSubscriberExample.cs`
 - Paste the following code into `RosSubscriberExample.cs`
 	- **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
 
@@ -64,7 +46,7 @@ public class RosSubscriberExample : RosSubscriber
 ```
 
 - Create an empty game object and name it `RosSubscriber`
-- Attach the `RosSubscriberExample` script to the `RosSubscriber` game object and drag the cube game object onto the `cube` parameter ni the Inspector window.
+- Attach the `RosSubscriberExample` script to the `RosSubscriber` game object and drag the cube game object onto the `cube` parameter in the Inspector window.
 - In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` game object to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address ROS is connecting to. That's not necessarily the same as your machine's main IP address.)
 - Press play in the editor
 
