@@ -38,7 +38,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. TODO: PLACEHOLDER; to be updated with submodules and packages, and potentially routing out to a more specific URDF tutorial?
 
-    > Note: the [URDF Importer]() package has already been added to this template project. To add it to your own project, follow the steps listed [here]().
+    > Note: the [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) package has already been added to this template project. To add it to your own project, follow the steps listed [here](https://github.com/Unity-Technologies/Robotics-Tutorials/blob/master/urdf_tutorial.md).
 
 1. Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
     > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
@@ -92,7 +92,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ## Resources
 
 - [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
-- More on the URDF importer tool PLACEHOLDER [here](https://github.com/Unity-Technologies/Robotics-Tutorials/blob/master/urdf_tutorial.md)
+- More on the URDF importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
 - Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
 
 ---
