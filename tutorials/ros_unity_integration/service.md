@@ -2,36 +2,15 @@
 
 Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a game object's position and rotation to receive a new position to move the game object towards.
 
-**NOTE:** If following from [Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials proceed to [Setting Up Unity Scene](service.md#setting-up-unity-scene) step.
-
-Follow the [Initial ROS Setup](setup.md) guide.
-
-Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/unity_ros_message_generation/message_generation_tutorial.md) guide.
-
 ## Setting Up ROS
-- Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
-- Run the `catkin_make` command and source the directory
-- Run the following command in a separate terminal window:
-	- `roscore`
-
-- Run each of the following commands with values that reflect your current set up
-
-```bash
-    rosparam set ROS_IP $ROS_IP
-    rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP <IP of your unity machine>
-    rosparam set UNITY_SERVER_PORT 5005
-```
-
-- Run each of the following commands in a separate terminal window:
-	- `rosrun robotics_demo server_endpoint.py`
-	- `rosrun robotics_demo position_service.py`
+- Follow the [Unity ROS Initial Setup](setup.md) guide. (You can skip this step if following from the [Unity ROS Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
+- Open a new terminal window and run `rosrun robotics_demo position_service.py`
 
 ## Setting Up Unity Scene
 - Generate the C# code for `PositionService`'s messages by going to `RosMessageGeneration` -> `AutoGenerateServices` -> `Single Service...`
 - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/srv/PositionService.srv` and click `GENERATE!`
     - The generated files will be saved in the default directory `Assets/RosMessages/srv`
-- Creat a script and name it `RosServiceExample.cs`
+- Create a script and name it `RosServiceExample.cs`
 - Paste the following code into `RosServiceExample.cs`
 - **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
 
@@ -99,8 +78,8 @@ public class RosServiceExample : MonoBehaviour
 ```
 
 - Create an empty game object, name it `RosConnection`, and attach the `Plugins/TCPConnection/ROSConnection` script to it.
-- In the Inspector window of the Editor change the `hostName` variable on the `RosConnection` game object to the ROS master URI. 
-- Create another empty game object and name it `RosService`
+- In the Inspector window of the Editor change the `hostName` variable on the `RosConnection` game object to the ROS IP.
+- Create another empty game object and name it `RosService`.
 - Attach the `RosServiceExample` script to the `RosService` game object. Drag the cube game object onto its `cube` parameter and the RosConnection game object onto its `Ros` parameter.
 - Pressing play in the Editor should start communication with the `postion_service` script, running as a ROS node, causing the cube to move to random positions in the scene.
 

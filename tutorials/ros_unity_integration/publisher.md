@@ -2,25 +2,10 @@
 
 Create a simple Unity scene which publishes a game object's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
-Follow the [Initial ROS Setup](setup.md) guide.
-
-Follow the [ROS Message Generation](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/unity_ros_message_generation/message_generation_tutorial.md) guide.
-
 ## Setting Up ROS
-- Download and copy the `robotics_demo` directory at `tutorials/ros_packages/` of this repo to your Catkin workspace.
-- Run the `catkin_make` command and source the directory
-- Now it's time to actually start ROS! Run `roscore &`.
-- Run each of the following commands with values that reflect your current environment:
+- Follow the [Unity ROS Initial Setup](setup.md) guide.
 
-```bash
-    rosparam set ROS_IP $ROS_IP
-    rosparam set ROS_TCP_PORT 10000
-    rosparam set UNITY_IP <ip of your unity machine>
-    rosparam set UNITY_SERVER_PORT 5005
-```
-
-- Run each of the following commands in a separate terminal window:
-	- `rosrun robotics_demo server_endpoint.py`
+- Now that your ROS endpoint is running, open a new terminal window and run the following command:
 	- `rostopic echo pos_rot`
 
 ## Setting Up Unity Scene
@@ -82,11 +67,11 @@ public class RosPublisherExample : MonoBehaviour
 
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
-- Create an empty game object, name it `RosPublisher` and attach the `RosPublisherExample` script.
+- Create an empty game object, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
+	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS
+- Create another empty game object, name it `RosPublisher` and attach the `RosPublisherExample` script.
 	- Drag the cube game object onto the `Cube` parameter
-- Create another empty game object, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
-	- Change the host name and port to match the ROS IP and port variables defined in the previous section
-	- Select the RosPublisher object again, and drag the RosConnection object onto its `Ros` parameter.
+	- Drag the RosConnection object onto its `Ros` parameter.
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
 

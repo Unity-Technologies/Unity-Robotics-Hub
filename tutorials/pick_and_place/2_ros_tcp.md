@@ -187,7 +187,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `hostName` on the RosConnect component in Unity.
    - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
      - On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection.
-     - On Windows, open `Wi-Fi network` on the taskbar, and open `Properties`. The IP address should be listed next to "IPv4 address."
+     - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
 
 - Set the parameter values by running the following commands:
 
