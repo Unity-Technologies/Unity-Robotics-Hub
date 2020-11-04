@@ -34,49 +34,49 @@ The UI button `OnClick` callback will be reassigned later in this tutorial to th
 ```csharp
 public void PublishJoints()
 {
-  MoverServiceRequest request = new MoverServiceRequest();
-  request.joints_input = CurrentJointConfig();
-  
-  // Pick Pose
-  request.pick_pose = new RosMessageTypes.Geometry.Pose
-  {
-    position = new Point(
-      target.transform.position.z,
-      -target.transform.position.x,
-      // Add pick pose offset to position the gripper above target to avoid collisions
-      target.transform.position.y + pickPoseOffset
-    ),
-    // Orientation is hardcoded for this example so the gripper is always directly above the target object
-    orientation = pickOrientation
-  };
+    MoverServiceRequest request = new MoverServiceRequest();
+    request.joints_input = CurrentJointConfig();
+    
+    // Pick Pose
+    request.pick_pose = new RosMessageTypes.Geometry.Pose
+    {
+      position = new Point(
+        target.transform.position.z,
+        -target.transform.position.x,
+        // Add pick pose offset to position the gripper above target to avoid collisions
+        target.transform.position.y + pickPoseOffset
+      ),
+      // Orientation is hardcoded for this example so the gripper is always directly above the target object
+      orientation = pickOrientation
+    };
 
-  // Place Pose
-  request.place_pose = new RosMessageTypes.Geometry.Pose
-  {
-    position = new Point(
-      targetPlacement.transform.position.z,
-      -targetPlacement.transform.position.x,
-      // Use the same pick pose offset so the target cube can be seen dropping into position
-      targetPlacement.transform.position.y + pickPoseOffset
-    ),
-    // Orientation is hardcoded for this example so the gripper is always directly above the target object
-    orientation = pickOrientation
-  };
+    // Place Pose
+    request.place_pose = new RosMessageTypes.Geometry.Pose
+    {
+      position = new Point(
+        targetPlacement.transform.position.z,
+        -targetPlacement.transform.position.x,
+        // Use the same pick pose offset so the target cube can be seen dropping into position
+        targetPlacement.transform.position.y + pickPoseOffset
+      ),
+      // Orientation is hardcoded for this example so the gripper is always directly above the target object
+      orientation = pickOrientation
+    };
 
-  ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
-}
-
-void TrajectoryResponse(MoverServiceResponse response)
-{
-  if (response.trajectories != null)
-  {
-    Debug.Log("Trajectory returned.");
-    StartCoroutine(ExecuteTrajectories(response));
+    ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
   }
-  else
+
+  void TrajectoryResponse(MoverServiceResponse response)
   {
-    Debug.LogError("No trajectory returned from MoverService.");
-  }
+    if (response.trajectories != null)
+    {
+      Debug.Log("Trajectory returned.");
+      StartCoroutine(ExecuteTrajectories(response));
+    }
+    else
+    {
+      Debug.LogError("No trajectory returned from MoverService.");
+    }
 }
 ```
 
