@@ -186,9 +186,9 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
    -  The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `hostName` on the RosConnect component in Unity.
-   -  Finding the IP address of your local machine (the one running Unity), i.e.    `UNITY_IP` depends on your operating system. 
+   -  Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
       -  On a Mac, open `System Preferences > Network`. The IP address should be listed on the active connection.
-      -  On Windows, open `Wi-Fi network` on the taskbar, and open `Properties`. The IP address should be listed next to "IPv4 address."
+      -  On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
 
 1. Set the parameter values by running the following commands:
 
