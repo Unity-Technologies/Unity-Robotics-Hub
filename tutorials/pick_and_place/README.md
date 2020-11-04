@@ -7,7 +7,6 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 > Note: This project was built using the ROS Melodic distro and Python 2.
 
 **Table of Contents**
-
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS-Unity Integration](#part-2-ros-unity-integration)
@@ -27,7 +26,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 <img src="img/2_echo.png" width="400"/>
 
-This part assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and publishing and subscribing to a ROS topic.
+This part assumes you have access to a functional ROS workspace. Steps covered include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and publishing to a ROS topic.
 
 ---
 
