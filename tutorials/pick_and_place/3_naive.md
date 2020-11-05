@@ -175,7 +175,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-- If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to ROS catkin workspace `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
+- If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to ROS catkin workspace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 --- 
 

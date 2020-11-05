@@ -28,9 +28,10 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 - If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
 - Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
-	- This directory will be used as the ROS [catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace)
-	- It contains ROS packages for pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
-	- If you cloned the project and forgot using `--recurse-submodules`, you can run the command `git submodule update --init --recursive` to download packages for Git submodules.
+	- This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace)
+  - If you cloned the project and forgot using `--recurse-submodules`, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
+	- Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container
+  - It contains ROS packages for pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
 
 ## The Unity Side
 
@@ -166,9 +167,9 @@ rospy.spin()
 
 - Additionally, note the file `niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-- If you have not already built and sourced the catkin workspace since importing the new ROS packages, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
+- If you have not already built and sourced the catkin workspace since importing the new ROS packages, navigate to ROS workspace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-- Open a new terminal in the ROS workspace and navigate to catkin workspace `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`. Run:
+- Open a new terminal in the ROS workspace and navigate to ROS workspace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`. Run:
    ```bash
    source devel/setup.bash
    
