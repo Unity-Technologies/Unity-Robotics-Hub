@@ -175,7 +175,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-- If you have not already built and sourced the ROS workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
+- If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to ROS catkin workspace `Unity-Robotics-Hub/tutorials/pick_and_place/ROS`, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 --- 
 
@@ -184,7 +184,7 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 - The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Start ROS Core, set the parameter values, and begin the server_endpoint as follows:
 
 ``` bash
-cd ~/catkin_ws/ && source devel/setup.bash
+source devel/setup.bash
 
 roscore &
 
@@ -201,7 +201,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 - Open a new terminal window and start the Mover Service node.
 
 ``` bash
-cd ~/catkin_ws/ && source devel/setup.bash
+source devel/setup.bash
 
 rosrun niryo_moveit mover.py
 ```
@@ -213,7 +213,7 @@ Once this process is ready, it will print `Ready to plan` to the console.
 	> Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
 
 ``` bash
-cd ~/catkin_ws/ && source devel/setup.bash
+source devel/setup.bash
 
 roslaunch niryo_moveit demo.launch
 ```
