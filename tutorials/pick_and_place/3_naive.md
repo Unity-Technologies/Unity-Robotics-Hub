@@ -9,7 +9,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
   - [Part 3: Pick & Place](#part-3-pick--place)
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
-  - [ROS-Unity Communication](#ros-unity-communication)
+  - [ROS–Unity Communication](#ros-unity-communication)
   - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)
@@ -162,9 +162,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 --- 
 
-## ROS-Unity Communication
+## ROS–Unity Communication
 
-1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
+1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
 
 2. Open a new terminal window in your ROS workspace and start the Mover Service node.
 

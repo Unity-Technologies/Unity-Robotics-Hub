@@ -2,11 +2,11 @@
 
 This part assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
 
-Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic. These steps are adapted from the [ROS-Unity Integration Tutorials](../ros_unity_integration/README.md).
+Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic. These steps are adapted from the [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md).
 
 **Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Part 2: ROS-Unity Integration](#part-2-ros-unity-integration)
+  - [Part 2: ROS–Unity Integration](#part-2-ros-unity-integration)
   - [Setup](#setup)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
@@ -15,7 +15,7 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 ---
 
-## Part 2: ROS-Unity Integration
+## Part 2: ROS–Unity Integration
 
 ![](img/2_ros_unity.png)
 
@@ -165,7 +165,7 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
  - Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-2. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
+2. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
 
 3.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
 
@@ -203,7 +203,7 @@ ROS and Unity have now successfully connected!
    -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
    - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 - More on [ROS Topics](http://wiki.ros.org/Topics)
-- [ROS-Unity Integration Tutorials](../ros_unity_integration/README.md)
+- [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md)
 - [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package
 - [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package
 - [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros)

@@ -1,9 +1,9 @@
-# ROS-Unity Integration Service
+# ROS–Unity Integration Service
 
 Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a game object's position and rotation to receive a new position to move the game object towards.
 
 ## Setting Up ROS
-- Follow the [ROS-Unity Initial Setup](setup.md) guide. (You can skip this step if following from the [ROS-Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
+- Follow the [ROS–Unity Initial Setup](setup.md) guide. (You can skip this step if following from the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
 - Open a new terminal window and run `rosrun robotics_demo position_service.py`
 
 ## Setting Up Unity Scene

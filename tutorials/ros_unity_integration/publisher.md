@@ -1,9 +1,9 @@
-# ROS-Unity Integration Publisher
+# ROS–Unity Integration Publisher
 
 Create a simple Unity scene which publishes a game object's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
 ## Setting Up ROS
-- Follow the [ROS-Unity Initial Setup](setup.md) guide.
+- Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Now that your ROS endpoint is running, open a new terminal window and run the following command:
 	- `rostopic echo pos_rot`

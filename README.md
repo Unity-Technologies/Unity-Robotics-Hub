@@ -22,7 +22,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - Unity 2020.2 or newer
 
 ### Tutorials
-- [ROS-Unity Integration](tutorials/ros_unity_integration/README.md)
+- [ROS–Unity Integration](tutorials/ros_unity_integration/README.md)
  - How to set up simple communication between ROS and Unity.
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
 - [Pick and Place End-to-End](tutorials/pick_and_place/README.md)

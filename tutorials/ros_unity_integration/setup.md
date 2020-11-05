@@ -1,11 +1,11 @@
-# ROS-Unity Initial Setup
+# ROS–Unity Initial Setup
 
-The minimum requirements for a ROS Unity integration.
+The minimum requirements for a ROS–Unity integration.
 
 ## ROS Environment
 
 - Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package to the `src` folder in your Catkin workspace.
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace. (You can skip this step if you're not interested in following the ROS-Unity Integration tutorials.)
+- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace. (You can skip this step if you're not interested in following the ROS–Unity Integration tutorials.)
 
 - Run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 

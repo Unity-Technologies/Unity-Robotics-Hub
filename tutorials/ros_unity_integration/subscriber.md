@@ -1,11 +1,11 @@
-# ROS-Unity Integration Subscriber
+# ROS–Unity Integration Subscriber
 
 Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a game object.
 
 **NOTE:** If following from [Publisher](publisher.md) tutorial proceed to [Setting Up Unity Scene](subscriber.md#setting-up-unity-scene) step.
 
 ## Setting Up ROS
-- Follow the [ROS-Unity Initial Setup](setup.md) guide. (You can skip this if you already did it during the [ROS-Unity Integration Publisher](publisher.md) tutorial.)
+- Follow the [ROS–Unity Initial Setup](setup.md) guide. (You can skip this if you already did it during the [ROS–Unity Integration Publisher](publisher.md) tutorial.)
 
 ## Setting Up Unity Scene
 - Generate the C# code for `UnityColor` message by going to `RosMessageGeneration` -> `AutoGenerateMessages` -> `Single Message...`
@@ -55,4 +55,4 @@ public class RosSubscriberExample : RosSubscriber
 
 ![](images/tcp_2.gif)
 
-Continue to the [ROS-Unity Integration Service](service.md).
+Continue to the [ROS–Unity Integration Service](service.md).
