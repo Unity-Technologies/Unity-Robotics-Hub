@@ -1,0 +1,9 @@
+[submodule "tutorials/pick_and_place/ROS/src/ROS_TCP_Endpoint"]
+	path = tutorials/pick_and_place/ROS/src/ROS_TCP_Endpoint
+	url = git@github.com:Unity-Technologies/ROS_TCP_Endpoint.git
+[submodule "tutorials/pick_and_place/ROS/src/niryo_one_ros"]
+	path = tutorials/pick_and_place/ROS/src/niryo_one_ros
+	url = git@github.com:NiryoRobotics/niryo_one_ros.git
+[submodule "tutorials/pick_and_place/ROS/src/moveit_msgs"]
+	path = tutorials/pick_and_place/ROS/src/moveit_msgs
+	url = git@github.com:ros-planning/moveit_msgs.git

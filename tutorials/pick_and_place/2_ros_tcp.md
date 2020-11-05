@@ -27,22 +27,13 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 ## Setup
 
-1. If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
+If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
-1. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. Place the contents of this `ROS` directory inside the `src` directory of your ROS workspace, e.g. `~/catkin_ws/src`. 
-   - This package contains Python scripts, MoveIt configurations, and other necessary files for the pick and place task.
-
-1. TODO PLACEHOLDER: Update to submodule/packages
-
-2. Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
-
-3.  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories (e.g. dynamixel_sdk/, mcp_can_rpi/, niryo_one/, etc.) to the `src` directory of your ROS workspace.
-
-4. Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
-
-5. Copy the `niryo_one_urdf/` directory in Unity (located at `Assets/URDF/niryo_one/niryo_one_urdf`) to the `src` directory of your ROS workspace.
-
----
+Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
+  - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace)
+  - If you cloned the project and forgot using `--recurse-submodules`, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
+  - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container
+  - It contains ROS packages for pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
 
 ## The Unity Side
 
@@ -57,14 +48,14 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 1.  In the Message Auto Generation window that appears, next to the Input File Path, click `Browse File...` and navigate to the newly downloaded MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. 
 	- If this is successful, 1 new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
    
-1. Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`. In the Message Auto Generation window that appears, next to the Input Path, click `Select Folder…` and navigate to the `niryo_moveit` directory, e.g. `~/catkin_ws/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. 
+1. Once again go to the `RosMessageGeneration -> Auto Generate Messages` and select `All Messages in Directory`. In the Message Auto Generation window that appears, next to the Input Path, click `Select Folder…` and navigate to the `niryo_moveit` directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!` A window will appear to notify that the Code Generation is Complete. 
 	- If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
   
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
 1. Now that the messages have been generated, the service will be created. In the menu, select `RosMessageGeneration -> Auto Generate Services` and select `Single Service`. 
 
-1. In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `~/catkin_ws/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
+1. In the Service Auto Generation window that appears, next to the Input Package Path, click `Browse Package…` and navigate to the niryo_moveit/srv directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` If this is successful, 2 new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
   
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
@@ -162,7 +153,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
    sudo -H pip install rospkg jsonpickle
    ```
 
-2. In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+ - In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
@@ -172,23 +163,21 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
    ...
    ```
 
-1. Additionally, note the file `niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
+ - Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-1. If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
+2. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
 
-1. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
-
-1.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
+3.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
 
     ```bash
-    cd ~/catkin_ws/ && source devel/setup.bash
+    source devel/setup.bash
 
     rosrun niryo_moveit TrajectorySubscriber.py
     ```
 
     This won't print anything to the terminal window until something is published to the ROS Topic it's subscribed to. 
 
-1. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `rosrun niryo_moveit TrajectorySubscriber.py` command is running--it should now print `I heard:` with the data.
+4. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `rosrun niryo_moveit TrajectorySubscriber.py` command is running--it should now print `I heard:` with the data.
   
 ROS and Unity have now successfully connected!
 
@@ -197,8 +186,7 @@ ROS and Unity have now successfully connected!
 ---
 
 ## Troubleshooting
-
-- If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x ~/catkin_ws/src/niryo_moveit/scripts/server_endpoint.py`.
+- If the error `[rosrun] Found the following, but they're either not files, or not executable: server_endpoint.py` appears, the Python script may need to be marked as executable via `chmod +x Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/scripts/server_endpoint.py`.
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
   
