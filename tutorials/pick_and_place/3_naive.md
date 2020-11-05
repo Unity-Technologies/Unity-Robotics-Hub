@@ -9,7 +9,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
   - [Part 3: Pick & Place](#part-3-pick--place)
   - [The Unity Side](#the-unity-side)
   - [The ROS Side](#the-ros-side)
-  - [ROS–Unity Communication](#ros-unity-communication)
+  - [ROS–Unity Communication](#rosunity-communication)
   - [Resources](#resources)
   - [Troubleshooting](#troubleshooting)
     - [Errors and Warnings](#errors-and-warnings)

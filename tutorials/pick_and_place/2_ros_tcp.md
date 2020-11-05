@@ -6,7 +6,7 @@ Steps covered in this tutorial include creating a TCP connection between Unity a
 
 **Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
-  - [Part 2: ROS–Unity Integration](#part-2-ros-unity-integration)
+  - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Setup](#setup)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
