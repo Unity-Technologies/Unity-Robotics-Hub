@@ -135,7 +135,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-1. Note the file `niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
+1. Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
 
     ```python
     def plan_trajectory(move_group, destination_pose, start_joint_angles): 
