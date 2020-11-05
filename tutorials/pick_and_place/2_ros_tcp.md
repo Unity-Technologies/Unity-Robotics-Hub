@@ -34,8 +34,6 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 1. TODO PLACEHOLDER: Update to submodule/packages
 
-2. Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
-
 3.  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories (e.g. dynamixel_sdk/, mcp_can_rpi/, niryo_one/, etc.) to the `src` directory of your ROS workspace.
 
 4. Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
@@ -47,8 +45,6 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 ## The Unity Side
 
 1. If the current Unity project is not already open, select and open it from the Unity Hub.
-
-1. Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repository. In the ROS-TCP-Connector, copy the `MessageGeneration` and `TcpConnector` directories to the Unity project's Assets/Plugins directory.
 
 1. Adding `MessageGeneration` creates a new Unity menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`.
 
@@ -162,7 +158,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
    sudo -H pip install rospkg jsonpickle
    ```
 
-2. In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+ - In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
@@ -172,11 +168,17 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
    ...
    ```
 
-1. Additionally, note the file `niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
+ - Additionally, note the file `niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-1. If you have not already built and sourced the catkin workspace since importing the new ROS packages, run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
+1. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core and set ROS params.
 
-1. Follow the steps in the [ROS-Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
+1. Open a new terminal window and start the server endpoint with the following command:
+
+    ```bash
+    cd ~/catkin_ws/ && source devel/setup.bash
+
+    rosrun niryo_moveit server_endpoint.py
+    ```
 
 1.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
 
