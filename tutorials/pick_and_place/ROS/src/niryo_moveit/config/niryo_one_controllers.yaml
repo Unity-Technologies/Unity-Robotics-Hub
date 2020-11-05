@@ -1,0 +1,34 @@
+# Settings for ros_control control loop
+hardware_control_loop:
+    loop_hz: 25
+
+# Publish all joint states -----------------------
+joint_state_controller:
+    type: "joint_state_controller/JointStateController"
+    publish_rate: 50
+    
+# Joint Trajectory Controller - position based -----------------------
+niryo_one_follow_joint_trajectory_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints: 
+        - joint_1  
+        - joint_2
+        - joint_3  
+        - joint_4  
+        - joint_5  
+        - joint_6
+    constraints:
+        goal_time: 1.0 
+        stopped_velocity_tolerance: 0.05
+        joint_1: {trajectory: 0.5, goal: 0.2}
+        joint_2: {trajectory: 0.5, goal: 0.2}
+        joint_3: {trajectory: 0.5, goal: 0.2}
+        joint_4: {trajectory: 0.5, goal: 0.2}
+        joint_5: {trajectory: 1.0, goal: 0.3}
+        joint_6: {trajectory: 1.0, goal: 0.3}
+    stop_trajectory_duration: 1.0
+    state_publish_rate: 20
+    #action_monitor_rate: 20
+
+
+
