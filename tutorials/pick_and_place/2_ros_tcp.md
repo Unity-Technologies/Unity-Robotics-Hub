@@ -161,7 +161,6 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
    tcp_server.start()
    rospy.spin()
    ...
->>>>>>> c00d10c067983d7d82798864b05c755a26df4953
    ```
 
  - Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
