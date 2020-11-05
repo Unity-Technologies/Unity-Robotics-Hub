@@ -5,7 +5,6 @@ The minimum requirements for a ROS Unity integration.
 ## ROS Environment
 
 - Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package to the `src` folder in your Catkin workspace.
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace. (You can skip this step if you're not interested in following the ROS Unity Integration tutorials.)
 
 - Run `cd ~/catkin_ws/ && catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -40,13 +39,6 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
    rosparam set UNITY_IP 192.168.50.13
    rosparam set UNITY_SERVER_PORT 5005
    ```
-
-- Once the parameter values have been set, you can run the server_endpoint. In this same terminal, run:
-  
-   ```bash
-   rosrun robotics_demo server_endpoint.py
-   ```
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 ## Unity Scene
 - Create a new directory under the `Assets` directory, and name it `Plugins`.
