@@ -215,7 +215,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the RosConnector component in Unity. Additionally, ensure that the ROS parameter values are set correctly.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the RosConnect object in Unity. Additionally, ensure that the ROS parameter values are set correctly.
 
 ### Miscellaneous Issues
 
