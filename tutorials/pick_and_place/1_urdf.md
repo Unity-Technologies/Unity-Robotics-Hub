@@ -16,9 +16,9 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
   
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b10 as of the latest revision). 
+1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b10 as of the latest revision).
    
-    ![](img/1_hub.png) 
+    ![](img/1_hub.png)
 
 1. Clone or download this repository to your local machine.
     ```bash
@@ -29,7 +29,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. Double click to load the `Assets/Scenes/SampleScene` if it is not already open. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
-    ![](img/1_cube.png) 
+    ![](img/1_cube.png)
 
 1. Select the `Main Camera` in the Hierarchy. Move the camera to a more convenient location for viewing the robot by assigning the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
@@ -38,13 +38,12 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     ![](img/1_physics.png)
 
 1. TODO: PLACEHOLDER; to be updated with submodules and packages, and potentially routing out to a more specific URDF tutorial?
-
-    > Note: the [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) package has already been added to this template project. To add it to your own project, follow the steps listed [here](https://github.com/Unity-Technologies/Robotics-Tutorials/blob/master/urdf_tutorial.md).
+    > Note: the [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) package has already been added to this template project. To add it to your own project, follow the steps listed [here](https://github.com/Unity-Technologies/URDF-Importer#integrate-urdf-importer-into-unity-project).
 
 1. Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
     > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
 
-    > Note: If the menu option does not appear, check the Console window to check for any compilation errors. 
+    > Note: If the menu option does not appear, check the Console window to check for any compilation errors.
   
 1. Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
@@ -63,13 +62,13 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
 1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
-	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide, but for our purposes these settings will allow the robot to stay in position without the joints slipping.
+  > Note: You can find information on how these parameters are used in calculations by articulation bodies by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) technical guide for writing a custom controller. For our purposes these settings will allow the robot to stay in position without the joints slipping.
 
-    ![](img/1_controller.png) 
+    ![](img/1_controller.png)
   
 1. In the Hierarchy window, click the arrow to the left of the name to expand the GameObject tree, down to `niryo_one/world/base_link`. Toggle on `Immovable` for the `base_link`.
 
-    ![](img/1_base.png) 
+    ![](img/1_base.png)
 
     > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at PLACEHOLDER `Assets/Plugins/UnityEditorScripts/Urdf/Controller/Controller.cs`.
 
@@ -77,11 +76,11 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
     ![](img/1_force.png)
 
-1. Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor. 
+1. Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor.
   
 > Note: Using the Controller, joints can be selected using the arrow keys. Use the left/right arrow keys to navigate through the joints, where the selected index will be highlighted in red. Use the up/down arrow keys to control the selected joint movement. The Controller script on the niryo_one object will describe the actively Selected Index as well as the Joint Name.
 
-![](img/1_end.gif) 
+![](img/1_end.gif)
 
 ---
 
@@ -100,4 +99,4 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 
-Proceed to [Part 2](2_ros_tcp.md).
+Proceed to [Part 2](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/pick_and_place/2_ros_tcp.md).
