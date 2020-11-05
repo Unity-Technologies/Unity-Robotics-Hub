@@ -17,7 +17,8 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
 1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b10 as of the latest revision). 
-![](img/1_hub.png) 
+   
+    ![](img/1_hub.png) 
 
 1. Clone or download this repository to your local machine.
     ```bash

@@ -1,4 +1,4 @@
-# Unity ROS Initial Setup
+# ROS-Unity Initial Setup
 
 The minimum requirements for a ROS Unity integration.
 

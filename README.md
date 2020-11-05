@@ -18,7 +18,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 
 ### Tutorials
 - [C# ROS Message Class Generation](tutorials/unity_ros_message_generation/message_generation_tutorial.md)
-- [Unity ROS Integration](tutorials/ros_unity_integration/README.md)
+- [ROS-Unity Integration](tutorials/ros_unity_integration/README.md)
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
 - [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
 
