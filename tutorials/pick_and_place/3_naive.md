@@ -81,7 +81,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
 
-    At the end of the function, the `MoverServiceResponse` receives a `response.trajectories`. This is passed to the `ExecuteTrajectories` method below:
+    The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` below:
 
     ```csharp
     private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
@@ -117,22 +117,22 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-1. Return to Unity. Select the RosConnect GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnect object.
+2. Return to Unity. Select the RosConnect GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnect object.
 
     ![](img/3_swap.gif) 
 
-1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Finally, assign the `niryo_one` robot to the Niryo One field.
+3. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Finally, assign the `niryo_one` robot to the Niryo One field.
 
     ![](img/3_target.gif)
 
-1. The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
+4. The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
    - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-1. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
+5. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
 
     ![](img/3_onclick.png)
 
-1. The Unity side is now ready to communicate with ROS to motion plan!
+6. The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
 
