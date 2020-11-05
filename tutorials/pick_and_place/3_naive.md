@@ -22,11 +22,11 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-1. If you have not already cloned or downloaded this repository, do so now, and follow the steps in [Part 1](1_urdf.md) to set up the Unity project, and [Part 2](2_ros_tcp.md) to integrate ROS with Unity. 
+1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project, and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now.
 
 1. If the current Unity project is not already open, select and open it from the Unity Hub.
 
-1. Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
+    Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
     The UI button `OnClick` callback will be reassigned later in this tutorial to the following function, `PublishJoints`, as defined:
 
@@ -117,22 +117,17 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `Close` gripper methods as is appropriate.
 
-2. Return to Unity. Select the RosConnect GameObject. Disable the SourceDestinationPublisher component by toggling off the script's checkmark in the Inspector window. Add the `TrajectoryPlanner` script to the RosConnect object.
+2. Return to Unity. Select the Publisher GameObject and the `TrajectoryPlanner` script as a component.
 
-    ![](img/3_swap.gif) 
-
-3. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Finally, assign the `niryo_one` robot to the Niryo One field.
+3. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
 
     ![](img/3_target.gif)
 
-4. The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
-   - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
-
-5. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
+4. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
 
     ![](img/3_onclick.png)
 
-6. The Unity side is now ready to communicate with ROS to motion plan!
+5. The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
 

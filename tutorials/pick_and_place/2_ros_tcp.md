@@ -70,7 +70,7 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 1. In this cloned or downloaded repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
-1. Note the SourceDestinationPublisher script. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port, and the articulation body values are assigned based on the GameObjects that will be assigned shortly. The `Publish()` function is defined as follows:
+   Note the SourceDestinationPublisher script. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port, and the articulation body values are assigned based on the GameObjects that will be assigned shortly. The `Publish()` function is defined as follows:
 
    ```csharp
    public void Publish()
@@ -115,28 +115,29 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-1. Return to the Unity Editor. Right click in the Hierarchy window and select Create Empty to add a new empty GameObject. Name it Publisher. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the SourceDestinationPublisher script in the Project window and dragging it onto the Publisher object in the Hierarchy window.
+1. Return to the Unity Editor. Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.       
+   > Alternatively, you can drag the script from the Project window onto the Publisher object in the Hierarchy window.
 
-   ![](img/2_component.gif)
+   ![](img/2_sourcedest.gif)
 
-1. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
+2. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
 
-1. Confirm that the components have been added to the two objects successfully by checking for them in the Inspector.
-
-1. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
+4. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
 
    ![](img/2_target.gif)
 
-1. The `hostName` should be the IP address of your ROS machine (*not* the one running Unity).
+5. Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
 
    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-   - In the RosConnect component in the Inspector, replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+   - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-1. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
-	- Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
+6. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
+   
+   > In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen. 
   
-1. Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the Publisher object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
+1. Select the newly made Button object, and scroll to see the Button component in the Inspector. Click the `+` button under the empty `OnClick()` header to add a new event. Select the `Publisher` object in the Hierarchy window and drag it into the new OnClick() event, where it says `None (Object)`. Click the dropdown where it says `No Function`. Select SourceDestinationPublisher > `Publish()`.
 
    ![](img/2_onclick.png)
 
