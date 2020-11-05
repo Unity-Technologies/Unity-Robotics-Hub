@@ -153,7 +153,7 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
    sudo -H pip install rospkg jsonpickle
    ```
 
- - In your ROS workspace, find the directory `~/catkin_ws/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+ - In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
