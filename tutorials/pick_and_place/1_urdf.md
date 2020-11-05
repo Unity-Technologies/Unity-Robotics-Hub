@@ -43,12 +43,14 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ## Setting Up the Robot 
 
+> Note: Presumably when you opened this project, the package manager automatically checked out and built the URDF-Importer package for you. You can double-check this now by looking for `Packages/URDF-Importer` in the Project Browser or by opening the Package Manager window.
+
 - Open the Physics Project Settings (Edit > Project Settings > Physics) and ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
-   ![](img/1_physics.png)
+    ![](img/1_physics.png)
 
 - Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
-  > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
+    > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
   
 * Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
@@ -75,7 +77,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
     ![](img/1_base.png)
 
-    > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at PLACEHOLDER `Assets/Plugins/UnityEditorScripts/Urdf/Controller/Controller.cs`.
+    > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Packages/URDF Importer/Runtime/Controller/Controller.cs`.
 
 * On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5` which will increase the speed at which the shoulder joint can rotate.
 
@@ -104,4 +106,4 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 
-####Proceed to [Part 2](2_ros_tcp.md).
+#### Proceed to [Part 2](2_ros_tcp.md).
