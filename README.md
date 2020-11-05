@@ -8,8 +8,13 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 
 ### Repos
 - [TCP Endpoint ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
+ - A ROS node for sending/receiving messages from Unity.
 - [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
+ - A set of Unity components for sending/receiving messages from ROS. 
 - [URDF Importer](https://github.cds.internal.unity3d.com/unity/URDF-Importer)
+ - A Unity plugin for loading URDF files (Universal Robot Definition File)
+- [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
+ - A robot simulation, demonstrating Unity's new physics solver.
 
 ### Prerequisites
 - Knowlege of [ROS](https://www.ros.org/) and a working [ROS environment](https://www.ros.org/install/)
@@ -17,33 +22,8 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - Unity 2020.2 or newer
 
 ### Tutorials
-- [C# ROS Message Class Generation](tutorials/unity_ros_message_generation/message_generation_tutorial.md)
-- [Unity ROS Integration](tutorials/ros_unity_integration/README.md)
+- [ROS-Unity Integration](tutorials/ros_unity_integration/README.md)
+ - How to set up simple communication between ROS and Unity.
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
 - [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
-
-### ROS Packages
-
-`Robotics Demo` with example implementations of:
-
-- Launch File
-- Custom Message Types
-- Custom Service
-- Publisher Script
-- Service Script
-- TCP Endpoint Script
-
-
-### unity_scripts
----
-
-Example scripts on how to implement a ROS Publisher, Subscriber, or Service.
-
-- RosPublishExample.cs
-	- Publishes the position of a gameobject every 0.5 seconds.
-
-- RosServiceExample.cs
-	- Each time service is called return a destination position for a game object to move towards.
-
-- RosSubscriberExample.cs
-	- Subscribes to a topic that accepts color messages and uses them to change the color of a game object in the Unity scene.
+ - A complete end-to-end robotics environment - a simulated robot defined in URDF, controlled via two-way communication with ROS.
