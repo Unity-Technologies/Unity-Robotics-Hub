@@ -27,21 +27,13 @@ To enable communication between Unity and ROS a TCP endpoint running as a ROS no
 
 ## Setup
 
-1. If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
+If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
-2. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
+Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
   - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace)
   - If you cloned the project and forgot using `--recurse-submodules`, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
   - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container
   - It contains ROS packages for pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
-
-3. Download or clone the latest [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) repository, and add the `tcp_endpoint` package to the `src` directory of your ROS workspace. This package creates the endpoint to accept ROS messages from Unity.
-
-4.  Download or clone the latest [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros) repository. Add the subdirectories (e.g. dynamixel_sdk/, mcp_can_rpi/, niryo_one/, etc.) to the `src` directory of your ROS workspace.
-
-5. Download or clone the latest [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) repository. Add the entire `moveit_msgs` directory to the `src` directory of your ROS workspace.
-
-6. Copy the `niryo_one_urdf/` directory in Unity (located at `Assets/URDF/niryo_one/niryo_one_urdf`) to the `src` directory of your ROS workspace.
 
 ## The Unity Side
 
