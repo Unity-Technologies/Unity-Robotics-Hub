@@ -1,0 +1,38 @@
+<launch>
+    <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+    <arg name="hardware_version" default="2" />
+    <arg name="niryo_one_sim_mode" default="false" />
+
+    <!-- PARAMS -->
+    <group ns="niryo_one">
+        <param name="hardware_version" type="int" value="$(arg hardware_version)" />
+        <param name="reboot_when_auto_change_version" type="bool" value="true" />
+    </group>
+
+    <group ns="niryo_one/robot_command_validation">
+        <rosparam file="$(find niryo_moveit)/config/robot_command_validation.yaml"/>
+    </group>
+
+    <group ns="niryo_one/motors">
+        <rosparam file="$(find niryo_moveit)/config/niryo_one_motors.yaml"/>
+        <rosparam file="$(find niryo_moveit)/config/stepper_params.yaml"/>
+    </group>
+
+    <group ns="niryo_one/python_api">
+        <param name="service_timeout" type="int" value="2" />
+        <param name="action_connection_timeout" type="int" value="2" />
+        <param name="action_execute_timeout" type="int" value="15" />
+        <param name="action_preempt_timeout" type="int" value="3" />
+    </group>
+        
+    <group ns="niryo_one/robot_state">
+        <param name="rate_tf_listener" type="double" value="5.0" />
+        <param name="rate_publish_state" type="double" value="5.0" />
+    </group>
+
+    <!-- load URDF -->
+    <group>
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(find niryo_one_urdf)/niryo_one.urdf.xacro"/>
+        <param name="robot_description_tf2" command="$(find xacro)/xacro --inorder $(find niryo_one_urdf)/niryo_one.urdf.xacro" />
+    </group>
+</launch>
