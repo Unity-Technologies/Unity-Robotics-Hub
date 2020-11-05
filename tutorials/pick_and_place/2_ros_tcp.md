@@ -209,8 +209,9 @@ ROS and Unity have now successfully connected!
 ## Resources
 
 - Setting up a ROS workspace:
-   -  http://wiki.ros.org/ROS/Installation
+   
    > Note: this tutorial was made using ROS Melodic.
+   -  http://wiki.ros.org/ROS/Installation
    -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
    - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 - More on [ROS Topics](http://wiki.ros.org/Topics)
@@ -219,7 +220,6 @@ ROS and Unity have now successfully connected!
 - [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package
 - [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros)
 - [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs)
-<!-- - All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case -->
   
 ---
 

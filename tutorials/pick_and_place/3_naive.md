@@ -219,7 +219,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ### Miscellaneous Issues
 
-- If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `ur3_with_gripper` object are set to `10000` and `100`, respectively.
+- If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `niryo_one` object are set to `10000` and `100`, respectively.
 
 - If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`.
 <!-- -  Also verify that the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc.) X Drive Force Limit is `1000`. -->

@@ -63,7 +63,8 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
 	> Note: You can find more information on what these values do by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) guide, but for our purposes these settings will allow the robot to stay in position without the joints slipping.
-![](img/1_controller.png) 
+
+    ![](img/1_controller.png) 
   
 1. In the Hierarchy window, click the arrow to the left of the name to expand the GameObject tree, down to `niryo_one/world/base_link`. Toggle on `Immovable` for the `base_link`.
 
