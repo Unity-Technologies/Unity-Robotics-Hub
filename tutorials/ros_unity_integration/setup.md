@@ -48,7 +48,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 - Load these newly set parameters by running:
 
     ```bash
-    rosparam load src/ROS-TCP-Endpoint/tcp_endpoint/config/params.yaml
+    rosparam load src/ros_tcp_endpoint/tcp_endpoint/config/params.yaml
     ```
 
 ## Unity Scene
