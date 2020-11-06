@@ -2,6 +2,8 @@
 
 This part assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
 
+If you're new to ROS, check out the [Start Guide](http://wiki.ros.org/ROS/StartGuide) on the ROS Wiki to get started.
+
 Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic. These steps are adapted from the [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md).
 
 **Table of Contents**
