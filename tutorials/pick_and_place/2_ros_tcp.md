@@ -35,11 +35,11 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
   - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container
   - It contains ROS packages for pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
 
+---
+
 ## The Unity Side
 
 1. If the current Unity project is not already open, select and open it from the Unity Hub.
-
-1. Download or clone the latest [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) repository. In the ROS-TCP-Connector, copy the `MessageGeneration` and `TcpConnector` directories to the Unity project's Assets/Plugins directory.
 
 1. Adding `MessageGeneration` creates a new Unity menu option, “RosMessageGeneration.” Select `RosMessageGeneration -> Auto Generate Messages` and select `Single Message`.
 
@@ -165,17 +165,15 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
  - Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-2. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
+2. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core and set ROS params.
 
-3.  Open a second terminal in the ROS workspace. `rosrun` the subscriber script, e.g.
+3. Open a new terminal window in the ROS workspace and start the server endpoint with the following command:
 
     ```bash
     source devel/setup.bash
 
-    rosrun niryo_moveit TrajectorySubscriber.py
+    rosrun niryo_moveit server_endpoint.py
     ```
-
-    This won't print anything to the terminal window until something is published to the ROS Topic it's subscribed to. 
 
 4. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `rosrun niryo_moveit TrajectorySubscriber.py` command is running--it should now print `I heard:` with the data.
   

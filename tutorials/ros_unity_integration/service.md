@@ -3,8 +3,29 @@
 Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a game object's position and rotation to receive a new position to move the game object towards.
 
 ## Setting Up ROS
-- Follow the [ROS–Unity Initial Setup](setup.md) guide. (You can skip this step if following from the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
-- Open a new terminal window and run `rosrun robotics_demo position_service.py`
+
+(You can skip this if you already did the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
+
+- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+
+- Follow the [ROS–Unity Initial Setup](setup.md) guide.
+
+- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+  
+   ```bash
+    source devel/setup.bash
+	rosrun robotics_demo server_endpoint.py
+   ```
+
+Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+
+## Start the Position service
+- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+
+   ```bash
+    source devel/setup.bash
+	rosrun robotics_demo position_service.py
+   ```
 
 ## Setting Up Unity Scene
 - Generate the C# code for `PositionService`'s messages by going to `RosMessageGeneration` -> `AutoGenerateServices` -> `Single Service...`

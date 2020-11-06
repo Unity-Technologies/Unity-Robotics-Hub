@@ -1,39 +1,35 @@
-# Importing a UR3 Robot using URDF importer
+# Importing a Niryo One Robot using URDF importer
 
 ## Requirements
 - Unity Version 2020.2+
-- UR3 URDF file
-- [URDF importer dll files and source code](https://github.cds.internal.unity3d.com/unity/URDF-Importer/releases)
+- [URDF Importer repo](https://github.com/Unity-Technologies/URDF-Importer)
+- Niryo One URDF files from [Niryo One ROS](https://github.com/NiryoRobotics/niryo_one_ros)
+- Working ROS environment
 
 ## Setting up the URDF importer in Unity Editor 
-- Create a new Unity project.
-- Copy UnityEditorScripts folder into the assets directory of your unity project.
-- Create a new folder in the Assets directory and name it Plugins.
-- Copy Urdf.dll in the plugins folder. Click on the urdf.dll in the Unity Editor and uncheck "Validate References".
-- Copy the associated ur3 URDF file and meshes into the Assets folder. The files should follow [this](urdf_tutorials/urdf_appendix.md#File-Hierarchy) hierarchy
-- Find the ur3.urdf file in the assets folder and select it.
-- From the menu click `Assets` -> `Import Robot from URDF` or in file explorer right click on the selected file and click `Import Robot from URDF`.
-- Select the co-ordinate system in which the meshes were designed. Default mesh orientation is Y-up which is supported by Unity but some packages often use Z-up and X-up configuration. For more [information](https://docs.unity3d.com/Manual/HOWTO-FixZAxisIsUp.html). 
-- Click `Import`
+- Integrate the URDF Importer following these [instructions](https://github.com/Unity-Technologies/URDF-Importer#integrate-urdf-importer-into-unity-project)
+- Create a new directory in `Assets` and name it `URDF`
+- Clone the [Niryo One ROS](https://github.com/NiryoRobotics/niryo_one_ros) repo and copy the `niryo_one_description` directory into `Assets/URDF`
+- This directory only includes a `.urdf.xacro` file which will need to be converted into a `.urdf` file before we can import it
+	- Run the following command  to convert Xacro to URDF, `rosrun xacro xacro --inorder -o PATH/TO/niryo_one.urdf PATH/TO/niryo_one.urdf.xacro`
+	- Copy the generated `niryo_one.urdf` file to `Assets/URDF`
+	- Right click on the this file and select `Import Robot from URDF` 
+	- Select the co-ordinate system in which the meshes were designed. Default mesh orientation is Y-up which is supported by Unity but some packages often use Z-up and X-up configuration. For more [information](https://docs.unity3d.com/Manual/HOWTO-FixZAxisIsUp.html). 
+	- Click `Import`
    
 ## Using the Controller
-- The Robot is loaded in Unity without any constraints or controller.
-- A controller is  pre-built in Unity URDF importer to help showcase the movement of UR3 in Unity.
-- To add the controller to UR3 robot click `Enable` button on the Inspector window in front of the `Controller Script`. This will add Controller Script, FKrobot and Joint Control at runtime. These scripts help 
-- Set the Stiffness and Damping to 100,000 and 10,000 respectively
-- In the GameObject tree expand `ur3` -> `world` -> `base_link`
-- Turn the toggle for 'Immovable' for the base_link
-- Press the play button to start the scene
-- The robot is controlled by using the arrow keys.
+- By default a robot imported using the URDF Importer is loaded without any constraints or controller.
+	- A controller is pre-built in Unity URDF importer to help showcase the movement of robots in Unity.
+- To add the controller to an imported robot click the `Enable` button in the Inspector window in front of the `Controller Script` option. This will add a Controller Script, FKrobot and Joint Control at runtime. 
+- To prevent the joints from slipping set the `Stiffness` and `Damping` to `100,000` and `10,000` respectively.
+- To prevent the robot from falling over, in the GameObject tree expand `niryo_one` -> `world` -> `base_link` and set the toggle for `Immovable` for the base_link.
+- Press the play button to start the scene.
+	- Use the left and right arrow keys to select the articulation body you want to move.
+	- Use the up and down keys to move the articulation body clockwise and counterclockwise.
 
-![](images/link_selection.gif)
 
-- Use the left and right arrow keys to select the articulation body you want to move.
-- Use the up and down keys to move the articulation body clockwise and counterclockwise.
-
-![](images/link_control.gif)
-
-A guide to making your controller can be found [here](urdf_appendix.md##Guide-to-write-your-own-controller)
+A guide to making a custom controller can be found [here](urdf_appendix.md##Guide-to-write-your-own-controller)
 
 ## Forward Kinematics script
+
 Forward Kinematics scripts gives you the ability to see the current position of the end effector based on forward kinematics of the robot. You can [use](urdf_appendix.md##Using-FK-Robot-Script) it to compare the end effector position of the robot of the articulation body to make sure the importer is working correctly.
