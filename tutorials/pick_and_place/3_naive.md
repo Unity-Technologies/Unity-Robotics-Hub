@@ -158,11 +158,9 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. If you have not already set the values in `params.yaml`, return to [Part 2: ROS–Unity Integration](2_ros_tcp.md#the-ros-side) to finish the setup.
+1. If you have not already set the values in `params.yaml`, follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to finish the configuration setup.
 
-    > Note: To set up the ROS–Unity integration in a different project, follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md).
-
-2. The ROS side is now ready to interface with Unity!
+1. The ROS side is now ready to interface with Unity!
 
 --- 
 
@@ -185,7 +183,7 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
     The ROS side of the setup is ready! 
 
-2. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
    - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ![](img/0_pick_place.gif)

@@ -168,23 +168,7 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. The ROS parameters will need to be set to your configuration. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. 
-    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as hostName on the RosConnect component in Unity.
-    - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system.
-        - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
-        - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
-
-    Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
-
-    ```yaml
-    ROS_IP: 192.168.50.149
-    ROS_TCP_PORT: 10000
-    UNITY_IP: 192.168.50.13
-    UNITY_SERVER_PORT: 5005
-    rosdistro: 'melodic'
-    ```
-
-    > Note: To set up the ROS–Unity integration in a different project, follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md).
+1. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to configure the ROS params configuration file.
 
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and run the TrajectorySubscriber.
 
