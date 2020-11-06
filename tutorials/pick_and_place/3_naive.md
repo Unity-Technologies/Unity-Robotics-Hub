@@ -164,33 +164,27 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## ROS–Unity Communication
 
-1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core, set ROS params, and start the server endpoint in the first terminal window.
+1. The ROS side is now ready to interface with Unity! Open a new terminal window and navigate to your catkin workspace. If you have not already set the values in `params.yaml`, return to [Part 2: ROS–Unity Integration](2_ros_tcp.md#the-ros-side) to finish setting up.
 
-2. Open a new terminal window in your ROS workspace and start the Mover Service node.
+    > To set up the ROS–Unity integration in a different project, follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md).
 
-    ``` bash
-    source devel/setup.bash
-
-    rosrun niryo_moveit mover.py
-    ```
-
-    Once this process is ready, it will print `Ready to plan` to the console.
-
-3. Open a new terminal window in your ROS workspace and launch MoveIt by calling `demo.launch`.
-	- This launch file loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot.
+2. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
+    - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
 	> Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
 
-    ``` bash
-    source devel/setup.bash
-
-    roslaunch niryo_moveit demo.launch
+    ```bash
+    roslaunch niryo_moveit part_3.launch
     ```
 
-    This may print out various error messages regarding the controller_spawner, such as `[controller_spawner-4] process has died`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
+    This launch will print various messages to the console, including the set parameters and the nodes launched. 
+
+    The final two messages should confirm `You can start planning now!` and `Ready to plan`.
+
+    > This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
 
     The ROS side of the setup is ready! 
 
-1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+2. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
    - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ![](img/0_pick_place.gif)
@@ -222,6 +216,5 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 - If the robot appears loose/wiggly or is not moving with no console errors, ensure that the Stiffness and Damping values on the Controller script of the `niryo_one` object are set to `10000` and `100`, respectively.
 
 - If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`.
-<!-- -  Also verify that the forearm_link, wrist_link, hand_link, right_gripper, and left_gripper, (i.e. `niryo_one/world/base_link/shoulder_link/arm_link/elbow_link/forearm_link/...` etc.) X Drive Force Limit is `1000`. -->
 
 - Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint.py` script may time out, and will need to be re-run.

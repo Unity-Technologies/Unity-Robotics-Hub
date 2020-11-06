@@ -59,7 +59,7 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
   
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
-1. In this cloned or downloaded repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
+2. In this repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
    Note the SourceDestinationPublisher script. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port, and the articulation body values are assigned based on the GameObjects that will be assigned shortly. The `Publish()` function is defined as follows:
 
@@ -106,24 +106,24 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-1. Return to the Unity Editor. Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.       
+3. Return to the Unity Editor. Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.       
    > Alternatively, you can drag the script from the Project window onto the Publisher object in the Hierarchy window.
 
    ![](img/2_sourcedest.gif)
 
-2. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
+4. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
 
-4. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
+5. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
 
    ![](img/2_target.gif)
 
-5. Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
+6. Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
 
    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
    - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-6. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+7. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
    
    > In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen. 
@@ -165,17 +165,39 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
  - Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
-2. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to start ROS Core and set ROS params.
+1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-3. Open a new terminal window in the ROS workspace and start the server endpoint with the following command:
+1. The ROS parameters will need to be set to your configuration. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. 
+    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as hostName on the RosConnect component in Unity.
+    - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system.
+        - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
+        - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
 
-    ```bash
-    source devel/setup.bash
+    Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
 
-    rosrun niryo_moveit server_endpoint.py
+    ```yaml
+    ROS_IP: 192.168.50.149
+    ROS_TCP_PORT: 10000
+    UNITY_IP: 192.168.50.13
+    UNITY_SERVER_PORT: 5005
+    rosdistro: 'melodic'
     ```
 
-4. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `rosrun niryo_moveit TrajectorySubscriber.py` command is running--it should now print `I heard:` with the data.
+    > To set up the ROS–Unity integration in a different project, follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md).
+
+2. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and run the TrajectorySubscriber.
+
+    ```bash
+    roslaunch niryo_moveit part_2.launch
+    ```
+
+    > The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+
+    This launch will print various messages to the console, including the set parameters and the nodes launched. 
+    
+    Ensure that the `process[server_endpoint]` and `process[trajectory_subscriber]` were successfully started, and that a message similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000` is printed.
+
+3. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running--it should now print `I heard:` with the data.
   
 ROS and Unity have now successfully connected!
 
@@ -188,7 +210,7 @@ ROS and Unity have now successfully connected!
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
   
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
 
 ---
 
