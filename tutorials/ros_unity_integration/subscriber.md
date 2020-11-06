@@ -1,20 +1,21 @@
-# ROS-Unity Integration Subscriber
+# ROS–Unity Integration Subscriber
 
 Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a game object.
 
 **NOTE:** If following from [Publisher](publisher.md) tutorial proceed to [Setting Up Unity Scene](subscriber.md#setting-up-unity-scene) step.
 
 ## Setting Up ROS
-(You can skip this if you already did the [ROS-Unity Integration Publisher](publisher.md) tutorial.)
+
+(You can skip this if you already did the [ROS–Unity Integration Publisher](publisher.md) tutorial.)
 
 - Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
 
-- Follow the [ROS-Unity Initial Setup](setup.md) guide.
+- Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
-- Open a new terminal window and run the following commands:
+- Open a new terminal window, navigate to your Catkin workspace, and run the following commands:
   
    ```bash
-    cd ~/catkin_ws/ && source devel/setup.bash
+    source devel/setup.bash
 	rosrun robotics_demo server_endpoint.py
    ```
 
@@ -68,4 +69,4 @@ public class RosSubscriberExample : RosSubscriber
 
 ![](images/tcp_2.gif)
 
-Continue to the [ROS-Unity Integration Service](service.md).
+Continue to the [ROS–Unity Integration Service](service.md).

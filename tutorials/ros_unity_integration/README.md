@@ -1,6 +1,6 @@
-# ROS-Unity Integration
+# ROS–Unity Integration
 
-## ROS-Unity Communication
+## ROS–Unity Communication
 ![](images/unity_ros.png)
 
 A TCP endpoint running as a ROS node facilitates message passing to and from Unity and ROS.
@@ -11,11 +11,11 @@ The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Uni
 
 
 ## Tutorials
-- [ROS-Unity Initial Setup](setup.md) - Minimum setup required for a ROS Unity integration
-- [ROS-Unity Integration Publisher](publisher.md) - Adding a Publisher to a Unity Scene
-- [ROS-Unity Integration Subscriber](subscriber.md) - Adding a Subscriber to a Unity Scene
-- [ROS-Unity Integration Service](service.md) - Adding a Service call to a Unity Scene
-- [ROS-Unity Integration Server Endpoint](server_endpoint.md) - How to write a Server Endpoint
+- [ROS–Unity Initial Setup](setup.md) - Minimum setup required for a ROS–Unity integration
+- [ROS–Unity Integration Publisher](publisher.md) - Adding a Publisher to a Unity Scene
+- [ROS–Unity Integration Subscriber](subscriber.md) - Adding a Subscriber to a Unity Scene
+- [ROS–Unity Integration Service](service.md) - Adding a Service call to a Unity Scene
+- [ROS–Unity Integration Server Endpoint](server_endpoint.md) - How to write a Server Endpoint
 
 ## Example Unity Scripts
 
