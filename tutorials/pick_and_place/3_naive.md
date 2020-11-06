@@ -135,26 +135,26 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
 
-    ```python
-    def plan_trajectory(move_group, destination_pose, start_joint_angles): 
-        current_joint_state = JointState()
-        current_joint_state.name = joint_names
-        current_joint_state.position = start_joint_angles
+```python
+def plan_trajectory(move_group, destination_pose, start_joint_angles): 
+    current_joint_state = JointState()
+    current_joint_state.name = joint_names
+    current_joint_state.position = start_joint_angles
 
-        moveit_robot_state = RobotState()
-        moveit_robot_state.joint_state = current_joint_state
-        move_group.set_start_state(moveit_robot_state)
+    moveit_robot_state = RobotState()
+    moveit_robot_state.joint_state = current_joint_state
+    move_group.set_start_state(moveit_robot_state)
 
-        move_group.set_pose_target(destination_pose)
-        plan = move_group.go(wait=True)
+    move_group.set_pose_target(destination_pose)
+    plan = move_group.go(wait=True)
 
-        if not plan:
-            print("RAISE NO PLAN ERROR")
+    if not plan:
+        print("RAISE NO PLAN ERROR")
 
-        return move_group.plan()
-    ```
+    return move_group.plan()
+```
 
-    This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
+This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -170,7 +170,8 @@ Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-sid
 
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
     - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
-	> Note: Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
+  
+	    > Note: Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
 
     ```bash
     roslaunch niryo_moveit part_3.launch
@@ -184,7 +185,7 @@ Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-sid
 
     The ROS side of the setup is ready! 
 
-1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+2. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
    - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ![](img/0_pick_place.gif)
