@@ -1,4 +1,4 @@
-# ROS-Unity Integration Server Endpoint
+# ROS–Unity Integration Server Endpoint
 
 A walkthrough of the important components of a ROS TCP endpoint script using the `robotics_demo` package as a example.
 

@@ -9,7 +9,7 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 **Table of Contents**
 - [Pick and Place Tutorial](#pick-and-place-tutorial)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
-  - [Part 2: ROS-Unity Integration](#part-2-ros-unity-integration)
+  - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Part 3: Pick & Place](#part-3-pick--place)
   
 ---
@@ -22,7 +22,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 ---
 
-## [Part 2: ROS-Unity Integration](2_ros_tcp.md)
+## [Part 2: ROS–Unity Integration](2_ros_tcp.md)
 
 <img src="img/2_echo.png" width="400"/>
 

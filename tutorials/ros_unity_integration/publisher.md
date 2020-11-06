@@ -1,24 +1,25 @@
-# ROS-Unity Integration Publisher
+# ROS–Unity Integration Publisher
 
 Create a simple Unity scene which publishes a game object's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
 ## Setting Up ROS
+
 - Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
 
-- Follow the [ROS-Unity Initial Setup](setup.md) guide.
+- Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window and run the following commands:
   
    ```bash
-    cd ~/catkin_ws/ && source devel/setup.bash
+    source devel/setup.bash
 	rosrun robotics_demo server_endpoint.py
    ```
 
 Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-- Open another new terminal window and run the following commands:
+- Open another new terminal window, navigate to your ROS workspace, and run the following commands:
    ```bash
-    cd ~/catkin_ws/ && source devel/setup.bash
+    source devel/setup.bash
 	rostopic echo pos_rot
    ```
 
