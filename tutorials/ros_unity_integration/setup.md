@@ -4,7 +4,7 @@ The minimum requirements for a ROS–Unity integration.
 
 ## ROS Environment
 
-- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package to the `src` folder in your Catkin workspace.
+- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
 
 - Navigate to your Catkin workspace and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -60,6 +60,8 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     </launch>
     ```
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
+
+> Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
 
 ## Unity Scene
 - Create a new directory under the `Assets` directory, and name it `Plugins`.
