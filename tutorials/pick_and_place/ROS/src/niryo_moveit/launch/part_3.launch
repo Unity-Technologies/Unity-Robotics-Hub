@@ -1,5 +1,5 @@
 <launch>
-    <rosparam file="$(find tcp_endpoint)/config/params.yaml" command="load"/>
+    <rosparam file="$(find niryo_moveit)/config/params.yaml" command="load"/>
     <node name="server_endpoint" pkg="niryo_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
     <node name="mover" pkg="niryo_moveit" type="mover.py" args="--wait" output="screen"/>
     <include file="$(find niryo_moveit)/launch/demo.launch" />

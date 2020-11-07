@@ -164,13 +164,13 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
    ...
    ```
 
-   Additionally, note the file `src/niryo_moveit/scripts/TrajectorySubscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
+   Additionally, note the file `src/niryo_moveit/scripts/trajectory_subscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to configure the ROS params configuration file.
+1. The ROS parameters will need to be set to your configuration. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to configure the values in this `params.yaml`.
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and run the TrajectorySubscriber.
+1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and run the trajectory subscriber.
 
     ```bash
     roslaunch niryo_moveit part_2.launch
@@ -182,7 +182,7 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
     
     Ensure that the `process[server_endpoint]` and `process[trajectory_subscriber]` were successfully started, and that a message similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000` is printed.
 
-1. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running--it should now print `I heard:` with the data.
+2. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running--it should now print `I heard:` with the data.
   
 ROS and Unity have now successfully connected!
 

@@ -172,7 +172,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/mover.py
   scripts/server_endpoint.py
-  scripts/TrajectorySubscriber.py
+  scripts/trajectory_subscriber.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

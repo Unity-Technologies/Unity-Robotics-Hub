@@ -4,7 +4,7 @@ The minimum requirements for a ROS–Unity integration.
 
 ## ROS Environment
 
-- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
+- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package to the `src` folder in your Catkin workspace.
 
 - Navigate to your Catkin workspace and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -23,7 +23,9 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
      - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
      - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
 
-- Set the ROS parameter values by navigating to the tcp_endpoint configs, i.e. `./ROS-TCP-Endpoint/tcp_endpoint/config/params.yaml`. Open the file for editing, and update the `ROS_IP` and `UNITY_IP` with the appropriate addresses.
+- The ROS parameter values can be set using a YAML file. Create a `params.yaml` file in your package, e.g. `./config/params.yaml`. Open the file for editing. 
+
+- Update the `ROS_IP` and `UNITY_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
 
     ```yaml
     ROS_IP: <your ROS IP>
@@ -45,11 +47,19 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 
     Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
 
-- Load these newly set parameters by running:
+- These newly set parameters can be set by running `rosparam load`, e.g.:
 
     ```bash
-    rosparam load src/ros_tcp_endpoint/tcp_endpoint/config/params.yaml
+    rosparam load PATH/TO/config/params.yaml
     ```
+- Alternatively, this YAML can be loaded from a launch file, e.g.:
+
+    ```xml
+    <launch>
+        <rosparam file="$(find <PACKAGE_NAME>)/config/params.yaml" command="load"/>
+    </launch>
+    ```
+> Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 
 ## Unity Scene
 - Create a new directory under the `Assets` directory, and name it `Plugins`.
