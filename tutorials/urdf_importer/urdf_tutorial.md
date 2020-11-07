@@ -1,4 +1,4 @@
-# Importing a Niryo One Robot using URDF importer
+# Importing a Niryo One Robot using URDF Importer
 
 ## Requirements
 - Unity Version 2020.2+
@@ -6,7 +6,7 @@
 - Niryo One URDF files from [Niryo One ROS](https://github.com/NiryoRobotics/niryo_one_ros)
 - Working ROS environment
 
-## Setting up the URDF importer in Unity Editor 
+## Setting up the URDF Importer in Unity Editor 
 - Integrate the URDF Importer following these [instructions](https://github.com/Unity-Technologies/URDF-Importer#integrate-urdf-importer-into-unity-project)
 - Create a new directory in `Assets` and name it `URDF`
 - Clone the [Niryo One ROS](https://github.com/NiryoRobotics/niryo_one_ros) repo and copy the `niryo_one_description` directory into `Assets/URDF`
@@ -19,7 +19,7 @@
    
 ## Using the Controller
 - By default a robot imported using the URDF Importer is loaded without any constraints or controller.
-	- A controller is pre-built in Unity URDF importer to help showcase the movement of robots in Unity.
+	- A controller is pre-built in Unity URDF Importer to help showcase the movement of robots in Unity.
 - To add the controller to an imported robot click the `Enable` button in the Inspector window in front of the `Controller Script` option. This will add a Controller Script, FKrobot and Joint Control at runtime. 
 - To prevent the joints from slipping set the `Stiffness` and `Damping` to `100,000` and `10,000` respectively.
 - To prevent the robot from falling over, in the GameObject tree expand `niryo_one` -> `world` -> `base_link` and set the toggle for `Immovable` for the base_link.

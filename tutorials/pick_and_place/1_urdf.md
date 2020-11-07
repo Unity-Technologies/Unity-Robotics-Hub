@@ -1,6 +1,6 @@
 # Pick and Place Tutorial: Part 1
 
-This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF importer.
+This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF Importer.
 
 If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball) to get started.
 
@@ -77,7 +77,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
     ![](img/1_base.png)
 
-    > Note: A controller is pre-built in the Unity URDF importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Packages/URDF Importer/Runtime/Controller/Controller.cs`.
+    > Note: A controller is pre-built in the Unity URDF Importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Packages/URDF Importer/Runtime/Controller/Controller.cs`.
 
 1. On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5` which will increase the speed at which the shoulder joint can rotate.
 
@@ -100,7 +100,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ## Resources
 
 - [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
-- More on the URDF importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
+- More on the URDF Importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
 - Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
 
 ---
