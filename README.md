@@ -7,7 +7,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 ## Unity Robotics Tutorials
 
 ### Repos
-- [TCP Endpoint ROS Package](https://github.com/Unity-Technologies/ROS_TCP_Endpoint)
+- [TCP Endpoint ROS Package](https://github.com/Unity-Technologies/ROS-TCP-Endpoint)
 	- A ROS node for sending/receiving messages from Unity.
 - [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 	- A set of Unity components for sending/receiving messages from ROS. 

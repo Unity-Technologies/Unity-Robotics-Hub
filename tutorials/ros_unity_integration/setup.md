@@ -4,7 +4,7 @@ The minimum requirements for a ROS–Unity integration.
 
 ## ROS Environment
 
-- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS_TCP_Endpoint) package to the `src` folder in your Catkin workspace.
+- Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
 
 - Navigate to your Catkin workspace and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
