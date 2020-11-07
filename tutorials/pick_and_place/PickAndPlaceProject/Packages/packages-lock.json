@@ -37,12 +37,19 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.robotics.urdf-importer": {
-      "version": "git+https://github.com/Unity-Technologies/URDF-Importer#to-package",
+    "com.unity.robotics.ros-tcp-connector": {
+      "version": "git+https://github.com/Unity-Technologies/ROS-TCP-Connector.git#to-package",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "f9f2b6645dbdc991ab5763c03473dec8ad2b2d0e"
+      "hash": "ad086cec0da7b92833342e411f7b6aaac82699f1"
+    },
+    "com.unity.robotics.urdf-importer": {
+      "version": "git+https://github.com/Unity-Technologies/URDF-Importer.git#vidur/VHACD_integration",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cecf445d92d6159d3fc69f003aa24a53af601a47"
     },
     "com.unity.test-framework": {
       "version": "1.1.18",
