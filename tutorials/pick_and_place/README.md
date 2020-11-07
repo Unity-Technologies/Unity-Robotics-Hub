@@ -18,7 +18,7 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 
 <img src="img/1_end.gif" width="400"/>
 
-This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot--the [Niryo One](https://niryo.com/niryo-one/)--using the URDF importer. 
+This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot--the [Niryo One](https://niryo.com/niryo-one/)--using the URDF Importer. 
 
 ---
 

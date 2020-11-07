@@ -149,7 +149,7 @@ Some attributes generates a nullity check which checks for presence of attribute
 
 The most commonly used Coordinate system is the right hand coordinate system which is shown in the figure above. It follows the convention that if your right-hand thumb represents the X direction, then the index finger and the middle finger stretched out uncrossed at right angles would represent the Y and Z direction respectively. Positive direction of rotation is represented by the curl of the fingers with the thumb stretched out.
 
-Unity uses a left- hand coordinate system which defines the direction of the axis and positive direction of rotation in the same way as above but using the left hand. URDF importer converts the position and orientation of the links and joints from LHS to RHS using the functions present in  Unity3D/Assets/RosSharp/Scripts/Extensions/TransformExtensinons.cs.
+Unity uses a left- hand coordinate system which defines the direction of the axis and positive direction of rotation in the same way as above but using the left hand. URDF Importer converts the position and orientation of the links and joints from LHS to RHS using the functions present in  Unity3D/Assets/RosSharp/Scripts/Extensions/TransformExtensinons.cs.
 
 ![](images/articulation_axis.png)
 ![](images/prismatic_articulation.png)
