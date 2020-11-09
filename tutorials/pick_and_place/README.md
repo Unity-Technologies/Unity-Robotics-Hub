@@ -30,7 +30,7 @@ This part assumes you have access to a functional ROS workspace. Steps covered i
 
 ---
 
-## [Part 3: Pick & Place](3_naive.md)
+## [Part 3: Pick & Place](3_pick_and_place.md)
  
 <img src="img/0_pick_place.gif" width="400"/>
 

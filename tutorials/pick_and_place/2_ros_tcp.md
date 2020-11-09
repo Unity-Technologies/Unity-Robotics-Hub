@@ -218,4 +218,4 @@ ROS and Unity have now successfully connected!
   
 ---
 
-#### Proceed to [Part 3](3_naive.md).
+#### Proceed to [Part 3](3_pick_and_place.md).
