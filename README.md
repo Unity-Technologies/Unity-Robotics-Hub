@@ -27,3 +27,18 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
 - [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
 	- A complete end-to-end robotics environment - a simulated robot defined in URDF, controlled via two-way communication with ROS.
+
+### Additional Resources
+We have published a series of blog posts that are relevant for Unity Robotics:
+
+- (November 12, 2020)
+[Unite Now 2020: Simulating Robots with ROS and Unity](https://resources.unity.com/unitenow/onlinesessions/simulating-robots-with-ros-and-unity)
+- (August 26, 2020)
+[Announcing Unity robotic simulation](https://unity.com/solutions/automotive-transportation-manufacturing/robotics)
+- (May 20, 2020)
+[Use articulation bodies to easily prototype industrial designs with realistic motion and behavior](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/)
+
+In addition to robot simulation, here are some additional, relevant Unity simulation products:
+
+- [Unity Industrial Simulation](https://unity.com/products/unity-simulation)
+- [Training a performant object detection ML model on synthetic data using Unity Perception tools](https://blogs.unity3d.com/2020/09/17/training-a-performant-object-detection-ml-model-on-synthetic-data-using-unity-perception-tools/) ([Unity Perception Github Repository](https://github.com/Unity-Technologies/com.unity.perception))
