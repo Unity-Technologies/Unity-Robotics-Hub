@@ -113,7 +113,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     }
     ```
 
-    `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `Open` or `CloseGripper` methods as is appropriate.
+    `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `OpenGripper` or `CloseGripper` methods as is appropriate.
 
 1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
