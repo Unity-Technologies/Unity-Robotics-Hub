@@ -1,0 +1,5 @@
+<launch>
+    <rosparam file="$(find niryo_moveit)/config/params.yaml" command="load"/>
+    <node name="server_endpoint" pkg="niryo_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
+    <node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
+</launch>
