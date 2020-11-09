@@ -21,25 +21,25 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b9 as of the latest revision). If you can not find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b).
+2. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install this project's version of Unity: **2020.2.0b9**. If you cannot find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b).
    
     ![](img/1_hub.png)
 
 
-1. Click the "Add" button in the top right of the "Projects" tab on Unity hub, navigate to, and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject`) to add the tutorial project to your Hub.
+3. Click the "Add" button in the top right of the "Projects" tab on Unity Hub, and navigate to and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject/`) to add the tutorial project to your Hub.
 
    ![](img/hub_addproject.png)
 
-1. Click the newly added project to open it.
+4. Click the newly added project to open it.
 
-1. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Assets/Scenes directory, and double-click to open it now.
+5. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Assets/Scenes directory, and double-click to open it now.
     > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot).
 
-1. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
+6. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
     ![](img/1_cube.png) 
 
-1. Select the `Main Camera` in the Hierarchy. Move the camera to a more convenient location for viewing the robot by assigning the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
+7. Select the `Main Camera` in the Hierarchy. Move the camera to a more convenient location for viewing the robot by assigning the `Main Camera`'s Position to `(0, 1.4, -0.7)`, and the Rotation to `(45, 0, 0)` in the Inspector.
 
 ## Setting Up the Robot 
 
@@ -69,7 +69,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
 1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` and the Damping to `100`. Set the Speed to `30` and the Acceleration to `10`.
-    > Note: You can find information on how these parameters are used in calculations by articulation bodies by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) technical guide for writing a custom controller. For our purposes these settings will allow the robot to stay in position without the joints slipping.
+    > Note: You can find information on how these parameters are used in calculations by articulation bodies by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) technical guide for writing a custom controller. For our purposes, these settings will allow the robot to stay in position without the joints slipping.
   
     ![](img/1_controller.png)
   
@@ -85,7 +85,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor.
   
-    > Note: Using the Controller, joints can be selected using the arrow keys. Use the left/right arrow keys to navigate through the joints, where the selected index will be highlighted in red. Use the up/down arrow keys to control the selected joint movement. The Controller script on the niryo_one object will describe the actively Selected Index as well as the Joint Name.
+    > Note: Using the Controller, joints can be selected using the arrow keys. Use the left/right arrow keys to navigate through the joints, where the selected index will be highlighted in red. Use the up/down arrow keys to control the selected joint movement. The Controller script on the niryo_one object will describe the actively `Selected Index` as well as the `Joint Name`.
 
    ![](img/1_end.gif)
 
