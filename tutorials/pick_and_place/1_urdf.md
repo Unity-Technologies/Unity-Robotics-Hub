@@ -14,26 +14,26 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 ---
 
 ## Setting up the Unity Scene
-1. Clone this repo to a location on your local machine
+1. Clone this repo to a location on your local machine:
     ```bash
     git clone --recurse-submodules git@github.com:Unity-Technologies/Unity-Robotics-Hub.git
     ```
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b9 as of the latest revision). If you can not find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b)
+1. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install the latest version of Unity 2020.2 (2020.2.0b9 as of the latest revision). If you can not find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b).
    
     ![](img/1_hub.png)
 
 
-1. Click the "Add" button in the top right of the "Projects" tab on Unity hub, navigate to, and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject`) to add the tutorial project to your hub
+1. Click the "Add" button in the top right of the "Projects" tab on Unity hub, navigate to, and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject`) to add the tutorial project to your Hub.
 
    ![](img/hub_addproject.png)
 
-1. Click the newly added project to open it
+1. Click the newly added project to open it.
 
-1. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Scenes directory, and double-click to open it now.
-    > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot)
+1. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Assets/Scenes directory, and double-click to open it now.
+    > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot).
 
 1. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
@@ -43,7 +43,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ## Setting Up the Robot 
 
-> Note: Presumably when you opened this project, the package manager automatically checked out and built the URDF-Importer package for you. You can double-check this now by looking for `Packages/URDF-Importer` in the Project Browser or by opening the Package Manager window.
+> Note: Presumably when you opened this project, the Package Manager automatically checked out and built the URDF-Importer package for you. You can double-check this now by looking for `Packages/URDF-Importer` in the Project Browser or by opening the Package Manager window.
 
 1. Open the Physics Project Settings (Edit > Project Settings > Physics) and ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
