@@ -38,7 +38,7 @@ We have published a series of blog posts that are relevant for Unity Robotics:
 - (May 20, 2020)
 [Use articulation bodies to easily prototype industrial designs with realistic motion and behavior](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/)
 
-In addition to robot simulation, here are some additional, relavent Unity simulation products:
+In addition to robot simulation, here are some additional, relevant Unity simulation products:
 
 - [Unity Industrial Simulation](https://unity.com/products/unity-simulation)
 - [Training a performant object detection ML model on synthetic data using Unity Perception tools](https://blogs.unity3d.com/2020/09/17/training-a-performant-object-detection-ml-model-on-synthetic-data-using-unity-perception-tools/) ([Unity Perception Github Repository](https://github.com/Unity-Technologies/com.unity.perception))
