@@ -21,16 +21,13 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-2. Open Unity Hub and navigate to the Installs tab. Select `ADD` to install this project's version of Unity: **2020.2.0b9**. If you cannot find a suitable version on the Hub, [check the Unity 2020.2 Beta website](https://unity3d.com/beta/2020.2b).
+1. Go to the [Unity 2020.2 Beta website](https://unity3d.com/unity/beta/2020.2.0b9) to install this project's version of Unity: **2020.2.0b9**. 
    
-    ![](img/1_hub.png)
-
-
-3. Click the "Add" button in the top right of the "Projects" tab on Unity Hub, and navigate to and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject/`) to add the tutorial project to your Hub.
+1. Click the "Add" button in the top right of the "Projects" tab on Unity Hub, and navigate to and select the PickAndPlaceProject directory (`./Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject/`) to add the tutorial project to your Hub.
 
    ![](img/hub_addproject.png)
 
-4. Click the newly added project to open it.
+1. Click the newly added project to open it.
 
 5. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Assets/Scenes directory, and double-click to open it now.
     > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot).
