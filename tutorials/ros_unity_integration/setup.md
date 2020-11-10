@@ -54,7 +54,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ```
   Alternatively, this YAML can be loaded from a launch file, e.g.:
 
-    ```xml
+    ```
     <launch>
         <rosparam file="$(find <PACKAGE_NAME>)/config/params.yaml" command="load"/>
     </launch>
@@ -65,7 +65,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 > Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
 
 ## Unity Scene
-1. Launch Unity and create a new 3d scene. 
+1. Launch Unity and create a new scene.
 2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
 ![](images/add_package.png)
