@@ -2,10 +2,10 @@
 
 A walkthrough of the important components of a ROS TCP endpoint script using the `robotics_demo` package as a example.
 
-The following is an example of a server endpoint python script that:
+The following is an example of a server endpoint Python script that:
 
 - Gets parameters from `rosparam`
-- Creates correspondng ROS Publisher, Subscriber, and Service objects to interact with topics and services runninig in in ROS network
+- Creates corresponding ROS Publisher, Subscriber, and Service objects to interact with topics and services running in in ROS network
 - Starts TCP Server process to handle incoming and outgoing connections
 
 
@@ -133,7 +133,7 @@ Requires:
 ```
 
 
-These values can be hardcoded but for portability sake we recommend setting the parameters using the `rosparam set` command.
+These values can be hardcoded, but for the sake of portability, we recommend setting the parameters using the `rosparam set` command, or a `rosparam` YAML file.
 
 ```python
     ros_tcp_ip = rospy.get_param("/ROS_IP")
