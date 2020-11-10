@@ -54,7 +54,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ```
     Alternatively, this YAML can be loaded from a launch file, e.g.:
 
-    ```
+    ```xml
     <launch>
         <rosparam file="$(find <PACKAGE_NAME>)/config/params.yaml" command="load"/>
     </launch>
