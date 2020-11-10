@@ -30,6 +30,8 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 5. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project browser in the Assets/Scenes directory, and double-click to open it now.
     > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot).
 
+    > Note: Only one Unity scene should be open at a time. If you see multiple scenes open in the Hierarchy view, double-click the desired scene, e.g. `Assets/Scenes/EmptyScene`, to open it and close the other scenes.
+
 6. In the Unity Project window, navigate to `Assets/Prefabs`. Select the Table prefab, and click and drag it into the Hierarchy window. The table should appear in the Scene view. Then, select and drag the Target into the Hierarchy window, as well as the TargetPlacement. They should appear to sit on the table.
 
     ![](img/1_cube.png) 
