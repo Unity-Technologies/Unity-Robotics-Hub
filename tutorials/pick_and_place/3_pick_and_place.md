@@ -1,4 +1,4 @@
-# Pick and Place Tutorial: Part 3
+# Pick-and-Place Tutorial: Part 3
 
 This part assumes you have access to a functional ROS workspace and that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
 
@@ -16,7 +16,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ---
 
-## Part 3: Pick & Place
+## Part 3: Pick -and-Place
 
 ## The Unity Side
 
@@ -133,7 +133,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
+Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of the pick-and-place task).
 
 ```python
 def plan_trajectory(move_group, destination_pose, start_joint_angles): 
@@ -182,7 +182,7 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
     > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 
-1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
+1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick up and place the cube! 
    - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
   
 ![](img/0_pick_place.gif)
