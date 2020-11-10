@@ -32,7 +32,7 @@ If you have not already, complete [Part 1](1_urdf.md) to set up the Unity projec
 
 Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
   - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace).
-  - If you cloned the project and forgot using `--recurse-submodules`, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
+  - If you cloned the project and forgot using `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
   - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
   - This contains ROS packages for the pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
 
