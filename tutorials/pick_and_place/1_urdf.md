@@ -2,8 +2,6 @@
 
 This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF Importer.
 
-If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball) to get started.
-
 **Table of Contents**
   - [Setting up the Unity Scene](#setting-up-the-unity-scene)
   - [Create Unity scene with imported URDF](#setting-up-the-robot)
@@ -99,9 +97,9 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
 ## Resources
 
-- [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
 - More on the URDF Importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
 - Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
+- For an introduction to Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
 
 ---
 
