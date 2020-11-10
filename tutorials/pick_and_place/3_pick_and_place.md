@@ -158,9 +158,9 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-2. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
+1. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
 
-3. The ROS side is now ready to interface with Unity!
+1. The ROS side is now ready to interface with Unity!
 
 --- 
 
@@ -194,7 +194,6 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 - [MoveIt!](https://github.com/ros-planning/moveit)
 - Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
-<!-- - All of the launch and config files used were copied from [Niryo One ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) and edited to suit our reduced use case -->
 
 ---
 
