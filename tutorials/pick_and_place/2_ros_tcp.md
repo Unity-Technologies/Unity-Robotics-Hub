@@ -117,24 +117,24 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-4. Return to the Unity Editor. Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.       
+4. Return to the Unity Editor. Now that the message contents have been defined and the publisher script added, it needs to be added to the Unity world to run its functionality. Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.       
    > Note: Alternatively, you can drag the script from the Project window onto the Publisher object in the Hierarchy window.
 
    ![](img/2_sourcedest.gif)
 
-5. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
+1. Next, the object that will hold the TCP functionality needs to be added. Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
 
-6. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
+1. Note that these components show empty member variables in the Inspector window, which need to be assigned. Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
 
    ![](img/2_target.gif)
 
-7. Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
+1. Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
 
    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
    - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-8. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
    
    > Note: In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen. 
@@ -152,6 +152,8 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 ## The ROS side
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
+
+Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication.
 
 1. The provided files require the following packages to be installed; run the following if the packages are not already present:
 
@@ -178,23 +180,61 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to configure the values in this `params.yaml`.
+1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
+   - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
+   - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
+     - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
+     - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and run the trajectory subscriber.
+   - Update the `ROS_IP` and `UNITY_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
+
+      ```yaml
+      ROS_IP: <your ROS IP>
+      ROS_TCP_PORT: 10000
+      UNITY_IP: <your Unity IP>
+      UNITY_SERVER_PORT: 5005
+      rosdistro: 'melodic'
+      ```
+      
+      e.g.
+
+      ```yaml
+      ROS_IP: 192.168.50.149
+      ROS_TCP_PORT: 10000
+      UNITY_IP: 192.168.50.13
+      UNITY_SERVER_PORT: 5005
+      rosdistro: 'melodic'
+      ```
+
+      Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
+
+      > Note: Learn more about the server endpoint and ROS parameters [here](../ros_unity_integration/server_endpoint.md).
+
+   This YAML file is `rosparam set` from the launch files provided for this tutorial, which has been copied below for reference. Additionally, the server_endpoint and trajectory_subscriber nodes are launched from this file. 
+
+   ```xml
+   <launch>
+      <rosparam file="$(find niryo_moveit)/config/params.yaml" command="load"/>
+      <node name="server_endpoint" pkg="niryo_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
+      <node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
+   </launch>
+   ```
+
+   > Note: The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+
+4. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and start the trajectory subscriber.
 
     ```bash
     roslaunch niryo_moveit part_2.launch
     ```
 
-    > Note: The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+    > Note: Running `roslaunch` automatically starts [ROS Core](http://wiki.ros.org/roscore) if it is not already running. 
 
     This launch will print various messages to the console, including the set parameters and the nodes launched. 
     
     Ensure that the `process[server_endpoint]` and `process[trajectory_subscriber]` were successfully started, and that a message similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000` is printed.
 
-    > Note: Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
-
-1. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running--it should now print `I heard:` with the data.
+5. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running--it should now print `I heard:` with the data.
   
 ROS and Unity have now successfully connected!
 

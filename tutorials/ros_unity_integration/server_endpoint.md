@@ -145,6 +145,8 @@ These values can be hardcoded but for portability sake we recommend setting the 
     unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
 ```
 
+> Note: Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
+
 ## Launch File
 An example launch file that will set the appropriate ROSPARAM values required for a parameterized TCP Endpoint script.
 

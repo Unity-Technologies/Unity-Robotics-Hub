@@ -117,7 +117,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
-1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which are unassigned. Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
+1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
 
     ![](img/3_target.gif)
 
@@ -158,17 +158,15 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in the [ROS–Unity Integration Setup](../ros_unity_integration/setup.md) to configure the values.
+2. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
 
-    > Note: Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
-
-1. The ROS side is now ready to interface with Unity!
+3. The ROS side is now ready to interface with Unity!
 
 --- 
 
 ## ROS–Unity Communication
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
+1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
     - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
   
 	    > Note: Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
