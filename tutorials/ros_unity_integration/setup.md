@@ -59,6 +59,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
         <rosparam file="$(find <PACKAGE_NAME>)/config/params.yaml" command="load"/>
     </launch>
     ```
+	
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 >
 > Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
@@ -67,8 +68,8 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 1. Launch Unity and create a new 3d scene. 
 2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
-![](images/addpackage.png)
+![](images/add_package.png)
 
-![](images/addpackage2.png)
+![](images/add_package_2.png)
 
 Messages being passed between Unity and ROS need to be serialized exactly as ROS serializes them internally. This is achieved with the RosMessageGeneration utility, which generates C# classes, including serialization and deserialization functions, based on ROS message files. Adding the ROS TCP Connector package should have created a new Unity menu option, “RosMessageGeneration”, which we will use to generate these messages later.
