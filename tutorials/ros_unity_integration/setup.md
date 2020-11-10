@@ -52,7 +52,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ```bash
     rosparam load PATH/TO/config/params.yaml
     ```
-  Alternatively, this YAML can be loaded from a launch file, e.g.:
+    Alternatively, this YAML can be loaded from a launch file, e.g.:
 
     ```
     <launch>
