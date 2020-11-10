@@ -1,4 +1,4 @@
-# ROS–Unity Integration Subscriber
+# ROS–Unity Integration: Subscriber
 
 Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a game object.
 

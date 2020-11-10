@@ -1,4 +1,4 @@
-# ROS–Unity Integration Service
+# ROS–Unity Integration: Service
 
 Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a game object's position and rotation to receive a new position to move the game object towards.
 

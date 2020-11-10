@@ -1,4 +1,4 @@
-# ROS–Unity Integration Publisher
+# ROS–Unity Integration: Publisher
 
 Create a simple Unity scene which publishes a game object's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
