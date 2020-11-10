@@ -16,7 +16,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ---
 
-## Part 3: Pick -and-Place
+## Part 3: Pick-and-Place
 
 ## The Unity Side
 
