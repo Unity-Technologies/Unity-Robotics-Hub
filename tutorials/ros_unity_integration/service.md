@@ -1,6 +1,6 @@
-# ROS–Unity Integration Service
+# ROS–Unity Integration: Service
 
-Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a game object's position and rotation to receive a new position to move the game object towards.
+Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a GameObject's position and rotation to receive a new position to move the GameObject towards.
 
 ## Setting Up ROS
 
@@ -98,10 +98,10 @@ public class RosServiceExample : MonoBehaviour
 }
 ```
 
-- Create an empty game object, name it `RosConnection`, and attach the `Plugins/TCPConnection/ROSConnection` script to it.
-- In the Inspector window of the Editor change the `hostName` variable on the `RosConnection` game object to the ROS IP.
-- Create another empty game object and name it `RosService`.
-- Attach the `RosServiceExample` script to the `RosService` game object. Drag the cube game object onto its `cube` parameter and the RosConnection game object onto its `Ros` parameter.
-- Pressing play in the Editor should start communication with the `postion_service` script, running as a ROS node, causing the cube to move to random positions in the scene.
+- Create an empty GameObject, name it `RosConnection`, and attach the `Plugins/TCPConnection/ROSConnection` script to it.
+- In the Inspector window of the Editor change the `Host Name` variable on the `RosConnection` GameObject to the ROS IP.
+- Create another empty GameObject and name it `RosService`.
+- Attach the `RosServiceExample` script to the `RosService` GameObject. Drag the cube GameObject onto its `cube` parameter and the RosConnection GameObject onto its `Ros` parameter.
+- Pressing play in the Editor should start communication with the `position_service` script, running as a ROS node, causing the cube to move to random positions in the scene.
 
 ![](images/tcp_3.gif)

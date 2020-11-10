@@ -17,7 +17,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 	- A robot simulation, demonstrating Unity's new physics solver.
 
 ### Prerequisites
-- Knowlege of [ROS](https://www.ros.org/) and a working [ROS environment](https://www.ros.org/install/)
+- Knowledge of [ROS](https://www.ros.org/) and a working [ROS environment](https://www.ros.org/install/)
 	- This tutorial was made using ROS Melodic and Python 2.
 - Unity 2020.2 or newer
 

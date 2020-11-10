@@ -22,7 +22,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now.
 
-1. If the current Unity project is not already open, select and open it from the Unity Hub.
+1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
     Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
@@ -169,19 +169,16 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
     - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
   
-	    > Note: Descriptions of what these files are doing can be found [here](moveit_fiile_descriptions.md).
+	    > Note: Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
 
     ```bash
     roslaunch niryo_moveit part_3.launch
     ```
 
     This launch will print various messages to the console, including the set parameters and the nodes launched. 
+ The final two messages should confirm `You can start planning now!` and `Ready to plan`.
 
-    The final two messages should confirm `You can start planning now!` and `Ready to plan`.
-
-    > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore, so long as the final message to the console is `You can start planning now!`.
-
-    The ROS side of the setup is ready! 
+    > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 
 1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick and place the cube! 
    - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
@@ -201,13 +198,13 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 ### Errors and Warnings
 
-- If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch niryo_moveit demo.launch` process launched correctly and has printed `You can start planning now!`.
+- If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch niryo_moveit part_3.launch` process launched correctly and has printed `You can start planning now!`.
   
-- `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
+- `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered into the Host Name in the RosConnect object in Unity. Additionally, ensure that the ROS parameter values are set correctly.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
 
 ### Miscellaneous Issues
 
@@ -215,4 +212,4 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 - If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`.
 
-- Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint.py` script may time out, and will need to be re-run.
+- Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint` node may time out and will need to be re-run.

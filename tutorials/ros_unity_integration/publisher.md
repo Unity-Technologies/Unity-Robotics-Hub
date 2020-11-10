@@ -1,6 +1,6 @@
-# ROS–Unity Integration Publisher
+# ROS–Unity Integration: Publisher
 
-Create a simple Unity scene which publishes a game object's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
+Create a simple Unity scene which publishes a GameObject's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
 ## Setting Up ROS
 
@@ -24,7 +24,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
    ```
 
 ## Setting Up Unity Scene
-- In the menu bar find and select `RosMessageGeneration` -> `Auto Generate Messages` -> `Single Message ...`
+- In the menu bar, find and select `RosMessageGeneration` -> `Auto Generate Messages` -> `Single Message ...`
 - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/msg/PosRot.msg ` and click `GENERATE!`
     - The generated file will be saved in the default directory `Assets/RosMessages/msg`
 - Create a new directory in `Assets` and name it `Scripts`
@@ -45,7 +45,7 @@ public class RosPublisherExample : MonoBehaviour
     public ROSConnection ros;
     public string topicName = "pos_rot";
 
-    // The game object 
+    // The GameObject 
     public GameObject cube;
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.5f;
@@ -82,10 +82,10 @@ public class RosPublisherExample : MonoBehaviour
 
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
-- Create an empty game object, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
+- Create an empty GameObject, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
 	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS
-- Create another empty game object, name it `RosPublisher` and attach the `RosPublisherExample` script.
-	- Drag the cube game object onto the `Cube` parameter
+- Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
+	- Drag the cube GameObject onto the `Cube` parameter
 	- Drag the RosConnection object onto its `Ros` parameter.
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds

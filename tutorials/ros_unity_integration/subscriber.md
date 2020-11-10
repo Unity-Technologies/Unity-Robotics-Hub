@@ -1,6 +1,6 @@
-# ROS–Unity Integration Subscriber
+# ROS–Unity Integration: Subscriber
 
-Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a game object.
+Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a GameObject.
 
 **NOTE:** If following from [Publisher](publisher.md) tutorial proceed to [Setting Up Unity Scene](subscriber.md#setting-up-unity-scene) step.
 
@@ -59,13 +59,13 @@ public class RosSubscriberExample : RosSubscriber
 }
 ```
 
-- Create an empty game object and name it `RosSubscriber`
-- Attach the `RosSubscriberExample` script to the `RosSubscriber` game object and drag the cube game object onto the `cube` parameter in the Inspector window.
-- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` game object to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address ROS is connecting to. That's not necessarily the same as your machine's main IP address.)
+- Create an empty GameObject and name it `RosSubscriber`
+- Attach the `RosSubscriberExample` script to the `RosSubscriber` GameObject and drag the cube GameObject onto the `cube` parameter in the Inspector window.
+- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` GameObject to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address ROS is connecting to. That's not necessarily the same as your machine's main IP address.)
 - Press play in the editor
 
 ### In ROS Terminal Window
-- After the scene has entered Play mode, run the following command: `rosrun robotics_demo color_publisher.py` to change the color of the cube game object in Unity to a random color
+- After the scene has entered Play mode, run the following command: `rosrun robotics_demo color_publisher.py` to change the color of the cube GameObject in Unity to a random color
 
 ![](images/tcp_2.gif)
 
