@@ -181,209 +181,81 @@ value to the articulation body.
 
 ##### Controller Script
 
-In this example the control policy is to reach the target position as determined by arrow keys. This is implemented in the Controller script. It registers the keystrokes to first select the articulation body to be moved and than according to arrow keys determines the direction of the movement and sets it in the JointControl script.
+In this example the control policy is to reach the target position as determined by arrow keys. This is implemented in the Controller script. The controller uses two sets of inputs.It registers the `left` and `right` keystrokes to first select the articulation body to be moved. Source code can be found [here](https://github.com/Unity-Technologies/URDF-Importer/blob/main/Runtime/Controller/Controller.cs).
 
 ```C#
-namespace RosSharp.Control
+void Update()
 {
-    public enum RotationDirection { None = 0, Positive = 1, Negative = -1 };
-    public enum ControlType { PositionControl};
+    bool SelectionInput1 = Input.GetKeyDown("right");
+    bool SelectionInput2 = Input.GetKeyDown("left");
 
-    public class Controller : MonoBehaviour
+    UpdateDirection(selectedIndex);
+
+    if (SelectionInput2)
     {
-
-        private ArticulationBody[] articulationChain;
-        private Color[] prevColor;
-        private int previousIndex;
-
-        public ControlType control = ControlType.PositionControl;
-        public int selectedIndex;
-        public string jointName;
-        public float stiffness;
-        public float damping;
-        public float forceLimit;
-        public float R, G, B, Alpha;
-        public float speed = 5f; // Units: degree/s
-        public float torque = 100f; // Units: Nm or N
-        public float acceleration = 5f;// Units: m/s^2 / degree/s^2
-
-        void Start()
+        if (selectedIndex == 1)
         {
-            previousIndex = selectedIndex = 1;
-            this.gameObject.AddComponent<FKRobot>();
-            articulationChain = this.GetComponentsInChildren<ArticulationBody>();
-            int defDyanmicVal = 10;
-            foreach (ArticulationBody joint in articulationChain)
-            {
-                joint.gameObject.AddComponent<JointControl>();
-                joint.jointFriction = defDyanmicVal;
-                joint.angularDamping = defDyanmicVal;
-                ArticulationDrive currentDrive = joint.xDrive;
-                currentDrive.forceLimit = forceLimit;
-                joint.xDrive = currentDrive;
-            }
-            jointName = articulationChain[selectedIndex].name;
-            StoreColors(selectedIndex);
-            B = G = 0;
-            Alpha = R = 1;
+            selectedIndex = articulationChain.Length - 1;
         }
-
-        void Update()
+        else
         {
-            bool SelectionInput1 = Input.GetKeyDown("right");
-            bool SelectionInput2 = Input.GetKeyDown("left");
-
-            UpdateDirection(selectedIndex);
-
-            if (SelectionInput2)
-            {
-                if (selectedIndex == 1)
-                {
-                    selectedIndex = articulationChain.Length - 1;
-                }
-                else
-                {
-                    selectedIndex = selectedIndex - 1;
-                }
-                Highlight(selectedIndex);
-            }
-            else if (SelectionInput1)
-            {
-                if (selectedIndex == articulationChain.Length - 1)
-                {
-                    selectedIndex = 1;
-                }
-                else
-                {
-                    selectedIndex = selectedIndex + 1;
-                }
-                Highlight(selectedIndex);
-            }
-                
-            UpdateDirection(selectedIndex);
+            selectedIndex = selectedIndex - 1;
         }
-
-        /// <summary>
-        /// Highlights the color of the robot by changing the color of the part to a color set by the user in the inspector window
-        /// </summary>
-        /// <param name="selectedIndex">Index of the link selected in the Articulation Chain</param>
-        private void Highlight(int selectedIndex)
+        Highlight(selectedIndex);
+    }
+    else if (SelectionInput1)
+    {
+        if (selectedIndex == articulationChain.Length - 1)
         {
-            if(selectedIndex == previousIndex)
-            {
-                return;
-            }
-
-            Renderer[] previousMaterialList = articulationChain[previousIndex].transform.GetChild(0).GetComponentsInChildren<Renderer>();
-
-            for (int counter = 0; counter < previousMaterialList.Length; counter++)
-            {
-                previousMaterialList[counter].material.color = prevColor[counter];
-            }
-            jointName = articulationChain[selectedIndex].name;
-            Renderer[] materialList = articulationChain[selectedIndex].transform.GetChild(0).GetComponentsInChildren<Renderer>();
-
-            StoreColors(selectedIndex);
-
-            foreach (var mesh in materialList)
-            {
-                Color tempColor = new Color(R, G, B, Alpha);
-                mesh.material.color = tempColor;
-            }
-
+            selectedIndex = 1;
         }
-
-        /// <summary>
-        /// Sets the direction of movement of the joint on every update
-        /// </summary>
-        /// <param name="jointIndex">Index of the link selected in the Articulation Chain</param>
-        private void UpdateDirection(int jointIndex)
+        else
         {
-            float moveDirection = Input.GetAxis("Vertical");
-            JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();            
-            if (previousIndex != jointIndex)
-            {
-                JointControl previous = articulationChain[previousIndex].GetComponent<JointControl>();            
-                previous.direction = RotationDirection.None;
-                previousIndex = jointIndex;
-            }
-
-            if (current.controltype != control)
-                UpdateControlType(current);
-
-            if (moveDirection > 0)
-            {
-                current.direction = RotationDirection.Positive;
-            }
-            else if (moveDirection < 0)
-            {
-                current.direction = RotationDirection.Negative;
-            }
-            else
-            {
-                current.direction = RotationDirection.None;
-            }
-
-
+            selectedIndex = selectedIndex + 1;
         }
+        Highlight(selectedIndex);
+    }
+        
+    UpdateDirection(selectedIndex);
+}
+```
+The up and down arrow keys are used to update the direction in which the joint is to be moved. This is updated in the JointControl script that is attached to each GameObject with the articulation body and has been described in the next section
+```C#
+private void UpdateDirection(int jointIndex)
+{
+    float moveDirection = Input.GetAxis("Vertical");
+    JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();            
+    if (previousIndex != jointIndex)
+    {
+        JointControl previous = articulationChain[previousIndex].GetComponent<JointControl>();            
+        previous.direction = RotationDirection.None;
+        previousIndex = jointIndex;
+    }
 
-        /// <summary>
-        /// Stores original color of the part being highlighted
-        /// </summary>
-        /// <param name="index">Index of the part in the Articulation chain</param>
-        private void StoreColors(int index)
-        {
-            Renderer[] materialLists = articulationChain[index].transform.GetChild(0).GetComponentsInChildren<Renderer>();
-            prevColor = new Color[materialLists.Length];
-            for (int counter = 0; counter < materialLists.Length; counter++)
-            {
-                prevColor[counter] = materialLists[counter].sharedMaterial.GetColor("_Color");
-            }
-        }
+    if (current.controltype != control)
+        UpdateControlType(current);
 
-        public void UpdateControlType(JointControl joint)
-        {
-            joint.controltype = control;
-            if(control == ControlType.PositionControl)
-            {
-                ArticulationDrive drive = joint.joint.xDrive;
-                drive.stiffness = stiffness;
-                drive.damping = 0;
-                joint.joint.xDrive = drive;
-            }
-        }
+    if (moveDirection > 0)
+    {
+        current.direction = RotationDirection.Positive;
+    }
+    else if (moveDirection < 0)
+    {
+        current.direction = RotationDirection.Negative;
+    }
+    else
+    {
+        current.direction = RotationDirection.None;
     }
 }
+
 ```
 
 ##### Joint Control Script
 
-The joint control script determines the direction in which the joint needs to moved and sends the command using Articulation Body API. In all three control systems, you can directly control the primary value of the control, i.e position, velocity and torque respectively in the aforementioned control system or you can set the control of these values depending upon a time derivative of these values, i.e, speed, acceleration and power. In the latter case we multiply the time derivate constants with the *delta* time between frames.
+The joint control script determines the direction in which the joint needs to moved and sends the command using Articulation Body API. In all three control systems, you can directly control the primary value of the control, i.e position, velocity and torque respectively in the aforementioned control system or you can set the control of these values depending upon a time derivative of these values, i.e, speed, acceleration and power. In the latter case we multiply the time derivate constants with the *delta* time between frames. The source code can be found [here](https://github.com/Unity-Technologies/URDF-Importer/blob/main/Runtime/Controller/JointControl.cs).
 
 ```C#
-public class JointControl : MonoBehaviour
-{
-    RosSharp.Control.Controller controller;
-
-    public RosSharp.Control.RotationDirection direction;
-    public RosSharp.Control.ControlType controltype;
-    public float speed ;
-    public float torque ;
-    public float acceleration;
-    public ArticulationBody joint;
-
-
-    void Start()
-    {
-        direction = 0;
-        controller = (RosSharp.Control.Controller)this.GetComponentInParent(typeof(RosSharp.Control.Controller));
-        joint = this.GetComponent<ArticulationBody>();
-        controller.UpdateControlType(this);
-        speed = controller.speed;
-        torque = controller.torque;
-        acceleration = controller.acceleration;
-    }
-
     void FixedUpdate(){
 
         speed = controller.speed;
@@ -401,8 +273,7 @@ public class JointControl : MonoBehaviour
                     currentDrive.target += newTargetDelta;
                 } 
                 joint.xDrive = currentDrive;
-            }
-            
+            }  
         }
     }
 }
@@ -436,12 +307,12 @@ To insert DH parameters in the script :
 
 ## Convex Mesh Collider
 
-Colliders components in Unity define the shape of a body for detecting collisions. There are three types of [colliders](https://docs.unity3d.com/Manual/CollidersOverview.html) supported in Unity.
+Collider components in Unity define the shape of a body for detecting collisions. There are three types of [colliders](https://docs.unity3d.com/Manual/CollidersOverview.html) supported in Unity.
 - Primitive Colliders: These represent basic shapes like Box, Circle and sphere.
 - Compound Colliders: These colliders are formed by union of various Primitive Colliders
 - Mesh Colliders: This uses a mesh similar in shape to visual mesh to create more accurate collision meshes.
 
-The drawback for using [MeshColliders](https://docs.unity3d.com/Manual/class-MeshCollider.html) is that cannot collider with other MeshColliders. We need to use a convex hull of the collision mesh to convert it into a convex mesh. In unity these collision meshes are limited to 255 triangles. This can lead to poor performance in simulation as the volume of these collision meshes tend be greater than the visual meshes resulting in erratic behavior in Articulation Body.
+The drawback for using [MeshColliders](https://docs.unity3d.com/Manual/class-MeshCollider.html) is that it cannot collide with other MeshColliders. We need to use a convex hull of the collision mesh to enable collision with other MeshColliders. In Unity these collision meshes are limited to 255 triangles. This can lead to poor performance in simulation as the volume of these collision meshes tend be greater than the visual meshes resulting in erratic behavior in Articulation Body.
 
 To address this predicament we have integrated another algorithm to create Convex Hulls from a mesh. This is called Volumetric Hierarchical Approximate Convex Decomposition or VHACD whose details can be found [here](https://www.microsoft.com/en-us/research/uploads/prod/2019/09/a226-thul.pdf) and the source code for the algorithm can be found [here](https://github.com/kmammou/v-hacd). The difference in algorithms can be found below.
 
