@@ -28,13 +28,13 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 ## Setup
 
-If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
+1. If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
 
-Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
-  - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace).
-  - If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
-  - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
-  - This contains ROS packages for the pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
+1. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
+   - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace).
+   - If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
+   - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
+   - This contains ROS packages for the pick and place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
 
 ---
 
@@ -66,7 +66,9 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
    Select `RosMessageGeneration -> Auto Generate Messages -> All Messages in Directory`. 
    
    In the Message Auto Generation window, click `Select Folder…` and navigate to the `niryo_moveit` directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!`
+
 	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory.
+	
   
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
@@ -75,7 +77,9 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
    In the menu, select `RosMessageGeneration -> Auto Generate Services -> Single Service`. 
 
 1. In the Service Auto Generation window, click `Browse File...` and navigate to the niryo_moveit/srv directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` 
+
    - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. 
+   
 
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
@@ -145,9 +149,9 @@ Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of t
 
 1.  Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
 
-   - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
+    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-   - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+    - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
 1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
