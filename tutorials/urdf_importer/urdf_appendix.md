@@ -184,37 +184,57 @@ value to the articulation body.
 In this example the control policy is to reach the target position as determined by arrow keys. This is implemented in the Controller script. It registers the keystrokes to first select the articulation body to be moved and than according to arrow keys determines the direction of the movement and sets it in the JointControl script.
 
 ```C#
-public class Controller : MonoBehaviour
+namespace RosSharp.Control
+{
+    public enum RotationDirection { None = 0, Positive = 1, Negative = -1 };
+    public enum ControlType { PositionControl};
+
+    public class Controller : MonoBehaviour
     {
 
-        public enum RotationDirection { None = 0, Positive = 1, Negative = -1 };
-        public enum ControlType { PositionControl, TorqueControl}
-
         private ArticulationBody[] articulationChain;
+        private Color[] prevColor;
+        private int previousIndex;
 
         public ControlType control = ControlType.PositionControl;
         public int selectedIndex;
-        public float speed = 5f; // Units: degree/s or m/s
+        public string jointName;
+        public float stiffness;
+        public float damping;
+        public float forceLimit;
+        public float R, G, B, Alpha;
+        public float speed = 5f; // Units: degree/s
         public float torque = 100f; // Units: Nm or N
-        public float power; 
-        public float acceleration = 5f;// Units: m/s^2 or degree/s^2
+        public float acceleration = 5f;// Units: m/s^2 / degree/s^2
 
-        
         void Start()
         {
             previousIndex = selectedIndex = 1;
+            this.gameObject.AddComponent<FKRobot>();
             articulationChain = this.GetComponentsInChildren<ArticulationBody>();
+            int defDyanmicVal = 10;
             foreach (ArticulationBody joint in articulationChain)
             {
                 joint.gameObject.AddComponent<JointControl>();
+                joint.jointFriction = defDyanmicVal;
+                joint.angularDamping = defDyanmicVal;
+                ArticulationDrive currentDrive = joint.xDrive;
+                currentDrive.forceLimit = forceLimit;
+                joint.xDrive = currentDrive;
             }
+            jointName = articulationChain[selectedIndex].name;
+            StoreColors(selectedIndex);
+            B = G = 0;
+            Alpha = R = 1;
         }
 
         void Update()
         {
             bool SelectionInput1 = Input.GetKeyDown("right");
             bool SelectionInput2 = Input.GetKeyDown("left");
-            
+
+            UpdateDirection(selectedIndex);
+
             if (SelectionInput2)
             {
                 if (selectedIndex == 1)
@@ -225,6 +245,7 @@ public class Controller : MonoBehaviour
                 {
                     selectedIndex = selectedIndex - 1;
                 }
+                Highlight(selectedIndex);
             }
             else if (SelectionInput1)
             {
@@ -236,10 +257,40 @@ public class Controller : MonoBehaviour
                 {
                     selectedIndex = selectedIndex + 1;
                 }
+                Highlight(selectedIndex);
             }
                 
-            
             UpdateDirection(selectedIndex);
+        }
+
+        /// <summary>
+        /// Highlights the color of the robot by changing the color of the part to a color set by the user in the inspector window
+        /// </summary>
+        /// <param name="selectedIndex">Index of the link selected in the Articulation Chain</param>
+        private void Highlight(int selectedIndex)
+        {
+            if(selectedIndex == previousIndex)
+            {
+                return;
+            }
+
+            Renderer[] previousMaterialList = articulationChain[previousIndex].transform.GetChild(0).GetComponentsInChildren<Renderer>();
+
+            for (int counter = 0; counter < previousMaterialList.Length; counter++)
+            {
+                previousMaterialList[counter].material.color = prevColor[counter];
+            }
+            jointName = articulationChain[selectedIndex].name;
+            Renderer[] materialList = articulationChain[selectedIndex].transform.GetChild(0).GetComponentsInChildren<Renderer>();
+
+            StoreColors(selectedIndex);
+
+            foreach (var mesh in materialList)
+            {
+                Color tempColor = new Color(R, G, B, Alpha);
+                mesh.material.color = tempColor;
+            }
+
         }
 
         /// <summary>
@@ -249,9 +300,15 @@ public class Controller : MonoBehaviour
         private void UpdateDirection(int jointIndex)
         {
             float moveDirection = Input.GetAxis("Vertical");
-            JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();            //current.controltype = control;
+            JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();            
+            if (previousIndex != jointIndex)
+            {
+                JointControl previous = articulationChain[previousIndex].GetComponent<JointControl>();            
+                previous.direction = RotationDirection.None;
+                previousIndex = jointIndex;
+            }
 
-            if(current.controltype != control)
+            if (current.controltype != control)
                 UpdateControlType(current);
 
             if (moveDirection > 0)
@@ -270,6 +327,19 @@ public class Controller : MonoBehaviour
 
         }
 
+        /// <summary>
+        /// Stores original color of the part being highlighted
+        /// </summary>
+        /// <param name="index">Index of the part in the Articulation chain</param>
+        private void StoreColors(int index)
+        {
+            Renderer[] materialLists = articulationChain[index].transform.GetChild(0).GetComponentsInChildren<Renderer>();
+            prevColor = new Color[materialLists.Length];
+            for (int counter = 0; counter < materialLists.Length; counter++)
+            {
+                prevColor[counter] = materialLists[counter].sharedMaterial.GetColor("_Color");
+            }
+        }
 
         public void UpdateControlType(JointControl joint)
         {
@@ -281,16 +351,9 @@ public class Controller : MonoBehaviour
                 drive.damping = 0;
                 joint.joint.xDrive = drive;
             }
-
-            else if (control == ControlType.TorqueControl)
-            {
-                ArticulationDrive drive = joint.joint.xDrive;
-                drive.stiffness = stiffness;
-                drive.damping = 0;
-                joint.joint.xDrive = drive;
-            }
         }
     }
+}
 ```
 
 ##### Joint Control Script
@@ -309,6 +372,7 @@ public class JointControl : MonoBehaviour
     public float acceleration;
     public ArticulationBody joint;
 
+
     void Start()
     {
         direction = 0;
@@ -326,32 +390,19 @@ public class JointControl : MonoBehaviour
         torque = controller.torque;
         acceleration = controller.acceleration;
 
+
         if(joint.jointType != ArticulationJointType.FixedJoint)
         {
             if (controltype == RosSharp.Control.ControlType.PositionControl)
             {
                 ArticulationDrive currentDrive = joint.xDrive;
                 float newTargetDelta = (int)direction * Time.fixedDeltaTime * speed;
-                currentDrive.target += newTargetDelta;
+                if (newTargetDelta + currentDrive.target <= currentDrive.upperLimit && newTargetDelta + currentDrive.target >= currentDrive.lowerLimit){
+                    currentDrive.target += newTargetDelta;
+                } 
                 joint.xDrive = currentDrive;
             }
-            else if (controltype == RosSharp.Control.ControlType.TorqueControl)
-            {
-                ArticulationDrive currentDrive = joint.xDrive;
-
-                if (joint.jointType == ArticulationJointType.PrismaticJoint)
-                {
-                    Vector3 force = new Vector3((int)direction * (torque + joint.jointForce[0]), 0, 0);
-                    // Vector3 force = new Vector3((int)direction * (power * Time.fixedDeltaTime + joint.jointForce[0]), 0, 0);
-                    joint.AddForce(force);
-                }
-                else
-                {
-                    Vector3 force = new Vector3((int)direction * (torque + joint.jointForce[0]), 0, 0);
-                    // Vector3 force = new Vector3((int)direction * (power * Time.fixedDeltaTime + joint.jointForce[0]), 0, 0);
-                    joint.AddTorque(force);
-                }
-            }
+            
         }
     }
 }
@@ -383,7 +434,18 @@ To insert DH parameters in the script :
 - Fill the DH parameters for the robot starting from first joint and click `Add DH parameter`.
 - The added DH parameter will appear on the text box below.
 
+## Convex Mesh Collider
 
+Colliders components in Unity define the shape of a body for detecting collisions. There are three types of [colliders](https://docs.unity3d.com/Manual/CollidersOverview.html) supported in Unity.
+- Primitive Colliders: These represent basic shapes like Box, Circle and sphere.
+- Compound Colliders: These colliders are formed by union of various Primitive Colliders
+- Mesh Colliders: This uses a mesh similar in shape to visual mesh to create more accurate collision meshes.
+
+The drawback for using [MeshColliders](https://docs.unity3d.com/Manual/class-MeshCollider.html) is that cannot collider with other MeshColliders. We need to use a convex hull of the collision mesh to convert it into a convex mesh. In unity these collision meshes are limited to 255 triangles. This can lead to poor performance in simulation as the volume of these collision meshes tend be greater than the visual meshes resulting in erratic behavior in Articulation Body.
+
+To address this predicament we have integrated another algorithm to create Convex Hulls from a mesh. This is called Volumetric Hierarchical Approximate Convex Decomposition or VHACD whose details can be found [here](https://www.microsoft.com/en-us/research/uploads/prod/2019/09/a226-thul.pdf) and the source code for the algorithm can be found [here](https://github.com/kmammou/v-hacd). The difference in algorithms can be found below.
+
+![](images/ConvexMeshComparison.png)
 
 
 

@@ -15,6 +15,7 @@
 	- Copy the generated `niryo_one.urdf` file to `Assets/URDF`
 	- Right click on the this file and select `Import Robot from URDF` 
 	- Select the co-ordinate system in which the meshes were designed. Default mesh orientation is Y-up which is supported by Unity but some packages often use Z-up and X-up configuration. For more [information](https://docs.unity3d.com/Manual/HOWTO-FixZAxisIsUp.html). 
+	- Select the Convex Mesh Decomposer you want to use for the imported robot. More information can be found [here](urdf_appendix.md##Convex-Mesh-Collider).
 	- Click `Import`
    
 ## Using the Controller
@@ -22,6 +23,7 @@
 	- A controller is pre-built in Unity URDF Importer to help showcase the movement of robots in Unity.
 - To add the controller to an imported robot click the `Enable` button in the Inspector window in front of the `Controller Script` option. This will add a Controller Script, FKrobot and Joint Control at runtime. 
 - To prevent the joints from slipping set the `Stiffness` and `Damping` to `100,000` and `10,000` respectively.
+- To be able to apply forces to the joints set the `Force Limit` to `10,000`.
 - To prevent the robot from falling over, in the GameObject tree expand `niryo_one` -> `world` -> `base_link` and set the toggle for `Immovable` for the base_link.
 - Press the play button to start the scene.
 	- Use the left and right arrow keys to select the articulation body you want to move.
