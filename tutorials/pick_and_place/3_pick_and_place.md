@@ -24,9 +24,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
-    Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
+    > Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
-    The UI button `OnClick` callback will be reassigned later in this tutorial to the following function, `PublishJoints`, as defined:
+    > The UI button `OnClick` callback will be reassigned later in this tutorial to the following function, `PublishJoints`, as defined:
 
     ```csharp
     public void PublishJoints()
@@ -77,9 +77,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     }
     ```
 
-    This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
+    > This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
 
-    The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` below:
+    > The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` below:
 
     ```csharp
     private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
@@ -113,11 +113,13 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     }
     ```
 
-    `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `OpenGripper` or `CloseGripper` methods as is appropriate.
+    > `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `OpenGripper` or `CloseGripper` methods as is appropriate.
 
 1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
-1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
+1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
+
+    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
 
     ![](img/3_target.gif)
 
@@ -133,7 +135,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 > Note: This project was built using the ROS Melodic distro, and Python 2.
 
-Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
+> Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of pick and place).
 
 ```python
 def plan_trajectory(move_group, destination_pose, start_joint_angles): 
@@ -154,7 +156,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
     return move_group.plan()
 ```
 
-This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
+> This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
@@ -166,7 +168,9 @@ This creates a set of planned trajectories, iterating through a pre-grasp, grasp
 
 ## ROS–Unity Communication
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
+1. Open a new terminal window in the ROS workspace. Once again, source the workspace. 
+
+    Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
     - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
   
 	    > Note: Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
