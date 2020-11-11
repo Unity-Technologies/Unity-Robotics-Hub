@@ -1,4 +1,4 @@
-# Pick and Place Tutorial: Part 1
+# Pick-and-Place Tutorial: Part 1
 
 This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF Importer.
 
