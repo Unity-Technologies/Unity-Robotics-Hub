@@ -67,7 +67,7 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
 
     > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` ,the Damping to `100` and `Force Limit` to `10000`. Set the Speed to `30` and the Acceleration to `10`.
+1. On the Controller script of the top-level `niryo_one` object, set the Stiffness to `10000` ,the Damping to `100` and `Force Limit` to `1000`. Set the Speed to `30` and the Acceleration to `10`.
     > Note: You can find information on how these parameters are used in calculations by articulation bodies by referencing [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/master/tutorials/urdf_importer/urdf_appendix.md#guide-to-write-your-own-controller) technical guide for writing a custom controller. For our purposes, these settings will allow the robot to stay in position without the joints slipping.
   
     ![](img/1_controller.png)
@@ -77,10 +77,6 @@ If you are not familiar with Unity, check out the [Roll-a-Ball tutorial](https:/
     ![](img/1_base.png)
 
     > Note: A controller is pre-built in the Unity URDF Importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Packages/URDF Importer/Runtime/Controller/Controller.cs`.
-
-1. On the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`), set the X Drive Force Limit to `5` which will increase the speed at which the shoulder joint can rotate.
-
-    ![](img/1_force.png)
 
 1. Press Play. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor.
   
