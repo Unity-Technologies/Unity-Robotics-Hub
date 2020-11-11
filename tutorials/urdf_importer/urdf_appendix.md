@@ -231,10 +231,8 @@ private void UpdateDirection(int jointIndex)
         previous.direction = RotationDirection.None;
         previousIndex = jointIndex;
     }
-
     if (current.controltype != control)
         UpdateControlType(current);
-
     if (moveDirection > 0)
     {
         current.direction = RotationDirection.Positive;
