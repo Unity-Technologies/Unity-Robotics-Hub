@@ -1,16 +1,16 @@
-# Pick and Place Tutorial
+# Pick-and-Place Tutorial
 
 ![](img/0_pick_place.gif)
 
-This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick and place task with known poses using MoveIt trajectory planning. 
+This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick-and-place task with known poses using MoveIt trajectory planning. 
 
 > Note: This project was built using the ROS Melodic distro and Python 2.
 
 **Table of Contents**
-- [Pick and Place Tutorial](#pick-and-place-tutorial)
+- [Pick-and-Place Tutorial](#pick-and-place-tutorial)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
-  - [Part 3: Pick & Place](#part-3-pick--place)
+  - [Part 3: Pick-and-Place](#part-3-pick-and-place)
   
 ---
 
@@ -30,8 +30,8 @@ This part assumes you have access to a functional ROS workspace. Steps covered i
 
 ---
 
-## [Part 3: Pick & Place](3_pick_and_place.md)
+## [Part 3: Pick-and-Place](3_pick_and_place.md)
  
 <img src="img/0_pick_place.gif" width="400"/>
 
-This part includes the preparation and setup necessary to run a pick and place task with known poses using MoveIt. Steps covered include creating and invoking a motion planning service in ROS, moving a Unity Articulation Body based on a calculated trajectory, and controlling a gripping tool to successfully grasp and drop an object.
+This part includes the preparation and setup necessary to run a pick-and-place task with known poses using MoveIt. Steps covered include creating and invoking a motion planning service in ROS, moving a Unity Articulation Body based on a calculated trajectory, and controlling a gripping tool to successfully grasp and drop an object.

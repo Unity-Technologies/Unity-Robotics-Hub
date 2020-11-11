@@ -1,6 +1,6 @@
 # MoveIt Launch & Config Files
 
- In an attempt to make this tutorial a little more comprehensive and shed some light as to the different components of MoveIt, we have provided a minimal amount of files taken from the [Niryo ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) repo to successfully complete a pick and place task.
+ In an attempt to make this tutorial a little more comprehensive and shed some light as to the different components of MoveIt, we have provided a minimal amount of files taken from the [Niryo ROS Stack](https://github.com/NiryoRobotics/niryo_one_ros) repo to successfully complete a pick-and-place task.
 
 **NOTE:** The flow of which launch files call other launch files was not changed so that the workflow here would still resemble that of the original Niryo One repo even though some of the lines and arguments have been removed or changed.
 
@@ -8,7 +8,7 @@
 
 **demo.launch**
 
-Single launch file for all MoveIt and Niryo requirements for pick and place tutorial.
+Single launch file for all MoveIt and Niryo requirements for the pick-and-place tutorial.
 
 - Loads `niryo_one_base.launch` while passing in `urdf_without_meshes` argument set to false
 - Loads `controllers.launch` with `simulation_mode` set to true

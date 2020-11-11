@@ -25,7 +25,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 - [ROS–Unity Integration](tutorials/ros_unity_integration/README.md)
 	- How to set up simple communication between ROS and Unity.
 - [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md)
-- [Pick and Place End-to-End](tutorials/pick_and_place/README.md)
+- [Pick-and-Place End-to-End](tutorials/pick_and_place/README.md)
 	- A complete end-to-end robotics environment - a simulated robot defined in URDF, controlled via two-way communication with ROS.
 
 ### Additional Resources
