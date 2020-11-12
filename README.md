@@ -11,7 +11,7 @@ If you have questions please feel free to contact us [here](mailto:unity-robotic
 	- A ROS node for sending/receiving messages from Unity.
 - [TCP Connection Unity Scripts](https://github.com/Unity-Technologies/ROS-TCP-Connector)
 	- A set of Unity components for sending/receiving messages from ROS. 
-- [URDF Importer](https://github.cds.internal.unity3d.com/unity/URDF-Importer)
+- [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer)
 	- A Unity plugin for loading [URDF](http://wiki.ros.org/urdf) files (Unified Robot Description Format)
 - [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 	- A robot simulation, demonstrating Unity's new physics solver.
