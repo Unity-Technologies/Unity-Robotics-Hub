@@ -1,6 +1,7 @@
 # Pick-and-Place Tutorial: Part 1
 
 This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot using the URDF Importer.
+> Note: If you are familiar with Unity and the URDF Importer, or just want to skip directly to setting up ROS, you can do so by opening Assets/Scenes/Part1Done and going directly to [Part 2](2_ros_tcp.md).
 
 **Table of Contents**
   - [Setting up the Unity Scene](#setting-up-the-unity-scene)
@@ -101,4 +102,4 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 ---
 
 
-#### Proceed to [Part 2](2_ros_tcp.md).
+### Proceed to [Part 2](2_ros_tcp.md).
