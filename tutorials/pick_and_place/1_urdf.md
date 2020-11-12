@@ -15,7 +15,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 ## Setting up the Unity Scene
 1. Clone this repo to a location on your local machine:
     ```bash
-    git clone --recurse-submodules git@github.com:Unity-Technologies/Unity-Robotics-Hub.git
+    git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
     ```
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
