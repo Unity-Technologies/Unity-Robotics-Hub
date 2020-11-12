@@ -54,7 +54,7 @@ public class RosServiceExample : MonoBehaviour
     void Callback_Destination(PositionServiceResponse response)
     {
         awaitingResponseUntilTimestamp = -1;
-        destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.@for);
+        destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.pos_z);
         Debug.Log("New Destination: " + destination);
     }
 }
