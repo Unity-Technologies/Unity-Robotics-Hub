@@ -3,13 +3,13 @@
 import rospy
 
 from tcp_endpoint.RosTCPServer import TCPServer
+from tcp_endpoint.UnityTCPSender import UnityTCPSender
 from tcp_endpoint.RosPublisher import RosPublisher
 from tcp_endpoint.RosSubscriber import RosSubscriber
 from tcp_endpoint.RosService import RosService
 
 from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
-
 
 def main():
     ros_tcp_ip = rospy.get_param("/ROS_IP")
@@ -19,19 +19,22 @@ def main():
     buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
     connections = rospy.get_param("/TCP_CONNECTIONS", 10)
 
-    unity_machine_ip = rospy.get_param("/UNITY_IP")
-    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
+    unity_machine_ip = rospy.get_param("/UNITY_IP", '')
+    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT", 5005)
 
     rospy.init_node(ros_node_name, anonymous=True)
     rate = rospy.Rate(10)  # 10hz
 
+    tcp_sender = UnityTCPSender(unity_machine_ip, unity_machine_port)
+
     source_destination_dict = {
         'pos_srv': RosService('position_service', PositionService),
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
-        'color': RosSubscriber('color', UnityColor, unity_machine_ip, unity_machine_port),
+        'color': RosSubscriber('color', UnityColor, tcp_sender)
     }
 
-    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict, buffer_size, connections)
+    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, tcp_sender,
+                           ros_node_name, source_destination_dict, buffer_size, connections)
     tcp_server.start()
     rospy.spin()
 
