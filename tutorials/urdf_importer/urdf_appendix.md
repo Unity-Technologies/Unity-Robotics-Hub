@@ -303,19 +303,3 @@ To insert DH parameters in the script :
 - Fill the DH parameters for the robot starting from first joint and click `Add DH parameter`.
 - The added DH parameter will appear on the text box below.
 
-## Convex Mesh Collider
-
-Collider components in Unity define the shape of a body for detecting collisions. There are three types of [colliders](https://docs.unity3d.com/Manual/CollidersOverview.html) supported in Unity.
-- Primitive Colliders: These represent basic shapes like Box, Circle and sphere.
-- Compound Colliders: These colliders are formed by union of various Primitive Colliders
-- Mesh Colliders: This uses a mesh similar in shape to visual mesh to create more accurate collision meshes.
-
-The drawback for using [MeshColliders](https://docs.unity3d.com/Manual/class-MeshCollider.html) is that it cannot collide with other MeshColliders. We need to use a convex hull of the collision mesh to enable collision with other MeshColliders. In Unity these collision meshes are limited to 255 triangles. This can lead to poor performance in simulation as the volume of these collision meshes tend be greater than the visual meshes resulting in erratic behavior in Articulation Body.
-
-To address this predicament we have integrated another algorithm to create Convex Hulls from a mesh. This is called Volumetric Hierarchical Approximate Convex Decomposition or VHACD whose details can be found [here](https://www.microsoft.com/en-us/research/uploads/prod/2019/09/a226-thul.pdf) and the source code for the algorithm can be found [here](https://github.com/kmammou/v-hacd). The difference in algorithms can be found below.
-
-![](images/ConvexMeshComparison.png)
-
-
-
-

@@ -50,11 +50,9 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 1. Find and select the URDF file in the Project window (`Assets/URDF/niryo_one/niryo_one.urdf`). From the menu, click `Assets -> Import Robot from URDF`, or in the Project window, right click on the selected file and click `Import Robot from URDF`.
     > Note: The file extension may not appear in the Project window. The niryo_one.urdf file will appear in the root of the `Assets/URDF/niryo_one` directory.
   
-1. Keep the default Y Axis type and VHACD mesh decomposer in the Import menu and click `Import URDF`.
+1. Keep the default Y Axis type in the Import menu and click `Import URDF`.
   
     > Note: Default mesh orientation is Y-up, which is supported by Unity, but some packages often use Z-up and X-up configuration.
-
-    > Note: VHACD algorithm produces higher quality convex hull for collision detection than the default algorithm.
 
     > Note: The world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.63, 0)` in Unity coordinates.
 

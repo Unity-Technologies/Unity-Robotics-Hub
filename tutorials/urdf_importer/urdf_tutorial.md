@@ -15,7 +15,6 @@
 	- Copy the generated `niryo_one.urdf` file to `Assets/URDF`
 	- Right click on the this file and select `Import Robot from URDF` 
 	- Select the co-ordinate system in which the meshes were designed. Default mesh orientation is Y-up which is supported by Unity but some packages often use Z-up and X-up configuration. For more [information](https://docs.unity3d.com/Manual/HOWTO-FixZAxisIsUp.html). 
-	- Select the Convex Mesh Decomposer you want to use for the imported robot. More information can be found [here](urdf_appendix.md##Convex-Mesh-Collider).
 	- Click `Import`
    
 ## Using the Controller
