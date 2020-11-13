@@ -30,38 +30,34 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 	- **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
 
 ```csharp
-using System.Net.Sockets;
-using System.Threading.Tasks;
 using UnityEngine;
 using RosColor = RosMessageTypes.RoboticsDemo.UnityColor;
 
-public class RosSubscriberExample : RosSubscriber
+public class RosSubscriberExample : MonoBehaviour
 {
+    public ROSConnection ros;
     public GameObject cube;
-
-    protected override async Task HandleConnectionAsync(TcpClient tcpClient)
-    {
-        await Task.Yield();
-
-        using (var networkStream = tcpClient.GetStream())
-        {
-            RosColor colorMessage = (RosColor)ReadMessage(networkStream, new RosColor());
-            Debug.Log("Color(" + colorMessage.r + ", "+ colorMessage.g + ", "+ colorMessage.b + ", "+ colorMessage.a +")");
-            cube.GetComponent<Renderer>().material.color = new Color32((byte)colorMessage.r, (byte)colorMessage.g, (byte)colorMessage.b, (byte)colorMessage.a);
-        }
-    }
 
     void Start()
     {
-        StartMessageServer();
+        ros.Listen<RosColor>("color", ColorChange);
     }
 
+    void ColorChange(RosColor colorMessage)
+    {
+        cube.GetComponent<Renderer>().material.color = new Color32((byte)colorMessage.r, (byte)colorMessage.g, (byte)colorMessage.b, (byte)colorMessage.a);
+    }
 }
 ```
 
+- Create an empty GameObject, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script. (Or, if you're reusing the same scene from the Publisher tutorial, you can just keep the existing RosConnection object.)
+	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS.
+	- The IP for Unity to listen on should be determined automatically, but if you're having trouble, you can set it manually in the `Override Unity IP` field. Finding the IP address of your local machine (the one running Unity) depends on your operating system.
+		- On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
+		- On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
+
 - Create an empty GameObject and name it `RosSubscriber`
-- Attach the `RosSubscriberExample` script to the `RosSubscriber` GameObject and drag the cube GameObject onto the `cube` parameter in the Inspector window.
-- In the Inspector window of the Editor change the `unityHostName` parameter on the `RosSubscriber ` GameObject to the Unity machine's URI. (Note for Windows users: the connection will be rejected unless you put the actual IP address ROS is connecting to. That's not necessarily the same as your machine's main IP address.)
+- Attach the `RosSubscriberExample` script to the `RosSubscriber` GameObject, drag the cube GameObject onto the `cube` parameter in the Inspector window and the `RosConnection` object onto the `ros` parameter.
 - Press play in the editor
 
 ### In ROS Terminal Window
