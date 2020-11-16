@@ -13,12 +13,13 @@ from robotics_demo.srv import PositionService
 
 def main():
     ros_tcp_ip = rospy.get_param("/ROS_IP")
-    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT")
+    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT", 10000)
 
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
     buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
     connections = rospy.get_param("/TCP_CONNECTIONS", 10)
 
+    #Forcing the Unity IP is optional
     unity_machine_ip = rospy.get_param("/UNITY_IP", '')
     unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT", 5005)
 
