@@ -8,7 +8,7 @@ public class RosSubscriberExample : MonoBehaviour
 
     void Start()
     {
-        ros.Listen<RosColor>("color", ColorChange);
+        ros.Subscribe<RosColor>("color", ColorChange);
     }
 
     void ColorChange(RosColor colorMessage)
