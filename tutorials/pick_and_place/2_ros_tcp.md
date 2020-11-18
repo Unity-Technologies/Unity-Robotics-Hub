@@ -185,11 +185,10 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
    sudo -H pip install rospkg jsonpickle
    ```
 
-   > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+   > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
-   tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict)
    tcp_server.start()
    rospy.spin()
    ...
