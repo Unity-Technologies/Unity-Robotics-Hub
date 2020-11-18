@@ -1,6 +1,6 @@
 ![](images/unity-wide.png)
 
-<p align="center"><img src="tutorials/pick_and_place/img/0_pick_place.gif" width="600"/></p>
+<p align="center"><img src="images/warehouse.gif" width="800"/></p>
 
 # Unity Robotics Hub
 

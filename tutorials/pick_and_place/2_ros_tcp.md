@@ -60,8 +60,10 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    In the Message Auto Generation window click `Browse File...` and navigate to the MoveIt Msgs repository. Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` 
 	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
+  
+   > Note: If any of these ROS directories appear to be empty, you can run the command `git submodule update --init --recursive` to download the packages via Git submodules.
    
-1. Next, the custom message scripts for this tutorial will be generated. 
+2. Next, the custom message scripts for this tutorial will be generated. 
 
    Select `RosMessageGeneration -> Auto Generate Messages -> All Messages in Directory`. 
    
