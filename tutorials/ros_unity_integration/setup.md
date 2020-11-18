@@ -19,19 +19,13 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 
 1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
-   - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
-     - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
-     - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
-
 1. The ROS parameter values can be set using a YAML file. Create a `params.yaml` file in your package, e.g. `./config/params.yaml`. Open the file for editing. 
 
-1. Update the `ROS_IP` and `UNITY_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
+1. Update the `ROS_IP` below with the appropriate address and copy the contents into the `params.yaml` file.
 
     ```yaml
     ROS_IP: <your ROS IP>
     ROS_TCP_PORT: 10000
-    UNITY_IP: <your Unity IP>
-    UNITY_SERVER_PORT: 5005
     rosdistro: 'melodic'
     ```
     
@@ -40,12 +34,10 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ```yaml
     ROS_IP: 192.168.50.149
     ROS_TCP_PORT: 10000
-    UNITY_IP: 192.168.50.13
-    UNITY_SERVER_PORT: 5005
     rosdistro: 'melodic'
     ```
 
-    Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
+    Ensure that the `ROS_TCP_PORT` is set to 10000.
 
 1. Set these newly defined parameters by running `rosparam load`, e.g.:
 

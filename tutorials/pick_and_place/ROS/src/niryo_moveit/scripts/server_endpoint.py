@@ -11,28 +11,18 @@ from niryo_moveit.msg import NiryoMoveitJoints, NiryoTrajectory
 from niryo_moveit.srv import MoverService
 
 def main():
-    # Get variables set in rosparam used for
-    # server/node communication
-    ros_tcp_ip = rospy.get_param("/ROS_IP")
-    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT")
-
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
-
-    unity_machine_ip = rospy.get_param("/UNITY_IP")
-    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
-
-    rospy.init_node(ros_node_name, anonymous=True)
-    rate = rospy.Rate(10)  # 10hz
+    tcp_server = TCPServer(ros_node_name)
 
     # Create ROS communication objects dictionary for routing messages
-    source_destination_dict = {
+    tcp_server.source_destination_dict = {
         'SourceDestination_input': RosPublisher('SourceDestination', NiryoMoveitJoints, queue_size=10),
-        'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, unity_machine_ip, unity_machine_port),
+        'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, tcp_server),
         'niryo_moveit': RosService('niryo_moveit', MoverService)
     }
 
     # Start the Server Endpoint
-    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict)
+    rospy.init_node(ros_node_name, anonymous=True)
     tcp_server.start()
     rospy.spin()
 
