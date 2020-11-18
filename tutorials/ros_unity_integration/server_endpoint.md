@@ -22,37 +22,25 @@ from tcp_endpoint.RosService import RosService
 from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
 
-
 def main():
-	 # Get variables set in rosparam used for 
-	 # server/node communication 
-    ros_tcp_ip = rospy.get_param("/ROS_IP")
-    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT")
-
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
+    buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
+    connections = rospy.get_param("/TCP_CONNECTIONS", 10)
+    tcp_server = TCPServer(ros_node_name, buffer_size, connections)
 
-    unity_machine_ip = rospy.get_param("/UNITY_IP")
-    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
-
-    rospy.init_node(ros_node_name, anonymous=True)
-    rate = rospy.Rate(10)  # 10hz
-
-    # Create ROS communication objects dictionary for routing messages
-    source_destination_dict = {
+    tcp_server.source_destination_dict = {
         'pos_srv': RosService('position_service', PositionService),
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
-        'color': RosSubscriber('color', UnityColor, unity_machine_ip, unity_machine_port),
+        'color': RosSubscriber('color', UnityColor, tcp_server)
     }
 
-    # Start the Server Endpoint
-    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict)
+    rospy.init_node(ros_node_name, anonymous=True)
     tcp_server.start()
     rospy.spin()
 
 
 if __name__ == "__main__":
     main()
-
 ```
 
 
@@ -74,7 +62,6 @@ from robotics_demo.srv import PositionService
 
 ```python
     rospy.init_node(ros_node_name, anonymous=True)
-    rate = rospy.Rate(10)  # 10hz
 ```
 
 ## ROS Publisher
@@ -86,14 +73,13 @@ A ROS Publisher requires three components:
 
 `RosPublisher('pos_rot', PosRot, queue_size=10)`
 ## ROS Subscriber
-A ROS Subscriber requires four components:
+A ROS Subscriber requires three components:
 
 - Topic name
 - ROS message class generated from running `catkin_make` command
-- IP address of machine running Unity
-- Corresponding TCP port of machine running Unity
+- The tcp server that will connect to Unity
 
-`RosSubscriber('color', UnityColor, unity_machine_ip, unity_machine_port)`
+`RosSubscriber('color', UnityColor, tcp_server)`
 
 ## ROS Service
 A ROS Service requires two components:
@@ -103,47 +89,46 @@ A ROS Service requires two components:
 
 `RosService('position_service', PositionService)`
 
+## Creating the Server
+
+Requires:
+
+- The ROS node name
+
+```python
+    tcp_server = TCPServer(ros_node_name)
+```
+
 ## Source Destination Dictionary
 
 Create a dictionary keyed by topic or service with the corresponding ROS communication class as the value. The dictionary is used by the TCP server to direct messages to and from the ROS network.
 
 ```python
-    source_destination_dict = {
+    tcp_server.source_destination_dict = {
         'pos_srv': RosService('position_service', PositionService),
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
-        'color': RosSubscriber('color', Color, unity_machine_ip, unity_machine_port),
+        'color': RosSubscriber('color', Color, tcp_server),
     }
 ```
 
-
 ## Starting the Server
 
-Requires:
-
-- IP of machine the script will be executing on
-- The port to open for incoming connections
-- The ROS node name
-- Dictionary of service or topic names to corresponding class
-
 ```python
-    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict)
     tcp_server.start()
     rospy.spin()
     
 ```
 
 
-These values can be hardcoded, but for the sake of portability, we recommend setting the parameters using the `rosparam set` command, or a `rosparam` YAML file.
+The following parameters can be hardcoded, but for the sake of portability, we recommend setting the parameters using the `rosparam set` command, or a `rosparam` YAML file.
 
 ```python
-    ros_tcp_ip = rospy.get_param("/ROS_IP")
-    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT")
-
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
-
-    unity_machine_ip = rospy.get_param("/UNITY_IP")
-    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
+    buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
+    connections = rospy.get_param("/TCP_CONNECTIONS", 10)
 ```
+
+In addition, the TCPServer class uses the ROS parameters ROS_IP and ROS_TCP_PORT to determine what ip & port to listen on.
 
 > Note: Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
 
@@ -159,9 +144,6 @@ An example launch file that will set the appropriate ROSPARAM values required fo
     <param name="ROS_IP" type="str" value="$(env ROS_IP)" />
     <param name="ROS_TCP_PORT" type="int" value="10000" />
     <param name="TCP_NODE_NAME" type="str" value="TCPServer" />
-
-    <param name="UNITY_IP" type="str" value="192.168.1.105" />
-    <param name="UNITY_SERVER_PORT" type="int" value="5005" />
 
 	<group ns="position_service_and_endpoint">
 	       <node pkg="robotics_demo" name="position_service" type="position_service.py"/>

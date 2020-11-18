@@ -185,11 +185,10 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
    sudo -H pip install rospkg jsonpickle
    ```
 
-   > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint, defines the TCP host address and port values, and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
+   > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
 
    ```python
    ...
-   tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict)
    tcp_server.start()
    rospy.spin()
    ...
@@ -201,31 +200,17 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
 
 1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
-   - Finding the IP address of your local machine (the one running Unity), i.e. `UNITY_IP` depends on your operating system. 
-     - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
-     - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
-
-   - Update the `ROS_IP` and `UNITY_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
+   - Update the `ROS_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
 
       ```yaml
       ROS_IP: <your ROS IP>
-      ROS_TCP_PORT: 10000
-      UNITY_IP: <your Unity IP>
-      UNITY_SERVER_PORT: 5005
-      rosdistro: 'melodic'
       ```
       
       e.g.
 
       ```yaml
       ROS_IP: 192.168.50.149
-      ROS_TCP_PORT: 10000
-      UNITY_IP: 192.168.50.13
-      UNITY_SERVER_PORT: 5005
-      rosdistro: 'melodic'
       ```
-
-      Ensure that the `ROS_TCP_PORT` is set to 10000, and the `UNITY_SERVER_PORT` is set to 5005.
 
       > Note: Learn more about the server endpoint and ROS parameters [here](../ros_unity_integration/server_endpoint.md).
 

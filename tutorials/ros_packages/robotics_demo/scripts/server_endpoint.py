@@ -10,28 +10,19 @@ from tcp_endpoint.RosService import RosService
 from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
 
-
 def main():
-    ros_tcp_ip = rospy.get_param("/ROS_IP")
-    ros_tcp_port = rospy.get_param("/ROS_TCP_PORT")
-
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
     buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
     connections = rospy.get_param("/TCP_CONNECTIONS", 10)
+    tcp_server = TCPServer(ros_node_name, buffer_size, connections)
 
-    unity_machine_ip = rospy.get_param("/UNITY_IP")
-    unity_machine_port = rospy.get_param("/UNITY_SERVER_PORT")
-
-    rospy.init_node(ros_node_name, anonymous=True)
-    rate = rospy.Rate(10)  # 10hz
-
-    source_destination_dict = {
+    tcp_server.source_destination_dict = {
         'pos_srv': RosService('position_service', PositionService),
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
-        'color': RosSubscriber('color', UnityColor, unity_machine_ip, unity_machine_port),
+        'color': RosSubscriber('color', UnityColor, tcp_server)
     }
 
-    tcp_server = TCPServer(ros_tcp_ip, ros_tcp_port, ros_node_name, source_destination_dict, buffer_size, connections)
+    rospy.init_node(ros_node_name, anonymous=True)
     tcp_server.start()
     rospy.spin()
 
