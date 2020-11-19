@@ -42,7 +42,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "0e963defca4eb075316d30e1e4224dee276c22cb"
+      "hash": "67f0b4e3508983287709c04fed48f3c9e3228bf6"
     },
     "com.unity.robotics.urdf-importer": {
       "version": "git+https://github.com/Unity-Technologies/URDF-Importer.git#v0.0.3",
