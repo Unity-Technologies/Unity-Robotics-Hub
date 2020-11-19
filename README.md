@@ -1,6 +1,6 @@
 ![](images/unity-wide.png)
 
-<p align="center"><img src="tutorials/pick_and_place/img/0_pick_place.gif" width="600"/></p>
+<p align="center"><img src="images/warehouse.gif" width="800"/></p>
 
 # Unity Robotics Hub
 
@@ -38,6 +38,7 @@ For any questions or feedback, connect directly with the Robotics team at [unity
 
 We have published a series of blog posts and talks that are relevant for Unity Robotics:
 
+- (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
 - (November 12, 2020)
 Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.unity.com/unitenow/onlinesessions/simulating-robots-with-ros-and-unity)
 - (August 26, 2020)
