@@ -200,4 +200,37 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Find all robot joints in Awake() and add them to the jointArticulationBodies array.
     ///     Find left and right finger joints and assign them to their respective articulation body objects.
     /// </summary>
+    void Awake()
+    {
+        jointArticulationBodies = new ArticulationBody[numRobotJoints];
+        string shoulder_link = "world/base_link/shoulder_link";
+        jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
+
+        string arm_link = shoulder_link + "/arm_link";
+        jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
+        
+        string elbow_link = arm_link + "/elbow_link";
+        jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
+        
+        string forearm_link = elbow_link + "/forearm_link";
+        jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
+        
+        string wrist_link = forearm_link + "/wrist_link";
+        jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
+        
+        string hand_link = wrist_link + "/hand_link";
+        jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
+
+        // Find left and right fingers
+        string right_gripper = hand_link + "/tool_link/gripper_base/servo_head/control_rod_right/right_gripper";
+        string left_gripper = hand_link + "/tool_link/gripper_base/servo_head/control_rod_left/left_gripper";
+        string gripper_base = hand_link + "/tool_link/gripper_base/Collisions/unnamed";
+
+        gripperBase = niryoOne.transform.Find(gripper_base);
+        leftGripperGameObject = niryoOne.transform.Find(left_gripper);
+        rightGripperGameObject = niryoOne.transform.Find(right_gripper);
+
+        rightGripper = rightGripperGameObject.GetComponent<ArticulationBody>();
+        leftGripper = leftGripperGameObject.GetComponent<ArticulationBody>();
+    }
 }
