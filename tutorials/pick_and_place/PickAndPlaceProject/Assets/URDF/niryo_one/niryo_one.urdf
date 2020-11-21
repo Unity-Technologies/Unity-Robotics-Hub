@@ -218,6 +218,13 @@
     </collision>
 
   </link>
+
+  <!--Disable_Collisions -->
+  <disable_collision joint1="right_gripper" joint2="gripper_base">
+  </disable_collision>
+  <disable_collision joint1="left_gripper" joint2="gripper_base">
+  </disable_collision>
+
   <!--Joints -->
   <joint name="joint_world" type="fixed">
     <parent link="world"/>
