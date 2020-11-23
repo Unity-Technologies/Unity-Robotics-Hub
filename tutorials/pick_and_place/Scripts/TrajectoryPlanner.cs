@@ -233,23 +233,4 @@ public class TrajectoryPlanner : MonoBehaviour
         rightGripper = rightGripperGameObject.GetComponent<ArticulationBody>();
         leftGripper = leftGripperGameObject.GetComponent<ArticulationBody>();
     }
-
-    void Start()
-    {
-        // Ignore collisions between gripper base and left/right grippers as the grippers slide along the base's edge
-        Collider[] gripperBaseColliders = gripperBase.GetComponentsInChildren<Collider>();
-        Collider[] rightGripperCollider = rightGripper.GetComponentsInChildren<Collider>();
-        Collider[] leftGripperCollider = leftGripper.GetComponentsInChildren<Collider>();
-        foreach(Collider gripBase in gripperBaseColliders)
-        {
-            foreach(Collider rightGrip in rightGripperCollider)
-            {
-                Physics.IgnoreCollision(gripBase, rightGrip);
-            }
-            foreach(Collider leftGrip in leftGripperCollider)
-            {
-                Physics.IgnoreCollision(leftGrip, gripBase);
-            }
-        }
-    }
 }
