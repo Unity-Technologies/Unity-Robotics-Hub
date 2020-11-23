@@ -98,7 +98,7 @@ public class RosServiceExample : MonoBehaviour
 }
 ```
 
-- Create an empty GameObject, name it `RosConnection`, and attach the `Plugins/TCPConnection/ROSConnection` script to it.
+- Create an empty GameObject, name it `RosConnection`, and attach the `Plugins/TCPConnection/ROSConnection` script to it. (Or, if you're reusing the same scene from the previous tutorials, you can just keep the existing RosConnection object.)
 - In the Inspector window of the Editor change the `Host Name` variable on the `RosConnection` GameObject to the ROS IP.
 - Create another empty GameObject and name it `RosService`.
 - Attach the `RosServiceExample` script to the `RosService` GameObject. Drag the cube GameObject onto its `cube` parameter and the RosConnection GameObject onto its `Ros` parameter.
