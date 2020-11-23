@@ -4,7 +4,7 @@
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.3",
     "com.unity.ide.vscode": "1.2.2",
-    "com.unity.robotics.urdf-importer": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.0.3",
+    "com.unity.robotics.urdf-importer": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.0.4",
     "com.unity.robotics.ros-tcp-connector": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.0.3",
     "com.unity.test-framework": "1.1.18",
     "com.unity.textmeshpro": "3.0.1",

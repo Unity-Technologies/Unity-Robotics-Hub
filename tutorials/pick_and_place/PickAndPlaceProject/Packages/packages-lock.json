@@ -45,11 +45,11 @@
       "hash": "251c159b0a4bab0950c43e6a3be4524876d2549f"
     },
     "com.unity.robotics.urdf-importer": {
-      "version": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.0.3",
+      "version": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.0.4",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "c21c367786597b82079a1bf616af8c8b27293a95"
+      "hash": "ca9f90f7d3fda94747e4dd4fa9702e6799af938e"
     },
     "com.unity.test-framework": {
       "version": "1.1.18",
