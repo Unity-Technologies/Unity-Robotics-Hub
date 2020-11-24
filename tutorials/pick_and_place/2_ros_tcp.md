@@ -172,19 +172,24 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 ## The ROS side
 
-> Note: This project was built using the ROS Melodic distro and Python 2.
+> Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
 Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication.
 
-1. The provided files require the following packages to be installed; run the following if the packages are not already present:
+1. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
 
    ```bash
    sudo apt-get update && sudo apt-get upgrade
    sudo apt-get install python-pip ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
+   sudo -H pip install rospkg jsonpickle
    ```
 
+   ROS Noetic users should run:
+
    ```bash
-   sudo -H pip install rospkg jsonpickle
+   sudo apt-get update && sudo apt-get upgrade
+   sudo apt-get install python3-pip ros-noetic-robot-state-publisher ros-noetic-moveit ros-noetic-rosbridge-suite ros-noetic-joy ros-noetic-ros-control ros-noetic-ros-controllers
+   sudo -H pip3 install rospkg jsonpickle
    ```
 
    > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
