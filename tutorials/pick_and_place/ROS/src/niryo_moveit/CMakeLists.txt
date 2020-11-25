@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
-  tcp_endpoint
+  ros_tcp_endpoint
   message_generation
   moveit_msgs
   sensor_msgs
