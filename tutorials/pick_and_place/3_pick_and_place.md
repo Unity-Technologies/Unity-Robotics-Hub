@@ -158,6 +158,12 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 > This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
+### Use Docker Container
+
+1. If you are using ROS docker container and have not already build the ROS docker image. Follow the steps in [Part 2](2_ros_tcp.md) to build the `unity-robotics:pick-and-place` docker image.
+
+### Manually Setup ROS
+
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 1. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
@@ -167,6 +173,20 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 --- 
 
 ## ROS–Unity Communication
+
+### Use Docker Container
+
+1. Run ROS in a new docker container
+
+  ```bash
+  docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_3 /bin/bash
+  ```
+
+1. Terminate docker container
+
+Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
+
+### Manually Setup ROS
 
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. 
 

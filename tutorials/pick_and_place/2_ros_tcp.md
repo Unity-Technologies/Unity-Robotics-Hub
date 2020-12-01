@@ -174,7 +174,31 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication.
+Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provideds to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
+
+### Use Docker Container
+
+1. [Install Docker Engine](https://docs.docker.com/engine/install/)
+
+1. Build the ROS docker image
+
+  ```bash
+  cd /YOUR/UNITY-ROBOTICS-HUB/REPOSITORY/tutorials/pick_and_place &&
+  git submodule update --init --recursive &&
+  docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
+  ```
+
+1. Run ROS in a new docker container
+
+  ```bash
+  docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_2 /bin/bash
+  ```
+
+1. Terminate docker container
+
+Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
+
+### Manually Setup ROS
 
 1. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
 
