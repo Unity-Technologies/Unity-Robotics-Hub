@@ -186,7 +186,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 3. Terminate docker container
 
-Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
+    Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
 
 ### Manually Setup ROS
 

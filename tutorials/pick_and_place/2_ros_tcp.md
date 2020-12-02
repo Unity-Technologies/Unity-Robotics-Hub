@@ -198,7 +198,7 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
 
 4. Terminate docker container
 
-Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
+  Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
 
 ### Manually Setup ROS
 
