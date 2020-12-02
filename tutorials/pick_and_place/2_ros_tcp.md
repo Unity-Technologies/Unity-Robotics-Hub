@@ -155,6 +155,8 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
     - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
+    - If you are going to run ROS services with docker container introduced [below](#the-ros-side), fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`.
+
 1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
    
