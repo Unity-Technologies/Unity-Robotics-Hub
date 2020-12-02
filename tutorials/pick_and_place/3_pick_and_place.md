@@ -176,13 +176,15 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 ### Use Docker Container
 
-1. Run ROS in a new docker container
+1. If you have not already, [build the ROS docker image](2_ros_tcp.md#use-docker-container) before executing the following command lines.
+
+2. Run ROS in a new docker container
 
   ```bash
   docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_3 /bin/bash
   ```
 
-1. Terminate docker container
+3. Terminate docker container
 
 Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
 

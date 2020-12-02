@@ -182,7 +182,7 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
 
 1. [Install Docker Engine](https://docs.docker.com/engine/install/)
 
-1. Build the ROS docker image
+2. Build the ROS docker image
 
   ```bash
   cd /YOUR/UNITY-ROBOTICS-HUB/REPOSITORY/tutorials/pick_and_place &&
@@ -190,13 +190,13 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
   docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
   ```
 
-1. Run ROS in a new docker container
+3. Run ROS in a new docker container
 
   ```bash
   docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_2 /bin/bash
   ```
 
-1. Terminate docker container
+4. Terminate docker container
 
 Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
 
