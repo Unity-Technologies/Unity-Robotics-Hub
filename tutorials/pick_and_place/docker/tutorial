@@ -5,9 +5,9 @@ help()
    echo "Syntax: $0 [part_2|part_3]"
 }
 
-source $ros_workspace/devel/setup.bash
+source $ROS_WORKSPACE/devel/setup.bash
 
-echo "ROS_IP: $(hostname -i)" > $ros_workspace/src/niryo_moveit/config/params.yaml
+echo "ROS_IP: $(hostname -i)" > $ROS_WORKSPACE/src/niryo_moveit/config/params.yaml
 
 if [ $1 == "part_2" ]; then
 	roslaunch niryo_moveit part_2.launch
