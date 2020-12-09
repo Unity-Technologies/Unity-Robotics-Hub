@@ -220,9 +220,9 @@
   </link>
 
   <!--Disable_Collisions -->
-  <disable_collision link1="right_gripper" link2="gripper_base">
+  <disable_collision joint1="right_gripper" joint2="gripper_base">
   </disable_collision>
-  <disable_collision link1="left_gripper" link2="gripper_base">
+  <disable_collision joint1="left_gripper" joint2="gripper_base">
   </disable_collision>
 
   <!--Joints -->
