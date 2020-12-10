@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source /opt/ros/melodic/setup.bash
+cd $ROS_WORKSPACE
+catkin_make
