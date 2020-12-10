@@ -1,6 +1,4 @@
-<p align="center"><img src="images/Unity-1200X630.png"/></p>
-
-<p align="center"><img src="images/warehouse.gif" width="800"/></p>
+<p align="center"><img src="images/warehouse.gif"/></p>
 
 # Unity Robotics Hub
 
