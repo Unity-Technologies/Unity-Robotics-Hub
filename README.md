@@ -1,6 +1,4 @@
-![](images/unity-wide.png)
-
-<p align="center"><img src="images/warehouse.gif" width="800"/></p>
+<p align="center"><img src="images/warehouse.gif"/></p>
 
 # Unity Robotics Hub
 
