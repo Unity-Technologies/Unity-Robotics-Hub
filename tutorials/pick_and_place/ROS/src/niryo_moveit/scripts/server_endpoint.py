@@ -2,7 +2,7 @@
 
 import rospy
 
-from ros_tcp_endpoint import TCPServer, RosPublisher, RosSubscriber, RosService
+from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
 
 from niryo_moveit.msg import NiryoMoveitJoints, NiryoTrajectory
 from niryo_moveit.srv import MoverService
@@ -10,7 +10,7 @@ from niryo_moveit.srv import MoverService
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
-    tcp_server = TCPServer(ros_node_name)
+    tcp_server = TcpServer(ros_node_name)
 
     # Create ROS communication objects dictionary for routing messages
     tcp_server.source_destination_dict = {
