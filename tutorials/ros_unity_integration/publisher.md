@@ -82,7 +82,7 @@ public class RosPublisherExample : MonoBehaviour
 
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
-- Create an empty GameObject, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script.
+- Create an empty GameObject, name it `RosConnection` and attach the `ROS TCP Connection/Runtime/TcpConnector/ROSConnection` script.
 	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
 	- Drag the cube GameObject onto the `Cube` parameter
