@@ -26,15 +26,13 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ```yaml
     ROS_IP: <your ROS IP>
     ROS_TCP_PORT: 10000
-    rosdistro: 'melodic'
     ```
     
     e.g.
 
     ```yaml
-    ROS_IP: 192.168.50.149
+    ROS_IP: 127.0.0.1
     ROS_TCP_PORT: 10000
-    rosdistro: 'melodic'
     ```
 
     Ensure that the `ROS_TCP_PORT` is set to 10000.
