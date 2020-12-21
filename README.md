@@ -16,7 +16,7 @@ For any questions or feedback, connect directly with the Robotics team at [unity
 
 | Tutorial | Description |
 |---|---|
-| [Quick Installation Instructions]() | Brief steps on installing the Unity Robotics packages |
+| [Quick Installation Instructions](tutorials/quick_setup.md) | Brief steps on installing the Unity Robotics packages |
 | [Pick-and-Place Demo](tutorials/pick_and_place/README.md) | A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control |
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
 | [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files (Unified Robot Description Format) | 
