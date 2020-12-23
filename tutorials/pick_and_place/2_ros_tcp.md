@@ -104,23 +104,15 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       // Pick Pose
       sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
       {
-         position = new Point(
-               target.transform.position.z,
-               -target.transform.position.x,
-               target.transform.position.y
-         ),
-         orientation = pickOrientation
+         position = target.transform.position.To<FLU>(),
+         orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
       };
 
       // Place Pose
       sourceDestinationMessage.place_pose = new RosMessageTypes.Geometry.Pose
       {
-         position = new Point(
-               targetPlacement.transform.position.z,
-               -targetPlacement.transform.position.x,
-               targetPlacement.transform.position.y
-         ),
-         orientation = pickOrientation
+         position = targetPlacement.transform.position.To<FLU>(),
+         orientation = pickOrientation.To<FLU>()
       };
 
       // Finally send the message to server_endpoint.py running in ROS
@@ -130,7 +122,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
 
-   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
+   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are provided via the [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md) in the ROS-TCP-Connector package.
 
 1. Return to the Unity Editor. Now that the message contents have been defined and the publisher script added, it needs to be added to the Unity world to run its functionality. 
 
@@ -176,7 +168,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provideds to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
+Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provided to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
 
 ### Use Docker Container
 

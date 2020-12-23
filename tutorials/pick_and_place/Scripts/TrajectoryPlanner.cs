@@ -3,8 +3,13 @@ using System.Linq;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
-using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
+
+using ROSGeometry;
+using Quaternion = UnityEngine.Quaternion;
+using RosImage = RosMessageTypes.Sensor.Image;
 using Transform = UnityEngine.Transform;
+using Vector3 = UnityEngine.Vector3;
+
 
 public class TrajectoryPlanner : MonoBehaviour
 {
@@ -15,10 +20,10 @@ public class TrajectoryPlanner : MonoBehaviour
     // Hardcoded variables 
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
-    private readonly float pickPoseOffset = 0.1f;
+    private readonly Vector3 pickPoseOffset = new Vector3(0, 0.1f, 0);
     
     // Assures that the gripper is always positioned above the target cube before grasping.
-    private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
+    private readonly Quaternion pickOrientation = new Quaternion(-0.5f,-0.5f,0.5f,-0.5f);
 
     // Variables required for ROS communication
     public string rosServiceName = "niryo_moveit";
@@ -107,27 +112,15 @@ public class TrajectoryPlanner : MonoBehaviour
         // Pick Pose
         request.pick_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                target.transform.position.z,
-                -target.transform.position.x,
-                // Add pick pose offset to position the gripper above target to avoid collisions
-                target.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         request.place_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                targetPlacement.transform.position.z,
-                -targetPlacement.transform.position.x,
-                // Use the same pick pose offset so the target cube can be seen dropping into position
-                targetPlacement.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = pickOrientation.To<FLU>()
         };
 
         ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);

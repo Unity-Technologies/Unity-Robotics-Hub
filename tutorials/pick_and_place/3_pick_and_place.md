@@ -37,27 +37,15 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
         // Pick Pose
         request.pick_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                target.transform.position.z,
-                -target.transform.position.x,
-                // Add pick pose offset to position the gripper above target to avoid collisions
-                target.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         request.place_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                targetPlacement.transform.position.z,
-                -targetPlacement.transform.position.x,
-                // Use the same pick pose offset so the target cube can be seen dropping into position
-                targetPlacement.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = pickOrientation.To<FLU>()
         };
 
         ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
@@ -160,7 +148,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 ### Use Docker Container
 
-1. If you are using ROS docker container and have not already build the ROS docker image. Follow the steps in [Part 2](2_ros_tcp.md) to build the `unity-robotics:pick-and-place` docker image.
+1. If you are using ROS docker container and have not already built the ROS docker image. Follow the steps in [Part 2](2_ros_tcp.md) to build the `unity-robotics:pick-and-place` docker image.
 
 ### Manually Setup ROS
 
