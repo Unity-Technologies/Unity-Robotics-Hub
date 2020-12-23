@@ -20,10 +20,10 @@ public class TrajectoryPlanner : MonoBehaviour
     // Hardcoded variables 
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
-    private readonly Vector3 pickPoseOffset = new Vector3(0, 0.1f, 0);
+    private readonly Vector3 pickPoseOffset = Vector3.up * 0.1f;
     
     // Assures that the gripper is always positioned above the target cube before grasping.
-    private readonly Quaternion pickOrientation = new Quaternion(-0.5f,-0.5f,0.5f,-0.5f);
+    private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
 
     // Variables required for ROS communication
     public string rosServiceName = "niryo_moveit";

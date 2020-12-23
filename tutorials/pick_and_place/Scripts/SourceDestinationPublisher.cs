@@ -17,7 +17,7 @@ public class SourceDestinationPublisher : MonoBehaviour
     public GameObject target;
     public GameObject targetPlacement;
     
-    private readonly Quaternion pickOrientation = new Quaternion(-0.5f,-0.5f,0.5f,-0.5f);
+    private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
     
     // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
@@ -62,7 +62,6 @@ public class SourceDestinationPublisher : MonoBehaviour
         sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
         {
             position = target.transform.position.To<FLU>(),
-            // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
             orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
