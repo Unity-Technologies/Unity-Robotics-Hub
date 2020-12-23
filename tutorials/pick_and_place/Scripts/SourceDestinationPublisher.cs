@@ -62,6 +62,7 @@ public class SourceDestinationPublisher : MonoBehaviour
         sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
         {
             position = target.transform.position.To<FLU>(),
+            // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
             orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 

@@ -38,6 +38,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
         request.pick_pose = new RosMessageTypes.Geometry.Pose
         {
             position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
             orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
