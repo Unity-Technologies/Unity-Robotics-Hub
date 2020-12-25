@@ -188,7 +188,7 @@
     </collision>
   </link>
 
-<link name="left_gripper">
+<link name="right_gripper">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -203,7 +203,7 @@
     </collision>
 
   </link>
-<link name="right_gripper">
+<link name="left_gripper">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -290,28 +290,28 @@
     <child link="servo_head"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
-  <joint name="control_rod_right" type="fixed">
-    <parent link="servo_head"/>
-    <child link="control_rod_right"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
-<joint name="control_rod_left" type="fixed">
+  <joint name="control_rod_left" type="fixed">
     <parent link="servo_head"/>
     <child link="control_rod_left"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+<joint name="control_rod_right" type="fixed">
+    <parent link="servo_head"/>
+    <child link="control_rod_right"/>
     <origin rpy="0 3.141 0" xyz="0 0 0"/>
   </joint>
-  <joint name="gripper_joint_left" type="prismatic">
-    <parent link="control_rod_left"/>
-    <child link="left_gripper"/>
-    <origin rpy="0 3.141 0" xyz="0 0 0"/>
-    <limit effort="1" lower="-2.57436" upper="2.57436" velocity="1.0"/>
-  </joint>
-<joint name="gripper_joint_right" type="prismatic">
+  <joint name="gripper_joint_right" type="prismatic">
     <parent link="control_rod_right"/>
     <child link="right_gripper"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <limit effort="1" lower="-2.57436" upper="2.57436" velocity="1.0"/>
+    <origin rpy="0 3.141 0" xyz="0 0 0"/>
+    <limit effort="1" lower="-0.0257436" upper="0.0257436" velocity="1.0"/>
     <mimic joint = "gripper_joint_left" multiplier = "-1"/> 
+  </joint>
+<joint name="gripper_joint_left" type="prismatic">
+    <parent link="control_rod_left"/>
+    <child link="left_gripper"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <limit effort="1" lower="-0.0257436" upper="0.0257436" velocity="1.0"/>
   </joint>
 </robot>
 
