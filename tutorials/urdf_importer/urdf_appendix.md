@@ -3,9 +3,9 @@
 ## File Hierarchy
 URDF files and associated meshes should be placed in a single folder within the Assets directory of Unity. We suggest creating a new folder with the robot's name and place the URDF file in its root with all associated mesh files in sub folders. Be sure to update the file locations as described by the URDF file.
 
-## GameObject Hierarchy
+## GameObject Hierarchy 
 
-The robot imported in Unity follows a Parent -  Child hierarchy.
+The robot imported in Unity follows a Parent -  Child hierarchy. 
 - Robot GameObject
   - UrdfRobot Script: UrdfRobot.cs script contains functions to change the behaviors of the imported robot. The script is used to control a robot's behavior, compare against a URDF file, and export the robot as a URDF file.
   - Controller Script: Enables keyboard control of the robot. It can be modified to create custom controllers as described [here](##Guide-to-write-your-own-controller).
@@ -30,12 +30,12 @@ URDF comparator is a testing tool to compare two URDF files. This tool can be us
 - After the exported file location is selected, its location is automatically selected as location of `Log File Save Location`. You can choose your own save location by pressing the `Select` next to the text field.
 - To compare the two URDF files press `Compare URDF Files` to generate the [log file](#URDF_Comparator).
 
-## URDF_Comparator
+## URDF_Comparator 
 The URDF comparator generates a log file which details the results of the comparison. Log file contains two types of log blocks. One type of block details joint:
 ```
 ********LINK*****
 
- Name:
+ Name: 
  Equal:   True
  Name: Source:    base_link Exported:    base_link
  Inertial Checks
@@ -64,10 +64,10 @@ The URDF comparator generates a log file which details the results of the compar
   Material Checks
   Material Nullity Check:   True
    Name Equal:  True
-   Name: Source:    LightGrey
+   Name: Source:    LightGrey 
    Exported:    LightGrey
    Colors Equal:   True
-   RGB :0.700 0.700 0.700
+   RGB :0.700 0.700 0.700 
    Texture nullity equality:  True
  Collisions Checks
 Number of Collision Components
@@ -77,8 +77,8 @@ Exported Count: 0001
  -Collision Component:   1
   Collision Name
   Equal:   True
-  Name: Source:
-  Exported:
+  Name: Source:             
+  Exported:             
   Origin Checks
   Origin Nullity Check:   True
   Geometry:
@@ -118,9 +118,9 @@ Parent: Exported:    base_link
   Axis Checks
   Axis
   Equal:   True
-  XYZ : (0.000,0.000,1.000)
+  XYZ : (0.000,0.000,1.000) 
   Dynamics Checks
-  Dynamics Equal:   True
+  Dynamics Equal:   True 
   Lower Limit:
   Equal:   True
   Lower Limit Value: -3.14159265359
@@ -135,7 +135,7 @@ Child Name: Source: shoulder_link
 Child Name: Exported: shoulder_link
 
 ```
-Log file contains comparison for every attribute contained in the source URDF file to the corresponding attribute in exported URDF file. Each attribute follows the format :
+Log file contains comparison for every attribute contained in the source URDF file to the corresponding attribute in exported URDF file. Each attribute follows the format : 
 ```
 <Attribute_Name>
 Equal : <True/False>
@@ -144,7 +144,7 @@ Equal : <True/False>
 ```
 Some attributes generates a nullity check which checks for presence of attributes in both URDF files.
 
-## Articulation Body axis definition
+## Articulation Body axis definition 
 ![](images/Unity_coordinate.png)
 
 The most commonly used Coordinate system is the right hand coordinate system which is shown in the figure above. It follows the convention that if your right-hand thumb represents the X direction, then the index finger and the middle finger stretched out uncrossed at right angles would represent the Y and Z direction respectively. Positive direction of rotation is represented by the curl of the fingers with the thumb stretched out.
@@ -163,7 +163,7 @@ Note: When the mesh is imported in Unity, the x axis is negated to convert the m
 Articulation Body allows the joints to be controlled by three methods:
 
 1. Position Control
-2. Torque Control
+2. Torque Control 
 3. Velocity Control
 
 All types of control are governed by the Spring-Damper equation :
@@ -174,7 +174,7 @@ F = stiffness * (currentPosition - target) - damping * (currentVelocity - target
 
 #### Example Code
 
-Code for positional control can be divided into two scripts. One script would be attached to the root GameObject which represents the robot. This script would determine the correct position of the joint, directed by a control policy implemented by the user. The other end of the script is attached to the GameObject with ArticulationBody component which receives the target position and assigns that
+Code for positional control can be divided into two scripts. One script would be attached to the root GameObject which represents the robot. This script would determine the correct position of the joint, directed by a control policy implemented by the user. The other end of the script is attached to the GameObject with ArticulationBody component which receives the target position and assigns that 
 value to the articulation body.
 
 **Note: This architecture can be changed according to the user's design.**
@@ -215,7 +215,7 @@ void Update()
         }
         Highlight(selectedIndex);
     }
-
+        
     UpdateDirection(selectedIndex);
 }
 ```
@@ -224,10 +224,10 @@ The up and down arrow keys are used to update the direction in which the joint i
 private void UpdateDirection(int jointIndex)
 {
     float moveDirection = Input.GetAxis("Vertical");
-    JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();
+    JointControl current = articulationChain[jointIndex].GetComponent<JointControl>();            
     if (previousIndex != jointIndex)
     {
-        JointControl previous = articulationChain[previousIndex].GetComponent<JointControl>();
+        JointControl previous = articulationChain[previousIndex].GetComponent<JointControl>();            
         previous.direction = RotationDirection.None;
         previousIndex = jointIndex;
     }
@@ -269,16 +269,16 @@ The joint control script determines the direction in which the joint needs to mo
                 float newTargetDelta = (int)direction * Time.fixedDeltaTime * speed;
                 if (newTargetDelta + currentDrive.target <= currentDrive.upperLimit && newTargetDelta + currentDrive.target >= currentDrive.lowerLimit){
                     currentDrive.target += newTargetDelta;
-                }
+                } 
                 joint.xDrive = currentDrive;
-            }
+            }  
         }
     }
 }
 
 ```
 
-### Position Control
+### Position Control 
 
 Position Control can be imagined as adding a spring to a joint with linear spring in case of prismatic joint and a torsional spring in case of revolute joint. The joint follows Hooke's law:
 
@@ -317,10 +317,10 @@ To address this predicament we have integrated another algorithm to create Conve
 ![](images/ConvexMeshComparison.png)
 
 ## Disable Collision Support
-URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, rigidbodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
+URDF defines the robot visually using Visual Meshes and its inertial volume using collision meshes. Inertial meshes used to define the physical volume of the links and help in calculating the inertia of the links and  detecting the collisions between different physical objects. When a collider mesh is imported in Unity, it is decomposed into near convex shapes to form a concave hull. This is necessary in detecting collisions between two mesh colliders. The changed shape might intersect with each other creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity: 
 
 1. Identify the links between which you want to ignore the collisions.
-2. Add a tag in the URDF file with the format
+2. Add a tag in the URDF file with the format 
 ```XML
  <disable_collision link1= <name_of_link_1> link2=<name_of_link_2>>
   </disable_collision>
