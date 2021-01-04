@@ -16,9 +16,10 @@ def main():
     tcp_server.start({
         'SourceDestination_input': RosPublisher('SourceDestination', NiryoMoveitJoints, queue_size=10),
         'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, tcp_server),
-        'niryo_moveit': RosService('niryo_moveit', MoverService)
+        'niryo_moveit': RosService('niryo_moveit', MoverService),
+        'niryo_one/commander/robot_action/goal': RosSubscriber('niryo_one/commander/robot_action/goal', RobotMoveActionGoal, tcp_server),
+        'sim_real_pnp': RosPublisher('sim_real_pnp', MoverServiceRequest)
     })
-    
     rospy.spin()
 
 
