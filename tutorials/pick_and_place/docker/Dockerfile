@@ -19,4 +19,6 @@ RUN /bin/bash -c "find $ROS_WORKSPACE -type f -print0 | xargs -0 dos2unix"
 
 RUN dos2unix /setup.sh && chmod +x /setup.sh && /setup.sh && rm /setup.sh
 
+RUN echo "ROS_IP: $(hostname -i)" > $ROS_WORKSPACE/src/niryo_moveit/config/params.yaml
+
 ENTRYPOINT ["/bin/bash"]

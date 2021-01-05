@@ -7,7 +7,6 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
 **Table of Contents**
-- [Pick-and-Place Tutorial](#pick-and-place-tutorial)
   - [Requirements](#requirements)
   - [Part 0: ROS Setup Instructions](#part-0-ros-setup-instructions)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
