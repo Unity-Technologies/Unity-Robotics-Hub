@@ -62,7 +62,7 @@ The ROS workspace is now ready to accept commands!
    - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
     > Note: This contains the ROS packages for the pick-and-place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
   
-2. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
+1. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
 
    ```bash
    sudo apt-get update && sudo apt-get upgrade
@@ -78,9 +78,9 @@ The ROS workspace is now ready to accept commands!
    sudo -H pip3 install rospkg jsonpickle
    ```
 
-3. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
+1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-4. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection, stored in `src/niryo_moveit/config/params.yaml`. From your ROS workspace, assign the ROS IP in this `yaml` file:
+1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection, stored in `src/niryo_moveit/config/params.yaml`. From your ROS workspace, assign the ROS IP in this `yaml` file:
     
     ```bash
     echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml
