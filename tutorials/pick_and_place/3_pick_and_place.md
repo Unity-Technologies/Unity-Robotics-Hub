@@ -22,7 +22,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now. 
 
-2. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
+1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
     > Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
@@ -104,19 +104,19 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     > `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `OpenGripper` or `CloseGripper` methods as is appropriate.
 
-3. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
+1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
-4. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
+1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
 
     Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
 
     ![](img/3_target.gif)
 
-5. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
+1. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
 
     ![](img/3_onclick.png)
 
-6. The Unity side is now ready to communicate with ROS to motion plan!
+1. The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
 

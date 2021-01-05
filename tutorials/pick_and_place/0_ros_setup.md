@@ -42,12 +42,12 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
     docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place
     ```
 
-    When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell, e.g. `root@92b3f3211d0e:/#`. 
+    When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`. 
 
-1. Navigate to and source your ROS workspace:
+1. Source your ROS workspace:
 
     ```bash
-    cd catkin_ws && source devel/setup.bash
+    source devel/setup.bash
     ```
 
 The ROS workspace is now ready to accept commands!

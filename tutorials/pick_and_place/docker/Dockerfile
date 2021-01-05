@@ -21,4 +21,6 @@ RUN dos2unix /setup.sh && chmod +x /setup.sh && /setup.sh && rm /setup.sh
 
 RUN echo "ROS_IP: $(hostname -i)" > $ROS_WORKSPACE/src/niryo_moveit/config/params.yaml
 
+WORKDIR $ROS_WORKSPACE
+
 ENTRYPOINT ["/bin/bash"]
