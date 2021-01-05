@@ -1,6 +1,6 @@
 # Pick-and-Place Tutorial: Part 3
 
-This part assumes you have access to a functional ROS workspace and that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
+This part assumes that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
 
 Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
 
@@ -20,9 +20,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now.
+1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now. 
 
-1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
+2. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
     > Note the `Assets/Scripts/TrajectoryPlanner.cs` script. This is where all of the logic to invoke a motion planning service lives, as well as the logic to control the gripper end effector tool.
 
@@ -104,25 +104,25 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     > `ExecuteTrajectories` iterates through the joints to assign a new `xDrive.target` value based on the ROS service response, until the goal trajectories have been reached. Based on the pose assignment, this function may call the `OpenGripper` or `CloseGripper` methods as is appropriate.
 
-1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
+3. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
-1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
+4. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
 
     Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
 
     ![](img/3_target.gif)
 
-1. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
+5. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with TrajectoryPlanner > `PublishJoints()`.
 
     ![](img/3_onclick.png)
 
-1. The Unity side is now ready to communicate with ROS to motion plan!
+6. The Unity side is now ready to communicate with ROS to motion plan!
 
 ---
 
 ## The ROS Side
 
-> Note: This project was built using the ROS Melodic distro, and Python 2.
+> Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
 > Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of the pick-and-place task).
 
@@ -147,51 +147,21 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 > This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-### Use Docker Container
-
-1. If you are using ROS docker container and have not already built the ROS docker image. Follow the steps in [Part 2](2_ros_tcp.md) to build the `unity-robotics:pick-and-place` docker image.
-
-### Manually Setup ROS
-
-1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
-
-1. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
-
-1. The ROS side is now ready to interface with Unity!
-
---- 
-
 ## ROS–Unity Communication
 
-### Use Docker Container
-
-1. If you have not already, [build the ROS docker image](2_ros_tcp.md#use-docker-container) before executing the following command lines.
-
-2. Run ROS in a new docker container
-
-  ```bash
-  docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_3 /bin/bash
-  ```
-
-3. Terminate docker container
-
-    Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
-
-### Manually Setup ROS
+1. If you have not already completed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace, do so now. 
 
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. 
 
     Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
-    - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
-  
-	    > Note: Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
 
     ```bash
     roslaunch niryo_moveit part_3.launch
     ```
 
-    This launch will print various messages to the console, including the set parameters and the nodes launched. 
- The final two messages should confirm `You can start planning now!` and `Ready to plan`.
+    > Note: This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`. Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
+
+    This launch will print various messages to the console, including the set parameters and the nodes launched. The final two messages should confirm `You can start planning now!` and `Ready to plan`.
 
     > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 

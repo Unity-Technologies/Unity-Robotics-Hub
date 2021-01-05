@@ -1,13 +1,10 @@
 # Pick-and-Place Tutorial: Part 2
 
-This part assumes you have access to a functional ROS workspace. If you do not yet have a working ROS setup, refer to the [Resources](#resources) section below to get started. 
-
-If you're new to ROS, check out the [Start Guide](http://wiki.ros.org/ROS/StartGuide) on the ROS Wiki to get started.
+If you're new to ROS, check out the [Start Guide](http://wiki.ros.org/ROS/StartGuide) on the ROS Wiki to get started. The provided steps will include the necessary setup to configure your ROS workspace for this project.
 
 Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic. These steps are adapted from the [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md).
 
 **Table of Contents**
-  - [Setup](#setup)
   - [The Unity Side](#the-unity-side)
   - [The ROS side](#the-ros-side)
   - [Troubleshooting](#troubleshooting)
@@ -26,19 +23,9 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 ---
 
-## Setup
-
-1. If you have not already, complete [Part 1](1_urdf.md) to set up the Unity project. 
-
-1. Navigate to the `Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
-   - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace).
-   - If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
-   - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
-   - This contains ROS packages for the pick-and-place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
-
----
-
 ## The Unity Side
+
+1. If you have not already completed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace and [Part 1](1_urdf.md) to set up the Unity project, do so now. 
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
@@ -148,9 +135,9 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
     - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-    - If you are going to run ROS services with docker container introduced [below](#the-ros-side), fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`.
+    - If you are going to run ROS services with a Docker container, fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`.
 
-1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+2. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
    
    > Note: In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen. 
@@ -169,78 +156,17 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provided to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
+Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. If you have not already followed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace, do so now.
 
-### Use Docker Container
-
-1. [Install Docker Engine](https://docs.docker.com/engine/install/)
-
-2. Build the ROS docker image
-
-  ```bash
-  cd /YOUR/UNITY-ROBOTICS-HUB/REPOSITORY/tutorials/pick_and_place &&
-  git submodule update --init --recursive &&
-  docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
-  ```
-
-3. Run ROS in a new docker container
-
-  ```bash
-  docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_2 /bin/bash
-  ```
-
-4. Terminate docker container
-
-  Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
-
-### Manually Setup ROS
-
-1. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
+1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and start the trajectory subscriber.
 
    ```bash
-   sudo apt-get update && sudo apt-get upgrade
-   sudo apt-get install python-pip ros-melodic-robot-state-publisher ros-melodic-moveit ros-melodic-rosbridge-suite ros-melodic-joy ros-melodic-ros-control ros-melodic-ros-controllers ros-melodic-tf2-web-republisher
-   sudo -H pip install rospkg jsonpickle
+   roslaunch niryo_moveit part_2.launch
    ```
 
-   ROS Noetic users should run:
+   > Note: Running `roslaunch` automatically starts [ROS Core](http://wiki.ros.org/roscore) if it is not already running. 
 
-   ```bash
-   sudo apt-get update && sudo apt-get upgrade
-   sudo apt-get install python3-pip ros-noetic-robot-state-publisher ros-noetic-moveit ros-noetic-rosbridge-suite ros-noetic-joy ros-noetic-ros-control ros-noetic-ros-controllers
-   sudo -H pip3 install rospkg jsonpickle
-   ```
-
-   > In your ROS workspace, find the directory `src/niryo_moveit/scripts`. Note the file `server_endpoint.py`. This script imports the necessary dependencies from tcp_endpoint and starts the server. `rospy.spin()` ensures the node does not exit until it is shut down.
-
-   ```python
-   ...
-   tcp_server.start()
-   rospy.spin()
-   ...
-   ```
-
-   > Additionally, note the file `src/niryo_moveit/scripts/trajectory_subscriber.py`. This script subscribes to the SourceDestination topic. When something is published to this topic, this script will print out the information heard. 
-
-1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
-
-1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection. Navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
-   - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
-   - Update the `ROS_IP` below with the appropriate addresses and copy the contents into the `params.yaml` file.
-
-      ```yaml
-      ROS_IP: <your ROS IP>
-      ```
-      
-      e.g.
-
-      ```yaml
-      ROS_IP: 192.168.50.149
-      ```
-
-      > Note: Learn more about the server endpoint and ROS parameters [here](../ros_unity_integration/server_endpoint.md).
-
-   > This YAML file is `rosparam set` from the launch files provided for this tutorial, which has been copied below for reference. Additionally, the server_endpoint and trajectory_subscriber nodes are launched from this file. 
+   > Note: This launch file has been copied below for reference. The server_endpoint and trajectory_subscriber nodes are launched from this file, and the ROS params (set up in [Part 0](0_ros_setup.md)) are loaded from this command. The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
 
    ```xml
    <launch>
@@ -250,21 +176,11 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
    </launch>
    ```
 
-   > Note: The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+   This launch will print various messages to the console, including the set parameters and the nodes launched. 
+   
+   Ensure that the `process[server_endpoint]` and `process[trajectory_subscriber]` were successfully started, and that a message similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000` is printed.
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. Then, run the following `roslaunch` in order to set the ROS parameters, start the server endpoint, and start the trajectory subscriber.
-
-    ```bash
-    roslaunch niryo_moveit part_2.launch
-    ```
-
-    > Note: Running `roslaunch` automatically starts [ROS Core](http://wiki.ros.org/roscore) if it is not already running. 
-
-    This launch will print various messages to the console, including the set parameters and the nodes launched. 
-    
-    Ensure that the `process[server_endpoint]` and `process[trajectory_subscriber]` were successfully started, and that a message similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000` is printed.
-
-1. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running. It should now print `I heard:` with the data.
+2. Return to Unity, and press Play. Click the UI Button in the Game view to call SourceDestinationPublisher's `Publish()` function, publishing the associated data to the ROS topic. View the terminal in which the `roslaunch` command is running. It should now print `I heard:` with the data.
   
 ROS and Unity have now successfully connected!
 
@@ -283,12 +199,6 @@ ROS and Unity have now successfully connected!
 
 ## Resources
 
-- Setting up a ROS workspace:
-   
-   > Note: this tutorial was made using ROS Melodic.
-   -  http://wiki.ros.org/ROS/Installation
-   -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
-   - http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 - More on [ROS Topics](http://wiki.ros.org/Topics)
 - [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md)
 - [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package

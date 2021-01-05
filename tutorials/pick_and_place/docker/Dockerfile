@@ -14,10 +14,9 @@ COPY ./ROS/src/niryo_one_urdf $ROS_WORKSPACE/src/niryo_one_urdf
 COPY ./ROS/src/ros_tcp_endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint
 
 COPY ./docker/set-up-workspace /setup.sh
-COPY docker/tutorial /
 
 RUN /bin/bash -c "find $ROS_WORKSPACE -type f -print0 | xargs -0 dos2unix"
 
-RUN dos2unix /tutorial && dos2unix /setup.sh && chmod +x /setup.sh && /setup.sh && rm /setup.sh
+RUN dos2unix /setup.sh && chmod +x /setup.sh && /setup.sh && rm /setup.sh
 
-ENTRYPOINT ["/tutorial"]
+ENTRYPOINT ["/bin/bash"]
