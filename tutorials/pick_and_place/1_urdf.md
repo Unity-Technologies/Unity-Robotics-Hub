@@ -87,7 +87,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
     > Note: A controller is pre-built in the Unity URDF Importer to help showcase the movement of the Niryo. The Controller script is added to the imported URDF by default. This will add FKrobot and Joint Control components at runtime. The Controller script can be found in the project at `Assets/Packages/URDF Importer/Runtime/Controller/Controller.cs`.
 
-1. Press the Play button at the top of the Unity Editor. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor.
+1. Press the Play button at the top of the Unity Editor to enter Play Mode. If everything imported correctly, no errors should appear in the Console window. The robot arm should stay “mounted” to the table, and nothing should fall through the floor.
   
     Using the Controller, joints can be selected using the arrow keys. Use the left/right arrow keys to navigate through the joints, where the selected index will be highlighted in red. Use the up/down arrow keys to control the selected joint movement. The Controller script on the niryo_one object will describe the actively `Selected Index` as well as the `Joint Name`.
 
