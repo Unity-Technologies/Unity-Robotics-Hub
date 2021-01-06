@@ -1,6 +1,6 @@
 # Pick-and-Place Tutorial: Part 2
 
-If you're new to ROS, check out the [Start Guide](http://wiki.ros.org/ROS/StartGuide) on the ROS Wiki to get started. The provided steps will include the necessary setup to configure your ROS workspace for this project.
+The steps in this tutorial will explain how to configure your ROS workspace for this project, but check out the ROS Wiki's [Start Guide](http://wiki.ros.org/ROS/StartGuide) if you'd like to learn more about getting started with ROS.
 
 Steps covered in this tutorial include creating a TCP connection between Unity and ROS, generating C# scripts from a ROS message, and publishing and subscribing to a ROS Topic. These steps are adapted from the [ROS–Unity Integration Tutorials](../ros_unity_integration/README.md).
 
