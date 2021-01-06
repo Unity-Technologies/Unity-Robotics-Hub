@@ -1,14 +1,16 @@
+<p align="center"><img src="img/0_pick_place.gif"/></p>
+
 # Pick-and-Place Tutorial
 
-![](img/0_pick_place.gif)
+Unity's tools for robotic simulation enable users to integrate Unity with ROS-based workflows. [ROS](http://wiki.ros.org/ROS/Introduction) (Robot Operating System) provides services such as message-passing, package management, low-level device control, and hardware abstraction. Unity's robotics tools are able to support **importing URDF files** and **sending and receiving messages between ROS and Unity**. This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick-and-place task with known poses using MoveIt trajectory planning. 
 
-This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick-and-place task with known poses using MoveIt trajectory planning. 
+This tutorial is designed such that you do not need prior experience with Unity or C# in order to follow the scene setup steps, and you do not need prior robotics experience to get started with ROS integration. The tutorial is divided into high-level phases, from basic Unity and ROS initial setup through executing a pick-and-place task.
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
 **Table of Contents**
   - [Requirements](#requirements)
-  - [Part 0: ROS Setup Instructions](#part-0-ros-setup-instructions)
+  - [Part 0: ROS Setup](#part-0-ros-setup)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Part 3: Pick-and-Place](#part-3-pick-and-place)
@@ -24,7 +26,7 @@ This repository provides project files for the pick-and-place tutorial, includin
 
 ---
 
-## [Part 0: ROS Setup Instructions](0_ros_setup.md)
+## [Part 0: ROS Setup](0_ros_setup.md)
 
 <img src="img/0_docker.png" width="400"/>
 

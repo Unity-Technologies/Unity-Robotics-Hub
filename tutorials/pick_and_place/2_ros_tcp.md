@@ -29,7 +29,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
-   > Note: The Package Manager automatically checked out and built the ROS-TCP-Connection package in this project. You can verify this now by looking for `Packages/ROS-TCP-Connector` in the Project Browser or by opening the Package Manager window. See the [Quick Setup](../quick_setup.md) steps for adding this package to your own project.
+   > Note: The Package Manager automatically checked out and built the ROS-TCP-Connection package in this project. You can verify this now by looking for `Packages/ROS-TCP-Connector` in the Project window or by opening the Package Manager window. See the [Quick Setup](../quick_setup.md) steps for adding this package to your own project.
 
    > The ROS-TCP-Connector package includes two pieces: TcpConnector, which contains the `ROSConnection` script described above, and MessageGeneration, which generates C# scripts from ROS msg and srv files.
 
