@@ -74,7 +74,8 @@ public class NiryoSubscriber : MonoBehaviour
         leftGripperJoint.xDrive = leftDrive;
         rightGripperJoint.xDrive = rightDrive;
     }
-    
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -93,29 +94,18 @@ public class NiryoSubscriber : MonoBehaviour
             },
             pick_pose = new RosMessageTypes.Geometry.Pose
             {
-                position = new Point(
-                    target.transform.position.z,
-                    -target.transform.position.x,
-                    // Add pick pose offset to position the gripper above target to avoid collisions
-                    target.transform.position.y + PICK_POSE_OFFSET
-                ),
-                // Orientation is hardcoded for this example so the gripper is always directly above the target object
-                orientation = pickOrientation
+
+                position = (target.transform.position + pickPoseOffset).To<FLU>(),,
+                // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
+                orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
             },
             place_pose = new RosMessageTypes.Geometry.Pose
             {
-                position = new Point(
-                    targetPlacement.transform.position.z,
-                    -targetPlacement.transform.position.x,
-                    // Use the same pick pose offset so the target cube can be seen dropping into position
-                    targetPlacement.transform.position.y + PICK_POSE_OFFSET
-                ),
-                // Orientation is hardcoded for this example so the gripper is always directly above the target object
-                orientation = pickOrientation
+                position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
+                orientation = pickOrientation.To<FLU>()
             }
         };
         
-        Debug.Log("Sending mover service request!");
         ros.Send(rosJointPublishTopicName, request);
     }
     

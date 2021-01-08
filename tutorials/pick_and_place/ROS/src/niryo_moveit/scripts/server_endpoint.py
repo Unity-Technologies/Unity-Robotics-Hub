@@ -5,8 +5,9 @@ import rospy
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
 
 from niryo_moveit.msg import NiryoMoveitJoints, NiryoTrajectory
-from niryo_moveit.srv import MoverService
+from niryo_moveit.srv import MoverService, MoverServiceRequest
 
+from niryo_one_msgs.msg import RobotMoveActionGoal
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -16,6 +17,7 @@ def main():
     tcp_server.source_destination_dict = {
         'SourceDestination_input': RosPublisher('SourceDestination', NiryoMoveitJoints, queue_size=10),
         'NiryoTrajectory': RosSubscriber('NiryoTrajectory', NiryoTrajectory, tcp_server),
+        'niryo_moveit': RosService('niryo_moveit', MoverService),
         'niryo_one/commander/robot_action/goal': RosSubscriber('niryo_one/commander/robot_action/goal', RobotMoveActionGoal, tcp_server),
         'sim_real_pnp': RosPublisher('sim_real_pnp', MoverServiceRequest)
     }
