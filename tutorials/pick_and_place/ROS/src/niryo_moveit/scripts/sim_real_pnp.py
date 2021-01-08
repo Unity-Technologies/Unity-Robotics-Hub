@@ -23,13 +23,23 @@ from niryo_moveit.srv import MoverService, MoverServiceRequest, MoverServiceResp
 
 joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5', 'joint_6']
 
-CLOSE_COMMAND = 1
-OPEN_COMMAND = 2
+# Gripper parameters
+OPEN_COMMAND = 1
+CLOSE_COMMAND = 2
 GRIPPER_SPEED = 300
 
+# IDs used to determine which values in a RobotMoveActionGoal message to execute
 TOOL_ID = 11
 TOOL_COMMAND_ID = 6
 TRAJECTORY_COMMAND_ID = 7
+
+# Between Melodic and Noetic, the return type of plan() changed. moveit_commander has no __version__ variable, so checking the python version as a proxy
+if sys.version_info >= (3, 0):
+    def planCompat(plan):
+        return plan[1]
+else:
+    def planCompat(plan):
+        return plan
 
 """
     Given the start angles of the robot, plan a trajectory that ends at the destination pose.
@@ -45,7 +55,6 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
     move_group.set_pose_target(destination_pose)
 
-    #if not plan:
     if not move_group.plan():
         exception_str = """
             Trajectory could not be planned for a destination of {}\n with starting joint angles {}.
@@ -53,13 +62,15 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
         """.format(destination_pose, start_joint_angles)
         raise Exception(exception_str)
 
+    plan = planCompat(move_group.plan())
+
     trajectory_plan = TrajectoryPlan()
-    trajectory_plan.trajectory = move_group.plan()
+    trajectory_plan.trajectory = plan
 
     return trajectory_plan
 
 """
-
+    Create the RobotMoveActionGoal message with trajectory specific parameters.
 """
 def publish_trajectory(publisher, trajectory):
     action_goal = RobotMoveActionGoal()
@@ -68,7 +79,7 @@ def publish_trajectory(publisher, trajectory):
     publisher.publish(action_goal)
 
 """
-
+    Create the RobotMoveActionGoal message with gripper specific parameters.
 """
 def publish_tool_command(publisher, gripper_command):
     tool_command = ToolCommand()
@@ -119,8 +130,6 @@ def plan_pick_and_place(req):
 
     previous_ending_joint_angles = pre_grasp_pose.trajectory.joint_trajectory.points[-1].positions
     publish_trajectory(publisher, pre_grasp_pose)
-
-    print("Post pre grasp")
 
     # Grasp - lower gripper so that fingers are on either side of object
     pick_pose = copy.deepcopy(req.pick_pose)
