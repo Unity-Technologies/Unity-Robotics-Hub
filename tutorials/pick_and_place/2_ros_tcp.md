@@ -45,21 +45,21 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_menu.png)
 
-   In the ROS Message Browser window, click `Browse` next to the ROS message path. Navigate to and select the ROS directory of this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`). This window will populate with any msg and srv files found in this directory. 
+   In the ROS Message Browser window, click `Browse` next to the ROS message path. Navigate to and select the ROS directory of this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`). This window will populate with all msg and srv files found in this directory. 
    
    ![](img/2_browser.png)
 
    > Note: If any of these ROS directories appear to be empty, you can run the command `git submodule update --init --recursive` to download the packages via Git submodules.
    
-   Under `ROS/src/moveit_msgs/msg`, scroll down to `RobotTrajectory.msg`, and click its `Build msg` button. The button text will change to "Rebuild msg" when it has completed.
+   Under `ROS/src/moveit_msgs/msg`, scroll to `RobotTrajectory.msg`, and click its `Build msg` button. The button text will change to "Rebuild msg" when it has finished building.
 
    ![](img/2_robottraj.png)
 
 	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
   
-1. Next, the custom message scripts for this tutorial will be generated. 
+2. Next, the custom message scripts for this tutorial will be generated. 
 
-   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/msg` to view the msg files listed. Next to msg, select `Build 2 msgs`.
+   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/msg` to view the msg files listed. Next to msg, click `Build 2 msgs`.
 
    ![](img/2_msg.png)
    
@@ -69,19 +69,19 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. Finally, now that the messages have been generated, the service for moving the robot will be created. 
 
-   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/srv` to view the srv file listed. Next to srv, select `Build 1 srv`. 
+   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/srv` to view the srv file listed. Next to srv, click `Build 1 srv`. 
 
    ![](img/2_srv.png)
-
-   You can now close the ROS Message Browser window.
 
    - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories. 
    
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
+   You can now close the ROS Message Browser window.
+
 1. In this repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
-   > Note: The SourceDestinationPublisher script is included. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. On `Start()`, the TCP connector is instantiated with a ROS host name and port, and the articulation body values are assigned based on the GameObjects that will be assigned shortly. The `Publish()` function is defined as follows:
+   > Note: The SourceDestinationPublisher script is one of the included files. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. The `Publish()` function is defined as follows:
 
    ```csharp
    public void Publish()
@@ -126,23 +126,27 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_sourcedest.gif)
 
-1. Next, the object that will hold the TCP functionality needs to be added. 
+1. Note that this component shows empty member variables in the Inspector window, which need to be assigned. 
 
-   Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
-
-1. Note that these components show empty member variables in the Inspector window, which need to be assigned. 
-
-   Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field. Finally, assign the newly created RosConnect object to the `Ros` field.
+   Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field.
 
    ![](img/2_target.gif)
 
-1.  Once again, select the RosConnect object. The `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
+1. Next, the ROS TCP connection needs to be defined. Select `Robotics -> ROS Settings` from the top menu bar. 
 
-    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
+   In the ROS Settings window, the `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
 
-    - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+   - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-    - If you are going to run ROS services with a Docker container, fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`.
+   - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+
+   - If you are going to run ROS services with a Docker container, fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP` field empty.
+
+   ![](img/2_settings.png)
+
+   Opening the ROS Settings has created a ROSConnectionPrefab in `Assets/Resources` with the user-input settings. When the static `ROSConnection.instance` is referenced in a script, if a `ROSConnection` instance is not already present, the prefab will be instantiated in the Unity scene, and the connection will begin.
+   
+   > Note: While using the ROS Settings menu is the suggested workflow, you may still manually create a GameObject with an attached ROSConnection component.
 
 1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.

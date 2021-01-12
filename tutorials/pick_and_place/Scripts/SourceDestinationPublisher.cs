@@ -6,9 +6,7 @@ using Quaternion = UnityEngine.Quaternion;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
-    // ROS Connector
-    public ROSConnection ros;
-    private int numRobotJoints = 6;
+    private ROSConnection ros => ROSConnection.instance;
     
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
@@ -17,6 +15,7 @@ public class SourceDestinationPublisher : MonoBehaviour
     public GameObject target;
     public GameObject targetPlacement;
     
+    private int numRobotJoints = 6;
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
     
     // Articulation Bodies

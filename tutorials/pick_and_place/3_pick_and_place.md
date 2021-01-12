@@ -108,7 +108,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
 
-    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
+    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
 
     ![](img/3_target.gif)
 

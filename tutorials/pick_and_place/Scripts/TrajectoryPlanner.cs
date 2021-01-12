@@ -14,10 +14,10 @@ using Vector3 = UnityEngine.Vector3;
 public class TrajectoryPlanner : MonoBehaviour
 {
     // ROS Connector
-    public ROSConnection ros;
-    private int numRobotJoints = 6;
+    private ROSConnection ros => ROSConnection.instance;
 
     // Hardcoded variables 
+    private int numRobotJoints = 6;
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
     private readonly Vector3 pickPoseOffset = Vector3.up * 0.1f;
