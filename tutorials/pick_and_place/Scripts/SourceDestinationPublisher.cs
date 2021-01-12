@@ -25,7 +25,7 @@ public class SourceDestinationPublisher : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    void Awake()
+    void Start()
     {
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";

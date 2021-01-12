@@ -194,7 +194,7 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Find all robot joints in Awake() and add them to the jointArticulationBodies array.
     ///     Find left and right finger joints and assign them to their respective articulation body objects.
     /// </summary>
-    void Awake()
+    void Start()
     {
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
