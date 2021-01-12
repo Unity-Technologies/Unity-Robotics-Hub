@@ -41,7 +41,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 ## Setting Up the Robot 
 
-> Note: Presumably when you opened this project, the Package Manager automatically checked out and built the URDF-Importer package for you. You can double-check this now by looking for `Packages/URDF-Importer` in the Project Browser or by opening the Package Manager window.
+> Note: Presumably when you opened this project, the Package Manager automatically checked out and built the URDF-Importer package for you. You can double-check this now by looking for `Packages/URDF-Importer` in the Project Browser or by opening the Package Manager window. See the [Quick Setup](../quick_setup.md) steps for adding this package to your own project.
 
 1. Open the Physics Project Settings (Edit > Project Settings > Physics) and ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 

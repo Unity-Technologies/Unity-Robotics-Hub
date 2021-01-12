@@ -42,7 +42,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
-   > Note: The Package Manager automatically checked out and built the ROS-TCP-Connection package in this project. You can verify this now by looking for `Packages/ROS-TCP-Connector` in the Project Browser or by opening the Package Manager window.
+   > Note: The Package Manager automatically checked out and built the ROS-TCP-Connection package in this project. You can verify this now by looking for `Packages/ROS-TCP-Connector` in the Project Browser or by opening the Package Manager window. See the [Quick Setup](../quick_setup.md) steps for adding this package to your own project.
 
    > The ROS-TCP-Connector package includes two pieces: TcpConnector, which contains the `ROSConnection` script described above, and MessageGeneration, which generates C# scripts from ROS msg and srv files.
 
@@ -104,23 +104,16 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       // Pick Pose
       sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
       {
-         position = new Point(
-               target.transform.position.z,
-               -target.transform.position.x,
-               target.transform.position.y
-         ),
-         orientation = pickOrientation
+         position = target.transform.position.To<FLU>(),
+         // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
+         orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
       };
 
       // Place Pose
       sourceDestinationMessage.place_pose = new RosMessageTypes.Geometry.Pose
       {
-         position = new Point(
-               targetPlacement.transform.position.z,
-               -targetPlacement.transform.position.x,
-               targetPlacement.transform.position.y
-         ),
-         orientation = pickOrientation
+         position = targetPlacement.transform.position.To<FLU>(),
+         orientation = pickOrientation.To<FLU>()
       };
 
       // Finally send the message to server_endpoint.py running in ROS
@@ -130,7 +123,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`). 
 
-   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
+   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are provided via the [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md) in the ROS-TCP-Connector package.
 
 1. Return to the Unity Editor. Now that the message contents have been defined and the publisher script added, it needs to be added to the Unity world to run its functionality. 
 
@@ -176,7 +169,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provideds to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
+Most of the ROS setup has been provided via the `niryo_moveit` package. This section will describe the `.launch` files and start the necessary ROS nodes for communication. Two methods are provided to launch ROS nodes and services: either using a ROS docker container or doing it manually in your own ROS environment.
 
 ### Use Docker Container
 
