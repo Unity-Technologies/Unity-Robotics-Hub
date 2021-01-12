@@ -39,34 +39,43 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > Note: Read more about the ROS srv [here](http://wiki.ros.org/srv).
 
-2. We will start with generating the MoveItMsg: RobotTrajectory. This file describes the trajectory contents that will be used in the sent and received trajectory messages.
+1. We will start with generating the MoveItMsg: RobotTrajectory. This file describes the trajectory contents that will be used in the sent and received trajectory messages.
 
-   Select `RosMessageGeneration -> Auto Generate Messages -> Single Message` from the menu.
+   Select `Robotics -> Generate ROS Messages...` from the top menu bar.
 
-   ![](img/2_single.png)
+   ![](img/2_menu.png)
 
-   In the Message Auto Generation window click `Browse File...` and navigate to the MoveIt Msgs directory in this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/moveit_msgs`). Select `moveit_msgs/msg/RobotTrajectory.msg`, and then click `GENERATE!` 
-	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
-  
+   In the ROS Message Browser window, click `Browse` next to the ROS message path. Navigate to and select the ROS directory of this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`). This window will populate with any msg and srv files found in this directory. 
+   
+   ![](img/2_browser.png)
+
    > Note: If any of these ROS directories appear to be empty, you can run the command `git submodule update --init --recursive` to download the packages via Git submodules.
    
+   Under `ROS/src/moveit_msgs/msg`, scroll down to `RobotTrajectory.msg`, and click its `Build msg` button. The button text will change to "Rebuild msg" when it has completed.
+
+   ![](img/2_robottraj.png)
+
+	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
+  
 1. Next, the custom message scripts for this tutorial will be generated. 
 
-   Select `RosMessageGeneration -> Auto Generate Messages -> All Messages in Directory`. 
-   
-   In the Message Auto Generation window, click `Select Folder…` and navigate to the `niryo_moveit` directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/`. Select the `msg` folder, and then click `GENERATE!`
+   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/msg` to view the msg files listed. Next to msg, select `Build 2 msgs`.
 
+   ![](img/2_msg.png)
+   
 	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJoints and NiryoTrajectory. NiryoMoveitJoints describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. NiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
   
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
-1. Now that the messages have been generated, the service for moving the robot will be created. 
+1. Finally, now that the messages have been generated, the service for moving the robot will be created. 
 
-   In the menu, select `RosMessageGeneration -> Auto Generate Services -> Single Service`. 
+   Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/srv` to view the srv file listed. Next to srv, select `Build 1 srv`. 
 
-1. In the Service Auto Generation window, click `Browse File...` and navigate to the niryo_moveit/srv directory, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/src/niryo_moveit/srv`. Choose the `MoverService.srv` file, and then click `GENERATE!` 
+   ![](img/2_srv.png)
 
-   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories.
+   You can now close the ROS Message Browser window.
+
+   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories. 
    
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
