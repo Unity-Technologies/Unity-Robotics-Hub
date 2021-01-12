@@ -14,7 +14,7 @@ using Vector3 = UnityEngine.Vector3;
 public class TrajectoryPlanner : MonoBehaviour
 {
     // ROS Connector
-    private ROSConnection ros => ROSConnection.instance;
+    private ROSConnection ros;
 
     // Hardcoded variables 
     private int numRobotJoints = 6;
@@ -196,6 +196,9 @@ public class TrajectoryPlanner : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        // Get ROS connection static instance
+        ros = ROSConnection.instance;
+
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
         jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();

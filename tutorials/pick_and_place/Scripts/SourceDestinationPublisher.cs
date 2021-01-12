@@ -6,7 +6,8 @@ using Quaternion = UnityEngine.Quaternion;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
-    private ROSConnection ros => ROSConnection.instance;
+    // ROS Connector
+    private ROSConnection ros;
     
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
@@ -26,6 +27,9 @@ public class SourceDestinationPublisher : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        // Get ROS connection static instance
+        ros = ROSConnection.instance;
+
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
         jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
