@@ -189,7 +189,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the `ROS IP Address` in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
 
 ### Miscellaneous Issues
 

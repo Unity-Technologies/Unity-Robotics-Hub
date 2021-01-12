@@ -134,13 +134,13 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. Next, the ROS TCP connection needs to be defined. Select `Robotics -> ROS Settings` from the top menu bar. 
 
-   In the ROS Settings window, the `Host Name` should be the IP address of your ROS machine (*not* the one running Unity).
+   In the ROS Settings window, the `ROS IP Address` should be the IP address of your ROS machine (*not* the one running Unity).
 
    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-   - Replace the `Host Name` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+   - Replace the `ROS IP Address` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-   - If you are going to run ROS services with a Docker container, fill `Host Name` and `Override Unity IP` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP` field empty.
+   - If you are going to run ROS services with a Docker container, fill `ROS IP Address` and `Override Unity IP Address` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP Address` field empty.
 
    ![](img/2_settings.png)
 
@@ -204,7 +204,7 @@ ROS and Unity have now successfully connected!
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
   
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the ROS IP Address in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
 
 ---
 
