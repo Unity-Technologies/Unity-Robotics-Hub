@@ -49,38 +49,6 @@ from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
 ```
 
-
-## Instantiate the ROS Node
-
-```python
-    rospy.init_node(ros_node_name, anonymous=True)
-```
-
-## ROS Publisher
-A ROS Publisher requires three components:
-
-- Topic name
-- ROS message class generated from running `catkin_make` command
-- Queue size
-
-`RosPublisher('pos_rot', PosRot, queue_size=10)`
-## ROS Subscriber
-A ROS Subscriber requires three components:
-
-- Topic name
-- ROS message class generated from running `catkin_make` command
-- The tcp server that will connect to Unity
-
-`RosSubscriber('color', UnityColor, tcp_server)`
-
-## ROS Service
-A ROS Service requires two components:
-
-- Service name
-- ROS Service class generated from running `catkin_make` command
-
-`RosService('position_service', PositionService)`
-
 ## Creating the Server
 
 Requires:
@@ -101,6 +69,38 @@ Create a dictionary keyed by topic or service with the corresponding ROS communi
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
         'color': RosSubscriber('color', Color, tcp_server),
     }
+```
+
+## ROS Service
+A ROS Service requires two components:
+
+- Service name
+- ROS Service class generated from running `catkin_make` command
+
+`RosService('position_service', PositionService)`
+
+## ROS Publisher
+A ROS Publisher requires three components:
+
+- Topic name
+- ROS message class generated from running `catkin_make` command
+- Queue size
+
+`RosPublisher('pos_rot', PosRot, queue_size=10)`
+
+## ROS Subscriber
+A ROS Subscriber requires three components:
+
+- Topic name
+- ROS message class generated from running `catkin_make` command
+- The tcp server that will connect to Unity
+
+`RosSubscriber('color', UnityColor, tcp_server)`
+
+## Instantiate the ROS Node
+
+```python
+    rospy.init_node(ros_node_name, anonymous=True)
 ```
 
 ## Starting the Server
