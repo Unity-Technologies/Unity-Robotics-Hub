@@ -50,7 +50,7 @@ public class RosSubscriberExample : MonoBehaviour
 }
 ```
 
-- Create an empty GameObject, name it `RosConnection` and attach the `Plugins/TcpConnector/ROSConnection` script. (Or, if you're reusing the same scene from the Publisher tutorial, you can just keep the existing RosConnection object.)
+- Create an empty GameObject, name it `RosConnection` and attach the `Packages/ROS TCP Connection/Runtime/TcpConnector/ROSConnection` script. (Or, if you're reusing the same scene from the Publisher tutorial, you can just keep the existing RosConnection object.)
 	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS.
 	- The IP for Unity to listen on should be determined automatically, but if you're having trouble, you can set it manually in the `Override Unity IP` field. Finding the IP address of your local machine (the one running Unity) depends on your operating system.
 		- On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
