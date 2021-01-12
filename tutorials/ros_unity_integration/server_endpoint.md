@@ -56,8 +56,10 @@ Requires:
 - The ROS node name
 
 ```python
-    tcp_server = TcpServer(ros_node_name)
+    tcp_server = TcpServer(ros_node_name, buffer_size=1024, connections=10)
 ```
+
+The `ros_node_name` is required and the `buffer_size` and `connections` are optional. They are set to `1024` and `10` by default if not provided in the constructor arguments.
 
 ## Source Destination Dictionary
 
