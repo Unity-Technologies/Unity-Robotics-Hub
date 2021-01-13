@@ -35,7 +35,7 @@ This part uses scripts to automatically setup and run the Niryo One pick-and-pla
   docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
   ```
 
-1. Run ROS in a new docker container
+2. Run ROS in a new docker container
 
   ```bash
   docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_3 /bin/bash
