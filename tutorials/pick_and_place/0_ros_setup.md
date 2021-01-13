@@ -34,7 +34,7 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
     docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
     ```
 
-    > Note: The provided Dockerfile uses the [ROS Melodic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](ROS/) to the container. 
+    > Note: The provided Dockerfile uses the [ROS Melodic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages, copy the [provided ROS packages and submodules](ROS/) to the container, and build the catkin workspace. 
     
 1. Start the newly built Docker container: 
    

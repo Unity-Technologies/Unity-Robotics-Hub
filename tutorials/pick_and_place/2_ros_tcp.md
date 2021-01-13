@@ -57,7 +57,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectory.
   
-2. Next, the custom message scripts for this tutorial will be generated. 
+1. Next, the custom message scripts for this tutorial will need to be generated. 
 
    Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/msg` to view the msg files listed. Next to msg, click `Build 2 msgs`.
 
@@ -67,7 +67,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
   
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
-1. Finally, now that the messages have been generated, the service for moving the robot will be created. 
+1. Finally, now that the messages have been generated, we will create the service for moving the robot. 
 
    Still in the ROS Message Browser window, expand `ROS/src/niryo_moveit/srv` to view the srv file listed. Next to srv, click `Build 1 srv`. 
 
@@ -132,15 +132,15 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_target.gif)
 
-1. Next, the ROS TCP connection needs to be defined. Select `Robotics -> ROS Settings` from the top menu bar. 
+1. Next, the ROS TCP connection needs to be created. Select `Robotics -> ROS Settings` from the top menu bar. 
 
    In the ROS Settings window, the `ROS IP Address` should be the IP address of your ROS machine (*not* the one running Unity).
 
    - Find the IP address of your ROS machine. In Ubuntu, open a terminal window, and enter `hostname -I`.
 
-   - Replace the `ROS IP Address` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
+   - If you are **not** running ROS in a Docker container, replace the `ROS IP Address` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-   - If you are going to run ROS services with a Docker container, fill `ROS IP Address` and `Override Unity IP Address` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP Address` field empty.
+   - If you **are** going to run ROS services with a Docker container, fill `ROS IP Address` and `Override Unity IP Address` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP Address` field empty.
 
    ![](img/2_settings.png)
 
@@ -148,7 +148,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    
    > Note: While using the ROS Settings menu is the suggested workflow, you may still manually create a GameObject with an attached ROSConnection component.
 
-1. To call the `Publish()` function, a UI element will be added for user input. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
+1. Next, we will add a UI element that will allow user input to trigger the `Publish()` function. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
    
    > Note: In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen. 

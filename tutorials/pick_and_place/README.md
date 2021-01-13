@@ -2,7 +2,7 @@
 
 # Pick-and-Place Tutorial
 
-Unity's tools for robotic simulation enable users to integrate Unity with ROS-based workflows. [ROS](http://wiki.ros.org/ROS/Introduction) (Robot Operating System) provides services such as message-passing, package management, low-level device control, and hardware abstraction. Unity's robotics tools are able to support **importing URDF files** and **sending and receiving messages between ROS and Unity**. This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick-and-place task with known poses using MoveIt trajectory planning. 
+Unity's tools for robotic simulation enable users to integrate Unity with ROS-based workflows. [ROS](http://wiki.ros.org/ROS/Introduction) (Robot Operating System) provides services such as message-passing, package management, low-level device control, and hardware abstraction. Unity's robotics tools are able to support **importing URDF files** and **sending and receiving messages between ROS and Unity**. This tutorial will go through the steps necessary to integrate ROS with Unity, from installing the Unity Editor to creating a scene with an imported URDF to completing a pick-and-place task with known poses using [MoveIt](https://moveit.ros.org/) trajectory planning. 
 
 This tutorial is designed such that you do not need prior experience with Unity or C# in order to follow the scene setup steps, and you do not need prior robotics experience to get started with ROS integration. The tutorial is divided into high-level phases, from basic Unity and ROS initial setup through executing a pick-and-place task.
 
