@@ -19,6 +19,8 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 
 This part uses scripts to automatically setup and run the Niryo One pick-and-place demo in Unity Editor.
 
+---
+
 ## [Part 1: Create Unity scene with imported URDF](1_urdf.md) 
 
 <img src="img/1_end.gif" width="400"/>
