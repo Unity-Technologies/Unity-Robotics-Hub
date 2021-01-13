@@ -8,11 +8,16 @@ This tutorial will go through the steps necessary to integrate ROS with Unity, f
 
 **Table of Contents**
 - [Pick-and-Place Tutorial](#pick-and-place-tutorial)
+  - [Quick Demo](#quick-demo-watch-the-full-demo-with-one-click)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Part 3: Pick-and-Place](#part-3-pick-and-place)
   
 ---
+
+## [Quick Demo: Watch the full demo](quick_demo.md)
+
+This part uses scripts to automatically setup and run the Niryo One pick-and-place demo in Unity Editor.
 
 ## [Part 1: Create Unity scene with imported URDF](1_urdf.md) 
 
