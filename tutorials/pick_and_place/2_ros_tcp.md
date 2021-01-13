@@ -134,7 +134,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. Next, the object that will hold the TCP functionality needs to be added. 
 
-   Create another GameObject, name it RosConnect, and add the script `Assets/Plugins/TCPConnector/ROSConnection` to it in the same way.
+   Create another GameObject, name it RosConnect, and add the script `Packages/ROS TCP Connection/Runtime/TcpConnector/ROSConnection` to it in the same way.
 
 1. Note that these components show empty member variables in the Inspector window, which need to be assigned. 
 

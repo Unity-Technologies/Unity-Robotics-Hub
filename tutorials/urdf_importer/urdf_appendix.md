@@ -316,6 +316,18 @@ To address this predicament we have integrated another algorithm to create Conve
 
 ![](images/ConvexMeshComparison.png)
 
+## Disable Collision Support
+URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, rigidbodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
 
+1. Identify the links between which you want to ignore the collisions.
+2. Add a tag in the URDF file with the format 
+```XML
+ <disable_collision link1= <name_of_link_1> link2=<name_of_link_2>>
+  </disable_collision>
+```
+An example of the tag can be seen [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/PickAndPlaceProject/Assets/URDF/niryo_one/niryo_one.urdf#L223).
 
+The disable collision tag flags the links that need to be ignored to the URDF parser. Values of link1 and link2 attributes are the names of the two links between which the collision needs to be ignored. Make sure the names of the links match the names defined in the URDF file.
+
+Note: You can also manually ignore collisions in Unity using [APIs](https://docs.unity3d.com/ScriptReference/Physics.IgnoreCollision.html).
 
