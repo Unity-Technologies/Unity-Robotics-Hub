@@ -22,7 +22,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
   
-1. Go to the [Unity 2020.2 website](https://unity3d.com/unity/whats-new/2020.2.0) to install this project's version of Unity: **2020.2.0f1**. 
+1. Go to the [Unity 2020.2 Beta website](https://unity3d.com/unity/beta/2020.2.0b9) to install this project's version of Unity: **2020.2.0b9**. 
    
 1. Click the "Add" button in the top right of the "Projects" tab on Unity Hub, and navigate to and select the PickAndPlaceProject directory within this cloned repository (`/PATH/TO/Unity-Robotics-Hub/tutorials/pick_and_place/PickAndPlaceProject/`) to add the tutorial project to your Hub.
 

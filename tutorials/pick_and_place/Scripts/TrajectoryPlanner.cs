@@ -57,8 +57,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = 0.01f;
-        rightDrive.target = -0.01f;
+        leftDrive.target = -0.01f;
+        rightDrive.target = 0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
@@ -72,8 +72,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = -0.01f;
-        rightDrive.target = 0.01f;
+        leftDrive.target = 0.01f;
+        rightDrive.target = -0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
