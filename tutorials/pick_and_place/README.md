@@ -6,11 +6,11 @@ Unity's tools for robotic simulation enable users to integrate Unity with ROS-ba
 
 This tutorial is designed such that you do not need prior experience with Unity or C# in order to follow the scene setup steps, and you do not need prior robotics experience to get started with ROS integration. The tutorial is divided into high-level phases, from basic Unity and ROS initial setup through executing a pick-and-place task.
 
-Want to skip the tutorial and run the full demo? Check out our [Quick Demo](quick_demo.md)
+**Want to skip the tutorial and run the full demo? Check out our [Quick Demo](quick_demo.md)**
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-###Pick-and-Place Tutorial
+### Pick-and-Place Tutorial
   - [Requirements](#requirements)
   - [Part 0: ROS Setup](#part-0-ros-setup)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)

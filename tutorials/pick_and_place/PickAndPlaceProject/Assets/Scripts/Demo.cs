@@ -155,8 +155,8 @@ public class Demo : MonoBehaviour
         // Create RosConnect
         GameObject rosConnect = new GameObject(rosConnectName);
         rosConnection = rosConnect.AddComponent<ROSConnection>();
-        rosConnection.hostName = hostIP;
-        rosConnection.hostPort = hostPort;
+        rosConnection.rosIPAddress = hostIP;
+        rosConnection.rosPort = hostPort;
         rosConnection.overrideUnityIP = overrideUnityIP;
         rosConnection.unityPort = unityPort;
         rosConnection.awaitDataMaxRetries = awaitDataMaxRetries;
@@ -167,7 +167,6 @@ public class Demo : MonoBehaviour
     {
         GameObject publisher = new GameObject(publisherName);
         dynamic planner = publisher.AddComponent(assembly.GetType(trajectoryPlannerType));
-        planner.ros = rosConnection;
         planner.rosServiceName = rosServiceName;
         planner.niryoOne = GameObject.Find(niryoOneName);
         planner.target = GameObject.Find(targetName);
