@@ -48,5 +48,27 @@ This part uses scripts to automatically set up and run the Niryo One pick-and-pl
 1. Look for the `DemoScene` in the Project browser in the Assets/Scenes directory, and double-click to open it.
 
 1. Click the `Play` button to watch the full demo.
+	
+	<img src="img/quick_demo_hierarchy.png" width="35%" align="right">
+	> Note: several game objects will be created in the Hierarchy window at runtime
+	>
+	> * **Table**: the table where the robot stands on; instantiated from the Table prefab
+	> * **Target**: the cube that the robot is going to pick up; instantiated from the Target prefab
+	> * **TargetPlacement**: the area that the target cube will be placed; instantiation of the TargetPlacement prefab
+	> * **niryo_one**: the Niryo One robot imported from URDF
+	> * **ROSConnect**: the object that operates ROS communication
+	> * **Publisher**: the object that publish joint configurations to the ROS network for planning
 
+	<img src="img/quick_demo_ros_connect.png" width="35%" align="right">
+	> Note: the configurations of ROS communication can be found in the Inspector window of ROSConnect object
+	>
+	> * Joint configurations are published to ROS nodes running in the Docker container (127.0.0.1:10000)
+	> * ROS nodes in the Docker container will be notified that Unity's IP address is 127.0.0.1:5005
+	
+	<br />
+	<br />
+	<br />
+
+	![](img/0_pick_place.gif)
+	
 ### If you'd now like to follow the full tutorial to learn how to build the pick-and-place simulation from scratch, proceed to [Part 1](1_urdf.md).
