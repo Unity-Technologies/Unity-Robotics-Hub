@@ -14,10 +14,10 @@ using Vector3 = UnityEngine.Vector3;
 public class TrajectoryPlanner : MonoBehaviour
 {
     // ROS Connector
-    public ROSConnection ros;
-    private int numRobotJoints = 6;
+    private ROSConnection ros;
 
     // Hardcoded variables 
+    private int numRobotJoints = 6;
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
     private readonly Vector3 pickPoseOffset = Vector3.up * 0.1f;
@@ -57,8 +57,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = 0.01f;
-        rightDrive.target = -0.01f;
+        leftDrive.target = -0.01f;
+        rightDrive.target = 0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
@@ -72,8 +72,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = -0.01f;
-        rightDrive.target = 0.01f;
+        leftDrive.target = 0.01f;
+        rightDrive.target = -0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
@@ -196,6 +196,9 @@ public class TrajectoryPlanner : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // Get ROS connection static instance
+        ros = ROSConnection.instance;
+
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
         jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
