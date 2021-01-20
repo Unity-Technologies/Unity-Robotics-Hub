@@ -15,7 +15,8 @@ This tutorial is designed such that you do not need prior experience with Unity 
   - [Part 0: ROS Setup](#part-0-ros-setup)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
-  - [Part 3: Pick-and-Place](#part-3-pick-and-place)
+  - [Part 3: Pick-and-Place In Unity](#part-3-pick-and-place)
+  - [Part 4: Pick-and-Place On Robot](#part-4-pick-and-place)
 
 ## Requirements
 
@@ -42,7 +43,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 This part covers creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and publishing to a ROS topic.
 
-## [Part 3: Pick-and-Place](3_pick_and_place.md)
+## [Part 3: Pick-and-Place In Unity](3_pick_and_place.md)
  
 <img src="img/0_pick_place.gif" width="400"/>
 
@@ -50,5 +51,6 @@ This part includes the preparation and setup necessary to run a pick-and-place t
 
 ---
 
-## [Part 4: Pick-and-Place Sim and Real](4_sim_and_real.md)
+## [Part 4: Pick-and-Place On Robot](4_pick_and_place.md)
 
+TODO: Add gif
