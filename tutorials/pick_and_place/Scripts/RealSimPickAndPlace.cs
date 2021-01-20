@@ -15,7 +15,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     private const int TOOL_COMMAND_EXECUTION = 6;
     private const int TRAJECTORY_COMMAND_EXECUTION = 7;
     
-    public ROSConnection ros;
+    private ROSConnection ros;
     private const int NUM_ROBOT_JOINTS = 6;
     
     // Hardcoded variables 
