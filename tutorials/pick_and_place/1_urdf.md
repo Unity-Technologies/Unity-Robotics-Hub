@@ -104,7 +104,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 ## Resources
 
 - More on the URDF Importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
-- Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
+- Unity [Articulation Body Manual](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html)
 - For an introduction to Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
 
 ---
