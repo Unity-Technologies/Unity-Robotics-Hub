@@ -6,11 +6,11 @@ This part is going to be a little different than the previous tutorials in that 
 
   - [Niryo One Information](#niryo-one-information)
   - [RobotMoveGoal Parameters](#robotmovegoal-parameters)
-  - [Differences From Part 3](#differences-fromt-part-3)
+  - [Flow Differences](#flow-differences)
   - [The ROS Side](#the-ros-side)
   - [The Unity Side](#the-unity-side)
   	- [Key Differences](#key-differences)
-  	- [Setting Up Unity Scene](#settinig-up-unity-scene)
+  	- [Setting Up Unity Scene](#setting-up-unity-scene)
   - [Setting Up Niryo One](#setting-up-niryo-one)
   	- [Update Niryo One URDFs](#update-niryo-one-urdfs)
   	- [Add niryo_moveit Package](#add-niryo_moveit-package)
@@ -19,14 +19,14 @@ This part is going to be a little different than the previous tutorials in that 
   
 # Niryo One Information
 
-The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like instructions on how to connecct to the Niryo One, including passwords, and how to use the Niryo One Studio desktop application.
+The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connecct to the Niryo One, including passwords, and how to use the Niryo One Studio desktop application.
 
 For this tutorial we will be using the full [Niryo One ROS](https://niryo.com/docs/niryo-one/developer-tutorials/get-started-with-the-niryo-one-ros-stack/) stack running on the Niryo One robot. 
 
 From the Niryo One ROS documentation:
 > The commander package exposes an action server named “niryo_one/commander/robot_action”, with a “RobotMoveCommand” message. This is probably what you’re looking for if you want to send direct command to the robot using ROS.
 
-Using the `RobotMoveCommand` action server we can use an [action client](http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29) to send `RobotMoveGoal`s to the Niryo One for execution.
+Using the `RobotMoveCommand` action server we can write an [action client](http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29) that sends `RobotMoveGoal` commands to the Niryo One for execution.
 
 > If you are unfamiliar with ROS actions you can read more about them [here](http://wiki.ros.org/actionlib).
 
@@ -34,7 +34,7 @@ Using the `RobotMoveCommand` action server we can use an [action client](http://
 
 ## RobotMoveGoal Parameters
 
-So far we know that the Niryo One robot action server is expecting `RobotMoveGoal` messages. Looking at the `RobotMoveGoal` message type we see that it contains a single parameter, `RobotMoveCommand`. Furthermore, looking at the `RobotMoveCommand` message we see that it is used as a catch all for executing a variety of commands on the robot.
+The `goal` section in the `niryo_one_msgs/action/RobotMove.action` file shows a single parameter, `RobotMoveCommand`. Then looking at the `RobotMoveCommand` message we see that it is used as a catch all for executing a variety of commands on the robot.
 
 ### RobotMoveGoal.RobotMoveCommand
 
@@ -68,12 +68,12 @@ We can see that the `cmd_type` variable in `RobotMoveCommand` will need to be `7
 
 ### RobotMoveGoal.RobotMoveCommand.ToolCommand
 
-To execute an end effector command on the Niryo One, it requires a `ToolCommand` object. Much like `RobotMoveCommand`, the `ToolCommand` message type is a catch all for gripper commands as the Niryo One supports a variety of [grippers](https://niryo.com/niryo-one-accessories/).
+To execute an end effector command on the Niryo One, a `ToolCommand` object is required. Much like `RobotMoveCommand`, the `ToolCommand` message type is a catch all for gripper commands as the Niryo One supports a variety of [grippers](https://niryo.com/niryo-one-accessories/).
 
 We are only interested in opening and closing the standard gripper so we will only use the following parameters:
 
 - `uint8 tool_id`
-	- Which end effector is being used
+	- Which end effector is being used **TODO: How do we know 11**
 - `uint8 cmd_type`
 	- Which command to execute. Ex. open or close
 - `uint16 gripper_close_speed`
@@ -102,22 +102,31 @@ From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` 
 
 
 ## Differences From Part 3
-**Part 3 Message Flow:**
 
-**TODO: Diagrams**
+**Part 3 Flow:**
 
-- `TrajectoryPlanner` sends ServiceMessage with robot pose, target cube coordinates, and target destination coordinates to `mover.py`
-- `mover.py` calculates the four trajectories, adds them to an array, and returns the array to `TrajectoryPlanner`
-- `TrajectoryPlanner` then executes the trajectories one at a time
+![](img/4_old_flow.png)
 
-**The New Flow:**
+- `TrajectoryPlanner` sends ServiceMessage with robot pose, target cube coordinates, and target destination coordinates to `mover.py`.
+- `mover.py` calculates the four trajectories, adds them to an array, and returns the array to `TrajectoryPlanner`.
+- `TrajectoryPlanner` then executes the trajectories one at a time on the simulated Niryo One.
 
-- `RealSimPickAndPlace.cs` publishes robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic
-- `sim_and_real_pnp.py,`as a ROS subscriber node, reads from the `sim_real_pnp` topic, plans the trajectories, and sends the action goals one at a time.
+**Part 4 Flow:**
+
+![](img/4_new_flow.png)
+
+- `RealSimPickAndPlace.cs` publishes robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic.
+- `sim_and_real_pnp.py,`as a ROS subscriber node, reads from the `sim_real_pnp` topic, plans the trajectories, and sends the action goals one at a time to `RobotMoveAction` server.
+- `RobotMoveAction` server publishes the goal messages along to the `robot_action/goal` topic.
 
 - **Simultaneously**
-	- Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory
-	- Real Niryo One reads from the action goal topic, `robot_action/goal`, and executes trajectory
+	- Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory or tool commands.
+	- `RobotMoveAction` server executes trajectory on Niryo One.
+
+**Part 4 Changes:**
+
+- Gripper command execution was previously implemented in `TrajectoryPlanner.cs` in part 3 and is now being managed by the `RobotMoveAction` server.
+- Extra poses have been added to make execution of the individual poses more apparent on the physical robot.
 
 
 # The ROS Side
@@ -200,7 +209,7 @@ Using the same scene from [Part 3](3_pick_and_place.md), we are going to use a n
 ## Key Differences
 Instead of calling a service and waiting for the response  to execute a robot command, a subscription is going to be made to the `niryo_one/commander/robot_action/goal` topic and every command published will be executed upon reception.
 
-- A subscriber is create on Start to read the robot command messages and execute them.
+- A subscriber is created on Start to read the robot command messages and execute them as they are received.
 
 ```csharp
 void Start()
