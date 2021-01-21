@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
-    public ROSConnection ros;
+    ROSConnection ros;
     public string topicName = "pos_rot";
 
     // The game object 
@@ -17,6 +17,12 @@ public class RosPublisherExample : MonoBehaviour
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
+    
+    void Start()
+    {
+        // start the ROS connection
+        ros = ROSConnection.instance;
+    }
 
     private void Update()
     {

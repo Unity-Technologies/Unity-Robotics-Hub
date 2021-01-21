@@ -5,7 +5,7 @@ using Debug = UnityEngine.Debug;
 
 public class RosServiceExample : MonoBehaviour
 {
-    public ROSConnection ros;
+    ROSConnection ros;
 
     public string serviceName = "pos_srv";
 
@@ -20,6 +20,7 @@ public class RosServiceExample : MonoBehaviour
 
     void Start()
     {
+        ros = ROSConnection.instance;
         destination = cube.transform.position;
     }
 
