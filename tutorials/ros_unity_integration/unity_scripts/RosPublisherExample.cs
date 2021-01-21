@@ -17,12 +17,12 @@ public class RosPublisherExample : MonoBehaviour
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
-	
-	void Awake()
-	{
-		// start the ROS connection
-		ros = ROSConnection.instance;
-	}
+    
+    void Awake()
+    {
+        // start the ROS connection
+        ros = ROSConnection.instance;
+    }
 
     private void Update()
     {

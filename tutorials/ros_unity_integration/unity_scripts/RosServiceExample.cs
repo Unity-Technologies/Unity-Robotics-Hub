@@ -20,7 +20,7 @@ public class RosServiceExample : MonoBehaviour
 
     void Start()
     {
-		ros = ROSConnection.instance;
+        ros = ROSConnection.instance;
         destination = cube.transform.position;
     }
 
