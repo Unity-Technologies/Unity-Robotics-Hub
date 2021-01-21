@@ -25,7 +25,7 @@ public class SourceDestinationPublisher : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    void Awake()
+    void Start()
     {
         // Get ROS connection static instance
         ros = ROSConnection.instance;

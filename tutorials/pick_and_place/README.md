@@ -6,16 +6,16 @@ Unity's tools for robotic simulation enable users to integrate Unity with ROS-ba
 
 This tutorial is designed such that you do not need prior experience with Unity or C# in order to follow the scene setup steps, and you do not need prior robotics experience to get started with ROS integration. The tutorial is divided into high-level phases, from basic Unity and ROS initial setup through executing a pick-and-place task.
 
+**Want to skip the tutorial and run the full demo? Check out our [Quick Demo](quick_demo.md)**
+
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
-**Table of Contents**
+### Pick-and-Place Tutorial
   - [Requirements](#requirements)
   - [Part 0: ROS Setup](#part-0-ros-setup)
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Part 3: Pick-and-Place](#part-3-pick-and-place)
-  
----
 
 ## Requirements
 
@@ -24,15 +24,11 @@ This repository provides project files for the pick-and-place tutorial, includin
   git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
   ```
 
----
-
 ## [Part 0: ROS Setup](0_ros_setup.md)
 
 <img src="img/0_docker.png" width="400"/>
 
 This part provides two options for setting up your ROS workspace: using Docker, or manually setting up a catkin workspace.
-
----
 
 ## [Part 1: Create Unity scene with imported URDF](1_urdf.md) 
 
@@ -40,15 +36,11 @@ This part provides two options for setting up your ROS workspace: using Docker, 
 
 This part includes downloading and installing the Unity Editor, setting up a basic Unity scene, and importing a robot--the [Niryo One](https://niryo.com/niryo-one/)--using the URDF Importer. 
 
----
-
 ## [Part 2: ROS–Unity Integration](2_ros_tcp.md)
 
 <img src="img/2_echo.png" width="400"/>
 
 This part covers creating a TCP connection between Unity and ROS, generating C# scripts from a ROS msg and srv files, and publishing to a ROS topic.
-
----
 
 ## [Part 3: Pick-and-Place](3_pick_and_place.md)
  
