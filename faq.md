@@ -23,7 +23,7 @@ How does your Unity integration compare to [ROS#](https://github.com/siemens/ros
 ---
 Two of the Unity Robotics repos (URDF Importer and TCP Connector) have been forked from the Siemens ROS# repo.
 
-In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html) components on their corresponding joints. 
+In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) components on their corresponding joints. 
 
 Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains the `MessageGeneration` code from ROS#. We added the extra functionality that when generating a C# class from a ROS message, functions are also generated that will serialize and deserialize the messages as ROS would internally.
 
@@ -72,7 +72,7 @@ Ensure that the ROS IP address is entered correctly as the `Host Name` in the Ro
 
 I don't see an option to Import Robot from URDF, or I have compile errors upon importing the URDF-Importer.
 ---
-The [ArticulationBody](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/ArticulationBody.html) has dependencies on Unity Editor versions [2020.2.0](https://unity3d.com/unity/whats-new/2020.2.0)+. Try updating your project to the latest 2020.2 release.
+The [ArticulationBody](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) has dependencies on Unity Editor versions [2020.2.0](https://unity3d.com/unity/whats-new/2020.2.0)+. Try updating your project to the latest 2020.2 release.
 
 # Can't find what you're looking for?
 Connect directly with the Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com)!

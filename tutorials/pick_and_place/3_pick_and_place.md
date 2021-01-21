@@ -175,7 +175,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 ## Resources
 
 - [MoveIt!](https://github.com/ros-planning/moveit)
-- Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
+- Unity [Articulation Body Manual](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html)
 
 ---
 

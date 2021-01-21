@@ -30,7 +30,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 1. Click the newly added project to open it.
 
-1. Unity should open the project to a scene titled `EmptyScene`.  If it did not, you can find it in the Project window in the Assets/Scenes directory, and double-click to open it now.
+1. In Unity, double click to open the `Assets/Scenes/EmptyScene` scene if it is not already open.
     > Note: If you have some experience with Unity and would like to skip the scene setup portion, you can open the scene named `TutorialScene` now and skip ahead to [Setting up the robot](#setting-up-the-robot).
 
     > Note: Only one Unity scene should be open at a time. If you see multiple scenes open in the Hierarchy view, double-click the desired scene, e.g. `Assets/Scenes/EmptyScene`, to open it and close the other scenes.
@@ -104,7 +104,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 ## Resources
 
 - More on the URDF Importer tool [here](https://github.com/Unity-Technologies/URDF-Importer)
-- Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
+- Unity [Articulation Body Manual](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html)
 - For an introduction to Unity, check out the [Roll-a-Ball tutorial](https://learn.unity.com/project/roll-a-ball)
 
 ---
