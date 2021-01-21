@@ -24,9 +24,13 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
    ```
 
 ## Setting Up Unity Scene
-- In the menu bar, find and select `RosMessageGeneration` -> `Auto Generate Messages` -> `Single Message ...`
-- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/msg/PosRot.msg ` and click `GENERATE!`
-    - The generated file will be saved in the default directory `Assets/RosMessages/msg`
+- In the menu bar, find and select `Robotics` -> `Generate ROS Messages...`
+- Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`.
+	- Expand the robotics_demo subfolder and click "Build 2 msgs" to generate new C# scripts from the ROS .msg files.
+
+![](images/generate_messages_1.png)
+
+   - The generated files will be saved in the default directory `Assets/RosMessages/msg`.
 - Create a new directory in `Assets` and name it `Scripts`
 - Create a new script in the `Scripts` directory and name it `RosPublisherExample.cs`
 - Open `RosPublisherExample.cs` and paste the following code:
@@ -42,7 +46,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
-    public ROSConnection ros;
+    ROSConnection ros;
     public string topicName = "pos_rot";
 
     // The GameObject 
@@ -52,6 +56,12 @@ public class RosPublisherExample : MonoBehaviour
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
+
+	void Awake()
+	{
+		// start the ROS connection
+		ros = ROSConnection.instance;
+	}
 
     private void Update()
     {
@@ -82,11 +92,10 @@ public class RosPublisherExample : MonoBehaviour
 
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
-- Create an empty GameObject, name it `RosConnection` and attach the `ROS TCP Connection/Runtime/TcpConnector/ROSConnection` script.
-	- Change the host name and port to match the ROS IP and port variables defined when you set up ROS
+- In the main menu bar, open `Robotics/ROS Settings`.
+	- Set the ROS IP address and port to match the ROS IP and port variables defined when you set up ROS.
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
-	- Drag the cube GameObject onto the `Cube` parameter
-	- Drag the RosConnection object onto its `Ros` parameter.
+	- Drag the cube GameObject onto the `Cube` parameter.
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
 
