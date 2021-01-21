@@ -14,7 +14,7 @@ Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Serv
   
    ```bash
     source devel/setup.bash
-	rosrun robotics_demo server_endpoint.py
+    rosrun robotics_demo server_endpoint.py
    ```
 
 Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
@@ -24,7 +24,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
    ```bash
     source devel/setup.bash
-	rosrun robotics_demo position_service.py
+    rosrun robotics_demo position_service.py
    ```
 
 ## Setting Up Unity Scene
@@ -36,7 +36,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
    - The generated files will be saved in the default directory `Assets/RosMessages/srv`.
 - Create a script and name it `RosServiceExample.cs`
 - Paste the following code into `RosServiceExample.cs`
-	- **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
+    - **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
 
 ```csharp
 using System;
@@ -61,7 +61,7 @@ public class RosServiceExample : MonoBehaviour
 
     void Start()
     {
-		ros = ROSConnection.instance;
+        ros = ROSConnection.instance;
         destination = cube.transform.position;
     }
 
