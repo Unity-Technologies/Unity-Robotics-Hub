@@ -24,7 +24,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
     
 ![](images/generate_messages_1.png)
 
-   - The generated files will be saved in the default directory `Assets/RosMessages/msg`.
+   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
 
 ## Setting Up Unity Scene
 - Create a script and name it `RosSubscriberExample.cs`

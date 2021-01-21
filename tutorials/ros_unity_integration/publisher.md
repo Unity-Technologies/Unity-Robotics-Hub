@@ -30,7 +30,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ![](images/generate_messages_1.png)
 
-   - The generated files will be saved in the default directory `Assets/RosMessages/msg`.
+   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
 - Create a new directory in `Assets` and name it `Scripts`
 - Create a new script in the `Scripts` directory and name it `RosPublisherExample.cs`
 - Open `RosPublisherExample.cs` and paste the following code:
@@ -57,7 +57,7 @@ public class RosPublisherExample : MonoBehaviour
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
-    void Awake()
+    void Start()
     {
         // start the ROS connection
         ros = ROSConnection.instance;

@@ -33,7 +33,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ![](images/generate_messages_2.png)
 
-   - The generated files will be saved in the default directory `Assets/RosMessages/srv`.
+   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/srv`.
 - Create a script and name it `RosServiceExample.cs`
 - Paste the following code into `RosServiceExample.cs`
     - **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
