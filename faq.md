@@ -19,15 +19,15 @@ Is ROS 2 support planned?
 ---
 We definitely plan to support ROS 2 in the future. Let us know more about your use case in order to prioritize our work by reaching out to us at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
 
-How does your Unity integration compare to [ROS#](https://github.com/siemens/ros-sharp)?
+How does your Unity integration compare to ROS#?
 ---
-Two of the Unity Robotics repos (URDF Importer and TCP Connector) have been forked from the Siemens ROS# repo.
+Two of the Unity Robotics repos (URDF Importer and TCP Connector) have been forked from the [Siemens ROS# repo](https://github.com/siemens/ros-sharp).
 
 In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) components on their corresponding joints. 
 
 Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains the `MessageGeneration` code from ROS#. We added the extra functionality that when generating a C# class from a ROS message, functions are also generated that will serialize and deserialize the messages as ROS would internally.
 
-You can find the ROS# description of the differences [here](https://github.com/siemens/ros-sharp/wiki/Ext_RosSharp_RoboticsHub#differences-between-unity-robotics-hub-and-ros), which also includes some of their future plans.
+You can find more details about the differences between our implementation and ROS#, along with some of their future plans, in the [ROS# project](https://github.com/siemens/ros-sharp/wiki/Ext_RosSharp_RoboticsHub#differences-between-unity-robotics-hub-and-ros).
 
 How can I install the Unity Packages without starting from a template project?
 ---
