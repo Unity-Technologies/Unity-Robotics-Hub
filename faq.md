@@ -27,6 +27,8 @@ In the URDF Importer we have added the functionality to instantiate a robot from
 
 Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains the `MessageGeneration` code from ROS#. We added the extra functionality that when generating a C# class from a ROS message, functions are also generated that will serialize and deserialize the messages as ROS would internally.
 
+You can find the ROS# description of the differences [here](https://github.com/siemens/ros-sharp/wiki/Ext_RosSharp_RoboticsHub#differences-between-unity-robotics-hub-and-ros), which also includes some of their future plans.
+
 How can I install the Unity Packages without starting from a template project?
 ---
 Refer to the [Quick Start](tutorials/quick_setup.md) instructions on how to import these packages.
