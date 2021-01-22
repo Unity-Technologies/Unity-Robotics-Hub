@@ -146,7 +146,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    Opening the ROS Settings has created a ROSConnectionPrefab in `Assets/Resources` with the user-input settings. When the static `ROSConnection.instance` is referenced in a script, if a `ROSConnection` instance is not already present, the prefab will be instantiated in the Unity scene, and the connection will begin.
    
-   > Note: While using the ROS Settings menu is the suggested workflow, you may still manually create a GameObject with an attached ROSConnection component.
+   > Note: While using the ROS Settings menu is the suggested workflow as of this version, you may still manually create a GameObject with an attached ROSConnection component.
 
 1. Next, we will add a UI element that will allow user input to trigger the `Publish()` function. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well. 
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.

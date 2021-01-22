@@ -53,7 +53,7 @@ public class Demo : MonoBehaviour
     string scriptPattern = "*.cs";
 
     string externalScriptsDirectory = "../Scripts";
-    string scriptsDirectory = "Assets/Scripts";
+    //string scriptsDirectory = "Assets/Scripts";
 
     string rosConnectName = "ROSConnect";
     string publisherName = "Publisher";
