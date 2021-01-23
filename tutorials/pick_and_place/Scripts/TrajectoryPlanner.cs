@@ -3,22 +3,27 @@ using System.Linq;
 using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
-using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
+
+using ROSGeometry;
+using Quaternion = UnityEngine.Quaternion;
+using RosImage = RosMessageTypes.Sensor.Image;
 using Transform = UnityEngine.Transform;
+using Vector3 = UnityEngine.Vector3;
+
 
 public class TrajectoryPlanner : MonoBehaviour
 {
     // ROS Connector
-    public ROSConnection ros;
-    private int numRobotJoints = 6;
+    private ROSConnection ros;
 
     // Hardcoded variables 
+    private int numRobotJoints = 6;
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
-    private readonly float pickPoseOffset = 0.1f;
+    private readonly Vector3 pickPoseOffset = Vector3.up * 0.1f;
     
     // Assures that the gripper is always positioned above the target cube before grasping.
-    private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
+    private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
 
     // Variables required for ROS communication
     public string rosServiceName = "niryo_moveit";
@@ -52,8 +57,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = 0.01f;
-        rightDrive.target = -0.01f;
+        leftDrive.target = -0.01f;
+        rightDrive.target = 0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
@@ -67,8 +72,8 @@ public class TrajectoryPlanner : MonoBehaviour
         var leftDrive = leftGripper.xDrive;
         var rightDrive = rightGripper.xDrive;
 
-        leftDrive.target = -0.01f;
-        rightDrive.target = 0.01f;
+        leftDrive.target = 0.01f;
+        rightDrive.target = -0.01f;
 
         leftGripper.xDrive = leftDrive;
         rightGripper.xDrive = rightDrive;
@@ -107,27 +112,16 @@ public class TrajectoryPlanner : MonoBehaviour
         // Pick Pose
         request.pick_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                target.transform.position.z,
-                -target.transform.position.x,
-                // Add pick pose offset to position the gripper above target to avoid collisions
-                target.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
+            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         request.place_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                targetPlacement.transform.position.z,
-                -targetPlacement.transform.position.x,
-                // Use the same pick pose offset so the target cube can be seen dropping into position
-                targetPlacement.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = pickOrientation.To<FLU>()
         };
 
         ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
@@ -200,8 +194,11 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Find all robot joints in Awake() and add them to the jointArticulationBodies array.
     ///     Find left and right finger joints and assign them to their respective articulation body objects.
     /// </summary>
-    void Awake()
+    void Start()
     {
+        // Get ROS connection static instance
+        ros = ROSConnection.instance;
+
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
         jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();

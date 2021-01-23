@@ -1,13 +1,13 @@
 using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
-using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
+using ROSGeometry;
+using Quaternion = UnityEngine.Quaternion;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
     // ROS Connector
-    public ROSConnection ros;
-    private int numRobotJoints = 6;
+    private ROSConnection ros;
     
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
@@ -16,7 +16,8 @@ public class SourceDestinationPublisher : MonoBehaviour
     public GameObject target;
     public GameObject targetPlacement;
     
-    private readonly RosQuaternion pickOrientation = new RosQuaternion(0.5,0.5,-0.5,0.5);
+    private int numRobotJoints = 6;
+    private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
     
     // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
@@ -24,8 +25,11 @@ public class SourceDestinationPublisher : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    void Awake()
+    void Start()
     {
+        // Get ROS connection static instance
+        ros = ROSConnection.instance;
+
         jointArticulationBodies = new ArticulationBody[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
         jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
@@ -60,23 +64,15 @@ public class SourceDestinationPublisher : MonoBehaviour
         // Pick Pose
         sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                target.transform.position.z,
-                -target.transform.position.x,
-                target.transform.position.y
-            ),
-            orientation = pickOrientation
+            position = target.transform.position.To<FLU>(),
+            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         sourceDestinationMessage.place_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                targetPlacement.transform.position.z,
-                -targetPlacement.transform.position.x,
-                targetPlacement.transform.position.y
-            ),
-            orientation = pickOrientation
+            position = targetPlacement.transform.position.To<FLU>(),
+            orientation = pickOrientation.To<FLU>()
         };
 
         // Finally send the message to server_endpoint.py running in ROS

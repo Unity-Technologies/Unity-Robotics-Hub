@@ -62,4 +62,4 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 
 ![](images/add_package_2.png)
 
-Messages being passed between Unity and ROS need to be serialized exactly as ROS serializes them internally. This is achieved with the RosMessageGeneration utility, which generates C# classes, including serialization and deserialization functions, based on ROS message files. Adding the ROS TCP Connector package should have created a new Unity menu option, “RosMessageGeneration”, which we will use to generate these messages later.
+Messages being passed between Unity and ROS need to be serialized exactly as ROS serializes them internally. This is achieved with the RosMessageGeneration utility, which generates C# classes, including serialization and deserialization functions, based on ROS message files. Adding the ROS TCP Connector package should have created a new Unity menu option, “Robotics/Generate ROS Messages”, which we will use to generate these messages later.

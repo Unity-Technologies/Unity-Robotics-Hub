@@ -5,7 +5,7 @@ A walkthrough of the important components of a ROS TCP endpoint script using the
 The following is an example of a server endpoint Python script that:
 
 - Gets parameters from `rosparam`
-- Creates corresponding ROS Publisher, Subscriber, and Service objects to interact with topics and services running in in ROS network
+- Creates corresponding ROS Publisher, Subscriber, and Service objects to interact with topics and services running in ROS network
 - Starts TCP Server process to handle incoming and outgoing connections
 
 
@@ -15,7 +15,6 @@ The following is an example of a server endpoint Python script that:
 import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
-
 from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
 
@@ -24,15 +23,14 @@ def main():
     buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
     connections = rospy.get_param("/TCP_CONNECTIONS", 10)
     tcp_server = TcpServer(ros_node_name, buffer_size, connections)
-
-    tcp_server.source_destination_dict = {
+    rospy.init_node(ros_node_name, anonymous=True)
+    
+    tcp_server.start({
         'pos_srv': RosService('position_service', PositionService),
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
         'color': RosSubscriber('color', UnityColor, tcp_server)
-    }
-
-    rospy.init_node(ros_node_name, anonymous=True)
-    tcp_server.start()
+    })
+    
     rospy.spin()
 
 
@@ -44,42 +42,9 @@ if __name__ == "__main__":
 ## Import Statements for Services and Messages
 ```python
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
-
 from robotics_demo.msg import PosRot, UnityColor
 from robotics_demo.srv import PositionService
 ```
-
-
-## Instantiate the ROS Node
-
-```python
-    rospy.init_node(ros_node_name, anonymous=True)
-```
-
-## ROS Publisher
-A ROS Publisher requires three components:
-
-- Topic name
-- ROS message class generated from running `catkin_make` command
-- Queue size
-
-`RosPublisher('pos_rot', PosRot, queue_size=10)`
-## ROS Subscriber
-A ROS Subscriber requires three components:
-
-- Topic name
-- ROS message class generated from running `catkin_make` command
-- The tcp server that will connect to Unity
-
-`RosSubscriber('color', UnityColor, tcp_server)`
-
-## ROS Service
-A ROS Service requires two components:
-
-- Service name
-- ROS Service class generated from running `catkin_make` command
-
-`RosService('position_service', PositionService)`
 
 ## Creating the Server
 
@@ -88,29 +53,71 @@ Requires:
 - The ROS node name
 
 ```python
-    tcp_server = TcpServer(ros_node_name)
+    tcp_server = TcpServer(ros_node_name, buffer_size, connections)
 ```
 
-## Source Destination Dictionary
+The `ros_node_name` argument is required and the `buffer_size` and `connections` are optional. They are set to `1024` and `10` by default if not provided in the constructor arguments.
 
-Create a dictionary keyed by topic or service with the corresponding ROS communication class as the value. The dictionary is used by the TCP server to direct messages to and from the ROS network.
+## Instantiate the ROS Node
 
 ```python
-    tcp_server.source_destination_dict = {
-        'pos_srv': RosService('position_service', PositionService),
-        'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
-        'color': RosSubscriber('color', Color, tcp_server),
-    }
+    rospy.init_node(ros_node_name, anonymous=True)
 ```
 
 ## Starting the Server
 
 ```python
-    tcp_server.start()
-    rospy.spin()
+    tcp_server.start({
+        'pos_srv': RosService('position_service', PositionService),
+        'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
+        'color': RosSubscriber('color', UnityColor, tcp_server)
+    })
     
+    rospy.spin()
 ```
 
+## Source Destination Dictionary
+
+The argument to start() is a dictionary keyed by topic or service with the corresponding ROS communication class as the value. The dictionary is used by the TCP server to direct messages to and from the ROS network.
+
+## ROS Publisher
+A ROS Publisher allows a Unity component to send messages on a given topic to other ROS nodes. It requires three components:
+
+- Topic name
+- ROS message class generated from running `catkin_make` command
+- Queue size (optional)
+
+`RosPublisher('pos_rot', PosRot, queue_size=10)`
+
+## ROS Subscriber
+A ROS Subscriber allows a Unity component to receive messages from other ROS nodes on a given topic. It requires three components:
+
+- Topic name
+- ROS message class generated from running `catkin_make` command
+- The tcp server that will connect to Unity
+
+`RosSubscriber('color', UnityColor, tcp_server)`
+
+## ROS Service
+A ROS Service is similar to a RosPublisher, in that a Unity component sends a Request message to another ROS node. Unlike a Publisher, the Unity component then waits for a Response back. It requires two components:
+
+- Service name
+- ROS Service class generated from running `catkin_make` command
+
+`RosService('position_service', PositionService)`
+
+## Unity Service
+
+A Unity Service is similar to a RosSubscriber, in that a Unity component receives a Request message from another ROS node. It then sends a Response back. It requires three components:
+
+- Service name
+- ROS Service class generated from running `catkin_make` command
+- The tcp server that will connect to Unity
+
+`UnityService('unity_service', PositionService, tcp_server)`
+
+
+## Parameters
 
 The following parameters can be hardcoded, but for the sake of portability, we recommend setting the parameters using the `rosparam set` command, or a `rosparam` YAML file.
 
@@ -130,7 +137,7 @@ An example launch file that will set the appropriate ROSPARAM values required fo
 ```
 <launch>
 
-    <env name="ROS_IP" value="192.168.1.116"/>
+    <env name="ROS_IP" value="127.0.0.1"/>
     <env name="ROS_HOSTNAME" value="$(env ROS_IP)"/>
     
     <param name="ROS_IP" type="str" value="$(env ROS_IP)" />

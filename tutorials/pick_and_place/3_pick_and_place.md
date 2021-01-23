@@ -1,6 +1,6 @@
 # Pick-and-Place Tutorial: Part 3
 
-This part assumes you have access to a functional ROS workspace and that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
+This part assumes that the previous two parts ([Part 1](1_urdf.md), [Part 2](2_ros_tcp.md)) have been completed.
 
 Steps covered in this tutorial includes invoking a motion planning service in ROS, moving a Unity Articulation Body based on the calculated trajectory, and controlling a gripping tool to successfully grasp a cube.
 
@@ -20,7 +20,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now.
+1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now. 
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
@@ -37,27 +37,16 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
         // Pick Pose
         request.pick_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                target.transform.position.z,
-                -target.transform.position.x,
-                // Add pick pose offset to position the gripper above target to avoid collisions
-                target.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
+            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         request.place_pose = new RosMessageTypes.Geometry.Pose
         {
-            position = new Point(
-                targetPlacement.transform.position.z,
-                -targetPlacement.transform.position.x,
-                // Use the same pick pose offset so the target cube can be seen dropping into position
-                targetPlacement.transform.position.y + pickPoseOffset
-            ),
-            // Orientation is hardcoded for this example so the gripper is always directly above the target object
-            orientation = pickOrientation
+            position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
+            orientation = pickOrientation.To<FLU>()
         };
 
         ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
@@ -119,7 +108,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
 
-    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. Finally, assign the RosConnect object to the `Ros` field.
+    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
 
     ![](img/3_target.gif)
 
@@ -133,7 +122,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The ROS Side
 
-> Note: This project was built using the ROS Melodic distro, and Python 2.
+> Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
 > Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of the pick-and-place task).
 
@@ -158,51 +147,21 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 > This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
 
-### Use Docker Container
-
-1. If you are using ROS docker container and have not already build the ROS docker image. Follow the steps in [Part 2](2_ros_tcp.md) to build the `unity-robotics:pick-and-place` docker image.
-
-### Manually Setup ROS
-
-1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, e.g. `Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`, run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
-
-1. If you have not already set the ROS parameter values in the `params.yaml`, navigate to `src/niryo_moveit/config/params.yaml` and open the file for editing. Follow the steps in [Part 2](2_ros_tcp.md) to configure the values.
-
-1. The ROS side is now ready to interface with Unity!
-
---- 
-
 ## ROS–Unity Communication
 
-### Use Docker Container
-
-1. If you have not already, [build the ROS docker image](2_ros_tcp.md#use-docker-container) before executing the following command lines.
-
-2. Run ROS in a new docker container
-
-  ```bash
-  docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place part_3 /bin/bash
-  ```
-
-3. Terminate docker container
-
-    Press `Ctrl + C` or `Cmd + C` to terminate the docker container.
-
-### Manually Setup ROS
+1. If you have not already completed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace, do so now. 
 
 1. Open a new terminal window in the ROS workspace. Once again, source the workspace. 
 
     Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
-    - This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
-  
-	    > Note: Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
 
     ```bash
     roslaunch niryo_moveit part_3.launch
     ```
 
-    This launch will print various messages to the console, including the set parameters and the nodes launched. 
- The final two messages should confirm `You can start planning now!` and `Ready to plan`.
+    > Note: This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the Niryo One robot (`demo.launch`). The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`. Descriptions of what these files are doing can be found [here](moveit_file_descriptions.md).
+
+    This launch will print various messages to the console, including the set parameters and the nodes launched. The final two messages should confirm `You can start planning now!` and `Ready to plan`.
 
     > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 
@@ -216,7 +175,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 ## Resources
 
 - [MoveIt!](https://github.com/ros-planning/moveit)
-- Unity [Articulation Body Documentation](https://docs.unity3d.com/2020.1/Documentation/ScriptReference/ArticulationBody.html)
+- Unity [Articulation Body Manual](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html)
 
 ---
 
@@ -230,7 +189,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the Host Name in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the `ROS IP Address` in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
 
 ### Miscellaneous Issues
 
