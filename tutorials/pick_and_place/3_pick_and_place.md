@@ -68,7 +68,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
     > This is similar to the `SourceDestinationPublisher.Publish()` function, but with a few key differences. There is an added `pickPoseOffset` to the `pick` and `place_pose` `y` component. This is because the calculated trajectory to grasp the `target` object will hover slightly above the object before grasping it in order to avoid potentially colliding with the object. Additionally, this function calls `CurrentJointConfig()` to assign the `request.joints_input` instead of assigning the values individually.
 
-    > The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` below:
+    > The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` and executed as a [coroutine](https://docs.unity3d.com/Manual/Coroutines.html):
 
     ```csharp
     private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
