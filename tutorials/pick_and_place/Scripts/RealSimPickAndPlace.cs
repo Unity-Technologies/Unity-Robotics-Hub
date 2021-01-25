@@ -73,7 +73,11 @@ public class RealSimPickAndPlace : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    ///     Publish the robot's current joint configuration, the target object's
+    ///     position and rotation, and the target placement for the target object's
+    ///     position and rotation.
+    ///
+    ///     Includes conversion from Unity coordinates to ROS coordinates, Forward Left Up
     /// </summary>
     public void PublishJoints()
     {
@@ -146,9 +150,11 @@ public class RealSimPickAndPlace : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    ///   Execute robot commands receved from ROS Subscriber.
+    ///   Gripper commands will be executed immeditately wihle trajectories will be 
+    ///   executed in a coroutine.
     /// </summary>
-    /// <param name="robotAction"></param>
+    /// <param name="robotAction"> RobotMoveActionGoal of trajectory or gripper commands</param>
     void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
     {
         if (robotAction.goal.cmd.cmd_type == TRAJECTORY_COMMAND_EXECUTION)
@@ -171,18 +177,13 @@ public class RealSimPickAndPlace : MonoBehaviour
     }
 
     /// <summary>
-    ///     Execute the returned trajectories from the MoverService.
+    ///     Execute trajectories from RobotMoveActionGoal topic.
     /// 
-    ///     The expectation is that the MoverService will return four trajectory plans,
-    ///         PreGrasp, Grasp, PickUp, and Place,
-    ///     where each plan is an array of robot poses. A robot pose is the joint angle values
-    ///     of the six robot joints.
-    /// 
-    ///     Executing a single trajectory will iterate through every robot pose in the array while updating the
-    ///     joint values on the robot.
+    ///     Execution will iterate through every robot pose in the trajectory pose 
+    ///     array while updating the joint values on the simulated robot.
     /// 
     /// </summary>
-    /// <param name="trajectories"></param>
+    /// <param name="trajectories"> The array of poses for the robot to execute</param>
     private IEnumerator ExecuteTrajectories(RobotTrajectory trajectories)
     {
         // For every robot pose in trajectory plan

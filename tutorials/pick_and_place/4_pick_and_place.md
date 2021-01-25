@@ -103,29 +103,33 @@ From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` 
 
 ## Differences From Part 3
 
-**Part 3 Flow:**
+**Part 3  - Purely Simulated - Flow:**
 
 ![](img/4_old_flow.png)
 
-- `TrajectoryPlanner` sends ServiceMessage with robot pose, target cube coordinates, and target destination coordinates to `mover.py`.
-- `mover.py` calculates the four trajectories, adds them to an array, and returns the array to `TrajectoryPlanner`.
-- `TrajectoryPlanner` then executes the trajectories one at a time on the simulated Niryo One.
+1. `TrajectoryPlanner` sends ServiceMessage with robot pose, target cube coordinates, and target destination coordinates to `mover.py`.
+1. `mover.py` calculates the four trajectories, adds them to an array, and returns the array to `TrajectoryPlanner`.
+1. `TrajectoryPlanner` then executes the trajectories one at a time on the simulated Niryo One.
 
-**Part 4 Flow:**
+**Part 4 - Simulated and Real - Flow:**
 
 ![](img/4_new_flow.png)
 
-- `RealSimPickAndPlace.cs` publishes robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic.
-- `sim_and_real_pnp.py,`as a ROS subscriber node, reads from the `sim_real_pnp` topic, plans the trajectories, and sends the action goals one at a time to `RobotMoveAction` server.
-- `RobotMoveAction` server publishes the goal messages along to the `robot_action/goal` topic.
+1. `RealSimPickAndPlace.cs` publishes robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic.
+1. `sim_and_real_pnp.py,`as a ROS subscriber node, reads from the `sim_real_pnp` topic, plans the trajectories, and sends the action goals one at a time to `RobotMove` action server.
 
-- **Simultaneously**
-	- Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory or tool commands.
-	- `RobotMoveAction` server executes trajectory on Niryo One.
 
-**Part 4 Changes:**
+1. **Simultaneously**
+	1. `RobotMove` action server publishes the goal messages along to the `robot_action/goal` topic.
+	1. `RobotMove` action server executes trajectory on Niryo One.
 
-- Gripper command execution was previously implemented in `TrajectoryPlanner.cs` in part 3 and is now being managed by the `RobotMoveAction` server.
+1. Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory or tool commands.
+
+**Changes:**
+
+- The `MoverService`, `mover.py`,  has been replaced with a ROS Subscriber in `sim_and_real_pnp.py` but retains the trajectory planning capability.
+- Introduction of an action server, `RobotMove`, to schedule and exectute trajectories.
+- Gripper command execution was previously hard coded in `TrajectoryPlanner.cs` in part 3 but is now being managed by the `RobotMove` action server.
 - Extra poses have been added to make execution of the individual poses more apparent on the physical robot.
 
 
@@ -295,9 +299,9 @@ void Start()
 ---
 
 ## Update Niryo One URDFs
-- To account for the simulated Niryo One's position on a table, the URDF files on the Niryo One will need to be updated to reflect this change.
+> The world-space origin of the Niryo One is defined in its URDF file. The provided Niryo One URDF used in the previous tutorials has already been updated to reflect the position of the simulated Niryo One situated on top of the table. In order to have accurate trajectory planning the URDF files on the real Niryo One will need to be updated to reflect the simulated robot's position.
 
-	- The two files that will need to be updated are `niryo_one.urdf.xacro`  and `without_mesh_niryo_one.urdf.xacro` located in the `/home/niryo/catkin_ws/src/niryo_one_description/urdf/v2` directory.
+- The two files that will need to be updated are `niryo_one.urdf.xacro`  and `without_mesh_niryo_one.urdf.xacro` located in the `/home/niryo/catkin_ws/src/niryo_one_description/urdf/v2` directory.
 	- Look for the joint named `joint_world` and update the `origin`'s `xyz` to `0 0 0.63` to reflect that the simulated Niryo is placed at `0.63` on the Z axis.
 	
 	```xml

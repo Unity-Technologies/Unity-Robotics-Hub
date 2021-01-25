@@ -69,8 +69,6 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
         """.format(destination_pose, start_joint_angles)
         raise Exception(exception_str)
 
-    # plan = planCompat(move_group.plan())
-
     trajectory_plan = TrajectoryPlan()
     trajectory_plan.trajectory = planCompat(move_group.plan())
 
