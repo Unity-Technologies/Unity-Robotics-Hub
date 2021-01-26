@@ -129,7 +129,7 @@ public class TrajectoryPlanner : MonoBehaviour
 
     void TrajectoryResponse(MoverServiceResponse response)
     {
-        if (response.trajectories != null)
+        if (response.trajectories.Length > 0)
         {
             Debug.Log("Trajectory returned.");
             StartCoroutine(ExecuteTrajectories(response));

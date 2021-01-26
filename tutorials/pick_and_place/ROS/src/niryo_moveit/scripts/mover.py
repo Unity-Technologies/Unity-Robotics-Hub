@@ -43,7 +43,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
     move_group.set_start_state(moveit_robot_state)
 
     move_group.set_pose_target(destination_pose)
-    plan = move_group.go(wait=True)
+    plan = move_group.plan()
 
     if not plan:
         exception_str = """
@@ -52,7 +52,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
         """.format(destination_pose, destination_pose)
         raise Exception(exception_str)
 
-    return planCompat(move_group.plan())
+    return planCompat(plan)
 
 
 """
