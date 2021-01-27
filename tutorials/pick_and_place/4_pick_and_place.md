@@ -225,7 +225,7 @@ void Start()
 - The subscriber callback mimics the robot commander code in the Niryo One ROS stack and determines whether a trajectory or tool command was issued.
 
 ```csharp
-      void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
+    void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
     {
         if (robotAction.goal.cmd.cmd_type == TRAJECTORY_COMMAND_EXECUTION)
         {
