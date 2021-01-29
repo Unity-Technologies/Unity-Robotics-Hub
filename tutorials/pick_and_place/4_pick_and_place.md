@@ -19,9 +19,9 @@ This part is going to be a little different than the previous tutorials in that 
   
 # Niryo One Information
 
-The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connecct to the Niryo One, including passwords, and how to use the Niryo One Studio desktop application.
+The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connect to the Niryo One, including passwords, and how to use the Niryo One Studio desktop application.
 
-For this tutorial we will be using the full [Niryo One ROS](https://niryo.com/docs/niryo-one/developer-tutorials/get-started-with-the-niryo-one-ros-stack/) stack running on the Niryo One robot. 
+For this tutorial we will be using the full [Niryo One ROS stack](https://niryo.com/docs/niryo-one/developer-tutorials/get-started-with-the-niryo-one-ros-stack/) running on the Niryo One robot.
 
 From the Niryo One ROS documentation:
 > The commander package exposes an action server named “niryo_one/commander/robot_action”, with a “RobotMoveCommand” message. This is probably what you’re looking for if you want to send direct command to the robot using ROS.
@@ -34,7 +34,7 @@ Using the `RobotMoveCommand` action server we can write an [action client](http:
 
 ## RobotMoveGoal Parameters
 
-The `goal` section in the `niryo_one_msgs/action/RobotMove.action` file shows a single parameter, `RobotMoveCommand`. Then looking at the `RobotMoveCommand` message we see that it is used as a catch all for executing a variety of commands on the robot.
+The `goal` section in the `niryo_one_msgs/action/RobotMove.action` file shows a single field, `RobotMoveCommand`. Then looking at the `RobotMoveCommand` message we see that it is used as a catchall for executing a variety of commands on the robot.
 
 ### RobotMoveGoal.RobotMoveCommand
 
@@ -47,7 +47,7 @@ Since we are only interested in executing trajectory and gripper commands we wil
 - `niryo_one_msgs/ToolCommand tool_cmd`
 	- The end effector command to be executed
 
-Since the `cmd_type` variable is used to determine which command in the `RobotMoveCommand` message is to be executed, we will need to find the appropriate values to exectue trajectory or tool commands.
+Since the `cmd_type` variable is used to determine which command in the `RobotMoveCommand` message is to be executed, we will need to find the appropriate values to execute trajectory or tool commands.
 
 We can find this information in the `niryo_one_ros/niryo_one_commander/src/niryo_one_commander/command_type.py` file:
 
@@ -125,16 +125,15 @@ From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` 
 
 1. Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory or tool commands.
 
-**Changes:**
+**Note the changes between Part 3 and Part 4::**
 
-- The `MoverService`, `mover.py`,  has been replaced with a ROS Subscriber in `sim_and_real_pnp.py` but retains the trajectory planning capability.
+- The `MoverService`, `mover.py`,  has been replaced with a ROS Subscriber in `sim_and_real_pnp.py` but retains the trajectory-planning capability.
 - Introduction of an action server, `RobotMove`, to schedule and exectute trajectories.
-- Gripper command execution was previously hard coded in `TrajectoryPlanner.cs` in part 3 but is now being managed by the `RobotMove` action server.
+- Gripper command execution was previously hard-coded in `TrajectoryPlanner.cs` in part 3 but is now being managed by the `RobotMove` action server.
 - Extra poses have been added to make execution of the individual poses more apparent on the physical robot.
 
 
 # The ROS Side
----
 There are two lines that have not been previously used in `server_endpoint.py` that we will now be using.
 
 - The following line will be used by the simulated Niryo One in our Unity scene to read from the `robot_action/goal` topic and execute the same trajectories as the real Niryo One.
@@ -206,12 +205,11 @@ We will also make use of the `sim_and_real_pnp.py` script. It is very similar to
 	```
 
 # The Unity Side
----
 Using the same scene from [Part 3](3_pick_and_place.md), we are going to use a new script, `RealSimPickAndPlace.cs`, that mirrors a lot of the functionality of the `TrajectoryPlanner.cs` script. 
 
 
 ## Key Differences
-Instead of calling a service and waiting for the response  to execute a robot command, a subscription is going to be made to the `niryo_one/commander/robot_action/goal` topic and every command published will be executed upon reception.
+Instead of calling a service and waiting for the response  to execute a robot command, a subscription is going to be made to the `niryo_one/commander/robot_action/goal` topic and every command published will be executed upon receipt.
 
 - A subscriber is created on Start to read the robot command messages and execute them as they are received.
 
@@ -277,7 +275,7 @@ void Start()
 `ros.Send(rosJointPublishTopicName, request);`
 
 
-## Setting Up Unity Scene
+## Setting Up The Unity Scene
 1. In Unity, Select Robotics -> ROS Settings from the top menu bar and update the ROS IP Address to that of the Niryo One.
 
 1. Select the Publisher GameObject and add the `RealSimPickAndPlace` script as a component.
@@ -296,7 +294,6 @@ void Start()
 
 
 # Setting Up Niryo One
----
 
 ## Update Niryo One URDFs
 > The world-space origin of the Niryo One is defined in its URDF file. The provided Niryo One URDF used in the previous tutorials has already been updated to reflect the position of the simulated Niryo One situated on top of the table. In order to have accurate trajectory planning the URDF files on the real Niryo One will need to be updated to reflect the simulated robot's position.
@@ -323,7 +320,7 @@ void Start()
 
 # Execution
 1. Use the `part_4.launch` file to setup the ROS params and start the `server_endpoint` and `sim_real_pnp` scripts.
-	- `roslaucnh niryo_moveit part_4.launch`
+	- `roslaunch niryo_moveit part_4.launch`
 
 1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS on the Niryo One, and watch the robot arm move simultaneously in simulation and real life!
 
