@@ -19,7 +19,9 @@ This part is going to be a little different than the previous tutorials in that 
   
 # Niryo One Information
 
-The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connect to the Niryo One, including passwords, and how to use the Niryo One Studio desktop application.
+The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connect to the Niryo One, including passwords, how to connect the Niryo One to a network, and how to use the Niryo One Studio desktop application.
+
+> NOTE: The Niryo One will need to be connected to the same network as the machine running the Unity Editor.
 
 For this tutorial we will be using the full [Niryo One ROS stack](https://niryo.com/docs/niryo-one/developer-tutorials/get-started-with-the-niryo-one-ros-stack/) running on the Niryo One robot.
 
