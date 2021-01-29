@@ -5,12 +5,12 @@ This part is going to be a little different than the previous tutorials in that 
 **Table of Contents**
 
   - [Niryo One Information](#niryo-one-information)
-  - [RobotMoveGoal Parameters](#robotmovegoal-parameters)
-  - [Flow Differences](#flow-differences)
+  	- [RobotMoveGoal Parameters](#robotmovegoal-parameters)
+  - [Differences From Part 3](#differences-from-part-3)
   - [The ROS Side](#the-ros-side)
   - [The Unity Side](#the-unity-side)
   	- [Key Differences](#key-differences)
-  	- [Setting Up Unity Scene](#setting-up-unity-scene)
+  	- [Setting Up The Unity Scene](#setting-up-the-unity-scene)
   - [Setting Up Niryo One](#setting-up-niryo-one)
   	- [Update Niryo One URDFs](#update-niryo-one-urdfs)
   	- [Add niryo_moveit Package](#add-niryo_moveit-package)
@@ -73,13 +73,28 @@ To execute an end effector command on the Niryo One, a `ToolCommand` object is r
 We are only interested in opening and closing the standard gripper so we will only use the following parameters:
 
 - `uint8 tool_id`
-	- Which end effector is being used **TODO: How do we know 11**
+	- Which end effector is being used
 - `uint8 cmd_type`
 	- Which command to execute. Ex. open or close
 - `uint16 gripper_close_speed`
 	- How fast should the gripper close
 - `uint16 gripper_open_speed`
 	- How fast should the gripper open
+
+The `tool_id`s are stored in `niryo_one_ros/niryo_one_bringup/config/v2/niryo_one_motors.yaml`
+
+```yaml
+dxl_authorized_motors: # here include all Dynamixel tools that can possibly be attached to Niryo One
+    - 2 # -> id of Axis 4
+    - 3 # -> id of Axis 5
+    - 6 # -> id of Axis 6
+    - 11 # id of Gripper 1
+    - 12 # id of Gripper 2
+    - 13 # id of Gripper 3
+    - 31 # if of Vacuum Pump 1
+```
+
+We are using the standard gripper which has an id of 11.
 
 Just like the `cmd_type` parameter in `RobotMoveCommand` we will need to look at `niryo_one_ros/niryo_one_tools/config/end_effectors.yaml` to find the appropriate values to use.
 
@@ -101,7 +116,7 @@ command_list:
 From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` variable will need to be `2` to close the gripper and `1` to open it. 
 
 
-## Differences From Part 3
+# Differences From Part 3
 
 **Part 3  - Purely Simulated - Flow:**
 
@@ -128,7 +143,7 @@ From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` 
 **Note the changes between Part 3 and Part 4::**
 
 - The `MoverService`, `mover.py`,  has been replaced with a ROS Subscriber in `sim_and_real_pnp.py` but retains the trajectory-planning capability.
-- Introduction of an action server, `RobotMove`, to schedule and exectute trajectories.
+- An action server, RobotMove, has been introduced to schedule and execute trajectories.
 - Gripper command execution was previously hard-coded in `TrajectoryPlanner.cs` in part 3 but is now being managed by the `RobotMove` action server.
 - Extra poses have been added to make execution of the individual poses more apparent on the physical robot.
 
@@ -284,16 +299,18 @@ void Start()
 
     Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
 
-![](img/4_script.png)
+ ![](img/4_script.png)
 
 1. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with RealSimPickAndPlace > `PublishJoints()`.
 
-![](img/4_button.png)
+ ![](img/4_button.png)
 
 1. The Unity side is now ready to communicate with ROS on the Niryo One!
 
 
 # Setting Up Niryo One
+
+> An easy way to find the Niryo One's IP address is to connect to it using the Niryo One Studio application
 
 ## Update Niryo One URDFs
 > The world-space origin of the Niryo One is defined in its URDF file. The provided Niryo One URDF used in the previous tutorials has already been updated to reflect the position of the simulated Niryo One situated on top of the table. In order to have accurate trajectory planning the URDF files on the real Niryo One will need to be updated to reflect the simulated robot's position.
@@ -310,11 +327,11 @@ void Start()
 	```
 
 ## Add niryo_moveit Package
-- Update the `niryo_moveit/config/params.yml` file's `ROS_IP` parameter to match that of the Niryo One.
+The Niryo One ROS stack is already installed on the robot and only the `niryo_moveit` package will need to be added.
 
-> An easy way to find the Niryo One's IP address is to connect to it using the Niryo One Studio application
+1. Update the `niryo_moveit/config/params.yml` file's `ROS_IP` parameter to match that of the Niryo One.
 
-- Copy the `niryo_moveit` package to the `catkin_ws` directory on the Niryo One's catkin workspace at `/home/niryo/catkin_ws` and run the `catkin_make` command.
+1. Copy the `niryo_moveit` package to the `catkin_ws` directory on the Niryo One's catkin workspace at `/home/niryo/catkin_ws` and run the `catkin_make` command.
 
 > Using the SCP command to transfer the `niryo_moveit` package might look something like, `scp -r ~/PATH/TO/niryo_moveit niryo@NIRYO_IP_ADDRESS:/home/niryo/catkin_ws/src`
 
