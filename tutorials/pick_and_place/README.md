@@ -16,7 +16,7 @@ This tutorial is designed such that you do not need prior experience with Unity 
   - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
   - [Part 2: ROS–Unity Integration](#part-2-rosunity-integration)
   - [Part 3: Pick-and-Place In Unity](#part-3-pick-and-place-in-unity)
-  - [Part 4: Pick-and-Place On Robot](#part-4-pick-and-place-on-robot)
+  - [Part 4: Pick-and-Place on the Real Robot](#part-4-pick-and-place-on-the-real-robot)
 
 ## Requirements
 
@@ -49,7 +49,7 @@ This part covers creating a TCP connection between Unity and ROS, generating C# 
 
 This part includes the preparation and setup necessary to run a pick-and-place task with known poses using MoveIt. Steps covered include creating and invoking a motion planning service in ROS, moving a Unity Articulation Body based on a calculated trajectory, and controlling a gripping tool to successfully grasp and drop an object.
 
-## [Part 4: Pick-and-Place On Robot](4_pick_and_place.md)
+## [Part 4: Pick-and-Place on the Real Robot](4_pick_and_place.md)
 
 <img src="img/4_pick_and_place.gif" width="400"/>
 
