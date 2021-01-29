@@ -299,11 +299,11 @@ void Start()
 
     Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
 
- ![](img/4_script.png)
+    ![](img/4_script.png)
 
 1. Select the previously made Button object in Canvas/Button, and scroll to see the Button component. Under the `OnClick()` header, click the dropdown where it is currently assigned to the SourceDestinationPublisher.Publish(). Replace this call with RealSimPickAndPlace > `PublishJoints()`.
 
- ![](img/4_button.png)
+    ![](img/4_button.png)
 
 1. The Unity side is now ready to communicate with ROS on the Niryo One!
 
