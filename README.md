@@ -61,7 +61,7 @@ Here’s a peek into what our Physics Team is hard at work on…
 [FAQs](faq.md)
 
 ## Support
-For general questions or feedback, connect directly with the Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
+For general questions, feedback, or feature requests, connect directly with the Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
 
 For bugs or other issues, please file a GitHub issue and the Robotics team will investigate the issue as soon as possible.
 
