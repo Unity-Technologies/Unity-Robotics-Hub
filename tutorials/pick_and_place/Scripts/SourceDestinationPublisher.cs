@@ -1,8 +1,7 @@
-using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
-using ROSGeometry;
-using Quaternion = UnityEngine.Quaternion;
+using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {

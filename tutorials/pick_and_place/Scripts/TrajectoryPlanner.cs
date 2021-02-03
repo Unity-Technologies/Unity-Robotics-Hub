@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Linq;
-using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
-
-using ROSGeometry;
-using Quaternion = UnityEngine.Quaternion;
-using RosImage = RosMessageTypes.Sensor.Image;
-using Transform = UnityEngine.Transform;
-using Vector3 = UnityEngine.Vector3;
+using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 
 
 public class TrajectoryPlanner : MonoBehaviour
