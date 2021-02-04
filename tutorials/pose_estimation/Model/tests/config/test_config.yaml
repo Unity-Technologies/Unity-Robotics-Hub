@@ -1,0 +1,33 @@
+estimator: test 
+train:
+  dataset_zip_file_name_training: test_single_cube_dataset
+  batch_training_size: 1
+  accumulation_steps: 1
+  epochs: 1
+  beta_loss: 1
+  sample_size_train: 0
+val:
+  dataset_zip_file_name_validation: test_single_cube_dataset
+  batch_validation_size: 1
+  val_start_epoch: 0
+  sample_size_val: 0
+test:
+  dataset_zip_file_name_test: test_single_cube_dataset
+  batch_test_size: 1
+  sample_size_test: 0
+dataset:
+  image_scale: 224
+  download_data_gcp: False
+  gcs_bucket: None
+  pose_estimation_gcs_path: None
+  symmetric: [False]
+adam_optimizer:
+  lr: 0.0001
+  beta_1: 0.9
+  beta_2: 0.999
+checkpoint:
+  load_dir_checkpoint: None
+  save_frequency: 1
+system:
+  log_dir_system: /tmp/pose_estimation/single_cube
+  data_root: /Users/Documents/

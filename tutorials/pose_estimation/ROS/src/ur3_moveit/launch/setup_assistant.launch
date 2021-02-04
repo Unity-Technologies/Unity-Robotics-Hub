@@ -1,0 +1,15 @@
+<!-- Re-launch the MoveIt! Setup Assistant with this configuration package already loaded -->
+<launch>
+
+  <!-- Debug Info -->
+  <arg name="debug" default="false" />
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+  <arg     if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args" />
+
+  <!-- Run -->
+  <node pkg="moveit_setup_assistant" type="moveit_setup_assistant" name="moveit_setup_assistant"
+	args="--config_pkg=ur3_moveit"
+	launch-prefix="$(arg launch_prefix)"
+        output="screen" />
+
+</launch>
