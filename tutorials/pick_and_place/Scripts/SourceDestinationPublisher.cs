@@ -2,26 +2,25 @@ using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
-using RosMessageTypes.Geometry;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
     // ROS Connector
     private ROSConnection ros;
-
+    
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
 
     public GameObject niryoOne;
     public GameObject target;
     public GameObject targetPlacement;
-
+    
     private int numRobotJoints = 6;
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
-
+    
     // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -36,23 +35,23 @@ public class SourceDestinationPublisher : MonoBehaviour
 
         string arm_link = shoulder_link + "/arm_link";
         jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
-
+        
         string elbow_link = arm_link + "/elbow_link";
         jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
-
+        
         string forearm_link = elbow_link + "/forearm_link";
         jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
-
+        
         string wrist_link = forearm_link + "/wrist_link";
         jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
-
+        
         string hand_link = wrist_link + "/hand_link";
         jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
     }
 
     public void Publish()
     {
-        MNiryoMoveitJoints sourceDestinationMessage = new MNiryoMoveitJoints();
+        NiryoMoveitJoints sourceDestinationMessage = new NiryoMoveitJoints();
 
         sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
         sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
@@ -62,14 +61,14 @@ public class SourceDestinationPublisher : MonoBehaviour
         sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
 
         // Pick Pose
-        sourceDestinationMessage.pick_pose = new MPose
+        sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
         {
             position = target.transform.position.To<FLU>(),
             orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
-        sourceDestinationMessage.place_pose = new MPose
+        sourceDestinationMessage.place_pose = new RosMessageTypes.Geometry.Pose
         {
             position = targetPlacement.transform.position.To<FLU>(),
             orientation = pickOrientation.To<FLU>()

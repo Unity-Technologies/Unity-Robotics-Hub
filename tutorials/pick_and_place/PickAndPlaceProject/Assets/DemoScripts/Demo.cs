@@ -1,14 +1,14 @@
 #if UNITY_EDITOR
 using Microsoft.CSharp;
+using RosSharp;
+using RosSharp.Control;
+using RosSharp.Urdf.Editor;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using RosSharp;
-using RosSharp.Control;
-using RosSharp.Urdf.Editor;
 using UnityEditor;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
@@ -75,10 +75,8 @@ public class Demo : MonoBehaviour
     {
         EditorApplication.LockReloadAssemblies();
         SetupScene();
-        AddRosMessages();
-        ImportRobot();
-        CreateRosConnection();
-        CreateTrajectoryPlannerPublisher();
+        SetupRos();
+        CreateTrajectoryPlannerPubliser();
     }
 
     void Update()
@@ -106,18 +104,31 @@ public class Demo : MonoBehaviour
     private void SetupScene()
     {
         // Instantiate the table, target, and target placement
-        InstantiatePrefab(tableName);
-        InstantiatePrefab(targetName);
-        InstantiatePrefab(targetPlacementName);
+        GameObject table = InstantiatePrefab(tableName);
+        GameObject target = InstantiatePrefab(targetName);
+        GameObject targetPlacement = InstantiatePrefab(targetPlacementName);
 
         // Adjust main camera
         GameObject camera = GameObject.Find(cameraName);
         camera.transform.position = cameraPosition;
         camera.transform.rotation = cameraRotation;
+
+        // Import Niryo One with URDF importer
+        string urdfFilepath = Path.Combine(Application.dataPath, urdfRelativeFilepath);
+        ImportRobot(urdfFilepath, ImportSettings.convexDecomposer.unity);
+
+        // Adjust robot parameters
+        Controller controller = GameObject.Find(niryoOneName).GetComponent<Controller>();
+        controller.stiffness = controllerStiffness;
+        controller.damping = controllerDamping;
+        controller.forceLimit = controllerForceLimit;
+        controller.speed = controllerSpeed;
+        controller.acceleration = controllerAcceleration;
+        GameObject.Find(baseLinkName).GetComponent<ArticulationBody>().immovable = true;
     }
 
     // Tutorial Part 2 without the Publisher object
-    private void AddRosMessages()
+    private void SetupRos()
     {
         if (generateRosMessages)
         {
@@ -141,9 +152,19 @@ public class Demo : MonoBehaviour
         scripts.AddRange(Directory.GetFiles(rosMessagesDirectory, scriptPattern, SearchOption.AllDirectories));
         scripts.AddRange(Directory.GetFiles(externalScriptsDirectory));
         RecompileScripts(scripts.ToArray());
+        
+        // Create RosConnect
+        GameObject rosConnect = new GameObject(rosConnectName);
+        rosConnection = rosConnect.AddComponent<ROSConnection>();
+        rosConnection.rosIPAddress = hostIP;
+        rosConnection.rosPort = hostPort;
+        rosConnection.overrideUnityIP = overrideUnityIP;
+        rosConnection.unityPort = unityPort;
+        rosConnection.awaitDataMaxRetries = awaitDataMaxRetries;
+        rosConnection.awaitDataSleepSeconds = awaitDataSleepSeconds;
     }
 
-    private void CreateTrajectoryPlannerPublisher()
+    private void CreateTrajectoryPlannerPubliser()
     {
         GameObject publisher = new GameObject(publisherName);
         dynamic planner = publisher.AddComponent(assembly.GetType(trajectoryPlannerType));
@@ -161,39 +182,15 @@ public class Demo : MonoBehaviour
         return gameObject;
     }
 
-    private void CreateRosConnection()
+    private void ImportRobot(string urdfFilepath, ImportSettings.convexDecomposer convexDecomposer)
     {
-        // Create RosConnect
-        GameObject rosConnect = new GameObject(rosConnectName);
-        rosConnection = rosConnect.AddComponent<ROSConnection>();
-        rosConnection.rosIPAddress = hostIP;
-        rosConnection.rosPort = hostPort;
-        rosConnection.overrideUnityIP = overrideUnityIP;
-        rosConnection.unityPort = unityPort;
-        rosConnection.awaitDataMaxRetries = awaitDataMaxRetries;
-        rosConnection.awaitDataSleepSeconds = awaitDataSleepSeconds;
-    }
-
-    private void ImportRobot()
-    {
-        ImportSettings urdfImportSettings = new ImportSettings
+        // Import Niryo One by URDF Importer
+        ImportSettings settings = new ImportSettings
         {
             choosenAxis = ImportSettings.axisType.yAxis,
-            convexMethod = ImportSettings.convexDecomposer.unity
+            convexMethod = convexDecomposer,
         };
-        // Import Niryo One with URDF importer
-        string urdfFilepath = Path.Combine(Application.dataPath, urdfRelativeFilepath);
-        // Create is a coroutine that would usually run only in EditMode, so we need to force its execution here
-        var robotImporter = UrdfRobotExtensions.Create(urdfFilepath, urdfImportSettings, false);
-        while (robotImporter.MoveNext()) {}
-        // Adjust robot parameters
-        Controller controller = GameObject.Find(niryoOneName).GetComponent<Controller>();
-        controller.stiffness = controllerStiffness;
-        controller.damping = controllerDamping;
-        controller.forceLimit = controllerForceLimit;
-        controller.speed = controllerSpeed;
-        controller.acceleration = controllerAcceleration;
-        GameObject.Find(baseLinkName).GetComponent<ArticulationBody>().immovable = true;
+        UrdfRobotExtensions.Create(urdfFilepath, settings);
     }
 
     // Credit to https://www.codeproject.com/Tips/715891/Compiling-Csharp-Code-at-Runtime
