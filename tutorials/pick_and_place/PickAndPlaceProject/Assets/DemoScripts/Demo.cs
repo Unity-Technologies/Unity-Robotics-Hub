@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using Microsoft.CSharp;
-using RosMessageGeneration;
 using RosSharp;
 using RosSharp.Control;
 using RosSharp.Urdf.Editor;
@@ -12,6 +11,8 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
 public class Demo : MonoBehaviour
 {
