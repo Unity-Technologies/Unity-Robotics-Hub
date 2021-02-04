@@ -21,7 +21,7 @@ This tutorial is designed such that you do not need prior experience with Unity 
 
 This repository provides project files for the pick-and-place tutorial, including Unity assets, URDF files, and ROS scripts. Clone this repository to a location on your local machine:
   ```bash
-  git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+  git clone --recurse-submodules -b main https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
   ```
 
 ## [Part 0: ROS Setup](0_ros_setup.md)

@@ -11,7 +11,7 @@ This part uses scripts to automatically set up and run the Niryo One pick-and-pl
 
 1. Clone this repo to a location on your local machine:
     ```bash
-    git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+    git clone --recurse-submodules -b main https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
     ```
 
 1. Install [Docker Engine](https://docs.docker.com/engine/install/)

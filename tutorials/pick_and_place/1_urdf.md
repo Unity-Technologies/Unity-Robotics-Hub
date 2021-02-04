@@ -17,7 +17,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 1. If you have not already cloned this project to your local machine, do so now:
 
     ```bash
-    git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+    git clone --recurse-submodules -b main https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
     ```
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).

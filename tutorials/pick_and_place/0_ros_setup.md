@@ -14,7 +14,7 @@ This part provides two options for setting up your ROS workspace: using Docker, 
 If you have not already cloned this project to your local machine, do so now:
 
 ```bash
-git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+git clone --recurse-submodules -b main https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 ## Option A: Use Docker

@@ -11,9 +11,9 @@ This page provides brief instructions on installing the Unity Robotics packages.
 
     ![](../images/packman.png)
 
-1. Enter the git URL for the desired package. 
-   1. For the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector), enter `https://github.com/Unity-Technologies/ROS-TCP-Connector.git`. 
-   1. For the [URDF-Importer](https://github.com/Unity-Technologies/URDF-Importer), enter `https://github.com/Unity-Technologies/URDF-Importer.git`. 
+1. Enter the git URL for the desired package with the latest version tag (currently v0.1.2). 
+   1. For the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector), enter `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`. 
+   1. For the [URDF-Importer](https://github.com/Unity-Technologies/URDF-Importer), enter `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`. 
 
 1. Click `Add`. 
 
