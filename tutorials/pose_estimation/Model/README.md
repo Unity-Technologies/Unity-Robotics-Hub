@@ -116,6 +116,8 @@ python -m pose_estimation.cli train
 
 You can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
 
+#### Visualizing Training Results with Tensorboard
+If you'd like to examine the results of your training run in more detail, see our guide on [viewing the Tensorboard logs](../Documentation/tensorboard.md).
 
 #### Evaluate  
 To run the evaluate commmand with default values:
@@ -132,41 +134,8 @@ If you want to run the project on Docker, then follow [this guide](documentation
 ## Running on the Cloud
 If you want to run the project on the Cloud, then follow [this guide](documentation/running_on_the_cloud.md). 
 
-## Visualizing the Results
-To view the training or evaluate logs you can you use tensorboard. The logs are saved in the same directory the model is saved. 
-You need to run the following command:
 
-* **Action**: 
-```bash
-tensorboard --logdir=[LOG DIRECTORY]
-```
-
-For example if you have saved all your models in a folder called `save` inside your Documents folder, open a new terminal, put yourself into your `Documents` directory: 
-```bash
-tensorboard --logdir=save
-```
-
-You should see something similar to that: 
-<p align="center">
-<img src="documentation/docs/tensorboard.png" height=60/>
-</p>
-
-Then, as you can see on the image, my tensorboard will be accessible on the port 6006 from local. 
-
-* **Action**: Open your internet browser and in the search bar, enter:
-```
-localhost:[PORT_NUMBER]
-```
-
-For me as my port is `6006` I will enter: 
-```
-localhost:6006
-```
-
-If you train your model following our suggestions you should see something similar to the following: 
-<p align="center">
-<img src="documentation/docs/performance_model.png"/>
-</p>
+## Performance
 
 Below is a description of the model's performance. For the loss, I used the L2 norm for the position and orientation. However, to evaluate the performance of my model both in the training and the validation part, I used the [translation_average_mean_square_error.py](pose_estimation/evaluation_metrics/translation_average_mean_square_error.py) which is the average of the L2 norm over the dataset and the [orientation_average_quaternion_error.py](pose_estimation/evaluation_metrics/orientation_average_quaternion_error.py) which is the average of the angle between the orientation of the prediction and the orientation of the target over the dataset.
 
