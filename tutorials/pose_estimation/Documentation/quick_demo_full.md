@@ -21,13 +21,14 @@ You need to have a software enabling you to run bash files. One option is to dow
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.cds.internal.unity3d.com/unity/Pose-Estimation-Demo.git
+git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 Two package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations and [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial. 
 
-* **Action**: Open a terminal and go to the directory of the `Pose-Estimation-Demo` folder. Then run:
+* **Action**: Still in the same terminal, run:
 ```bash
+cd Unity-Robotics-Hub/tutorials/pose_estimation
 ./submodule.sh 
 ```
 
@@ -47,9 +48,9 @@ Two package dependencies for this project, [Universal Robot](https://github.com/
 
 ## Add the Pose Estimation Model
 
-In your `Pose-Estimation-Demo` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
+In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-* **Action**: You can use the pose estimation model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.cds.internal.unity3d.com/unity/Single-Cube-Pose-Estimation/releases), under the tag _**Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: You can use the pose estimation model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
 
 * **Action**: Copy the model file (.tar file) into the `models` folder you have just created. 
 
@@ -65,7 +66,7 @@ We have provided a Docker container to get you up and running quickly.
 <img src="Images/4_docker_daemon.png" height=400/>
 </p>
 
-* **Action**: In the terminal, ensure the current location is at the root of the `Pose-Estimation-Demo` directory. Build the provided ROS Docker image as follows:
+* **Action**: In the terminal, ensure the current location is at the root of the `pose_estimation` directory. Build the provided ROS Docker image as follows:
 
 ```bash
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .

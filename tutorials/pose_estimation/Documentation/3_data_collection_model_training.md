@@ -66,12 +66,12 @@ You should then see something similar to the following:
 #### Requirements
 
 - To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
-- You will need to clone the [Pose-Estimation-Model](https://github.com/Unity-Technologies/Pose-Estimation-Model) repository. Once downloaded, return to this page to follow the steps below. If you would like more information on the model, further documentation is provided in the Pose-Estimation-Model repo.
+- If you would like more information on the model, further documentation is provided in the [ReadMe.md](../Model/README.md) of the Model folder.
 
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
 
 #### Using Docker
-If you would like to run using Docker, you can follow the [Docker steps provided](https://github.com/Unity-Technologies/Pose-Estimation-Model/blob/master/documentation/running_on_docker.md) in the Pose-Estimation-Model documentation.
+If you would like to run using Docker, you can follow the [Docker steps provided](../Model/documentation/running_on_docker.md) in the Model documentation.
 
 
 #### Using Conda 
@@ -91,20 +91,20 @@ conda activate <env-name>
 
 #### Updating the Model Config
 
-At the top of the [cli.py]() file in the model code, you can see the documentation for all supported commands. Since typing these in can be laborious, we use a [config.yaml](https://github.com/Unity-Technologies/Pose-Estimation-Model/blob/miniconda_integration/config.yaml) file to feed in all these arguments. You can still use the command line arguments if you want - they will override the config. 
+At the top of the [cli.py]() file in the model code, you can see the documentation for all supported commands. Since typing these in can be laborious, we use a [config.yaml](../Model/config.yaml) file to feed in all these arguments. You can still use the command line arguments if you want - they will override the config. 
 
 There are a few settings specific to your setup that you'll need to change.
 
 First, we need to specify the path to the folders where your training and validation data are saved:
 
-* **Action**: In the [config.yaml](https://github.com/Unity-Technologies/Pose-Estimation-Model/blob/master/config.yaml), under `system`, you need to set the argument `data/root` to the path of the  directory containing your data folders. For example, since I put my data (`UR3_single_cube_training` and `UR3_single_cube_validation`) in a folder called `data` in Documents, I set the following:
+* **Action**: In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `data/root` to the path of the  directory containing your data folders. For example, since I put my data (`UR3_single_cube_training` and `UR3_single_cube_validation`) in a folder called `data` in Documents, I set the following:
 ```bash
   data_root: /Users/jonathan.leban/Documents/data
 ```
 
 Second, we need to modify the location where the model is going to be saved: 
 
-* **Action**: In the [config.yaml](https://github.com/Unity-Technologies/Pose-Estimation-Model/blob/master/config.yaml), under `system`, you need to set the argument `log_dir_system` to the full path to the output folder where your model's results will be saved. For example, I created a new directory called `models` in my Documents, and then set the following:
+* **Action**: In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `log_dir_system` to the full path to the output folder where your model's results will be saved. For example, I created a new directory called `models` in my Documents, and then set the following:
 ```bash
 log_dir_system: /Users/jonathan.leban/Documents/models
 ```
@@ -112,7 +112,7 @@ log_dir_system: /Users/jonathan.leban/Documents/models
 #### Training the model
 Now its time to train our deep learning model!
 
-* **Action**: If you are not already in `Pose-Estimation-Model`, navigate there. 
+* **Action**: If you are not already in `Model`, navigate there. 
 
 * **Action**: Enter the following command to start training: 
 ```bash 
@@ -131,9 +131,9 @@ Once training has completed, we can also run our model on our validation dataset
 
 However, first we need to specify a few settings in our config file.
 
-* **Action**: In [config.yaml](https://github.com/Unity-Technologies/Pose-Estimation-Model/blob/miniconda_integration/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
+* **Action**: In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
 
-**Action**: If you are not already in the `Pose-Estimation-Model`, navigate there. 
+**Action**: If you are not already in the `Model`, navigate there. 
 
 **Action** To start the evaluation run, enter the following command: 
 ```bash 
