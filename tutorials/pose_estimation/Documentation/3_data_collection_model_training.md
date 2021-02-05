@@ -60,6 +60,8 @@ Now its time to train our deep learning model! We've provided the model training
 
 This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
 
+**Action**: Navigate to the `tutorials/pose_estimation/Model` directory.
+
 #### Requirements
 
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
