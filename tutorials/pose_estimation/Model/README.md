@@ -2,7 +2,7 @@ Pose Estimation Model
 =====================
 This repository enables users to train and evaluate a deep neural network to predict the pose of a single object from RGB images. We provide support for running both locally and with Docker.  
 
-This project uses synthetic training data collected in Unity. To learn more about that, see our data collection [tutorial](https://github.cds.internal.unity3d.com/unity/Pose-Estimation-Demo).
+This project uses synthetic training data collected in Unity. To learn more about that, see our data collection [tutorial](../).
 
 This model is a modified implementation of [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf), by Tobin et. al. It is based on the classic VGG-16 architecture, and initialized with weights pre-trained on the ImageNet dataset. The head of the network is replaced with a 3D position prediction head that outputs (x, y, z), and an orientation predicton head that outputs a quaternion (q<sub>x</sub>, q<sub>y</sub>, q<sub>z</sub>, q<sub>w</sub>). 
 
@@ -77,7 +77,7 @@ In this section, I will show you how to run it on local.
 **Note**: If you want to know more information on how to run it on a cloud, then go to [running_on_the_cloud](documentation/running_on_the_cloud.md).
 
 There are two datasets you need to have on your local computer: `UR3_single_cube_training` and 
-`UR3_single_cube_validation` for the training and the validation process. To create those datasets, you need to follow the Phase 1, 2 and 3 of the [Pose Estimation Demo](https://github.cds.internal.unity3d.com/unity/Pose-Estimation-Demo) tutorial. 
+`UR3_single_cube_validation` for the training and the validation process. To create those datasets, you need to follow the Phase 1, 2 and 3 of the [Pose Estimation Demo](../) tutorial. 
 
 There are few steps you need to follow in order to feed your neural network from the data properly:
 * **Action**: In the [config.yaml](config.yaml), at the bottom you can find the argument `data_root` 

@@ -24,4 +24,4 @@ Once you navigate to that location in your browser, you should see something lik
     <img src="Images/3_performance_model.png"/>
 </p>
 
-These charts show the changing loss during the training process. The training and validation losses are the mean squared errors for position and orientation on the training and validation data sets, respectively. During training, the loss is generally expected to go down, but as you can see here, it can be noisy. If you'd like to learn more about the model, you can explore its code [here](https://github.com/Unity-Technologies/Pose-Estimation-Model).
+These charts show the changing loss during the training process. The training and validation losses are the mean squared errors for position and orientation on the training and validation data sets, respectively. During training, the loss is generally expected to go down, but as you can see here, it can be noisy. If you'd like to learn more about the model, you can explore its code [here](../Model).

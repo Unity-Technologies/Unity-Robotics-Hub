@@ -23,12 +23,12 @@ You need to have a software enabling you to run bash files. One option is to dow
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.cds.internal.unity3d.com/unity/Pose-Estimation-Demo.git
+git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-Then we need to be in the `Pose-Estimation-Demo` folder and generate the content of the `universal robots` and the `robotiq` folders. 
+Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the content of the `universal robots` and the `robotiq` folders. 
 ```bash
-cd Pose-Estimation-Demo
+cd Unity-Robotics-Hub/tutorials/pose_estimation
 ./submodule.sh
 ```
 
@@ -41,7 +41,7 @@ When you first run Unity, you will be asked to open an existing project, or crea
 * **Action**: Open Unity and create a new project using the **Universal Render Pipeline**. Name your new project _**Pose Estimation Tutorial**_, and specify a desired location as shown below.
 
 <p align="center">
-<img src="Images/1_create_new_project.png" align="center" width=800/>
+<img src="Images/1_create_new_project.png" align="center" width=950/>
 </p>
 
 ### <a name="step-2">Step 2: Download the Perception, the URDF and the TCP connector Packages</a>
@@ -131,7 +131,7 @@ As seen above, the new Scene already contains a camera (`Main Camera`) and a lig
 Once the camera and light settings are done, we will focus on the objects we will put into our scene. Before doing so, we need to import some folders as `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`. But first, we need to delete some pre-existing folders in Unity. 
 
 
-* **Action**: From the release of this [github repository](https://github.cds.internal.unity3d.com/unity/Single-Cube-Pose-Estimation/releases), under the tag _**Tutorial**_ download the package called `TutorialAssets.zip` and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`. 
+* **Action**: From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the package called `TutorialAssets.zip` and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`. 
 
 * **Action**: Drag and Drop the `TutorialAssets` folder onto the _**Project**_ tab in the `Assets` folder. 
 

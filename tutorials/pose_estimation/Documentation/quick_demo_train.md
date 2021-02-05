@@ -11,12 +11,12 @@ You need to have a software enabling you to run bash files. One option is to dow
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.cds.internal.unity3d.com/unity/Pose-Estimation-Demo.git
+git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 **Action**: [Install Unity `2020.2.*`.](Documentation/install_unity.md)
 
-**Action**: Open the completed project. In the Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from inside the file location where you cloned this repo. 
+**Action**: Open the completed project. In the Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from `PATH-YOU-CLONE-THE-PROJECT-Unity-Robotics-Hub/tutorials/pose_estimation/`. 
 
 ## <a name='setup'>Setup</a>
 

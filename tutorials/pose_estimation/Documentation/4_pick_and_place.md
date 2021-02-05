@@ -25,21 +25,21 @@ In this phase, we will use our trained deep learning model to predict the pose o
 ### Step 1: Setup
 If you have correctly followed phases 1 and 2, whether or not you choose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
 
-**Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `Pose-Estimation-Demo` folder. 
+**Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
 
 ```bash
-cd <PATH-TO-Pose-Estimation-Model>
+cd <PATH-TO-pose_estimation>
 git submodule update --init --recursive 
 ```
 
 Two package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations and [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial. 
 
-* **Action**: Open a terminal and go to the directory of the `Pose-Estimation-Demo` folder. Then run:
+* **Action**: Open a terminal and go to the directory of the `pose_estimation` folder. Then run:
 ```bash
 ./submodule.sh 
 ```
 
-In your `Pose-Estimation-Demo` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
+In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
 ### Step 2: Adding the Pose Estimation Model
 
@@ -47,7 +47,7 @@ Here you have two options for the model:
 
 #### Option A: Using Our Pre-trained Model
 
-* **Action**: You can use the model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.cds.internal.unity3d.com/unity/Single-Cube-Pose-Estimation/releases), under the tag _**Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: You can use the model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
 
 #### Option B: Using Your Own Model
 
@@ -57,7 +57,7 @@ Here you have two options for the model:
 
 * **Action**: Copy the model file (.tar file) into the `models` folder you have just created. 
 
-* **Action**: The model is called for inference from [pose_estimation_script.py](PATH-TO-Pose-Estimation-Demo/ROS/src/ur3_moveit/scripts/pose_estimation_script.py), on line 17. So, if you choose to use your model and you named it something other than `UR3_single_cube_model.tar` you will have to change line 17 to specify your model's filename.
+* **Action**: The model is called for inference from [pose_estimation_script.py](../ROS/src/ur3_moveit/scripts/pose_estimation_script.py), on line 17. So, if you choose to use your model and you named it something other than `UR3_single_cube_model.tar` you will have to change line 17 to specify your model's filename.
 
 
 ### Step 3: Set up the ROS side
@@ -74,7 +74,7 @@ Building this Docker container will install the necessary packages for this tuto
 <img src="Images/4_docker_daemon.png" height=500/>
 </p>
 
-* **Action**: In the terminal, ensure the current location is at the root of the `Pose-Estimation-Demo` directory. Build the provided ROS Docker image as follows:
+* **Action**: In the terminal, ensure the current location is at the root of the `pose_estimation` directory. Build the provided ROS Docker image as follows:
 
 ```bash
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
@@ -100,7 +100,7 @@ source devel/setup.bash
 
 The ROS workspace is now ready to accept commands!
 
-**Note**: The Docker-related files (Dockerfile, bash scripts for setup) are located in `PATH-TO-Pose-Estimation-Demo/docker`. 
+**Note**: The Docker-related files (Dockerfile, bash scripts for setup) are located in `PATH-TO-pose_estimation/docker`. 
 
 ---
 
