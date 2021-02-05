@@ -82,15 +82,15 @@ As a reminder, we want to extract some files of `save/single_cube/` inside the d
 Open a new terminal and enter the following: 
 
 ```bash
-docker cp <containerId>:/file/path/within/container /host/path/target
+docker cp <containerId>:<source path> <destination path>
 ```
 
-As an example, I have put my `save` folder inside my `/Users/jonathan.leban/Documents/`. Thus, to copy my model on my local, I will enter the following: 
+As an example, I will enter the following: 
 ```bash
 docker cp 48a81368b095:/save/single_cube/UR3_single_cube_model_ep120.tar /Users/jonathan.leban/Documents/save
 ```
 
-To copy my metrics on my local, I will enter the following: 
+To copy my metrics data out of docker, I will enter the following: 
 ```bash
 docker cp 48a81368b095:/save/single_cube/events.out.tfevents.1612402202.48a81368b095 /Users/jonathan.leban/Documents/save
 ```
@@ -98,4 +98,4 @@ docker cp 48a81368b095:/save/single_cube/events.out.tfevents.1612402202.48a81368
 The metrics folder should have the same format as **events.out.tfevents.<`number`>.<`number`>**
 
 ### Troubleshooting 
-If when you launch the training you have an issue saying `Killed`, then you need to increase your `Memory` to 8GB in your Docker settings. 
+If when you launch the training you have an issue saying `Killed`, then you may want to try increasing the `Memory` allowance in your Docker settings. 
