@@ -7,7 +7,7 @@ This project uses synthetic training data collected in Unity. To learn more abou
 This model is a modified implementation of [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf), by Tobin et. al. It is based on the classic VGG-16 architecture, and initialized with weights pre-trained on the ImageNet dataset. The head of the network is replaced with a 3D position prediction head that outputs (x, y, z), and an orientation predicton head that outputs a quaternion (q<sub>x</sub>, q<sub>y</sub>, q<sub>z</sub>, q<sub>w</sub>). 
 
 <p align='center'>
-  <img src='documentation/docs/network.png'/>
+  <img src='documentation/docs/network.png' height=400/>
 </p>
 
 ### Table of contents
