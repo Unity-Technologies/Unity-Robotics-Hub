@@ -103,10 +103,10 @@ You can load a model, so that you can evaluate the performance or continue the t
  
 **Note**: For more information on how the save method works, you can go in the [codebase_structure.md](documentation/codebase_structure.md) file, in the section `Save and Load methods`.
 
-### CLI 
+## CLI 
 At the top of the [cli.py](pose_estimation/cli.py) file, you can see the documentation for all supported commands. 
 
-#### Train
+## Train
 To run the training commmand with default values:
 
 * **Action**: 
@@ -119,7 +119,13 @@ You can override many hyperparameters by adding additional arguments to this com
 #### Visualizing Training Results with Tensorboard
 If you'd like to examine the results of your training run in more detail, see our guide on [viewing the Tensorboard logs](../Documentation/tensorboard.md).
 
-#### Evaluate  
+## Evaluate 
+Once training has completed, we can also run our model on our validation dataset to measure its performance on data it has never seen before. 
+
+However, first we need to specify a few settings in our config file.
+
+* **Action**: In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model. 
+
 To run the evaluate commmand with default values:
 
 ```bash
