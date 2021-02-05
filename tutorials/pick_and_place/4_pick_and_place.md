@@ -19,7 +19,7 @@ This part is going to be a little different than the previous tutorials in that 
   
 # Niryo One Information
 
-The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One like how to connect to the Niryo One, including passwords, how to connect the Niryo One to a network, and how to use the Niryo One Studio desktop application.
+The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One, such as how to connect it to a network, how to log in to it, and how to use the Niryo One Studio desktop application.
 
 > NOTE: The Niryo One will need to be connected to the same network as the machine running the Unity Editor.
 
@@ -124,23 +124,23 @@ From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` 
 
 ![](img/4_old_flow.png)
 
-1. `TrajectoryPlanner` sends ServiceMessage with robot pose, target cube coordinates, and target destination coordinates to `mover.py`.
-1. `mover.py` calculates the four trajectories, adds them to an array, and returns the array to `TrajectoryPlanner`.
-1. `TrajectoryPlanner` then executes the trajectories one at a time on the simulated Niryo One.
+1. In part 3, we had `TrajectoryPlanner` send a MoverServiceRequest message on the `niryo_moveit` topic. The message contained the robot pose, target cube coordinates, and target destination coordinates
+1. `mover.py` received the message, calculated the four trajectories, added them to an array, and sent back the array in a MoverServiceResponse message to `TrajectoryPlanner`.
+1. `TrajectoryPlanner` then executed the trajectories one at a time on the simulated Niryo One.
 
 **Part 4 - Simulated and Real - Flow:**
 
 ![](img/4_new_flow.png)
 
-1. `RealSimPickAndPlace.cs` publishes robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic.
-1. `sim_and_real_pnp.py,`as a ROS subscriber node, reads from the `sim_real_pnp` topic, plans the trajectories, and sends the action goals one at a time to `RobotMove` action server.
+1. Now, `RealSimPickAndPlace.cs` will publish robot pose, target cube coordinates, and target destination coordinates to `sim_real_pnp` topic.
+1. `sim_and_real_pnp.py` will recieve the message, plan the trajectories, and send the action goals one at a time to the `RobotMove` action server.
 
 
 1. **Simultaneously**
-	1. `RobotMove` action server publishes the goal messages along to the `robot_action/goal` topic.
-	1. `RobotMove` action server executes trajectory on Niryo One.
+	1. The `RobotMove` action server will publish the goal messages along to the `robot_action/goal` topic.
+	1. The `RobotMove` action server will execute the trajectory on Niryo One.
 
-1. Simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber reads from the action goal topic, `robot_action/goal`, and executes the trajectory or tool commands.
+1. The simulated Niryo One, `RealSimPickAndPlace.cs`, subscriber will read from `robot_action/goal`, and execute the same commands.
 
 **Note the changes between Part 3 and Part 4::**
 
@@ -226,14 +226,14 @@ Using the same scene from [Part 3](3_pick_and_place.md), we are going to use a n
 
 
 ## Key Differences
-Instead of calling a service and waiting for the response  to execute a robot command, a subscription is going to be made to the `niryo_one/commander/robot_action/goal` topic and every command published will be executed upon receipt.
+Instead of calling a service and waiting for the response  to execute a robot command, we will subscribe to the `niryo_one/commander/robot_action/goal` topic and execute each command we receive.
 
 - A subscriber is created on Start to read the robot command messages and execute them as they are received.
 
 ```csharp
 void Start()
 {
-    ros.Subscribe<RobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommand);
+    ros.Subscribe<RobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
 }
 ```
 
