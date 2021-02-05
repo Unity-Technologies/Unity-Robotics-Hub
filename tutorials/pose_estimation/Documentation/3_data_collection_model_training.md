@@ -112,7 +112,7 @@ log_dir_system: /Users/jonathan.leban/Documents/models
 #### Training the model
 Now its time to train our deep learning model!
 
-* **Action**: If you are not already in `Model`, navigate there. 
+* **Action**: If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there. 
 
 * **Action**: Enter the following command to start training: 
 ```bash 
