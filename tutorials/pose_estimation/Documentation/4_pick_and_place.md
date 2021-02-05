@@ -28,7 +28,7 @@ If you have correctly followed phases 1 and 2, whether or not you choose to use 
 **Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
 
 ```bash
-cd <PATH-TO-pose_estimation>
+cd /PATH/TO/Unity-Robotics-Hub/tutorials/pose_estimation &&
 git submodule update --init --recursive 
 ```
 
@@ -43,11 +43,13 @@ In your `pose_estimation` folder, you should have a `ROS` folder. Inside that fo
 
 ### Step 2: Adding the Pose Estimation Model
 
+* **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`.
+
 Here you have two options for the model:
 
 #### Option A: Using Our Pre-trained Model
 
-* **Action**: You can use the model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: You can use the model we have trained. From this repository's [Releases](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation) under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
 
 #### Option B: Using Your Own Model
 

@@ -65,7 +65,7 @@ You should then see something similar to the following:
 #### Requirements
 
 - To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
-- If you would like more information on the model, further documentation is provided in the [ReadMe.md](../Model/README.md) of the Model folder.
+- If you would like more information on the model, further documentation is provided in the [README](../Model/README.md) of the Model folder of this `tutorials/pose_estimation` directory.
 
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
 
