@@ -41,7 +41,7 @@ We need to add a few components to our camera in order to equip it for the perce
 
 As you can see in the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`.
 
-There are several other types of labelers available in the Perception package, and you can even write your own. If you want more information on labelers, you can consult [this tutorial](https://github.com/Unity-Technologies/com.unity.perception) and follow from the Step 3 of [Phase 1](1_set_up_the_scene.md#step-3) of the Perception Tutorial.
+There are several other types of labelers available in the Perception package, and you can even write your own. If you want more information on labelers, you can consult the [perception package documentation](https://github.com/Unity-Technologies/com.unity.perception).
 
 * **Action**: In the _**Inspector**_ tab, in the `Perception Camera` script, click on the _**+**_ button at the bottom right corner of the `List is Empty` field, and select `BoundingBox3DLabeler`.
 
