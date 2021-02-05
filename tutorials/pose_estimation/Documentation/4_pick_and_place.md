@@ -43,8 +43,6 @@ In your `pose_estimation` folder, you should have a `ROS` folder. Inside that fo
 
 ### Step 2: Adding the Pose Estimation Model
 
-* **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`.
-
 Here you have two options for the model:
 
 #### Option A: Use Our Pre-trained Model
