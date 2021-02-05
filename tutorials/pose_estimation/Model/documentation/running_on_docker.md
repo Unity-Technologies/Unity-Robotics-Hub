@@ -43,33 +43,29 @@ Thus, the final command for me is:
 docker run -it -v /Users/jonathan.leban/Documents/data:/data -v Users/jonathan.leban/Documents/save:/save/single_cube pose_estimation bash
 ```
 
-### CLI
+### CLI 
+At the top of the [cli.py](pose_estimation/cli.py) file, you can see the documentation for all supported commands. 
+
 #### Train
-To run the training command, you need to adopt the following format: 
+To run the training commmand with default values:
 
-```bash
-cli.py train [options] [config] [dataset] [training-options] [hyperparameter-options] [save-options] [loading-options]
-```
-
-Thus, if you want to keep the [config.yaml](../config.yaml) as it is and change the number of epochs to 5, the training batch 
-size to 10 and set to 20 the number of steps you need to accumulate to upgrade the gradient, then the command will be: 
 * **Action**: 
 ```bash 
-python -m pose_estimation.cli train --epochs=5 --batch-training-size=10 --accumulation-steps=20
+python -m pose_estimation.cli train
 ```
+
+You can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
+
 
 #### Evaluate  
-To run the evaluate command, you need to adopt the following format: 
+To run the evaluate commmand with default values:
 
 ```bash
-cli.py evaluate [options] [config] [dataset] [evaluation-options] [save-options] [loading-options]
+python -m pose_estimation.cli evaluate
 ```
 
-Thus, if you want to keep the [config.yaml](../config.yaml) as it is and change the test batch size to 10 and the path where you have saved the already trained model you want to use which is for me `/Users/jonathan.leban/Documents/save/UR3_single_cube_model_ep120.tar`. 
-* **Action**: 
-```bash 
-python -m pose_estimation.cli evaluate --batch-test-size=10 --load-dir-checkpoint=/Users/jonathan.leban/Documents/save/UR3_single_cube_model_ep120.tar
-```
+Again, you can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
+
 
 ### Copy metrics and models saved on Docker on your local machine 
 Once you have trained or evaluated your model, you may want to copy the results out of the docker container, to your local computer. 
