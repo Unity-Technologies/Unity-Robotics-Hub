@@ -118,7 +118,7 @@ Now its time to train our deep learning model!
 python -m pose_estimation.cli train 
 ```
 
-**Note (Optional)**: If you want to override certain training hyperparameters, you can do so with additional arguments on the above command. See the documentation at the top of [cli.py]() for a full list of supported arguments.
+**Note (Optional)**: If you want to override certain training hyperparameters, you can do so with additional arguments on the above command. See the documentation at the top of [cli.py](../Model/pose_estimation/cli.py) for a full list of supported arguments.
 
 **Note**: If the training process ends unexpectedly, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
