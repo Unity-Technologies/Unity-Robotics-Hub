@@ -50,9 +50,10 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-* **Action**: You can use the pose estimation model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: To save time, you can use the pose estimation model we have trained. Download it [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar). 
 
-* **Action**: Copy the model file (.tar file) into the `models` folder you have just created. 
+* **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. Copy the `UR3_single_cube_model.tar` file you've just downloaded into this folder.
+
 
 ## Set up the ROS side
 
