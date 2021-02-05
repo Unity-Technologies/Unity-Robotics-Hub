@@ -131,7 +131,7 @@ However, first we need to specify a few settings in our config file.
 
 * **Action**: In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
 
-**Action**: If you are not already in the `Model`, navigate there. 
+* **Action**: If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there.
 
 **Action** To start the evaluation run, enter the following command: 
 ```bash 
