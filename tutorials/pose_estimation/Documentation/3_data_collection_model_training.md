@@ -37,17 +37,14 @@ You should see something similar to the following:
 <img src="Images/3_saved_data.png"/>
 </p>
 
-In my case the data is written to `/Users/jonathan.leban/Library/Application Support/DefaultCompany/SingleCubePoseEstimationProject` but for you the data path will be different. Go to that directory from your terminal:
-
-```bash
-```
+In my case the data is written to `/Users/jonathan.leban/Library/Application Support/DefaultCompany/SingleCubePoseEstimationProject` but for you the data path will be different. Go to that directory from your terminal.
 
 You should then see something similar to the following: 
 <p align="center">
 <img src="Images/3_data_logs.png"/>
 </p>
 
-* **Action**: Change the folder name where the data is saved to `UR3_single_cube_training`. 
+* **Action**: Change this folder's name to `UR3_single_cube_training`. 
 
 * **Action**: Now we need to collect the validation dataset. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, in the `Fixed Length Scenario` and in `Constants` set the `Total Iterations` to 3000.
 
@@ -59,21 +56,21 @@ You should then see something similar to the following:
 
 
 ### <a name="step-2">Step 2: Train the Deep Learning Model</a>
+Now its time to train our deep learning model! We've provided the model training code for you, but if you'd like to learn more about it - or make your own changes - you can dig into the details [here](../Model).
 
-**Note**: This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
+This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
 
 #### Requirements
 
-- To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
-- If you would like more information on the model, further documentation is provided in the [ReadMe.md](../Model/README.md) of the Model folder.
+To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
 
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
 
-#### Using Docker
+#### Option A: Using Docker
 If you would like to run using Docker, you can follow the [Docker steps provided](../Model/documentation/running_on_docker.md) in the Model documentation.
 
 
-#### Using Conda 
+#### Option B: Using Conda 
 If running locally without Docker, we first need to create a conda virtual environment and install the dependencies for our machine learning model. If you only have access to CPUs, install the dependencies specified in the `environment.yml` file. If your development machine has GPU support, you can choose to use the `environment-gpu.yml` file instead.
 
 * **Action**: In a terminal window, enter the following command to create the environment. Replace `<env-name>` with an environment name of your choice, e.g. `pose-estimation`:
