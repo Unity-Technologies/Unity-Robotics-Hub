@@ -6,7 +6,7 @@ Another option to run the project is to use a Docker image. This option allows y
 ## Docker Requirements
 You will need to have [Docker](https://docs.docker.com/get-docker/) installed on your computer. 
 
-### Docker Creation on Local
+### Running with Docker 
 
 * **Action**: In [config.yaml](../config.yaml), under `system`, set the argument `log_dir_system` to: `/save/single_cube`. 
 * **Action**: Set the argument `data_root` under `system` to `/data`. 
@@ -73,7 +73,7 @@ Once you have trained or evaluated your model, you may want to copy the results 
 After building and running the docker image your terminal should look something like this:
 
 <p align="center">
-<img src="docs/docker_id_image.png" height=50/>
+<img src="docs/docker_id_image.png" height=40/>
 </p>
 
 Here you can see on the right of `root@` the id of the docker container you are in. Copy this id. 
