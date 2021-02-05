@@ -21,21 +21,16 @@ Before creating the Docker image, you need to be sure your Docker settings are c
 
 The first step is to build the Docker image.
 
-* **Action**: Open a new terminal and put yourself in the `Pose-Estimation-Model` folder. Then enter the following:
-```bash 
-docker build -t [IMAGE NAME] .
-```
-
-As an example, for the image name, I used `pose_estimation`, and thus my command is: 
+* **Action**: Open a new terminal and navigate to the `Unity-Robotics-Hub/tutorials/pose_estimation/Model` folder. Then run the command to build your docker image, and name it `pose_estimation`:
 ```bash 
 docker build -t pose_estimation .
 ```
 
-**Note**: If you change something in the project, you will need to rebuild the Docker image. 
+**Note**: If you change any code in the `Model` directory, you will need to rebuild the Docker image. 
 
 * **Action**: Now we need to run the Docker image. One way is to use the bash shell. Still in the same terminal, enter the following:
 ```bash
-docker run -it -v [FULL PATH TO DATA FOLDER]:/data -v [FULL PATH TO MODEL FOLDER]:/save/single_cube [IMAGE NAME] bash
+docker run -it -v [FULL PATH TO DATA FOLDER]:/data -v [FULL PATH TO MODEL FOLDER]:/save/single_cube pose_estimation bash
 ```
 
 The `FULL PATH TO DATA FOLDER` is the path to the upper directory of your data. As an example, I have put my `UR3_single_cube_training` and `UR3_single_cube_validation` data folder into a folder called `data` that I have created in my `Documents` folder. Thus my `FULL PATH TO DATA FOLDER` will be `/Users/jonathan.leban/Documents/data`.
@@ -48,7 +43,7 @@ Thus, the final command for me is:
 docker run -it -v /Users/jonathan.leban/Documents/data:/data -v Users/jonathan.leban/Documents/save:/save/single_cube pose_estimation bash
 ```
 
-### Commands Model
+### CLI
 #### Train
 To run the training command, you need to adopt the following format: 
 
