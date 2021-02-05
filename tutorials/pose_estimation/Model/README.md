@@ -9,7 +9,7 @@ This model is a modified implementation of [Domain Randomization for Transferrin
 </p>
 
 ## Quick Start (Recommended)
-We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../Documentation/quick_demo_train).
+We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../Documentation/quick_demo_train.md).
 
 ## Pre-Trained Model
 We've provided a pre-trained model, which can be downloaded [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar).
@@ -17,7 +17,7 @@ We've provided a pre-trained model, which can be downloaded [here](https://githu
 ## Setup
  * [For running on docker](documentation/running_on_docker.md#docker-requirements)
  * [For running in the cloud](documentation/running_on_the_cloud.md)
- * [For running locally with Conda](../documentation/3_data_collection_model_training.md#option-b-using-conda)
+ * [For running locally with Conda](../Documentation/3_data_collection_model_training.md#option-b-using-conda)
 
 ## CLI
 This model supports a `train` and an `evaluate` command. Both of these have many arguments, which you can examine in `cli.py`. They will default to the values in `config.yaml` for convenience, but can be overridden via the command line.
