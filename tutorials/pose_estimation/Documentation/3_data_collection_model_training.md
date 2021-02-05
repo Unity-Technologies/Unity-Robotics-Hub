@@ -138,7 +138,7 @@ However, first we need to specify a few settings in our config file.
 python -m pose_estimation.cli evaluate 
 ```
 
-**Note (Optional)**: To override additional settings on your evaluation run, you can tag on additional arguments to the command above. See the documentation in [cli.py]() for more details.
+**Note (Optional)**: To override additional settings on your evaluation run, you can tag on additional arguments to the command above. See the documentation in [cli.py](../Model/pose_estimation/cli.py) for more details.
 
 
 ### Exercises for the Reader
