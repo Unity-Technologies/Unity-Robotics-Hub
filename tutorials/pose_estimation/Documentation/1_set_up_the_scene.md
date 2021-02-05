@@ -41,7 +41,7 @@ When you first run Unity, you will be asked to open an existing project, or crea
 * **Action**: Open Unity and create a new project using the **Universal Render Pipeline**. Name your new project _**Pose Estimation Tutorial**_, and specify a desired location as shown below.
 
 <p align="center">
-<img src="Images/1_create_new_project.png" align="center" width=800/>
+<img src="Images/1_create_new_project.png" align="center" width=950/>
 </p>
 
 ### <a name="step-2">Step 2: Download the Perception, the URDF and the TCP connector Packages</a>
