@@ -40,7 +40,6 @@ You should see something similar to the following:
 In my case the data is written to `/Users/jonathan.leban/Library/Application Support/DefaultCompany/SingleCubePoseEstimationProject` but for you the data path will be different. Go to that directory from your terminal:
 
 ```bash
-open [Directory-Printed-In-Your-Unity-Console-Where-The-Data-Is-Written]
 ```
 
 You should then see something similar to the following: 
