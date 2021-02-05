@@ -14,7 +14,7 @@ You will need to have [Docker](https://docs.docker.com/get-docker/) installed on
 Before creating the Docker image, you need to be sure your Docker settings are compatible with the project. Open Docker Desktop, click on `Settings` (the gear icon) on the top right, and go to `Resources`. Then change your settings so that it matches the following: 
 
 <p align="center">
-<img src="docs/docker_settings.png"/>
+<img src="docs/docker_settings.png" height=400/>
 </p>
 
 **Note**: You may need to tweak these settings for your exact use case.
