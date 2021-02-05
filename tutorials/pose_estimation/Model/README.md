@@ -65,4 +65,4 @@ python -m pytest tests/test_average_translation_mean_square_error.py
 ## Resources
 * [Documentation](documentation/codebase_structure.md) describing structure of the model code
 * [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf)
-* [Pose Estimation Tutorial](../)
+* [Pose Estimation Tutorial](../README.md)
