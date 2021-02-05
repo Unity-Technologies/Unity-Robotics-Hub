@@ -61,8 +61,6 @@ You will notice that the `BoundingBox3DLabeler` component has a field named `Id 
 
 This will create a new asset file named `IdLabelConfig` inside the `Assets` folder.
 
-In this tutorial, we will generate synthetic data intended for detecting a cube. Thus, in this step, you will add a label for the cube to the list of labels for `IdLabelConfig`.
-
 Now that you have created your label configuration, we need to assign them to the labeler that you previously added to your `Perception Camera` component.
 
 * **Action**: Select the `Main Camera` object from the _**Hierarchy**_ tab, and in the _**Inspector**_ tab, assign the newly created `IdLabelConfig` to the `IdLabelConfig`. To do so, you can either drag and drop the former into the corresponding fields for the label, or click on the small circular button in front of the `Id Label Config field`, which brings up an asset selection window filtered to only show compatible assets. 
@@ -233,7 +231,7 @@ To save time, we have provided a pre-written custom randomizer to do this.
     * In the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click `Add Randomizer` and start typing `RobotArmObjectPositionRandomizer`. 
     * Set the `MinRobotReachability` to `0.2` and the `MaxRobotReachability` to `0.4`. 
     * Under `Plane`, click on the circle and start typing `ObjectPlacementPlane` and then double click on the GameObject that appears. 
-    * Under `base`, you need to drag and drop the base (ur3_with_gripper/world/base_link/base) of the robot.
+    * Under `base`, you need to drag and drop the base (`ur3_with_gripper/world/base_link/base`) of the robot.
 
 <p align="center">
 <img src="Gifs/2_robot_randomizer_settings.gif" height=508 />
@@ -249,7 +247,7 @@ The `RobotArmObjectPositionRandomizerTag` component should look like the followi
 <img src="Images/2_RobotArmReachablePositionRandomizerSetting.png" height=150/>
 </p>
 
-If you press play, you should now see the cube moving around the robot and rotating at each frame.
+If you press play, you should now see the cube and goal moving around the robot with the cube rotating at each frame.
 
 <p align="center">
 <img src="Gifs/2_object_position_randomizer.gif" height=388 width=800/>

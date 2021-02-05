@@ -2,3 +2,6 @@
 *.vsconfig
 ROS/src/robotiq
 ROS/src/universal_robot
+ROS/src/ros_tcp_endpoint
+ROS/src/moveit_msgs
+ROS/src/ur3_moveit/models/

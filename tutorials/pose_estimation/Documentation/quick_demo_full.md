@@ -24,7 +24,7 @@ You need to have a software enabling you to run bash files. One option is to dow
 git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-Two package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations and [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial. 
+Three package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations, [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, and [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial, as well as the [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/).
 
 * **Action**: Still in the same terminal, run:
 ```bash
