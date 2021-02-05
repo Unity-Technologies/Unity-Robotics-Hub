@@ -1,144 +1,36 @@
 Pose Estimation Model
 =====================
-This repository enables users to train and evaluate a deep neural network to predict the pose of a single object from RGB images. We provide support for running both locally and with Docker.  
+This section contains code for training and evaluating a deep neural network to predict the pose of a single object from RGB images. We provide support for running both locally and with Docker.  
 
-This project uses synthetic training data collected in Unity. To learn more about that, see our data collection [tutorial](../).
-
-This model is a modified implementation of [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf), by Tobin et. al. It is based on the classic VGG-16 architecture, and initialized with weights pre-trained on the ImageNet dataset. The head of the network is replaced with a 3D position prediction head that outputs (x, y, z), and an orientation predicton head that outputs a quaternion (q<sub>x</sub>, q<sub>y</sub>, q<sub>z</sub>, q<sub>w</sub>). 
+This model is a modified implementation of [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf), by Tobin et. al. It is based on the classic VGG-16 backbone architecture, and initialized with weights pre-trained on the ImageNet dataset. The head of the network is replaced with a 3D position prediction head that outputs (x, y, z), and an orientation predicton head that outputs a quaternion (q<sub>x</sub>, q<sub>y</sub>, q<sub>z</sub>, q<sub>w</sub>). 
 
 <p align='center'>
   <img src='documentation/docs/network.png' height=400/>
 </p>
 
-### Table of contents
-- [Requirements](#requirements)
-- [Running on local](#running-on-local)
-  - [Dataset](#dataset) 
-  - [Save and Load](#save-and-load)
-    - [Save](#save)
-    - [Load](#load)
-  - [CLI](#cli)
-    - [Train](#train)
-    - [Evaluate](#evaluate)
-- [Running on Docker](#running-on-docker)
-- [Running on the Cloud](#running-on-the-cloud)
-- [Visualizing the Results](#visualizing-the-results)
-- [Unit Testing](#unit-testing)
-
-### Supporting Documentation
-- [Codebase Structure](documentation/codebase_structure.md)
-- [Running on Docker](documentation//running_on_docker.md)
-- [Running on the Cloud](documentation/running_on_the_cloud.md)
-
 ---
 
-## Requirements
+## Quick Start (Recommended)
+We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../documentation/quick_demo_train).
 
-To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+## Pre-Trained Model
+We've provided a pre-trained model, which can be downloaded [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar).
 
-By following the instructions below, you will create a conda environment, so you do not need to already have Python 3 installed on your machine.
+## Setup
+ * [For running on docker](documentation/running_on_docker.md#docker-requirements)
+ * [For running in the cloud](documentation/running_on_the_cloud.md)
+ * [For running locally with Conda](../documentation/3_data_collection_model_training.md#option-b-using-conda)
 
-## Running on local
-* **Action**: First, you need to clone this git repository: 
-```bash 
-git clone git@github.com:Unity-Technologies/Pose-Estimation-Model.git
-```
+## CLI
+This model supports a `train` and an `evaluate` command. Both of these have many arguments, which you can examine in `cli.py`. They will default to the values in `config.yaml` for convenience, but can be overridden via the command line.
 
-A new folder called `Pose-Estimation-Model` has been created in your current directory. 
-* **Action**: Go inside that directory by entering the following command in your terminal: 
-```bash 
-cd Pose-Estimation-Model
-```
+The most important `train` arguments to be aware of are:
+* `--data_root`: Path to the directory containing your data folders. These directory should include `UR3_single_cube_training` and `UR3_single_cube_validation`, containing the training and validation data, respectively. 
+* `--log-dir-system`: Path to directory where you'd like to save Tensorboard log files and model checkpoint files.
 
-**NOTE**: You have two options: use a conda environment or use Docker. If you want to use Docker then click on [this](#running-on-docker). 
-
-Then, you need to create a conda environment with the dependencies of your [environment.yml](environment.yml) file and **if your development machine has GPU support**, you can choose to use [environment-gpu.yml](environment-gpu.yml) file instead. 
-This will create and activate the project in a virtual environment with Python 3 and all the packages required to run the project properly so that you don't have to install something on your computer. 
-* **Action**: Still in the same terminal window, enter the following: 
-```bash
-conda env create -n <env-name> -f environment.yml
-```
-
-* **Action**: Then you need to activate the environment:
-```bash
-conda activate <env-name>
-```
-
-Then, once the project is created, you can run python commands and thus train or evaluate your neural network model. But to run those commands, the project needs to have access to the datasets. 
-
-
-### Dataset
-For the datasets, you have the ability to use a cloud like google cloud platform or to use your local computer. 
-This feature is controlled by the argument `download_data_gcp` under `dataset` in [config.yaml](config.yaml) 
-and by `--download-dat-gcp` when you launch the command in the terminal (see the [CLI](#cli) section further down)
-
-In this section, I will show you how to run it on local.
-
-**Note**: If you want to know more information on how to run it on a cloud, then go to [running_on_the_cloud](documentation/running_on_the_cloud.md).
-
-There are two datasets you need to have on your local computer: `UR3_single_cube_training` and 
-`UR3_single_cube_validation` for the training and the validation process. To create those datasets, you need to follow the Phase 1, 2 and 3 of the [Pose Estimation Demo](../) tutorial. 
-
-There are few steps you need to follow in order to feed your neural network from the data properly:
-* **Action**: In the [config.yaml](config.yaml), at the bottom you can find the argument `data_root` 
-under `system`. Here you need to enter the root of the upper level directory of your data. 
-For example, you can put your data in a folder called `data` that you have created inside your `Documents` folder. On mac you will enter: `/Users/user.name/Documents/data`
-
-* **Action**: In the [config.yaml](config.yaml), you also need to set the argument `download_data_gcp` under `dataset` to `False`. 
-
-### Save and Load
-#### Save
-Now you have two options to save your model and your metrics (logger): either you save it on local or you save it on google cloud (you can use another cloud but you will have to make the changes yourself). 
-
-* **Action**: in the [config.yaml](config.yaml) file, under the argument `system` there is an argument `log_dir_system`. This argument defines the directory where you want to save the model and the metrics. You need to put the full local path.  
-
-As I am a Mac User, the path will be different if you are working on Windows.
-
-**Note**: For more information on how the save method works, you can go in the [codebase_structure.md](documentation/codebase_structure.md) file, in the section `Save and Load methods`.
-
-#### Load
-You can load a model, so that you can evaluate the performance or continue the training. 
-
-* **Action**: In the [config.yaml](config.yaml) file, under the key `system` there is a key `log_dir_system`. This specifies the directory where the model and metrics will be saved. Be sure to include the full local path. 
- 
-**Note**: For more information on how the save method works, you can go in the [codebase_structure.md](documentation/codebase_structure.md) file, in the section `Save and Load methods`.
-
-## CLI 
-At the top of the [cli.py](pose_estimation/cli.py) file, you can see the documentation for all supported commands. 
-
-## Train
-To run the training commmand with default values:
-
-* **Action**: 
-```bash 
-python -m pose_estimation.cli train
-```
-
-You can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
-
-#### Visualizing Training Results with Tensorboard
-If you'd like to examine the results of your training run in more detail, see our guide on [viewing the Tensorboard logs](../Documentation/tensorboard.md).
-
-## Evaluate 
-Once training has completed, we can also run our model on our validation dataset to measure its performance on data it has never seen before. 
-
-However, first we need to specify a few settings in our config file.
-
-* **Action**: In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model. 
-
-To run the evaluate commmand with default values:
-
-```bash
-python -m pose_estimation.cli evaluate
-```
-
-Again, you can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
-
-## Running on Docker 
-If you want to run the project on Docker, then follow [this guide](documentation/running_on_docker.md). 
-
-## Running on the Cloud
-If you want to run the project on the Cloud, then follow [this guide](documentation/running_on_the_cloud.md). 
+The most important `evaluate` arguments to be aware of are:
+* `--load-dir-checkpoint`: Path to model to be evaluated. 
+* `--data_root`: Path to the directory containing your data folders. These directory should include `UR3_single_cube_training` and `UR3_single_cube_validation`, containing the training and validation data, respectively. 
 
 
 ## Performance
@@ -160,7 +52,7 @@ However, we used different metrics to _evaluate_ the performance of the model.
 
 We use [pytest](https://docs.pytest.org/en/latest/) to run tests located under `tests/`. You can run the tests after having done the instructions in the [Running on Local](#running-on-local) commands.
 
-You can run the entire test suite with
+You can run the entire test suite with:
 
 * **Action**:
 ```bash
