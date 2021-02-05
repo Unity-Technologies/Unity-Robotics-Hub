@@ -8,8 +8,6 @@ This model is a modified implementation of [Domain Randomization for Transferrin
   <img src='documentation/docs/network.png' height=400/>
 </p>
 
----
-
 ## Quick Start (Recommended)
 We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../documentation/quick_demo_train).
 
