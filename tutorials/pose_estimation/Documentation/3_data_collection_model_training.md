@@ -91,7 +91,7 @@ conda activate <env-name>
 
 #### Updating the Model Config
 
-At the top of the [cli.py]() file in the model code, you can see the documentation for all supported commands. Since typing these in can be laborious, we use a [config.yaml](../Model/config.yaml) file to feed in all these arguments. You can still use the command line arguments if you want - they will override the config. 
+At the top of the [cli.py](../Model/pose_estimation/cli.py) file in the model code, you can see the documentation for all supported commands. Since typing these in can be laborious, we use a [config.yaml](../Model/config.yaml) file to feed in all these arguments. You can still use the command line arguments if you want - they will override the config. 
 
 There are a few settings specific to your setup that you'll need to change.
 
