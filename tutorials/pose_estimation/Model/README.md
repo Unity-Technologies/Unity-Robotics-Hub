@@ -33,7 +33,7 @@ The most important `evaluate` arguments to be aware of are:
 
 ## Performance
 
-Below is a description of the model's performance. For the loss, we used the L2 norm for the position and orientation in each batch.
+Below is a description of the model's performance on predicting the pose of a cube. For the loss, we used the L2 norm for the position and orientation in each batch.
 
 However, we used different metrics to _evaluate_ the performance of the model. 
 * To evaluate translation predictions, we measured the [average L2 norm over the dataset](pose_estimation/evaluation_metrics/translation_average_mean_square_error.py).
