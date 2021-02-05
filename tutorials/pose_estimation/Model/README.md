@@ -150,10 +150,10 @@ However, we used different metrics to _evaluate_ the performance of the model.
 * To evaluate the orientation predictions, we used the angle between the orientation of the prediction and the orientation of the target, averaged over the dataset (implementation [here](pose_estimation/evaluation_metrics/orientation_average_quaternion_error.py)).
 
 
-|                                   | Training | Validation|
-|:---------------------------------:|:--------:|:---------:|
-|Translation (% of the cube's size) |   12%    |   10%     |
-|Orientation (radian)               |   0.06   |   0.05    |   
+|                                   | Training Error | Validation Error |
+|:---------------------------------:|:--------------:|:----------------:|
+|Translation (% of the cube's size) |   12%          |   10%            |
+|Orientation (radian)               |   0.06         |   0.05           |   
 
 
 ## Unit Testing
