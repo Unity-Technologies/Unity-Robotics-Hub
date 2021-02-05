@@ -19,14 +19,14 @@ To follow this tutorial you need to **clone** this repository even if you want t
 
 **Note For Windows users**:
 
-You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
+You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select `GIT Bash Here`. 
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
 git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the content of the `universal robots` and the `robotiq` folders. 
+Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the contents of the `universal_robot` and the `robotiq` folders. 
 ```bash
 cd Unity-Robotics-Hub/tutorials/pose_estimation
 ./submodule.sh
@@ -69,10 +69,10 @@ Installing the different packages may take some time (few minutes).
 * [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception`
   * This will help us collect training data for our machine learning model. 
 
-* [URDF package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
+* [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
   * This package will help us import a robot into our scene from a file in the [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
 
-* [TCP connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
+* [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
   * This package will enable a connection between ROS and Unity. 
 
 **Note**: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.

@@ -6,6 +6,8 @@ This tutorial will go through the steps necessary to perform pose estimation wit
 
 **Want to skip the tutorial and focus on collecting training data for the deep learning model? Check out our [quick data collection demo](Documentation/quick_demo_train.md).**
 
+> Note: This project has been developed with Python 3 and ROS Noetic.
+
 **Table of Contents**
 - [Phase 1: Create Unity scene with imported URDF](#link-phase-1)
 - [Phase 2: Setting up the scene for data collection](#link-phase-2)
