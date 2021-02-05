@@ -5,7 +5,7 @@ In this first phase of the tutorial, we will start by downloading and installing
 
 **Table of Contents**
   - [Requirements](#reqs)
-  - [Step 1: Download Unity Editor and Create a New Project](#step-1)
+  - [Step 1: Create a New Project](#step-1)
   - [Step 2: Download the Perception, the URDF and the TCP connector Packages](#step-2)
   - [Step 3: Setup the Ground Truth Render Feature](#step-3)
   - [Step 4: Setup the Scene](#step-4)
@@ -128,10 +128,9 @@ As seen above, the new Scene already contains a camera (`Main Camera`) and a lig
 </p>
 
 #### Adding Tutorial Files
-Once the camera and light settings are done, we will focus on the objects we will put into our scene. Before doing so, we need to import some folders as `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`. But first, we need to delete some pre-existing folders in Unity. 
+Now it is time to add some more objects to our scene. Before doing so, we need to import some folders containing the required assets. 
 
-
-* **Action**: From this repository's [Releases](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_, download the package called `TutorialAssets.zip` and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`. 
+* **Action**: Download [TutorialAssets.zip](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/TutorialAssets.zip), and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`.
 
 * **Action**: Drag and Drop the `TutorialAssets` folder onto the `Assets` folder in the _**Project**_ tab. 
 
