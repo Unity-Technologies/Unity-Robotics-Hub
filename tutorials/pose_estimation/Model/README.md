@@ -9,7 +9,7 @@ This model is a modified implementation of [Domain Randomization for Transferrin
 </p>
 
 ## Quick Start (Recommended)
-We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../documentation/quick_demo_train).
+We trained this model on sythetic data collected in Unity. To learn how to collect this data and train the model yourself, see our [data collection and training tutorial](../Documentation/quick_demo_train).
 
 ## Pre-Trained Model
 We've provided a pre-trained model, which can be downloaded [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar).
@@ -48,11 +48,10 @@ However, we used different metrics to _evaluate_ the performance of the model.
 
 ## Unit Testing
 
-We use [pytest](https://docs.pytest.org/en/latest/) to run tests located under `tests/`. You can run the tests after having done the instructions in the [Running on Local](#running-on-local) commands.
+We use [pytest](https://docs.pytest.org/en/latest/) to run tests located under `tests/`. You can run the tests after following the setup instructions in [Running on Local with Conda](../documentation/3_data_collection_model_training.md#option-b-using-conda) commands.
 
 You can run the entire test suite with:
 
-* **Action**:
 ```bash
 python -m pytest
 ```
@@ -62,3 +61,8 @@ or run individual test files with:
 ```bash
 python -m pytest tests/test_average_translation_mean_square_error.py
 ```
+
+## Resources
+* [Documentation](documentation/codebase_structure.md) describing structure of the model code
+* [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf)
+* [Pose Estimation Tutorial](../)
