@@ -37,10 +37,10 @@ You should see something similar to the following:
 <img src="Images/3_saved_data.png"/>
 </p>
 
-In my case the data is written to `/Users/jonathan.leban/Library/Application Support/DefaultCompany/Pose Estimation Tutorial` but for you the data path will be different. Go to that directory from your terminal:
+In my case the data is written to `/Users/jonathan.leban/Library/Application Support/DefaultCompany/SingleCubePoseEstimationProject` but for you the data path will be different. Go to that directory from your terminal:
 
 ```bash
-open /Users/jonathan.leban/Library/Application\ Support/DefaultCompany/Unity3D
+open [Directory-Printed-In-Your-Unity-Console-Where-The-Data-Is-Written]
 ```
 
 You should then see something similar to the following: 
