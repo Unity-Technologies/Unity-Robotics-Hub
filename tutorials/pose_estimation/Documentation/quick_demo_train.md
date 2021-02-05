@@ -16,7 +16,7 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
 
 **Action**: [Install Unity `2020.2.*`.](install_unity.md)
 
-**Action**: Open the completed project. In the Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from `PATH-YOU-CLONE-THE-PROJECT-Unity-Robotics-Hub/tutorials/pose_estimation/`. 
+**Action**: Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from `[DIRECTORY WHERE YOU CLONED THIS PROJECT]/Unity-Robotics-Hub/tutorials/pose_estimation/`. 
 
 ## <a name='setup'>Setup</a>
 
