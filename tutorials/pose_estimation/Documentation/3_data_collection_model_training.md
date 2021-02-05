@@ -62,15 +62,15 @@ This step can take a long time if your computer doesn't have GPU support (~5 day
 
 #### Requirements
 
-To run this project on local, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
-
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
 
 #### Option A: Using Docker
-If you would like to run using Docker, you can follow the [Docker steps provided](../Model/documentation/running_on_docker.md) in the Model documentation.
+If you would like to run using Docker, you can follow the [Docker steps provided](../Model/documentation/running_on_docker.md) in the model documentation.
 
 
 #### Option B: Using Conda 
+To run this project locally, you will need to install [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). 
+
 If running locally without Docker, we first need to create a conda virtual environment and install the dependencies for our machine learning model. If you only have access to CPUs, install the dependencies specified in the `environment.yml` file. If your development machine has GPU support, you can choose to use the `environment-gpu.yml` file instead.
 
 * **Action**: In a terminal window, enter the following command to create the environment. Replace `<env-name>` with an environment name of your choice, e.g. `pose-estimation`:
