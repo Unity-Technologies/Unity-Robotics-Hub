@@ -44,7 +44,7 @@ docker run -it -v /Users/jonathan.leban/Documents/data:/data -v Users/jonathan.l
 ```
 
 ### CLI 
-At the top of the [cli.py](pose_estimation/cli.py) file, you can see the documentation for all supported commands. 
+At the top of the [cli.py](../pose_estimation/cli.py) file, you can see the documentation for all supported commands. 
 
 #### Train
 To run the training commmand with default values:
@@ -54,7 +54,7 @@ To run the training commmand with default values:
 python -m pose_estimation.cli train
 ```
 
-You can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
+You can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](../pose_estimation/cli.py) for a view of all supported arguments.  
 
 
 #### Evaluate  
@@ -64,7 +64,7 @@ To run the evaluate commmand with default values:
 python -m pose_estimation.cli evaluate
 ```
 
-Again, you can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](pose_estimation/cli.py) for a view of all supported arguments.  
+Again, you can override many hyperparameters by adding additional arguments to this command. See the documentation at the top of [cli.py](../pose_estimation/cli.py) for a view of all supported arguments.  
 
 
 ### Copy metrics and models saved on Docker on your local machine 
