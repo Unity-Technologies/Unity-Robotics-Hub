@@ -26,7 +26,7 @@ You need to have a software enabling you to run bash files. One option is to dow
 git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the contents of the `universal_robot` and the `robotiq` folders. 
+Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the contents of the `universal_robot`, `moveit_msgs`, `ros_tcp_endpoint`, and the `robotiq` folders. 
 ```bash
 cd Unity-Robotics-Hub/tutorials/pose_estimation
 ./submodule.sh

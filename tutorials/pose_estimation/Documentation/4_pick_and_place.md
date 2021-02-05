@@ -32,7 +32,7 @@ cd /PATH/TO/Unity-Robotics-Hub/tutorials/pose_estimation &&
 git submodule update --init --recursive 
 ```
 
-Two package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations and [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial. 
+Three package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations, [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, and [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial, as well as the [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/).
 
 * **Action**: Open a terminal and go to the directory of the `pose_estimation` folder. Then run:
 ```bash
@@ -217,7 +217,7 @@ roslaunch ur3_moveit pose_est.launch
 
 This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`gazebo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
 
-This launch will print various messages to the console, including the set parameters and the nodes launched. The final two messages should confirm `You can start planning now!`.
+This launch will print various messages to the console, including the set parameters and the nodes launched. The final message should confirm `You can start planning now!`.
 
 **Note**: The launch file may throw errors regarding `[controller_spawner-5] process has died`. These are safe to ignore as long as the final message is `Ready to plan`. This confirmation may take up to a minute to appear.
 
@@ -234,7 +234,7 @@ Note that the robot arm must be in its default position, i.e. standing upright, 
 
 This will grab the current camera view, generate a [sensor_msgs/Image](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html) message, and send a new Pose Estimation Service Response to the ROS node running `pose_estimation_service.py`. This will run the trained model and return a Pose Estimation Service Response containing an estimated pose, which is subsequently converted and sent as a new Mover Service Response to the `mover.py` ROS node. Finally, MoveIt calculates and returns a list of trajectories to Unity, and the poses are executed to pick up and place the cube.
 
-The target object and empty goal object can be moved around during runtime for different trajectory calculations, or the target can be randomized using the `Randomize Cube` button. 
+The target object and empty goal object can be moved around during runtime for different trajectory calculations, or can be randomized using the `Randomize Cube` button. 
 
 **Note**: You may encounter a `UserWarning: CUDA initialization: Found no NVIDIA driver on your system.` error upon the first image prediction attempt. This warning can be safely ignored.
 

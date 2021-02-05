@@ -2,6 +2,14 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# ros_tcp_endpoint repository https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
+cd $DIR/ROS/src
+git clone -b main https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git ros_tcp_endpoint
+
+# moveit_msgs repository https://github.com/ros-planning/moveit_msgs.git
+cd $DIR/ROS/src
+git clone https://github.com/ros-planning/moveit_msgs.git
+
 # Robotiq repository https://github.com/ros-industrial/robotiq.git
 git init $DIR/ROS/src/robotiq
 cd $DIR/ROS/src/robotiq
