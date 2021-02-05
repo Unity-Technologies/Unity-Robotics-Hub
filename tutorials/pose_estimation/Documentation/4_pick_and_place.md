@@ -45,20 +45,17 @@ In your `pose_estimation` folder, you should have a `ROS` folder. Inside that fo
 
 Here you have two options for the model:
 
-#### Option A: Using Our Pre-trained Model
+#### Option A: Use Our Pre-trained Model
 
-* **Action**: You can use the model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: To save time, you may use the model we have trained. Download this [UR3_single_cube_model.tar](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar) file, which contains the pre-trained model weights.
 
-#### Option B: Using Your Own Model
+#### Option B: Use Your Own Model
 
-* **Action**: You can use the model you have trained in Phase 3. However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
+* **Action**: You can also use the model you have trained in [Phase 3](3_data_collection_mode_training.md). However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
 
 #### Moving the Model to the ROS Folder
 
-* **Action**: Copy the model file (.tar file) into the `models` folder you have just created. 
-
-* **Action**: The model is called for inference from [pose_estimation_script.py](../ROS/src/ur3_moveit/scripts/pose_estimation_script.py), on line 17. So, if you choose to use your model and you named it something other than `UR3_single_cube_model.tar` you will have to change line 17 to specify your model's filename.
-
+* **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder called `models`. Then copy your model file (.tar) into it.
 
 ### Step 3: Set up the ROS side
 

@@ -10,7 +10,7 @@ In addition to the `YRotationRandomizer` and the `RobotArmObjectPositionRandomiz
 * **Action**: Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click on `Add Randomizer` and start typing `UniformPoseRandomizer`. For the `Random` parameter, set the min value of the Range to `-1`. We do that because we want the change of the position and the rotation in both directions for a given axis. The Randomizer's UI snippet should look like the following: 
 
 <p align="center">
-<img src="Images/5_uniform_pose_randomizer_settings.png" height=270/>
+<img src="Images/5_uniform_pose_randomizer_settings.png" height=150/>
 </p>
 
 * **Action**: Now we need to add the RandomizerTag to the Camera but you can add it the GameObject you want. Select the `Main Camera` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `UniformPoseRandomizerTag` in the search bar that appears, until the `UniformPoseRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.

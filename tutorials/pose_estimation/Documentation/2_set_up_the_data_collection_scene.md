@@ -41,7 +41,7 @@ We need to add a few components to our camera in order to equip it for the perce
 
 As you can see in the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`.
 
-There are several other types of labelers available in the Perception package, and you can even write your own. If you want more information on labelers, you can consult [this tutorial](https://github.com/Unity-Technologies/com.unity.perception) and follow from the Step 3 of [Phase 1](1_set_up_the_scene.md#step-3) of the Perception Tutorial.
+There are several other types of labelers available, and you can even write your own. If you want more information on labelers, you can consult the [Perception package documentation](https://github.com/Unity-Technologies/com.unity.perception).
 
 * **Action**: In the _**Inspector**_ tab, in the `Perception Camera` script, click on the _**+**_ button at the bottom right corner of the `List is Empty` field, and select `BoundingBox3DLabeler`.
 
@@ -268,7 +268,7 @@ Now we will add the light Randomizer.
 The Randomizer should now look like the following: 
 
 <p align="center">
-<img src="Images/2_light_randomizer_settings.png" height=600/>
+<img src="Images/2_light_randomizer_settings.png" height=500/>
 </p>
 
 * **Action**: Now we need to add the RandomizerTag to the light. Select the `Directional Light` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `LightRandomizerTag` in the search bar that appears, until the `LightRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.

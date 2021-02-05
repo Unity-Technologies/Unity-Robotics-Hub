@@ -14,9 +14,9 @@ You need to have a software enabling you to run bash files. One option is to dow
 git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-**Action**: [Install Unity `2020.2.*`.](Documentation/install_unity.md)
+**Action**: [Install Unity `2020.2.*`.](install_unity.md)
 
-**Action**: Open the completed project. In the Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from `PATH-YOU-CLONE-THE-PROJECT-Unity-Robotics-Hub/tutorials/pose_estimation/`. 
+**Action**: Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from the `Unity-Robotics-Hub/tutorials/pose_estimation/` folder. 
 
 ## <a name='setup'>Setup</a>
 

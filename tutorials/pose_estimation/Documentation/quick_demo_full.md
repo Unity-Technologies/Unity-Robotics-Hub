@@ -1,6 +1,6 @@
 # Pick-and-Place with Pose Estimation: Quick Demo
 
-If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning based perception. To learn how to build something like this from scratch, see our [full tutorial](#1_set_up_the_scene.md).
+If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning-based perception. To learn how to build something like this from scratch, see our [full tutorial](1_set_up_the_scene.md).
 
 **Table of Contents**
 - [Requirements](#requirements)
@@ -50,9 +50,10 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-* **Action**: You can use the pose estimation model we have trained. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. From the release of this [github repository](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/tag/Pose-Estimation), under the tag _**Pose Estimation Tutorial**_ download the file called `UR3_single_cube_model.tar`.
+* **Action**: To save time, you can use the pose estimation model we have trained. Download it [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar). 
 
-* **Action**: Copy the model file (.tar file) into the `models` folder you have just created. 
+* **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. Copy the `UR3_single_cube_model.tar` file you've just downloaded into this folder.
+
 
 ## Set up the ROS side
 
@@ -116,7 +117,7 @@ The completed project is set up for data collection by default, so we must switc
 
 Run the following `roslaunch` command in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service and Pose Estimation nodes, and launch MoveIt.
 
-* **Action**: In the terminal window of your ROS workspace opened in [Step 2](#step-2-set-up-the-ros-side), run the provided launch file:
+* **Action**: In the terminal window of your ROS workspace opened above, run the provided launch file:
 
 ```bash
 roslaunch ur3_moveit pose_est.launch 

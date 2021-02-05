@@ -6,7 +6,9 @@ Instead of training or evaluating your model on your local computer, you can use
 - Can run on any computer and at any time without needing monitoring
 
 To run the project on the cloud, you will need to change a few parameters in [config.yaml](../config.yaml) file. The steps are described in the section below, [Google Cloud Platform](#google-cloud-platform).
+
 ### Google Cloud Platform
+
 Instead of extracting the data from your local computer, you can also download it form the cloud. In that case, you have two options: 
 - If you want to access the cloud for your data in the Docker image, you will need to change the [config.yaml](../config.yaml) file. 
   - Under `dataset`, set `download_data_gcp` to `True`
