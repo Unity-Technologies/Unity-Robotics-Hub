@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.Experimental.Perception.Randomization.Parameters;
-using Unity.Mathematics;
+using UnityEngine.Perception.Randomization.Parameters;
 
 
 public class PlacementConstraint
