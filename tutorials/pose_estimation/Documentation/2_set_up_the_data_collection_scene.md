@@ -39,17 +39,18 @@ We need to add a few components to our camera in order to equip it for the perce
 
 * **Action**: Go to `Edit > Project Settings > Editor` and uncheck `Asynchronous Shader Compilation`.
 
-As you can see in the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`.
+As you can see in the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`. 
 
 There are several other types of labelers available, and you can even write your own. If you want more information on labelers, you can consult the [Perception package documentation](https://github.com/Unity-Technologies/com.unity.perception).
 
-* **Action**: In the _**Inspector**_ tab, in the `Perception Camera` script, click on the _**+**_ button at the bottom right corner of the `List is Empty` field, and select `BoundingBox3DLabeler`.
+* **Action**: In the _**Inspector**_ tab, in the `Perception Camera` script, click on the _**+**_ button at the bottom right corner of the `List is Empty` field, and select `BoundingBox3DLabeler`. This labeler will highlight all the edges of the labeled gameobjects. 
 
 Once you add the labeler, the Inspector view of the Perception Camera component will look like this:
 
 <p align="center">
 <img src="Images/2_perception_camera.png" width="500"/>
 </p>
+
 
 ### <a name="step-2">Step 2: Equipping the Cube for Data Collection</a>
 
@@ -214,6 +215,22 @@ If you return to your list of Randomizers in the Inspector view of SimulationSce
 <p align="center">
 <img src="Gifs/2_y_rotation_randomizer_settings.gif" height=550 width=1020/>
 </p>
+
+Before running, we will to make a little modification on the `Controller.cs` file inside the URDF importer package in order to remove a UI message not useful for this tutorial (the message is to give commands to move the robot using the keyboard). 
+* **Action**: Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ tab, on the `Controller` component, selects the three dots at the right extremity and click on `Edit Script`. 
+
+* **Action**: Comment the method `OnGUI()`. If you don't know how to do it, replace the lines 221 to 227 by: 
+```bash
+        /*
+        public void OnGUI()
+        {
+            GUIStyle centeredStyle = GUI.skin.GetStyle("Label");
+            centeredStyle.alignment = TextAnchor.UpperCenter;
+            GUI.Label(new Rect(Screen.width / 2 - 200, 10, 400, 20), "Press left/right arrow keys to select a robot joint.", centeredStyle);
+            GUI.Label(new Rect(Screen.width / 2 - 200, 30, 400, 20), "Press up/down arrow keys to move " + selectedJoint + ".", centeredStyle);
+        }
+        */
+```
 
 * **Action**: Run the simulation again and inspect how the cube now switches between different orientations. You can pause the simulation and then use the step button (to the right of the pause button) to move the simulation one frame forward and clearly see the variation of the cube's y-rotation. You should see something similar to the following. 
 
