@@ -127,8 +127,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.Experimental.Perception.Randomization.Parameters;
-using UnityEngine.Experimental.Perception.Randomization.Randomizers;
+using UnityEngine.Perception.Randomization.Parameters;
+using UnityEngine.Perception.Randomization.Randomizers;
 
 [Serializable]
 [AddRandomizerMenu("Perception/Y Rotation Randomizer")]
@@ -179,7 +179,7 @@ Let's go through the code above and understand each part:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Perception.Randomization.Randomizers;
+using UnityEngine.Perception.Randomization.Randomizers;
 
 public class YRotationRandomizerTag : RandomizerTag
 {
