@@ -40,7 +40,7 @@ The `/save/single_cube` directory is the directory inside the docker container. 
 
 Thus, the final command for me is: 
 ```bash
-docker run -it -v /Users/jonathan.leban/Documents/data:/data -v Users/jonathan.leban/Documents/save:/save/single_cube pose_estimation bash
+docker run -it -v /Users/jonathan.leban/Documents/data:/data -v /Users/jonathan.leban/Documents/save:/save/single_cube pose_estimation bash
 ```
 
 ### CLI 
@@ -58,14 +58,13 @@ You can override many hyperparameters by adding additional arguments to this com
 
 
 #### Evaluate  
-To run the evaluate commmand with default values:
+To run the evaluate commmand:
 
 ```bash
-python -m pose_estimation.cli evaluate
+python -m pose_estimation.cli evaluate --load-dir-checkpoint=/save/single_cube/UR3_single_cube_model.tar
 ```
 
-Again, you can override many hyperparameters by adding additional arguments to this command. See [cli.py](../pose_estimation/cli.py) for a view of all supported arguments.  
-
+Again, you can override many hyperparameters by adding additional arguments to this command. See [cli.py](../pose_estimation/cli.py) for a view of all supported arguments.
 
 ### Copy metrics and models saved on Docker on your local machine 
 Once you have trained or evaluated your model, you may want to copy the results out of the docker container, to your local computer. 
