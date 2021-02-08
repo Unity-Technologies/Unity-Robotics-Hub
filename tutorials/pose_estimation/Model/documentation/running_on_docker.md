@@ -58,24 +58,13 @@ You can override many hyperparameters by adding additional arguments to this com
 
 
 #### Evaluate  
-To run the evaluate commmand with default values:
+To run the evaluate commmand:
 
-```bash
-python -m pose_estimation.cli evaluate
-```
-
-Again, you can override many hyperparameters by adding additional arguments to this command. See [cli.py](../pose_estimation/cli.py) for a view of all supported arguments. 
-However, now that you run the project inside the docker container, you will need to put the path inside the docker container. As an example, if I want to use the model I have trained which I have put in the folder `save` of my `Document`. As when I ran the docker image, I linked the `save` folder to the directory `save/single_cube` inside the Docker container, then my model is now inside `save/single_cube` of the docker container. Thus the command to use my model will be: 
-
-```bash
-python -m pose_estimation.cli evaluate --load-dir-checkpoint=/save/single_cube/[Name of the model file]
-```
-
-As an example I saved my model as `UR3_single_cube_model.tar` so my command is: 
 ```bash
 python -m pose_estimation.cli evaluate --load-dir-checkpoint=/save/single_cube/UR3_single_cube_model.tar
 ```
 
+Again, you can override many hyperparameters by adding additional arguments to this command. See [cli.py](../pose_estimation/cli.py) for a view of all supported arguments.
 
 ### Copy metrics and models saved on Docker on your local machine 
 Once you have trained or evaluated your model, you may want to copy the results out of the docker container, to your local computer. 
