@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Linq;
-using RosMessageTypes.Geometry;
+using ROSGeometry;
 using RosMessageTypes.Moveit;
 using RosMessageTypes.NiryoMoveit;
 using RosMessageTypes.NiryoOne;
-using Unity.Robotics.ROSTCPConnector;
-using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 using UnityEngine;
+using Pose = RosMessageTypes.Geometry.Pose;
+using RosQuaternion = RosMessageTypes.Geometry.Quaternion;
 
 public class RealSimPickAndPlace : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     private ROSConnection ros;
     private const int NUM_ROBOT_JOINTS = 6;
 
-    // Hardcoded variables 
+    // Hardcoded variables
     private const float JOINT_ASSIGNMENT_WAIT = 0.038f;
     private readonly Vector3 PICK_POSE_OFFSET = Vector3.up * 0.15f;
 
@@ -81,7 +81,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     /// </summary>
     public void PublishJoints()
     {
-        MMoverServiceRequest request = new MMoverServiceRequest
+        MoverServiceRequest request = new MoverServiceRequest
         {
             joints_input =
             {
@@ -92,13 +92,13 @@ public class RealSimPickAndPlace : MonoBehaviour
                 joint_04 = jointArticulationBodies[4].xDrive.target,
                 joint_05 = jointArticulationBodies[5].xDrive.target
             },
-            pick_pose = new MPose
+            pick_pose = new Pose
             {
                 position = (target.transform.position + PICK_POSE_OFFSET).To<FLU>(),
                 // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
                 orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
             },
-            place_pose = new MPose
+            place_pose = new Pose
             {
                 position = (targetPlacement.transform.position + PICK_POSE_OFFSET).To<FLU>(),
                 orientation = pickOrientation.To<FLU>()
@@ -146,16 +146,16 @@ public class RealSimPickAndPlace : MonoBehaviour
 
     void Start()
     {
-        ros.Subscribe<MRobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
+        ros.Subscribe<RobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
     }
 
     /// <summary>
     ///   Execute robot commands receved from ROS Subscriber.
-    ///   Gripper commands will be executed immeditately wihle trajectories will be 
+    ///   Gripper commands will be executed immeditately wihle trajectories will be
     ///   executed in a coroutine.
     /// </summary>
     /// <param name="robotAction"> RobotMoveActionGoal of trajectory or gripper commands</param>
-    void ExecuteRobotCommands(MRobotMoveActionGoal robotAction)
+    void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
     {
         if (robotAction.goal.cmd.cmd_type == TRAJECTORY_COMMAND_EXECUTION)
         {
@@ -178,24 +178,24 @@ public class RealSimPickAndPlace : MonoBehaviour
 
     /// <summary>
     ///     Execute trajectories from RobotMoveActionGoal topic.
-    /// 
-    ///     Execution will iterate through every robot pose in the trajectory pose 
+    ///
+    ///     Execution will iterate through every robot pose in the trajectory pose
     ///     array while updating the joint values on the simulated robot.
-    /// 
+    ///
     /// </summary>
     /// <param name="trajectories"> The array of poses for the robot to execute</param>
-    private IEnumerator ExecuteTrajectories(MRobotTrajectory trajectories)
+    private IEnumerator ExecuteTrajectories(RobotTrajectory trajectories)
     {
         // For every robot pose in trajectory plan
         foreach (var point in trajectories.joint_trajectory.points)
         {
             var jointPositions = point.positions;
-            float[] result = jointPositions.Select(r => (float)r * Mathf.Rad2Deg).ToArray();
+            float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
 
             // Set the joint values for every joint
             for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
             {
-                var joint1XDrive = jointArticulationBodies[joint].xDrive;
+                var joint1XDrive  = jointArticulationBodies[joint].xDrive;
                 joint1XDrive.target = result[joint];
                 jointArticulationBodies[joint].xDrive = joint1XDrive;
             }
