@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Perception.Randomization.Randomizers;
-using UnityEngine.Experimental.Perception.Randomization.Parameters;
+using UnityEngine.Perception.Randomization.Randomizers;
+using UnityEngine.Perception.Randomization.Parameters;
 
 [AddComponentMenu("Perception/RandomizerTags/UniformPoseRandomizerTag")]
 public class UniformPoseRandomizerTag : RandomizerTag

@@ -98,18 +98,19 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.perception": {
-      "version": "file:/Users/jonathan.leban/Documents/com.unity.perception/com.unity.perception",
+      "version": "0.7.0-preview.1",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "1.1.2",
         "com.unity.render-pipelines.core": "7.1.6",
         "com.unity.burst": "1.3.9",
         "com.unity.entities": "0.8.0-preview.8",
         "com.unity.simulation.client": "0.0.10-preview.10",
-        "com.unity.simulation.capture": "0.0.10-preview.16",
-        "com.unity.simulation.core": "0.0.10-preview.21"
-      }
+        "com.unity.simulation.capture": "0.0.10-preview.19",
+        "com.unity.simulation.core": "0.0.10-preview.22"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.platforms": {
       "version": "0.2.1-preview.4",
@@ -206,11 +207,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.simulation.capture": {
-      "version": "0.0.10-preview.16",
+      "version": "0.0.10-preview.19",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.simulation.core": "0.0.10-preview.21"
+        "com.unity.simulation.core": "0.0.10-preview.22"
       },
       "url": "https://packages.unity.com"
     },
@@ -222,7 +223,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.simulation.core": {
-      "version": "0.0.10-preview.21",
+      "version": "0.0.10-preview.22",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
