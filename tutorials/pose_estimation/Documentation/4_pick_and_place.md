@@ -195,6 +195,8 @@ Note that the TrajectoryPlanner component shows its member variables in the _**I
 
 * **Action**: On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it, as we are no longer in the Data Collection phase. If you want to collect new data in the future, you can always check back on the `Fixed Length Scenario` and uncheck to disable the `ROSObjects`. 
 
+* **Action**: On the `Main Camera` GameObject, uncheck the `Perception Camera` script component, since we do not need it anymore. 
+
 Also note that the UI elements have been provided in `ROSObjects/Canvas`, including the Event System that is added on default by Unity. In `ROSObjects/Canvas/ButtonPanel`, the OnClick callbacks have been pre-assigned in the prefab. These buttons set the robot to its upright default position, randomize the cube position and rotation, randomize the target, and call the Pose Estimation service.
 
 
