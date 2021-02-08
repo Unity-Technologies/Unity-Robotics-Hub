@@ -344,4 +344,4 @@ The Niryo One ROS stack is already installed on the robot and only the `niryo_mo
 1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS on the Niryo One, and watch the robot arm move simultaneously in simulation and real life!
 
 
-
+<img src="img/4_pick_and_place.gif" width="400"/>
