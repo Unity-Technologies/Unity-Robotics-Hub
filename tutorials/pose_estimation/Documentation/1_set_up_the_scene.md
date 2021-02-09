@@ -160,7 +160,9 @@ For your convenience, we have provided prefabs for most of the components of the
 
 
 #### Importing the Robot
-Finally we will add the robot and the URDF files in order to import the UR3 Robot. 
+Now it's time to import the robot from a URDF file. We will also adjust some physics settings for optimal behavior.
+
+* **Action**: Open the Physics Project Settings (in the top menu bar, Edit > Project Settings > Physics) and ensure the `Solver Type` is set to `Temporal Gauss Seidel`. This prevents erratic behavior in the joints that may be caused by the default solver.
 
 * **Action**: In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
