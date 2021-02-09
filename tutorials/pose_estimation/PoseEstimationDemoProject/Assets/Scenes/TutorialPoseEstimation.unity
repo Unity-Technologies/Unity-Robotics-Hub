@@ -5901,7 +5901,7 @@ MonoBehaviour:
       type: {class: RobotArmObjectPositionRandomizer, ns: , asm: Assembly-CSharp}
       data:
         collapsed: 0
-        <enabled>k__BackingField: 0
+        <enabled>k__BackingField: 1
         plane: {fileID: 5666230719848660714}
         maxPlacementTries: 100
         robotBase: {fileID: 1709504114}
@@ -5924,7 +5924,7 @@ MonoBehaviour:
       type: {class: LightRandomizer, ns: , asm: Assembly-CSharp}
       data:
         collapsed: 0
-        <enabled>k__BackingField: 0
+        <enabled>k__BackingField: 1
         lightIntensityParameter:
           collapsed: 0
           value:
