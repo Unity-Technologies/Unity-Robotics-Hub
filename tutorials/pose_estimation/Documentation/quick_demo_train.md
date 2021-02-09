@@ -30,8 +30,8 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
 
 ## <a name="data-collection">Data Collection</a>
 The project is set up for data collection by default, so you can get started without too much work. To see how,
-follow the instructions in [phase 3: step 1](3_data_collection_model_training.md#step-1-collect-the-training-and-validation-data) of the tutorial. This section will explain how to set the random seed of the environment, choose how many training data examples you'd like to collect, and get it running. 
+follow the instructions in [phase 3: step 1](3_data_collection_model_training.md#step-1) of the tutorial. This section will explain how to set the random seed of the environment, choose how many training data examples you'd like to collect, and get it running. 
 
-If you'd like to then move on to training a pose estimation model on the data you've collected, move on to [phase 3: step 2](3_data_collection_model_training.md#step-2-train-the-deep-learning-model). 
+If you'd like to then move on to training a pose estimation model on the data you've collected, move on to [phase 3: step 2](3_data_collection_model_training.md#step-2). 
 
 Have fun!
