@@ -5,10 +5,10 @@ In this first phase of the tutorial, we will start by downloading and installing
 
 **Table of Contents**
   - [Requirements](#reqs)
-  - [Step 1: Create a New Project](#step-1)
-  - [Step 2: Download the Perception, the URDF and the TCP connector Packages](#step-2)
-  - [Step 3: Setup the Ground Truth Render Feature](#step-3)
-  - [Step 4: Setup the Scene](#step-4)
+  - [Create a New Project](#step-1)
+  - [Download the Perception, the URDF and the TCP connector Packages](#step-2)
+  - [Setup the Ground Truth Render Feature](#step-3)
+  - [Setup the Scene](#step-4)
 
 ---
 
@@ -33,7 +33,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 2. [Install Unity `2020.2.*`.](install_unity.md)
 
 
-### <a name="step-1">Step 1: Create a New Project</a> 
+### <a name="step-1">Create a New Project</a> 
 When you first run Unity, you will be asked to open an existing project, or create a new one.
 
 1. Open Unity and create a new project using the **Universal Render Pipeline**. Name your new project _**Pose Estimation Tutorial**_, and specify a desired location as shown below.
@@ -42,7 +42,7 @@ When you first run Unity, you will be asked to open an existing project, or crea
 <img src="Images/1_create_new_project.png" align="center" width=950/>
 </p>
 
-### <a name="step-2">Step 2: Download the Perception, the URDF and the TCP connector Packages</a>
+### <a name="step-2">Download the Perception, the URDF and the TCP connector Packages</a>
 
 Once your new project is created and loaded, you will be presented with the Unity Editor interface. From this point on, whenever we refer to the "editor", we mean the Unity Editor.
 
@@ -75,7 +75,7 @@ Installing the different packages may take some time (few minutes).
 
 **Note**: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
-### <a name="step-3">Step 3: Setup Ground Truth Render Feature</a>
+### <a name="step-3">Setup Ground Truth Render Feature</a>
 
 The Hierarchy, Scene View, Game View, Play/Pause/Step toolbar, Inspector, Project, and Console windows of the Unity Editor have been highlighted below for reference, based on the default layout. Custom Unity Editor layouts may vary slightly. A top menu bar option is available to re-open any of these windows: Window > General.
 
@@ -99,7 +99,7 @@ The perception packages relies on a "ground truth render feature" to save out la
 </p>
 
 
-### <a name="step-4">Step 4: Setup the Scene</a>
+### <a name="step-4">Setup the Scene</a>
 
 #### The Scene
 Simply put in Unity, Scenes contain any object that exists in the world. This world can be a game, or in this case, a data-collection oriented simulation. Every new project contains a Scene named SampleScene, which is automatically opened when the project is created. This Scene comes with several objects and settings that we do not need, so let's create a new one.

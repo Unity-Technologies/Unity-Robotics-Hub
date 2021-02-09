@@ -14,13 +14,13 @@ You should now have a table, cube, camera, and working robot arm in your scene. 
 </p>
 
 **Table of Contents**
-  - [Step 1: Equipping the Camera for Data Collection](#step-1)
-  - [Step 2: Equipping the Cube for Data Collection](#step-2-equipping-the-cube-for-data-collection)
-  - [Step 3: Add and set up randomizers](#step-3-add-and-setup-randomizers)
+  - [Equipping the Camera for Data Collection](#step-1)
+  - [Equipping the Cube for Data Collection](#step-2-equipping-the-cube-for-data-collection)
+  - [Add and set up randomizers](#step-3-add-and-setup-randomizers)
 
 ---
 
-### <a name="step-1">Step 1: Equipping the Camera for Data Collection</a>
+### <a name="step-1">Equipping the Camera for Data Collection</a>
 
 We need to have a fixed aspect ratio so that you are sure to have the same size of images we have when you collect the data. 
 1. Select the `Game` view and select `Free Aspect`. Then select the **+**, with the message `Add new item` on it if you put your mouse over the + sign. For the Width select `650` and for the Height select `400`. A gif below shows you how to do it. 
@@ -52,7 +52,7 @@ Once you add the labeler, the Inspector view of the Perception Camera component 
 </p>
 
 
-### <a name="step-2">Step 2: Equipping the Cube for Data Collection</a>
+### <a name="step-2">Equipping the Cube for Data Collection</a>
 
 Our work above prepares us to collect RGB images from the camera and some associated 3D bounding box(es) for objects in our scene. However, we still need to specify _which_ objects we'd like to collect poses for. In this tutorial, we will only collect the pose of the cube, but you can add more objects if you'd like.
 
@@ -87,7 +87,7 @@ The _**Inspector**_ view of the `Cube` should look like the following:
 </p>
 
 
-### <a name="step-3">Step 3: Add and setup randomizers</a>
+### <a name="step-3">Add and setup randomizers</a>
 
 #### Domain Randomization
 We will be collecting training data from a simulation, but most real perception use-cases occur in the real world. 
@@ -217,7 +217,7 @@ If you return to your list of Randomizers in the Inspector view of SimulationSce
 </p>
 
 Before running, we will to make a little modification on the `Controller.cs` file inside the URDF importer package in order to remove a UI message not useful for this tutorial (the message is to give commands to move the robot using the keyboard).
- 
+
 10. Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ tab, on the `Controller` component, selects the three dots at the right extremity and click on `Edit Script`. 
 
 

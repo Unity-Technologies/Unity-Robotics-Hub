@@ -13,13 +13,13 @@ In this phase, we will be collecting a large dataset of RGB images of the scene,
 Steps included in this phase of the tutorial:
 
 **Table of Contents**
-  - [Step 1: Collect the Training and Validation Data](#step-1-collect-the-training-and-validation-data)
-  - [Step 2: Train the Deep Learning Model](#step-2-train-the-deep-learning-model)
+  - [Collect the Training and Validation Data](#step-1-collect-the-training-and-validation-data)
+  - [Train the Deep Learning Model](#step-2-train-the-deep-learning-model)
   - [Exercises for the Reader](#exercises-for-the-reader)
 
 ---
 
-### <a name="step-1">Step 1: Collect the Training and Validation Data</a>
+### <a name="step-1">Collect the Training and Validation Data</a>
 
 Now it is time to collect the data: a set of images with the corresponding position and orientation of the cube relative to the camera.
 
@@ -55,7 +55,7 @@ You should then see something similar to the following:
 * **(Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
 
 
-### <a name="step-2">Step 2: Train the Deep Learning Model</a>
+### <a name="step-2">Train the Deep Learning Model</a>
 Now its time to train our deep learning model! We've provided the model training code for you, but if you'd like to learn more about it - or make your own changes - you can dig into the details [here](../Model).
 
 This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).

@@ -14,15 +14,15 @@ In this phase, we will use our trained deep learning model to predict the pose o
 </p>
 
 **Table of Contents**
-  - [Step 1: Setup](#step-1-setup)
-  - [Step 2: Adding the Pose Estimation Model](#step-2-adding-the-pose-estimation-model)
-  - [Step 3: Set up the ROS side](#step-3-set-up-the-ros-side)
-  - [Step 4: Set up the Unity side](#step-4-set-up-the-unity-side)
-  - [Step 5: Putting it together](#step-5-putting-it-together)
+  - [Setup](#setup)
+  - [Adding the Pose Estimation Model](#step-2)
+  - [Set up the ROS side](#step-3)
+  - [Set up the Unity side](#step-4)
+  - [Putting it together](#step-5)
 
 ---
 
-### Step 1: Setup
+### <a name="setup">Setup</a>
 If you have correctly followed phases 1 and 2, whether or not you choose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
 
 **Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
@@ -41,7 +41,7 @@ Three package dependencies for this project, [Universal Robot](https://github.co
 
 In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-### Step 2: Adding the Pose Estimation Model
+### <a name="step-2">Adding the Pose Estimation Model</a>
 
 Here you have two options for the model:
 
@@ -57,7 +57,7 @@ Here you have two options for the model:
 
 2. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder called `models`. Then copy your model file (.tar) into it.
 
-### Step 3: Set up the ROS side
+### <a name="step-3">Set up the ROS side</a>
 
 **Note**: This project has been developed with Python 3 and ROS Noetic.
 
@@ -101,7 +101,7 @@ The ROS workspace is now ready to accept commands!
 
 ---
 
-### Step 4: Set up the Unity side
+### <a name="step-4">Set up the Unity side</a>
 
 If your Pose Estimation Tutorial Unity project is not already open, select and open it from the Unity Hub.
 
@@ -200,7 +200,7 @@ Note that the TrajectoryPlanner component shows its member variables in the _**I
 Also note that the UI elements have been provided in `ROSObjects/Canvas`, including the Event System that is added on default by Unity. In `ROSObjects/Canvas/ButtonPanel`, the OnClick callbacks have been pre-assigned in the prefab. These buttons set the robot to its upright default position, randomize the cube position and rotation, randomize the target, and call the Pose Estimation service.
 
 
-### Step 5: Putting it together
+### <a name="step-5">Putting it together</a>
 
 Then, run the following roslaunch in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service and Pose Estimation nodes, and launch MoveIt.
 
