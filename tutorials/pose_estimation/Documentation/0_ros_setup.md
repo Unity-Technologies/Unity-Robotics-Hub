@@ -14,7 +14,7 @@ sudo apt-get install python3-pip ros-noetic-robot-state-publisher ros-noetic-mov
 sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-    > Note: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
+**Note**: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
 
 ```bash 
 sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
@@ -39,7 +39,7 @@ The ROS parameters will need to be set to your configuration in order to allow t
 echo "ROS_IP: $(hostname -I)" > src/ur3_moveit/config/params.yaml
 ```
 
-    > Note: You can also manually assign this value by navigating to the `src/ur3_moveit/config/params.yaml` file and opening it for 
+**Note**: You can also manually assign this value by navigating to the `src/ur3_moveit/config/params.yaml` file and opening it for 
 editing.
 
 ```yaml
@@ -64,6 +64,6 @@ This YAML file is a rosparam set from the launch files provided for this tutoria
 </launch>
 ```
 
-    > Note: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
+**Note**: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
 
 The ROS workspace is now ready to accept commands! Return to [Phase 3: Set up the Unity side](3_pick_and_place.md#step-3-set-up-the-unity-side) to continue the tutorial.

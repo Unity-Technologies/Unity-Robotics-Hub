@@ -27,9 +27,9 @@ We need to collect data for the training process and data for the validation one
 
 We have chosen a training dataset of 30,000 images and a validation dataset of 3,000 images. 
 
-* **Action**: Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, in the `Fixed Length Scenario` and in `Constants` set the `Total Iterations` to 30000.
+1. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, in the `Fixed Length Scenario` and in `Constants` set the `Total Iterations` to 30000.
 
-* **Action**: Press play and wait until the simulation is done. It should take a bit of time (~10 min). Once it is done, go to the _**Console**_ tab which is the tag on the right of the _**Project**_ tab. 
+1. Press play and wait until the simulation is done. It should take a bit of time (~10 min). Once it is done, go to the _**Console**_ tab which is the tag on the right of the _**Project**_ tab. 
 
 You should see something similar to the following: 
 
@@ -44,15 +44,15 @@ You should then see something similar to the following:
 <img src="Images/3_data_logs.png"/>
 </p>
 
-* **Action**: Change this folder's name to `UR3_single_cube_training`. 
+1. Change this folder's name to `UR3_single_cube_training`. 
 
-* **Action**: Now we need to collect the validation dataset. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, in the `Fixed Length Scenario` and in `Constants` set the `Total Iterations` to 3000.
+1. Now we need to collect the validation dataset. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, in the `Fixed Length Scenario` and in `Constants` set the `Total Iterations` to 3000.
 
-* **Action**: Press play and wait until the simulation is done. Once it is done go to the _**Console**_ tab and go to the directory where the data has been saved. 
+1. Press play and wait until the simulation is done. Once it is done go to the _**Console**_ tab and go to the directory where the data has been saved. 
 
-* **Action**: Change the folder name where this latest data was saved to `UR3_single_cube_validation`. 
+1. Change the folder name where this latest data was saved to `UR3_single_cube_validation`. 
 
-* **Action (Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
+* **(Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
 
 
 ### <a name="step-2">Step 2: Train the Deep Learning Model</a>
@@ -60,7 +60,7 @@ Now its time to train our deep learning model! We've provided the model training
 
 This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
 
-**Action**: Navigate to the `tutorials/pose_estimation/Model` directory.
+1. Navigate to the `tutorials/pose_estimation/Model` directory.
 
 #### Requirements
 
@@ -75,14 +75,14 @@ To run this project locally, you will need to install [Anaconda](https://docs.an
 
 If running locally without Docker, we first need to create a conda virtual environment and install the dependencies for our machine learning model. If you only have access to CPUs, install the dependencies specified in the `environment.yml` file. If your development machine has GPU support, you can choose to use the `environment-gpu.yml` file instead.
 
-* **Action**: In a terminal window, enter the following command to create the environment. Replace `<env-name>` with an environment name of your choice, e.g. `pose-estimation`:
+1. In a terminal window, enter the following command to create the environment. Replace `<env-name>` with an environment name of your choice, e.g. `pose-estimation`:
 ```bash
 conda env create -n <env-name> -f environment.yml
 ```
 
 Then, you need to activate the conda environment.
 
-* **Action**: Still in the same terminal window, enter the following command:
+1. Still in the same terminal window, enter the following command:
 ```bash
 conda activate <env-name>
 ```
@@ -95,14 +95,14 @@ There are a few settings specific to your setup that you'll need to change.
 
 First, we need to specify the path to the folders where your training and validation data are saved:
 
-* **Action**: In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `data/root` to the path of the  directory containing your data folders. For example, since I put my data (`UR3_single_cube_training` and `UR3_single_cube_validation`) in a folder called `data` in Documents, I set the following:
+1. In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `data/root` to the path of the  directory containing your data folders. For example, since I put my data (`UR3_single_cube_training` and `UR3_single_cube_validation`) in a folder called `data` in Documents, I set the following:
 ```bash
   data_root: /Users/jonathan.leban/Documents/data
 ```
 
 Second, we need to modify the location where the model is going to be saved: 
 
-* **Action**: In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `log_dir_system` to the full path to the output folder where your model's results will be saved. For example, I created a new directory called `models` in my Documents, and then set the following:
+1. In the [config.yaml](../Model/config.yaml), under `system`, you need to set the argument `log_dir_system` to the full path to the output folder where your model's results will be saved. For example, I created a new directory called `models` in my Documents, and then set the following:
 ```bash
 log_dir_system: /Users/jonathan.leban/Documents/models
 ```
@@ -110,9 +110,9 @@ log_dir_system: /Users/jonathan.leban/Documents/models
 #### Training the model
 Now its time to train our deep learning model!
 
-* **Action**: If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there. 
+1. If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there. 
 
-* **Action**: Enter the following command to start training: 
+1. Enter the following command to start training: 
 ```bash 
 python -m pose_estimation.cli train 
 ```
@@ -129,11 +129,11 @@ Once training has completed, we can also run our model on our validation dataset
 
 However, first we need to specify a few settings in our config file.
 
-* **Action**: In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
+1. In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
 
-* **Action**: If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there.
+1. If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there.
 
-**Action** To start the evaluation run, enter the following command: 
+1. To start the evaluation run, enter the following command: 
 ```bash 
 python -m pose_estimation.cli evaluate 
 ```
