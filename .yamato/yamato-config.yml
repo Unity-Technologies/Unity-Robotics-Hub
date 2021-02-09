@@ -1,0 +1,24 @@
+name: Robotics Hub Tests
+agent:
+    type: Unity::VM
+    image: robotics/ci-ubuntu20:latest
+    flavor: i1.large
+variables:
+    PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
+commands:
+    - git submodule update --init --recursive
+    - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
+    - unity-downloader-cli -u 2020.2.0b9 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
+    - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
+    - utr/utr --testproject=./TestUrdfImporter --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor
+triggers:
+    cancel_old_ci: true
+    expression: |
+        (pull_request.target eq "main"  AND
+        NOT pull_request.push.changes.all match "**/*.md") OR
+        (push.branch eq "dev" AND
+        NOT push.changes.all match "**/*.md")
+artifacts:
+    logs:
+        paths:
+            - "test-results/**/*"
