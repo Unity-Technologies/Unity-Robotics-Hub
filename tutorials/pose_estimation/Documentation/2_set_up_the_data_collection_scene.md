@@ -216,7 +216,8 @@ If you return to your list of Randomizers in the Inspector view of SimulationSce
 <img src="Gifs/2_y_rotation_randomizer_settings.gif" height=550 width=1020/>
 </p>
 
-Before running, we will to make a little modification on the `Controller.cs` file inside the URDF importer package in order to remove a UI message not useful for this tutorial (the message is to give commands to move the robot using the keyboard). 
+Before running, we will to make a little modification on the `Controller.cs` file inside the URDF importer package in order to remove a UI message not useful for this tutorial (the message is to give commands to move the robot using the keyboard).
+ 
 10. Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ tab, on the `Controller` component, selects the three dots at the right extremity and click on `Edit Script`. 
 
 
