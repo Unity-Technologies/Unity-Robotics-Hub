@@ -14,11 +14,11 @@ sudo apt-get install python3-pip ros-noetic-robot-state-publisher ros-noetic-mov
 sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-```bash 
-Note: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
+> Note: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
+> ```bash 
+> sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+> ```
 
-sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
-```
 
 Most of the ROS setup has been provided via the `ur3_moveit` package. This section will describe the provided files.
 
