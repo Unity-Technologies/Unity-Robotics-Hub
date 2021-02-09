@@ -30,7 +30,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 ./submodule.sh
 ```
 
-1. [Install Unity `2020.2.*`.](install_unity.md)
+2. [Install Unity `2020.2.*`.](install_unity.md)
 
 
 ### <a name="step-1">Step 1: Create a New Project</a> 
@@ -63,7 +63,7 @@ Installing the different packages may take some time (few minutes).
 
 
 #### Install Dependencies
-1. Install the following packages with the provided git URLs:
+4. Install the following packages with the provided git URLs:
 * [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
   * This will help us collect training data for our machine learning model. 
 
@@ -92,7 +92,7 @@ The perception packages relies on a "ground truth render feature" to save out la
 <img src="Images/1_forward_renderer.png"/>
 </p>
 
-1. Click on the found file to select it. Then, from the _**Inspector**_ tab of the editor, click on the _**Add Renderer Feature**_ button, and select _**Ground Truth Renderer Feature**_ from the dropdown menu:
+2. Click on the found file to select it. Then, from the _**Inspector**_ tab of the editor, click on the _**Add Renderer Feature**_ button, and select _**Ground Truth Renderer Feature**_ from the dropdown menu:
 
 <p align="center">
 <img src="Images/1_forward_renderer_inspector.png" width=430 height=350/>
@@ -113,13 +113,13 @@ The _**Hierarchy**_ tab of the editor displays all the Scenes currently loaded, 
 
 As seen above, the new Scene already contains a camera (`Main Camera`) and a light (`Directional Light`). We will now modify the camera's field of view and position to prepare it for the tutorial.
 
-1. Still in the _**Inspector**_ tab of the `Main Camera`, modify the camera's `Position` and `Rotation` to match the values shown below. This orients the camera so that it will have a good view of the objects we are about to add to the scene.   
+2. Still in the _**Inspector**_ tab of the `Main Camera`, modify the camera's `Position` and `Rotation` to match the values shown below. This orients the camera so that it will have a good view of the objects we are about to add to the scene.   
 
 <p align="center">
 <img src="Images/1_camera_settings.png" height=117 width=500/>
 </p>
 
-1. Click on `Directional Light` and in the _**Inspector**_ tab, modify the light's `Position` and `Rotation` to match the screenshot below. 
+3. Click on `Directional Light` and in the _**Inspector**_ tab, modify the light's `Position` and `Rotation` to match the screenshot below. 
 
 <p align="center">
 <img src="Images/1_directional_light.png" height=217 width=500/>
@@ -128,9 +128,9 @@ As seen above, the new Scene already contains a camera (`Main Camera`) and a lig
 #### Adding Tutorial Files
 Now it is time to add some more objects to our scene. Before doing so, we need to import some folders containing the required assets. 
 
-1. Download [TutorialAssets.zip](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/TutorialAssets.zip), and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`.
+4. Download [TutorialAssets.zip](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/TutorialAssets.zip), and unzip it. It should contain the following subfolders: `Materials`, `Prefabs`, `RosMessages`, `Scripts`, `URDFs`.
 
-1. Drag and Drop the `TutorialAssets` folder onto the `Assets` folder in the _**Project**_ tab. 
+5. Drag and Drop the `TutorialAssets` folder onto the `Assets` folder in the _**Project**_ tab. 
 
 Your `Assets` folder should like this: 
 
@@ -145,9 +145,9 @@ A prefab is just a file, and you can easily create an instance of the object in 
 
 For your convenience, we have provided prefabs for most of the components of the scene (the cube, goal, table, and floor).
 
-1. In the _**Project**_ tab, go to `Assets > TutorialAssets > Prefabs > Part1` and drag and drop the `Cube` prefab inside the _**Hierarchy panel**_.
+6. In the _**Project**_ tab, go to `Assets > TutorialAssets > Prefabs > Part1` and drag and drop the `Cube` prefab inside the _**Hierarchy panel**_.
 
-1. Repeat the action with the `Goal`, `Table` and the `Floor`. 
+7. Repeat the action with the `Goal`, `Table` and the `Floor`. 
 
 
 <p align="center">
@@ -160,7 +160,7 @@ For your convenience, we have provided prefabs for most of the components of the
 #### Importing the Robot
 Finally we will add the robot and the URDF files in order to import the UR3 Robot. 
 
-1. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
+8. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
 **Note**: Unity uses a "left handed" coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
 
@@ -174,9 +174,9 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 
 #### Setting up the Robot
 
-1. Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ view, go to the `Controller` script and set the `Stiffness` to **10000**, the `Damping` to **1000** and the `Force Limit` to **1000**. These are physics properties that control how the robot moves.
+9. Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ view, go to the `Controller` script and set the `Stiffness` to **10000**, the `Damping` to **1000** and the `Force Limit` to **1000**. These are physics properties that control how the robot moves.
 
-1. In the _**Hierarchy**_ tab, select the `ur3_with_gripper` GameObject and click on the arrow on the left, then click on the arrow on the left of `world`, then on `base_link`. In the `Articulation Body` component, toggle on `Immovable` for the `base link`. This will fix the robot base to its current position.
+10. In the _**Hierarchy**_ tab, select the `ur3_with_gripper` GameObject and click on the arrow on the left, then click on the arrow on the left of `world`, then on `base_link`. In the `Articulation Body` component, toggle on `Immovable` for the `base link`. This will fix the robot base to its current position.
 
 <p align="center">
 <img src="Gifs/1_robot_settings.gif" width=800 height=465/>

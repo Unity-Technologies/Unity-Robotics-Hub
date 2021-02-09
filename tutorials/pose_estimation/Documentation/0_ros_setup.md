@@ -4,9 +4,9 @@ This page provides steps on how to manually set up a catkin workspace for the Po
 
 1. Navigate to the `pose_estimation/` directory of this downloaded repository. This directory will be used as the ROS catkin workspace.
 
-1. Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
+2. Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
 
-1. If the following packages are not already installed on your ROS machine, run the following commands to install them:
+3. If the following packages are not already installed on your ROS machine, run the following commands to install them:
 
 ```bash
 sudo apt-get update && sudo apt-get upgrade
@@ -22,7 +22,7 @@ sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvisio
 
 Most of the ROS setup has been provided via the `ur3_moveit` package. This section will describe the provided files.
 
-1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run 
+4. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run 
 
 ```bash 
 catkin_make
@@ -33,7 +33,7 @@ Ensure there are no unexpected errors.
 
 The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection. 
 
-1. Navigate to your ROS workspace (e.g. `~/catkin_ws`). Assign the ROS IP in the `params.yaml` file as follows:
+5. Navigate to your ROS workspace (e.g. `~/catkin_ws`). Assign the ROS IP in the `params.yaml` file as follows:
 
 ```bash
 echo "ROS_IP: $(hostname -I)" > src/ur3_moveit/config/params.yaml

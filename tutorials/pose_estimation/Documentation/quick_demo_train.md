@@ -9,20 +9,20 @@ To follow this tutorial you need to **clone** this repository even if you want t
 
 You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
 
-**Action**: Open a terminal and put yourself where you want to host the repository. 
+1. Open a terminal and put yourself where you want to host the repository. 
 ```bash
 git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-**Action**: [Install Unity `2020.2.*`.](install_unity.md)
+2. [Install Unity `2020.2.*`.](install_unity.md)
 
-**Action**: Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from the `Unity-Robotics-Hub/tutorials/pose_estimation/` folder. 
+3. Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from the `Unity-Robotics-Hub/tutorials/pose_estimation/` folder. 
 
 ## <a name='setup'>Setup</a>
 
-* **Action**: Open the scene. Go to `Assets > Scenes` and double click on `TutorialPoseEstimation`. 
+1. Open the scene. Go to `Assets > Scenes` and double click on `TutorialPoseEstimation`. 
 
-* **Action**: The size of the images that will be used for pose estimation depends on a setting in the Game view. Select the `Game` view and select `Free Aspect`. Then select the **+**, with the message `Add new item` on it if you put your mouse over the + sign. For the Width select `650` and for the Height select `400`. A gif below shows you how to do it. 
+2. The size of the images that will be used for pose estimation depends on a setting in the Game view. Select the `Game` view and select `Free Aspect`. Then select the **+**, with the message `Add new item` on it if you put your mouse over the + sign. For the Width select `650` and for the Height select `400`. A gif below shows you how to do it. 
 
 <p align="center">
 <img src="Gifs/2_aspect_ratio.gif"/>
