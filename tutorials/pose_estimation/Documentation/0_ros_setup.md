@@ -13,8 +13,7 @@ sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install python3-pip ros-noetic-robot-state-publisher ros-noetic-moveit ros-noetic-rosbridge-suite ros-noetic-joy ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-tf* ros-noetic-gazebo-ros-pkgs ros-noetic-joint-state-publisher
 sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 ```
-
-**Note**: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
+> Note: If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
 
 ```bash 
 sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
