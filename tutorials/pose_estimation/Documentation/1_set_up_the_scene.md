@@ -49,11 +49,11 @@ Once your new project is created and loaded, you will be presented with the Unit
 #### How to install packages
 We will need to download and install several packages. In general, packages can be installed in Unity with the following steps:
 
-1. From the top menu bar, open _**Window**_ -> _**Package Manager**_. As the name suggests, the _**Package Manager**_ is where you can download new packages, update or remove existing ones, and access a variety of information and additional actions for each package.
+- From the top menu bar, open _**Window**_ -> _**Package Manager**_. As the name suggests, the _**Package Manager**_ is where you can download new packages, update or remove existing ones, and access a variety of information and additional actions for each package.
 
-2. Click on the _**+**_ sign at the top-left corner of the _**Package Manager**_ window and then choose the option _**Add package from git URL...**_. 
+- Click on the _**+**_ sign at the top-left corner of the _**Package Manager**_ window and then choose the option _**Add package from git URL...**_. 
 
-3. Enter the package address and click _**Add**_. It will take some time for the manager to download and import the package.
+- Enter the package address and click _**Add**_. It will take some time for the manager to download and import the package.
 
 Installing the different packages may take some time (few minutes). 
 
@@ -63,7 +63,7 @@ Installing the different packages may take some time (few minutes).
 
 
 #### Install Dependencies
-4. Install the following packages with the provided git URLs:
+1. Install the following packages with the provided git URLs:
 * [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
   * This will help us collect training data for our machine learning model. 
 
