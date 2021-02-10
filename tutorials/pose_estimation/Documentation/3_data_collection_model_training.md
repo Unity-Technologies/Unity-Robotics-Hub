@@ -52,7 +52,7 @@ You should then see something similar to the following:
 
 6. Change the folder name where this latest data was saved to `UR3_single_cube_validation`. 
 
-* **(Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
+7. **(Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
 
 
 ### <a name="step-2">Train the Deep Learning Model</a>
