@@ -11,7 +11,7 @@ This is a central repository for tools, tutorials, resources, and documentation 
 Simulation plays an important role in robotics development, and we’re here to ensure that roboticists can use Unity for these simulations. We're starting off with a set of tools to make it easier to use Unity with existing ROS-based workflows. Try out some of our samples below to get started quickly.
 
 ## Getting Started
-[Quick Installation Instructions](tutorials/quick_setup.md)
+### [Quick Installation Instructions](tutorials/quick_setup.md)
 
 Brief steps on installing the Unity Robotics packages.
 
