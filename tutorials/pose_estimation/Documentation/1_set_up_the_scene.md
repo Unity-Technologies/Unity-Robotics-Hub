@@ -18,6 +18,9 @@ To follow this tutorial you need to **clone** this repository even if you want t
 
 
   > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select `GIT Bash Here`. 
+  <p align="center">
+  <img src="Images/0_GIT_installed.png"/>
+  </p>
 
 1. Open a terminal and put yourself where you want to host the repository. 
 ```bash

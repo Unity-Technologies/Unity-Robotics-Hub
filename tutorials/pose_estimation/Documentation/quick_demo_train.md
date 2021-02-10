@@ -8,7 +8,7 @@ To follow this tutorial you need to **clone** this repository even if you want t
 >Note For Windows Users:
 You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
 <p align="center">
-<img src="Images/0_GIT_installed.images"/>
+<img src="Images/0_GIT_installed.png"/>
 </p>
 
 

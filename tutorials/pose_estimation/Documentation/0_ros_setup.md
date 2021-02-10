@@ -39,18 +39,16 @@ The ROS parameters will need to be set to your configuration in order to allow t
 echo "ROS_IP: $(hostname -I)" > src/ur3_moveit/config/params.yaml
 ```
 
-**Note**: You can also manually assign this value by navigating to the `src/ur3_moveit/config/params.yaml` file and opening it for 
-editing.
+>Note: You can also manually assign this value by navigating to the `src/ur3_moveit/config/params.yaml` file and opening it for editing.
+>```yaml
+>ROS_IP: <your ROS IP>
+>```
+>e.g.
+>```yaml
+>ROS_IP: 10.0.0.250
+>```
 
-```yaml
-ROS_IP: <your ROS IP>
-```
-e.g.
-
-```yaml
-ROS_IP: 10.0.0.250
-```
-    > Note: Learn more about the server endpoint and ROS parameters [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/server_endpoint.md).
+> Note: Learn more about the server endpoint and ROS parameters [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/server_endpoint.md).
 
 This YAML file is a rosparam set from the launch files provided for this tutorial, which has been copied below for reference. Additionally, the `server_endpoint`, `pose estimation`, and `mover` nodes are launched from this file.
 
@@ -64,6 +62,6 @@ This YAML file is a rosparam set from the launch files provided for this tutoria
 </launch>
 ```
 
-**Note**: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
+>Note: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
 
 The ROS workspace is now ready to accept commands! Return to [Phase 3: Set up the Unity side](3_pick_and_place.md#step-3-set-up-the-unity-side) to continue the tutorial.
