@@ -15,8 +15,8 @@ You should now have a table, a cube, a camera, and a robot arm in your scene. In
 
 **Table of Contents**
   - [Equipping the Camera for Data Collection](#step-1)
-  - [Equipping the Cube for Data Collection](#step-2-equipping-the-cube-for-data-collection)
-  - [Add and set up randomizers](#step-3-add-and-setup-randomizers)
+  - [Equipping the Cube for Data Collection](#step-2)
+  - [Add and set up randomizers](#step-3)
 
 ---
 
@@ -57,7 +57,7 @@ Once you add the labeler, the Inspector view of the Perception Camera component 
 
 Our work above prepares us to collect RGB images from the camera and some associated 3D bounding box(es) for objects in our scene. However, we still need to specify _which_ objects we'd like to collect poses for. In this tutorial, we will only collect the pose of the cube, but you can add more objects if you'd like.
 
-You will notice that the `BoundingBox3DLabeler` component has a field named `ID Label Config`. The label configuration we link here will determine which object poses get saved in our dataset. 
+You will notice that the `BoundingBox3DLabeler` component has a field named `Id Label Config`. The label configuration we link here will determine which object poses get saved in our dataset. 
 
 1.  In the _**Project**_ tab, right-click the `Assets` folder, then click `Create -> Perception -> Id Label Config`.
 

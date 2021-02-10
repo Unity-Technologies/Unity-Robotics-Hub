@@ -51,7 +51,7 @@ Here you have two options for the model:
 
 #### Option B: Use Your Own Model
 
-2. You can also use the model you have trained in [Part 3](3_data_collection_mode_training.md). However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
+2. You can also use the model you have trained in [Part 3](3_data_collection_model_training.md). However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
 
 #### Moving the Model to the ROS Folder
 

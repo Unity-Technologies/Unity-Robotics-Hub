@@ -64,4 +64,4 @@ This YAML file is a rosparam set from the launch files provided for this tutoria
 
 >Note: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
 
-The ROS workspace is now ready to accept commands! Return to [Part 3: Set up the Unity side](3_pick_and_place.md#step-3) to continue the tutorial.
+The ROS workspace is now ready to accept commands! Return to [Part 4: Set up the Unity side](4_pick_and_place.md#step-3) to continue the tutorial.

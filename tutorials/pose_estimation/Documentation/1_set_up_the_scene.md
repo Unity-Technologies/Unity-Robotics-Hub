@@ -103,7 +103,7 @@ The perception packages relies on a "ground truth render feature" to save out la
 ### <a name="step-4">Set up the Scene</a>
 
 #### The Scene
-Simply put in Unity, a `Scene` contains any object that exists in the world. This world can be a game, or in this case, a a data-collection-oriented simulation. Every new project contains a Scene named SampleScene, which is automatically opened when the project is created. This Scene comes with several objects and settings that we do not need, so let's create a new one.
+Simply put in Unity, a `Scene` contains any object that exists in the world. This world can be a game, or in this case, a data-collection-oriented simulation. Every new project contains a Scene named SampleScene, which is automatically opened when the project is created. This Scene comes with several objects and settings that we do not need, so let's create a new one.
 
 1. In the _**Project**_ tab, right-click on the `Assets > Scenes` folder and click _**Create -> Scene**_. Name this new Scene `TutorialPoseEstimation` and double-click on it to open it. 
 
@@ -163,7 +163,7 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 
 8. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
-**Note**: Unity uses a left-handed coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
+>Note Unity uses a left-handed coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
 
 >Note: VHACD algorithm produces higher quality convex hull for collision detection than the default algorithm.
 
