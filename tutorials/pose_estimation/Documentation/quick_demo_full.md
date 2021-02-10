@@ -16,7 +16,10 @@ If you just want to run the completed project, this section can help you get up 
 You will first need to **clone** this repository. This project has dependencies on a few git submodules, so you'll need to include the flag `--recurse-submodules` in your clone command. 
 
 >Note For Windows Users:
-You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
+You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic).
+<p align="center">
+<img src="Images/0_GIT_installed.images"/>
+</p> 
 
 1. Open a terminal and put yourself where you want to host the repository. 
 ```bash
