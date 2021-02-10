@@ -13,10 +13,11 @@ Simulation plays an important role in robotics development, and we’re here to 
 ## Getting Started
 [Quick Installation Instructions](tutorials/quick_setup.md)
 
-Brief steps on installing the Unity Robotics packages
+Brief steps on installing the Unity Robotics packages.
+
 [Pick-and-Place Demo](tutorials/pick_and_place/README.md)
 
-A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control
+A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
 
 [Pose Estimation Demo](tutorials/pose_estimation/README.md)
 
@@ -24,7 +25,7 @@ A complete end-to-end demonstration, in which we collect training data in Unity,
 
 [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 
-A robot simulation demonstrating Unity's new physics solver (no ROS dependency)
+A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
 ## Documentation
 
 | Tutorial | Description |
