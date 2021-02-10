@@ -3,7 +3,7 @@
 If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning-based perception. To learn how to build something like this from scratch, see our [full tutorial](1_set_up_the_scene.md).
 
 **Table of Contents**
-- [Requirements](#requirements)
+- [Prerequisites](#Prerequisites)
 - [Add the Pose Estimation Model](#add-the-pose-estimation-model)
 - [Set up the ROS side](#set-up-the-ros-side)
 - [Set up the Unity side](#set-up-the-unity-side)
@@ -11,7 +11,7 @@ If you just want to run the completed project, this section can help you get up 
 
 ---
 
-## Requirements
+## Prerequisites
 
 You will first need to **clone** this repository. 
 
@@ -50,7 +50,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-1. To save time, you can use the pose estimation model we have trained. Download it [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar). 
+1. Download the [pose estimation model](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar) we have trained.
 
 2. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. Copy the `UR3_single_cube_model.tar` file you've just downloaded into this folder.
 
@@ -104,8 +104,6 @@ The ROS workspace is now ready to accept commands!
 <img src="Images/4_ros_settings.png" width="500"/>
 </p>
 
-Opening the ROS Settings has created a ROSConnectionPrefab in `Assets/Resources` with the user-input settings. When the static `ROSConnection.instance` is referenced in a script, if a `ROSConnection` instance is not already present, the prefab will be instantiated in the Unity scene, and the connection will begin.
-
 #### Switching to Inference Mode
 
 The completed project is set up for data collection by default, so we must switch it to inference mode.
@@ -154,6 +152,8 @@ You should see the following:
 </p>
 
 Congrats! You did it!
+
+If you'd now like to follow the full tutorial to learn how to build the pick-and-place simulation from scratch, proceed to [Part 1](1_set_up_the_scene.md)
 
 
 

@@ -1,6 +1,6 @@
 # Exercises for the Reader
 
-In the main tutorial, we randomized the position and rotation of the cube. However, the perception package supports much more sophisticated environment randomization. In this (optional) section we will create a richer and more varied environment by adding one more randomizer to our scene.
+In the main tutorial, we randomized the position and rotation of the cube. However, the Perception Package supports much more sophisticated environment randomization. In this (optional) section we will create a richer and more varied environment by adding one more randomizer to our scene.
 
 In addition to the `YRotationRandomizer` and the `RobotArmObjectPositionRandomizer`, we have designed one more randomizer: 
 * `UniformPoseRandomizer` - Randomizes object's position and rotation relative to a fixed starting pose, over the specified range. We will apply this to the camera, to make our trained model more robust to small inaccuracies in placing the real camera.

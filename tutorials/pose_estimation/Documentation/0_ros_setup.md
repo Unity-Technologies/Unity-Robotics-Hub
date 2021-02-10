@@ -1,4 +1,4 @@
-# Pose-Estimation-Demo Tutorial: Phase 0
+# Pose-Estimation-Demo Tutorial: Part 0
 
 This page provides steps on how to manually set up a catkin workspace for the Pose Estimation tutorial.
 
@@ -64,4 +64,4 @@ This YAML file is a rosparam set from the launch files provided for this tutoria
 
 >Note: The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`.
 
-The ROS workspace is now ready to accept commands! Return to [Phase 3: Set up the Unity side](3_pick_and_place.md#step-3-set-up-the-unity-side) to continue the tutorial.
+The ROS workspace is now ready to accept commands! Return to [Part 4: Set up the Unity side](4_pick_and_place.md#step-3) to continue the tutorial.

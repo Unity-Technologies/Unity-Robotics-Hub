@@ -1,16 +1,16 @@
 # Pose-Estimation-Demo Tutorial: Troubleshooting
 
 **Table of Contents**
-  - [Phase 1: Create Unity scene with imported URDF](#phase-1-create-unity-scene-with-imported-urdf)
+  - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
     - [Package Installation](#package-installation)
     - [Assets, Materials](#assets-materials)
     - [URDF Importer](#urdf-importer)
-  - [Phase 3: Data Collection and model training](#phase-3-data-collection-and-model-training)
+  - [Part 3: Data Collection and model training](#part-3-data-collection-and-model-training)
     - [Docker, Environment](#docker-environment)
-  - [Phase 4: Pick-and-Place](#phase-4-pick-and-place)
+  - [Part 4: Pick-and-Place](#part-4-pick-and-place)
     - [Docker, ROS-TCP Connection](#docker-ros-tcp-connection)
 
-## Phase 1: Create Unity scene with imported URDF
+## Part 1: Create Unity scene with imported URDF
 
 ### Package Installation
 - If you are receiving a `[Package Manager Window] Unable to add package ... xcrun: error: invalid developer path...`, you may need to install the [Command Line Tools](https://developer.apple.com/library/archive/technotes/tn2339/_index.html) package for macOS via `xcode-select --install`.
@@ -40,7 +40,7 @@
 
   **Note**: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-## Phase 3: Data Collection and model training
+## Part 3: Data Collection and model training
 
 ### Docker, Environment
 - If you are using a Docker container to train your model but it is killed shortly after starting, you may need to increase the memory allocated to Docker. In the Docker Dashboard, navigate to Settings (via the gear icon) > Resources. The suggested minimum memory is 4.00 GB, but you may need to modify this for your particular needs.
@@ -49,7 +49,7 @@
   sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
   ```
 
-## Phase 4: Pick-and-Place
+## Part 4: Pick-and-Place
 
 ### Docker, ROS-TCP Connection
 - The buttons might appear oversized compared to the rest of the objects in the scene view, this is a normal behavior. If you zoom out from the table you should see something similar to the following: 

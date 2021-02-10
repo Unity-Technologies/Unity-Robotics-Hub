@@ -1,16 +1,16 @@
-# Pose Estimation Demo: Phase 3
+# Pose Estimation Demo: Part 3
 
-In [Phase 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor.
+In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor.
 
-In [Phase 2](2_set_up_the_data_collection_scene.md) of the tutorial, we learned:
+In [Part 2](2_set_up_the_data_collection_scene.md) of the tutorial, we learned:
 * How to equip the camera for the data collection
 * How to equip the cube for the data collection 
 * How to create your own randomizer 
 * How to add our custom randomizer
 
-In this phase, we will be collecting a large dataset of RGB images of the scene, and the corresponding pose of the cube. We will then use this data to train a machine learning model to predict the cube's position and rotation from images taken by our camera. We will then be ready to use the trained model for our pick-and-place task in [Phase 4](4_pick_and_place.md).
+In this part, we will be collecting a large dataset of RGB images of the scene, and the corresponding pose of the cube. We will then use this data to train a machine learning model to predict the cube's position and rotation from images taken by our camera. We will then be ready to use the trained model for our pick-and-place task in [Part 4](4_pick_and_place.md).
 
-Steps included in this phase of the tutorial:
+Steps included in this part of the tutorial:
 
 **Table of Contents**
   - [Collect the Training and Validation Data](#step-1)
@@ -58,7 +58,7 @@ You should then see something similar to the following:
 ## <a name="step-2">Train the Deep Learning Model</a>
 Now its time to train our deep learning model! We've provided the model training code for you, but if you'd like to learn more about it - or make your own changes - you can dig into the details [here](../Model).
 
-This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
+This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Part 4](4_pick_and_place.md).
 
 1. Navigate to the `tutorials/pose_estimation/Model` directory.
 
@@ -144,8 +144,8 @@ python -m pose_estimation.cli evaluate
 ### Exercises for the Reader
 **Optional**: If you would like to learn more about randomizers and apply domain randomization to this scene more thoroughly, check out our further exercises for the reader [here](5_more_randomizers.md).
 
-### Proceed to [Phase 4](4_pick_and_place.md).
+### Proceed to [Part 4](4_pick_and_place.md).
 
 ### 
 
-### Go back to [Phase 2](2_set_up_the_data_collection_scene.md)
+### Go back to [Part 2](2_set_up_the_data_collection_scene.md)

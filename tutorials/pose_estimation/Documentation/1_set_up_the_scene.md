@@ -1,6 +1,6 @@
-# Pose Estimation Demo: Phase 1
+# Pose Estimation Demo: Part 1
 
-In this first phase of the tutorial, we will start by downloading and installing the Unity Editor. We will install our project's dependencies: the Perception, URDF, and TCP Connector packages. We will then use a set of provided prefabs to easily prepare a simulated environment containing a table, a cube, and a working robot arm. 
+In this first part of the tutorial, we will start by downloading and installing the Unity Editor. We will install our project's dependencies: the Perception, URDF, and TCP Connector packages. We will then use a set of provided prefabs to easily prepare a simulated environment containing a table, a cube, and a working robot arm. 
 
 
 **Table of Contents**
@@ -76,7 +76,7 @@ Install the following packages with the provided git URLs:
 
 >Note: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
-### <a name="step-3">Setup Ground Truth Render Feature</a>
+### <a name="step-3">Set up Ground Truth Render Feature</a>
 
 The Hierarchy, Scene View, Game View, Play/Pause/Step toolbar, Inspector, Project, and Console windows of the Unity Editor have been highlighted below for reference, based on the default layout. Custom Unity Editor layouts may vary slightly. A top menu bar option is available to re-open any of these windows: Window > General.
 
@@ -100,10 +100,10 @@ The perception packages relies on a "ground truth render feature" to save out la
 </p>
 
 
-### <a name="step-4">Setup the Scene</a>
+### <a name="step-4">Set up the Scene</a>
 
 #### The Scene
-Simply put in Unity, Scenes contain any object that exists in the world. This world can be a game, or in this case, a data-collection oriented simulation. Every new project contains a Scene named SampleScene, which is automatically opened when the project is created. This Scene comes with several objects and settings that we do not need, so let's create a new one.
+Simply put in Unity, a `Scene` contains any object that exists in the world. This world can be a game, or in this case, a data-collection-oriented simulation. Every new project contains a Scene named SampleScene, which is automatically opened when the project is created. This Scene comes with several objects and settings that we do not need, so let's create a new one.
 
 1. In the _**Project**_ tab, right-click on the `Assets > Scenes` folder and click _**Create -> Scene**_. Name this new Scene `TutorialPoseEstimation` and double-click on it to open it. 
 
@@ -163,7 +163,7 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 
 8. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
->Note: Unity uses a "left handed" coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
+>Note Unity uses a left-handed coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
 
 >Note: VHACD algorithm produces higher quality convex hull for collision detection than the default algorithm.
 
@@ -184,4 +184,6 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 </p>
 
 
-### Proceed to [Phase 2](2_set_up_the_data_collection_scene.md).
+### Proceed to [Part 2](2_set_up_the_data_collection_scene.md).
+
+
