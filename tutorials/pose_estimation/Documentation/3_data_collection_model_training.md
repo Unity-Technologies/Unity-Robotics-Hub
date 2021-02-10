@@ -117,9 +117,9 @@ Now its time to train our deep learning model!
 python -m pose_estimation.cli train 
 ```
 
-**Note (Optional)**: If you want to override certain training hyperparameters, you can do so with additional arguments on the above command. See the documentation at the top of [cli.py](../Model/pose_estimation/cli.py) for a full list of supported arguments.
+>Note (Optional): If you want to override certain training hyperparameters, you can do so with additional arguments on the above command. See the documentation at the top of [cli.py](../Model/pose_estimation/cli.py) for a full list of supported arguments.
 
-**Note**: If the training process ends unexpectedly, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If the training process ends unexpectedly, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 #### Visualizing Training Results with Tensorboard
 If you'd like to examine the results of your training run in more detail, see our guide on [viewing the Tensorboard logs](tensorboard.md).
@@ -138,7 +138,7 @@ However, first we need to specify a few settings in our config file.
 python -m pose_estimation.cli evaluate 
 ```
 
-**Note (Optional)**: To override additional settings on your evaluation run, you can tag on additional arguments to the command above. See the documentation in [cli.py](../Model/pose_estimation/cli.py) for more details.
+>Note (Optional): To override additional settings on your evaluation run, you can tag on additional arguments to the command above. See the documentation in [cli.py](../Model/pose_estimation/cli.py) for more details.
 
 
 ### Exercises for the Reader

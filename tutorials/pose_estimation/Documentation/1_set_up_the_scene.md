@@ -17,7 +17,7 @@ In this first phase of the tutorial, we will start by downloading and installing
 To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. In fact, we need the ROS folder of the repository which is dependent of gitsubmodules (hence the command `--recurse-submodules`). 
 
 
-    > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select `GIT Bash Here`. 
+  > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select `GIT Bash Here`. 
 
 1. Open a terminal and put yourself where you want to host the repository. 
 ```bash
@@ -73,7 +73,7 @@ Installing the different packages may take some time (few minutes).
 * [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
   * This package will enable a connection between ROS and Unity. 
 
-**Note**: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 ### <a name="step-3">Setup Ground Truth Render Feature</a>
 

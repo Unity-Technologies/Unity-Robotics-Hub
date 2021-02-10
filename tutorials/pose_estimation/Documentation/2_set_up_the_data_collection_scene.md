@@ -160,7 +160,7 @@ public class YRotationRandomizer : InferenceRandomizer
 
 The purpose of this piece of code is to rotate a set of objects randomly about their y-axes every iteration. In Unity, the y-axis points "up". 
 
-**Note**: If you look at the Console tab of the editor now, you will see an error regarding `YRotationRandomizerTag` not being found. This is to be expected, since we have not yet created this class; the error will go away once we create the class later.
+>Note: If you look at the Console tab of the editor now, you will see an error regarding `YRotationRandomizerTag` not being found. This is to be expected, since we have not yet created this class; the error will go away once we create the class later.
 
 Let's go through the code above and understand each part:
 * Near the top, you'll notice the line `[AddRandomizerMenu("Perception/Y Rotation Randomizer")]`. This gives the name we see in the UI when we add the randomizer in the `Fixed Length Scenario`. 

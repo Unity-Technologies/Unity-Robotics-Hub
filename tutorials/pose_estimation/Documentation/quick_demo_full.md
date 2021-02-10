@@ -15,8 +15,7 @@ If you just want to run the completed project, this section can help you get up 
 
 You will first need to **clone** this repository. This project has dependencies on a few git submodules, so you'll need to include the flag `--recurse-submodules` in your clone command. 
 
-**Note For Windows users**:
-
+>Note For Windows Users:
 You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
 
 1. Open a terminal and put yourself where you want to host the repository. 
@@ -57,7 +56,7 @@ In your `pose_estimation` folder, you should have a `ROS` folder. Inside that fo
 
 ## Set up the ROS side
 
-**Note**: This project has been developed with Python 3 and ROS Noetic.
+>Note: This project has been developed with Python 3 and ROS Noetic.
 
 We have provided a Docker container to get you up and running quickly. 
 
@@ -73,7 +72,7 @@ We have provided a Docker container to get you up and running quickly.
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
 ```
 
-**Note**: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
+>Note: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
 
 3. Start the newly built Docker container: 
 
@@ -83,7 +82,7 @@ docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pose-estimation /
 
 When this is complete, it will print: `Successfully tagged unity-robotics:pose-estimation`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`. 
 
-**Note**: If you encounter issues with Docker, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If you encounter issues with Docker, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 4. Source your ROS workspace: 
 
@@ -127,13 +126,13 @@ This launch file also loads all relevant files and starts ROS nodes required for
 
 This launch will print various messages to the console, including the set parameters and the nodes launched. The final two messages should confirm `You can start planning now!`.
 
-**Note**: The launch file may throw errors regarding `[controller_spawner-5] process has died`. These are safe to ignore as long as the final message is `Ready to plan`. This confirmation may take up to a minute to appear.
+>Note: The launch file may throw errors regarding `[controller_spawner-5] process has died`. These are safe to ignore as long as the final message is `Ready to plan`. This confirmation may take up to a minute to appear.
 
 <p align="center"><img src="Images/4_terminal.png" width="600"/></p>
 
 2. Return to Unity, and press Play.
 
-**Note**: If you encounter connection errors such as a `SocketException` or don't see a completed TCP handshake between ROS and Unity in the console window, return to the [Connecting with ROS](#connecting-with-ros) section above to update the ROS Settings and generate the ROSConnectionPrefab.
+>Note: If you encounter connection errors such as a `SocketException` or don't see a completed TCP handshake between ROS and Unity in the console window, return to the [Connecting with ROS](#connecting-with-ros) section above to update the ROS Settings and generate the ROSConnectionPrefab.
 
 
 Note that the robot arm must be in its default position, i.e. standing upright, to perform Pose Estimation. This is done by simply clicking the `Reset Robot Position` button after each run.
@@ -144,9 +143,9 @@ This will grab the current camera view, generate a [sensor_msgs/Image](http://do
 
 The target object and goal object can be moved around during runtime for different trajectory calculations, or the target can be randomized using the `Randomize Cube` button. 
 
-**Note**: You may encounter a `UserWarning: CUDA initialization: Found no NVIDIA driver on your system.` error upon the first image prediction attempt. This warning can be safely ignored.
+>Note: You may encounter a `UserWarning: CUDA initialization: Found no NVIDIA driver on your system.` error upon the first image prediction attempt. This warning can be safely ignored.
 
-**Note**: If you encounter issues with the connection between Unity and ROS, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If you encounter issues with the connection between Unity and ROS, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 You should see the following: 
 <p align="center">

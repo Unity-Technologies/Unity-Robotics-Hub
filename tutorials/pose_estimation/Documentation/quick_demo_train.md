@@ -5,8 +5,7 @@
 To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. In fact, we need the ROS folder of the repository which is dependent of gitsubmodules (hence the command `--recurse-submodules`). 
 
 
-**Note For Windows users**:
-
+>Note For Windows Users:
 You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
 
 1. Open a terminal and put yourself where you want to host the repository. 
