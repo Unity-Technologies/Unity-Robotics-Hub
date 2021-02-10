@@ -28,18 +28,17 @@
 ### URDF Importer
 - If you are not seeing `Import Robot from URDF` in the `Assets` menu, check the console for compile errors. The project must compile correctly before the editor tools become available. 
 - If the robot appears loose/wiggly or is not moving with no console errors, ensure on the Controller script of the `ur3_with_gripper` that the `Stiffness` is **10000**, the `Damping` is **1000** and the `Force Limit` is **1000**. 
-- Note that the world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.77, 0)` in Unity coordinates. Moving the robot from its root position in Unity will require a change to its URDF definition.
+- Note that the world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.77, 0)` in Unity coordinates. Moving the robot from its root position in Unity will require a change to its URDF definition.	
 
-    ```xml
-    <joint name="joint_world" type="fixed">
-        <parent link="world" />
-            <child link="base_link" />
-        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.77"/>
-    </joint>
-    ```
+    ```xml	
+    <joint name="joint_world" type="fixed">	
+        <parent link="world" />	
+            <child link="base_link" />	
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.77"/>	
+    </joint>	
+    ```	
 
   **Note**: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
-
 
 ## Phase 3: Data Collection and model training
 

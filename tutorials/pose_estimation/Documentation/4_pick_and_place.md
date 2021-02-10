@@ -212,7 +212,7 @@ roslaunch ur3_moveit pose_est.launch
 
 ---
 
-This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`gazebo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
+This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`demo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
 
 This launch will print various messages to the console, including the set parameters and the nodes launched. The final message should confirm `You can start planning now!`.
 
