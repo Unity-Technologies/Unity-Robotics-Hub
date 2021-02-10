@@ -151,6 +151,7 @@ You should see the following:
 <img src="Gifs/0_demo.gif"/>
 </p>
 
+Congrats! You did it!
 
 If you'd now like to follow the full tutorial to learn how to build the pick-and-place simulation from scratch, proceed to [Part 1](1_set_up_the_scene.md)
 
