@@ -64,7 +64,7 @@ Installing the different packages may take some time (few minutes).
 
 #### Install Dependencies
 1. Install the following packages with the provided git URLs:
-* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
+* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.2`
   * This will help us collect training data for our machine learning model. 
 
 * [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
