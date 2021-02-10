@@ -10,7 +10,9 @@ commands:
     - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
     - unity-downloader-cli -u 2020.2.0b9 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
     - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
-    - utr/utr --testproject=./TestUrdfImporter --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor
+    - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestsCategories MessageGeneration
+    - mkdir -p ./tutorials/pick_and_place/PickAndPlaceProject/Assets/Scripts && cp ./tutorials/pick_and_place/Scripts/*.cs ./tutorials/pick_and_place/PickAndPlaceProject/Assets
+    - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestsCategories BuildTests
 triggers:
     cancel_old_ci: true
     expression: |
