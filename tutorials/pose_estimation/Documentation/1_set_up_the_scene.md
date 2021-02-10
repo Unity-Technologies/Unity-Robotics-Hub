@@ -63,8 +63,8 @@ Installing the different packages may take some time (few minutes).
 
 
 #### Install Dependencies
-**Action**: Install the following packages with the provided git URLs:
-* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.2`
+1. Install the following packages with the provided git URLs:
+* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
   * This will help us collect training data for our machine learning model. 
 
 * [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
@@ -158,7 +158,7 @@ For your convenience, we have provided prefabs for most of the components of the
 
 
 #### Importing the Robot
-Now it's time to import the robot from a URDF file.
+Finally we will add the robot and the URDF files in order to import the UR3 Robot. 
 
 8. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
@@ -184,5 +184,3 @@ Now it's time to import the robot from a URDF file.
 
 
 ### Proceed to [Phase 2](2_set_up_the_data_collection_scene.md).
-
-
