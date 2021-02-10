@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="urdf_path" default="$(find ur3_moveit)/URDF/ur3_with_gripper.urdf"/>
+
+  <!-- send robot urdf to param server -->
+  <param name="robot_description" textfile="$(arg urdf_path)" />
+
+  <include file="$(find ur3_moveit)/launch/ros_controllers.launch"/>
+ 
+  <!-- start this controller -->
+  <rosparam file="$(find ur3_moveit)/config/ros_controllers.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+  
+  <!-- load control managers -->
+  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
+ 
+  <!-- Launch moveit -->
+  <include file="$(find ur3_moveit)/launch/move_group.launch"></include>
+</launch>
