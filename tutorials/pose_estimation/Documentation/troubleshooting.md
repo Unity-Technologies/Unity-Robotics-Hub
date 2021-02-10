@@ -5,7 +5,6 @@
     - [Package Installation](#package-installation)
     - [Assets, Materials](#assets-materials)
     - [URDF Importer](#urdf-importer)
-  - [Phase 2: Set up the data collection scene](#phase-2-set-up-the-data-collection-scene)
   - [Phase 3: Data Collection and model training](#phase-3-data-collection-and-model-training)
     - [Docker, Environment](#docker-environment)
   - [Phase 4: Pick-and-Place](#phase-4-pick-and-place)
