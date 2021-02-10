@@ -19,7 +19,7 @@ Steps included in this phase of the tutorial:
 
 ---
 
-### <a name="step-1">Collect the Training and Validation Data</a>
+## <a name="step-1">Collect the Training and Validation Data</a>
 
 Now it is time to collect the data: a set of images with the corresponding position and orientation of the cube relative to the camera.
 
@@ -55,14 +55,14 @@ You should then see something similar to the following:
 7. **(Optional)**: Move the `UR3_single_cube_training` and `UR3_single_cube_validation` folders to a directory of your choice.  
 
 
-### <a name="step-2">Train the Deep Learning Model</a>
+## <a name="step-2">Train the Deep Learning Model</a>
 Now its time to train our deep learning model! We've provided the model training code for you, but if you'd like to learn more about it - or make your own changes - you can dig into the details [here](../Model).
 
 This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Phase 4](4_pick_and_place.md).
 
 1. Navigate to the `tutorials/pose_estimation/Model` directory.
 
-#### Requirements
+### Requirements
 
 We support two approaches for running the model: Docker (which can run anywhere) or locally with Conda. 
 
@@ -87,7 +87,7 @@ Then, you need to activate the conda environment.
 conda activate <env-name>
 ```
 
-#### Updating the Model Config
+### Updating the Model Config
 
 At the top of the [cli.py](../Model/pose_estimation/cli.py) file in the model code, you can see the documentation for all supported commands. Since typing these in can be laborious, we use a [config.yaml](../Model/config.yaml) file to feed in all these arguments. You can still use the command line arguments if you want - they will override the config. 
 
@@ -107,7 +107,7 @@ Second, we need to modify the location where the model is going to be saved:
 log_dir_system: /Users/jonathan.leban/Documents/models
 ```
 
-#### Training the model
+### Training the model
 Now its time to train our deep learning model!
 
 6. If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there. 
@@ -121,10 +121,10 @@ python -m pose_estimation.cli train
 
 >Note: If the training process ends unexpectedly, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
-#### Visualizing Training Results with Tensorboard
+### Visualizing Training Results with Tensorboard
 If you'd like to examine the results of your training run in more detail, see our guide on [viewing the Tensorboard logs](tensorboard.md).
 
-#### Evaluating the Model
+### Evaluating the Model
 Once training has completed, we can also run our model on our validation dataset to measure its performance on data it has never seen before. 
 
 However, first we need to specify a few settings in our config file.
