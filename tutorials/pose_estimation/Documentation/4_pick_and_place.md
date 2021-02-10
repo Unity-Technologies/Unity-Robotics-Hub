@@ -106,8 +106,6 @@ The ROS workspace is now ready to accept commands!
 
 If your Pose Estimation Tutorial Unity project is not already open, select and open it from the Unity Hub.
 
->Note: A complete version of this step has been provided in this repository, called `PoseEstimationDemoProject`. If you have some experience with Unity and would like to skip the scene setup portion, you can open this provided project via Unity Hub and open the scene TutorialPoseEstimation. You will need to update the ROS Settings as described below, then skip to [Step 5: Putting it together](#step-5).
-
 We will work on the same scene that was created in the [Phase 1](1_set_up_the_scene.md) and [Phase 2](2_set_up_the_data_collection_scene.md), so if you have not already, complete Phases 1 and 2 to set up the Unity project. 
 
 #### Connecting with ROS
@@ -116,16 +114,16 @@ Prefabs have been provided for the UI elements and trajectory planner for conven
 
 1. In the Project tab, go to `Assets > TutorialAssets > Prefabs > Part4` and drag and drop the `ROSObjects` prefab inside the _**Hierarchy**_ panel.
 
-**Action**: The ROS TCP connection needs to be created. In the top menu bar in the Unity Editor, select `Robotics -> ROS Settings`. Find the IP address of your ROS machine. 
-  * If you are going to run ROS services with the Docker container introduced [above](#step-3), fill `ROS IP Address` and `Override Unity IP` with the loopback IP address `127.0.0.1`. If you will be running ROS services via a non-Dockerized setup, you will most likely want to have the `Override Unity IP` field blank, which will let the Unity IP be determined automatically. 
+2. The ROS TCP connection needs to be created. In the top menu bar in the Unity Editor, select `Robotics -> ROS Settings`. Find the IP address of your ROS machine. 
+    * If you are going to run ROS services with the Docker container introduced [above](#step-3), fill `ROS IP Address` and `Override Unity IP` with the loopback IP address `127.0.0.1`. If you will be running ROS services via a non-Dockerized setup, you will most likely want to have the `Override Unity IP` field blank, which will let the Unity IP be determined automatically. 
 
-  * If you are **not** going to run ROS services with the Docker container, e.g. a dedicated Linux machine or VM, open a terminal window in this ROS workspace. Set the ROS IP Address field as the output of the following command:
+    * If you are **not** going to run ROS services with the Docker container, e.g. a dedicated Linux machine or VM, open a terminal window in this ROS workspace. Set the ROS IP Address field as the output of the following command:
 
-```bash
-hostname -I
-```
+    ```bash
+    hostname -I
+    ```
 
-2. Ensure that the ROS Port is set to `10000` and the Unity Port is set to `5005`. You can leave the Show HUD box unchecked. This HUD can be helpful for debugging message and service requests with ROS. You may turn this on if you encounter connection issues.
+3. Ensure that the ROS Port is set to `10000` and the Unity Port is set to `5005`. You can leave the Show HUD box unchecked. This HUD can be helpful for debugging message and service requests with ROS. You may turn this on if you encounter connection issues.
 
 <p align="center">
 <img src="Images/4_ros_settings.png" width="500"/>
@@ -139,7 +137,7 @@ The provided script `Assets/TutorialAssets/Scripts/TrajectoryPlanner.cs` contain
 
 In this TrajectoryPlanner script, there are two functions that are defined, but not yet implemented. `InvokePoseEstimationService()` and `PoseEstimationCallback()` will create a [ROS Service](http://wiki.ros.org/Services) Request and manage on the ROS Service Response, respectively. The following steps will provide the code and explanations for these functions.
 
-3. Open the `TrajectoryPlanner.cs` script in an editor. Find the empty `InvokePoseEstimationService(byte[] imageData)` function definition, starting at line 165. Replace the empty function with the following:
+4. Open the `TrajectoryPlanner.cs` script in an editor. Find the empty `InvokePoseEstimationService(byte[] imageData)` function definition, starting at line 165. Replace the empty function with the following:
 
 ```csharp
 private void InvokePoseEstimationService(byte[] imageData)
@@ -159,7 +157,7 @@ The `InvokePoseEstimationService` function will be called upon pressing the `Pos
 
 Next, the function that is called to manage the Pose Estimation service response needs to be implemented.
 
-4. Still in the TrajectoryPlanner script, find the empty `PoseEstimationCallback(PoseEstimationServiceResponse response)` function definition. Replace the empty function with the following:
+5. Still in the TrajectoryPlanner script, find the empty `PoseEstimationCallback(PoseEstimationServiceResponse response)` function definition. Replace the empty function with the following:
 
 ```csharp
 void PoseEstimationCallback(PoseEstimationServiceResponse response)
@@ -186,7 +184,7 @@ This callback is automatically run when the Pose Estimation service response arr
 
 Note that the TrajectoryPlanner component shows its member variables in the _**Inspector**_ window, which need to be assigned.
 
-5. Return to Unity. Select the `ROSObjects/Publisher` GameObject. Assign the `ur3_with_gripper` GameObject to the `Robot` field. Drag and drop the `Cube` GameObject from the _**Hierarchy**_ onto the `Target` Inspector field. Drag and drop the `Goal` to the `Goal` field. Finally, assign the `Simulation Scenario` object to the `Scenario` field. You should see the following:
+6. Return to Unity. Select the `ROSObjects/Publisher` GameObject. Assign the `ur3_with_gripper` GameObject to the `Robot` field. Drag and drop the `Cube` GameObject from the _**Hierarchy**_ onto the `Target` Inspector field. Drag and drop the `Goal` to the `Goal` field. Finally, assign the `Simulation Scenario` object to the `Scenario` field. You should see the following:
 
 <p align="center">
 <img src="Images/4_trajectory_field.png" width="500"/>
@@ -194,9 +192,9 @@ Note that the TrajectoryPlanner component shows its member variables in the _**I
 
 #### Switching to Inference Mode
 
-6. On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it, as we are no longer in the Data Collection phase. If you want to collect new data in the future, you can always check back on the `Fixed Length Scenario` and uncheck to disable the `ROSObjects`. 
+7. On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it, as we are no longer in the Data Collection phase. If you want to collect new data in the future, you can always check back on the `Fixed Length Scenario` and uncheck to disable the `ROSObjects`. 
 
-7. On the `Main Camera` GameObject, uncheck the `Perception Camera` script component, since we do not need it anymore. 
+8. On the `Main Camera` GameObject, uncheck the `Perception Camera` script component, since we do not need it anymore. 
 
 Also note that the UI elements have been provided in `ROSObjects/Canvas`, including the Event System that is added on default by Unity. In `ROSObjects/Canvas/ButtonPanel`, the OnClick callbacks have been pre-assigned in the prefab. These buttons set the robot to its upright default position, randomize the cube position and rotation, randomize the target, and call the Pose Estimation service.
 
