@@ -13,15 +13,15 @@ If you just want to run the completed project, this section can help you get up 
 
 ## Requirements
 
-You will first need to **clone** this repository. This project has dependencies on a few git submodules, so you'll need to include the flag `--recurse-submodules` in your clone command. 
+You will first need to **clone** this repository. 
 
 **Note For Windows users**:
 
-You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select GIT Bash Here (see attached pic). 
+You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation right click in your folder select `GIT Bash Here`. 
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 Three package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations, [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, and [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial, as well as the [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/).
@@ -73,7 +73,7 @@ We have provided a Docker container to get you up and running quickly.
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
 ```
 
-**Note**: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
+**Note**: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
 
 * **Action**: Start the newly built Docker container: 
 

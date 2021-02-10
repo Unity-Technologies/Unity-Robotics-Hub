@@ -2,8 +2,7 @@
 
 ## <a name="reqs">Requirements</a>
 
-To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. In fact, we need the ROS folder of the repository which is dependent of gitsubmodules (hence the command `--recurse-submodules`). 
-
+To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. 
 
 **Note For Windows users**:
 
@@ -11,7 +10,7 @@ You need to have a software enabling you to run bash files. One option is to dow
 
 **Action**: Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 **Action**: [Install Unity `2020.2.*`.](install_unity.md)

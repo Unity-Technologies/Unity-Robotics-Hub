@@ -25,13 +25,6 @@ In this phase, we will use our trained deep learning model to predict the pose o
 ### Step 1: Setup
 If you have correctly followed phases 1 and 2, whether or not you choose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
 
-**Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
-
-```bash
-cd /PATH/TO/Unity-Robotics-Hub/tutorials/pose_estimation &&
-git submodule update --init --recursive 
-```
-
 Three package dependencies for this project, [Universal Robot](https://github.com/ros-industrial/universal_robot) for the UR3 arm configurations, [Robotiq](https://github.com/ros-industrial/robotiq) for the gripper, and [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs) are large repositories. A bash script has been provided to run a sparse clone to only copy the files required for this tutorial, as well as the [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/).
 
 * **Action**: Open a terminal and go to the directory of the `pose_estimation` folder. Then run:
@@ -77,7 +70,7 @@ Building this Docker container will install the necessary packages for this tuto
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
 ```
 
-**Note**: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
+**Note**: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
 
 * **Action**: Start the newly built Docker container: 
 
@@ -131,8 +124,6 @@ hostname -I
 </p>
 
 Opening the ROS Settings has created a ROSConnectionPrefab in `Assets/Resources` with the user-input settings. When the static `ROSConnection.instance` is referenced in a script, if a `ROSConnection` instance is not already present, the prefab will be instantiated in the Unity scene, and the connection will begin.
-
-**Note**: While using the ROS Settings menu is the suggested workflow, you may still manually create a GameObject with an attached ROSConnection component.
 
 The provided script `Assets/TutorialAssets/Scripts/TrajectoryPlanner.cs` contains the logic to invoke the motion planning services, as well as the logic to control the gripper and end effector tool. This has been adapted from the [Pick-and-Place tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/3_pick_and_place.md). The component has been added to the ROSObjects/Publisher object.
 
