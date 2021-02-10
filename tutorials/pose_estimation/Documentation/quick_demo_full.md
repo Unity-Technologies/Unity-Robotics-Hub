@@ -108,7 +108,9 @@ The ROS workspace is now ready to accept commands!
 
 The completed project is set up for data collection by default, so we must switch it to inference mode.
 
-3. On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it.
+3. On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it if it is not done already.
+
+4. On the `Main Camera` GameObject, uncheck the `Perception Camera (Script)` component to disable it if it is not done already.
 
 
 ## Putting it together
