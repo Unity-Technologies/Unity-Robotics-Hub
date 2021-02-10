@@ -259,7 +259,7 @@ If you press play, you should now see the cube and goal moving around the robot 
 
 Now we will add the light Randomizer. 
 
-13. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click on `Add Randomizer` and start typing `LightRandomizer`. 
+1. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click on `Add Randomizer` and start typing `LightRandomizer`. 
     * For the `Light Intensity Parameter`, for the range parameter set the `Min` to `0.9` and the `Max` to `1.1`. 
     * For the range parameter of the `Rotation X`, set the `Min` to `40` and the `Max` to `80`. 
     * For the range parameter of the `Rotation Y`, set the `Min` to `-180` and the `Max` to `180`. 
@@ -271,7 +271,7 @@ The Randomizer should now look like the following:
 <img src="Images/2_light_randomizer_settings.png" height=500/>
 </p>
 
-14. Now we need to add the RandomizerTag to the light. Select the `Directional Light` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `LightRandomizerTag` in the search bar that appears, until the `LightRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.
+2. Now we need to add the RandomizerTag to the light. Select the `Directional Light` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `LightRandomizerTag` in the search bar that appears, until the `LightRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.
 
 To view this script, you can right click on the three dots are the end of the component and select `Edit Script`. 
 This randomizer is a bit different from the previous ones as you can see by the line `[RequireComponent(typeof(Light))]` at line 7. This line makes it so that you can only add the `LightRandomizerTag` component to an object that already has a **Light** component attached. This way, the Randomizers that query for this tag can be confident that the found objects have a **Light** component.
