@@ -2,7 +2,7 @@
 
 This tutorial will go through the steps necessary to perform pose estimation with a UR3 robotic arm in Unity. You’ll gain experience integrating ROS with Unity, importing URDF models, collecting labeled training data, and training and deploying a deep learning model. By the end of this tutorial, you will be able to perform pick-and-place with a robot arm in Unity, using computer vision to perceive the object the robot picks up.
 
-**Want to skip the tutorial and run the full demo? Check out our [quick demo](Documentation/quick_demo_full.md).**
+**Want to skip the tutorial and run the full demo? Check out our [Quick Demo](Documentation/quick_demo_full.md).**
 
 **Want to skip the tutorial and focus on collecting training data for the deep learning model? Check out our [quick data collection demo](Documentation/quick_demo_train.md).**
 
