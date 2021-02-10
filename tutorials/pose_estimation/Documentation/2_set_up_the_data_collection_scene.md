@@ -255,7 +255,7 @@ If you press play, you should now see the cube and goal moving around the robot 
 <img src="Gifs/2_object_position_randomizer.gif" height=388 width=800/>
 </p>
 
-### Light Randomizer
+#### Light Randomizer
 
 Now we will add the light Randomizer. 
 
