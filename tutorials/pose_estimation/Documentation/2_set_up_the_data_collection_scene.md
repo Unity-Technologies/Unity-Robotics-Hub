@@ -216,12 +216,8 @@ If you return to your list of Randomizers in the Inspector view of SimulationSce
 <img src="Gifs/2_y_rotation_randomizer_settings.gif" height=550 width=1020/>
 </p>
 
-Before running, we will to make a little modification on the `Controller.cs` file inside the URDF importer package in order to remove a UI message not useful for this tutorial (the message is to give commands to move the robot using the keyboard).
 
-10. Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ tab, on the `Controller` component, selects the three dots at the right extremity and click on `Edit Script`. 
-
-
-11. Run the simulation again and inspect how the cube now switches between different orientations. You can pause the simulation and then use the step button (to the right of the pause button) to move the simulation one frame forward and clearly see the variation of the cube's y-rotation. You should see something similar to the following. 
+10. Run the simulation again and inspect how the cube now switches between different orientations. You can pause the simulation and then use the step button (to the right of the pause button) to move the simulation one frame forward and clearly see the variation of the cube's y-rotation. You should see something similar to the following. 
 
 <p align="center">
 <img src="Gifs/2_y_rotation_randomizer.gif" height=411 width=800/>
@@ -233,7 +229,7 @@ It is great that we can now rotate the cube, but we also want to move it around 
 
 To save time, we have provided a pre-written custom randomizer to do this. 
 
-12. Select the `Simulation Scenario` GameObject, and do the following:
+11. Select the `Simulation Scenario` GameObject, and do the following:
     * In the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click `Add Randomizer` and start typing `RobotArmObjectPositionRandomizer`. 
     * Set the `MinRobotReachability` to `0.2` and the `MaxRobotReachability` to `0.4`. 
     * Under `Plane`, click on the circle and start typing `ObjectPlacementPlane` and then double click on the GameObject that appears. 
@@ -243,7 +239,7 @@ To save time, we have provided a pre-written custom randomizer to do this.
 <img src="Gifs/2_robot_randomizer_settings.gif" height=508 />
 </p>
 
-13. Now we need to add the RandomizerTag to the cube. 
+12. Now we need to add the RandomizerTag to the cube. 
     * Select the `Cube` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `RobotArmObjectPositionRandomizerTag` in the search bar that appears, until the `RobotArmObjectPositionRandomizerTag` script is found, with a **#** icon to the left. Then double click on it. 
     * Click on the arrow on the left of the `script` icon, and check the property `Must Be Reachable`. 
 
@@ -263,7 +259,7 @@ If you press play, you should now see the cube and goal moving around the robot 
 
 Now we will add the light Randomizer. 
 
-14. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click on `Add Randomizer` and start typing `LightRandomizer`. 
+13. Select the `Simulation Scenario` GameObject and in the _**Inspector**_ tab, on the `Fixed Length Scenario` component, click on `Add Randomizer` and start typing `LightRandomizer`. 
     * For the `Light Intensity Parameter`, for the range parameter set the `Min` to `0.9` and the `Max` to `1.1`. 
     * For the range parameter of the `Rotation X`, set the `Min` to `40` and the `Max` to `80`. 
     * For the range parameter of the `Rotation Y`, set the `Min` to `-180` and the `Max` to `180`. 
@@ -275,7 +271,7 @@ The Randomizer should now look like the following:
 <img src="Images/2_light_randomizer_settings.png" height=500/>
 </p>
 
-15. Now we need to add the RandomizerTag to the light. Select the `Directional Light` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `LightRandomizerTag` in the search bar that appears, until the `LightRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.
+14. Now we need to add the RandomizerTag to the light. Select the `Directional Light` GameObject and in the _**Inspector**_ tab, click on the _**Add Component**_ button. Start typing `LightRandomizerTag` in the search bar that appears, until the `LightRandomizerTag` script is found, with a **#** icon to the left. Then double click on it.
 
 To view this script, you can right click on the three dots are the end of the component and select `Edit Script`. 
 This randomizer is a bit different from the previous ones as you can see by the line `[RequireComponent(typeof(Light))]` at line 7. This line makes it so that you can only add the `LightRandomizerTag` component to an object that already has a **Light** component attached. This way, the Randomizers that query for this tag can be confident that the found objects have a **Light** component.
