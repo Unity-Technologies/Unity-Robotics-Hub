@@ -17,10 +17,7 @@ In this first phase of the tutorial, we will start by downloading and installing
 To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. In fact, we need the ROS folder of the repository which is dependent of gitsubmodules (hence the command `--recurse-submodules`). 
 
 
-  > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select `GIT Bash Here`. 
-  <p align="center">
-  <img src="Images/0_GIT_installed.png"/>
-  </p>
+  > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select [GIT Bash Here](Images/0_GIT_installed.png).
 
 1. Open a terminal and put yourself where you want to host the repository. 
 ```bash
@@ -67,14 +64,16 @@ Installing the different packages may take some time (few minutes).
 
 #### Install Dependencies
 1. Install the following packages with the provided git URLs:
-* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.2`
-  * This will help us collect training data for our machine learning model. 
+Install the following packages with the provided git URLs:
+
+* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
+    * This will help us collect training data for our machine learning model. 
 
 * [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
-  * This package will help us import a robot into our scene from a file in the [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
+    * This package will help us import a robot into our scene from a file in the [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
 
 * [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
-  * This package will enable a connection between ROS and Unity. 
+    * This package will enable a connection between ROS and Unity. 
 
 >Note: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
