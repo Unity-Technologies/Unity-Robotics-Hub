@@ -22,7 +22,7 @@ sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1+cu101 torc
 
 Most of the ROS setup has been provided via the `ur3_moveit` package. This section will describe the provided files.
 
-4. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run 
+4. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run: 
 
 ```bash 
 catkin_make
