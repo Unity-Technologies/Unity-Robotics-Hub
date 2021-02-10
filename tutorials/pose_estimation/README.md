@@ -4,19 +4,19 @@ This tutorial will go through the steps necessary to perform pose estimation wit
 
 **Want to skip the tutorial and run the full demo? Check out our [Quick Demo](Documentation/quick_demo_full.md).**
 
-**Want to skip the tutorial and focus on collecting training data for the deep learning model? Check out our [quick data collection demo](Documentation/quick_demo_train.md).**
+**Want to skip the tutorial and focus on collecting training data for the deep learning model? Check out our [Quick Data-Collection Demo](Documentation/quick_demo_train.md).**
 
 > Note: This project has been developed with Python 3 and ROS Noetic.
 
 **Table of Contents**
-- [Phase 1: Create Unity scene with imported URDF](#link-phase-1)
-- [Phase 2: Setting up the scene for data collection](#link-phase-2)
-- [Phase 3: Data Collection and Model Training](#link-phase-3)
-- [Phase 4: Pick-and-Place](#link-phase-4)
+- [Part 1: Create Unity scene with imported URDF](#link-part-1)
+- [Part 2: Setting up the scene for data collection](#link-part-2)
+- [Part 3: Data Collection and Model Training](#link-part-3)
+- [Part 4: Pick-and-Place](#link-part-4)
   
 ---
 
-### <a name="link-phase-1">[Phase 1: Create Unity Scene with Imported URDF](Documentation/1_set_up_the_scene.md)</a>
+### <a name="link-part-1">[Part 1: Create Unity Scene with Imported URDF](Documentation/1_set_up_the_scene.md)</a>
 
 <img src="Documentation/Images/0_scene.png" width=400 />
 
@@ -25,7 +25,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 ---
 
-### <a name="link-phase-2">[Phase 2: Setup the Scene for Data Collection](Documentation/2_set_up_the_data_collection_scene.md)</a> 
+### <a name="link-part-2">[Part 2: Setup the Scene for Data Collection](Documentation/2_set_up_the_data_collection_scene.md)</a> 
 
 <img src="Documentation/Images/0_data_collection_environment.png" width=400/>
 
@@ -35,7 +35,7 @@ If you would like to learn more about randomizers, and apply domain randomizatio
 
 ---
 
-### <a name="link-phase-3">[Phase 3: Data Collection and Model Training](Documentation/3_data_collection_model_training.md)</a> 
+### <a name="link-part-3">[Part 3: Data Collection and Model Training](Documentation/3_data_collection_model_training.md)</a> 
 
 <img src="Documentation/Images/0_json_environment.png" width=400/>
 
@@ -53,7 +53,7 @@ To measure the success of grasping in simulation using our pre-trained model for
 
 ---
 
-### <a name="link-phase-4">[Phase 4: Pick-and-Place](Documentation/4_pick_and_place.md)</a> 
+### <a name="link-part-4">[Part 4: Pick-and-Place](Documentation/4_pick_and_place.md)</a> 
 
 <img src="Documentation/Gifs/0_demo.gif" width=400/>
 

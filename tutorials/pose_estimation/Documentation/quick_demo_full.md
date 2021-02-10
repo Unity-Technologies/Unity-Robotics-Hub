@@ -3,7 +3,7 @@
 If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning-based perception. To learn how to build something like this from scratch, see our [full tutorial](1_set_up_the_scene.md).
 
 **Table of Contents**
-- [Requirements](#requirements)
+- [Prerequisites](#Prerequisites)
 - [Add the Pose Estimation Model](#add-the-pose-estimation-model)
 - [Set up the ROS side](#set-up-the-ros-side)
 - [Set up the Unity side](#set-up-the-unity-side)
@@ -11,7 +11,7 @@ If you just want to run the completed project, this section can help you get up 
 
 ---
 
-## Requirements
+## Prerequisites
 
 You will first need to **clone** this repository. This project has dependencies on a few git submodules, so you'll need to include the flag `--recurse-submodules` in your clone command. 
 
@@ -50,7 +50,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
-* **Action**: To save time, you can use the pose estimation model we have trained. Download it [here](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar). 
+* **Action**: Download the [pose estimation model](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar) we have trained.
 
 * **Action**: Go inside the `ROS/SRC/ur3_moveit` folder and create a folder `models`. Copy the `UR3_single_cube_model.tar` file you've just downloaded into this folder.
 

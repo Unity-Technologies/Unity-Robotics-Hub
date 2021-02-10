@@ -21,7 +21,7 @@ A complete end-to-end demonstration, including how to set up the Unity environme
 
 [**New**][Pose Estimation Demo](tutorials/pose_estimation/README.md)
 
-A complete end-to-end demonstration, in which we collect training data in Unity, and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick & place task.
+A complete end-to-end demonstration, in which we collect training data in Unity, and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
 
 [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 

@@ -1,13 +1,13 @@
-# Pose Estimation Demo: Phase 4
+# Pose Estimation Demo: Part 4
 
 
-In [Phase 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor. In [Phase 2](2_set_up_the_data_collection_scene.md), we set up the scene for data collection. 
+In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor. In [Part 2](2_set_up_the_data_collection_scene.md), we set up the scene for data collection. 
 
-In [Phase 3](3_data_collection_model_training.md) we have learned: 
+In [Part 3](3_data_collection_model_training.md) we have learned: 
 * How to collect the data 
 * How to train the deep learning model
 
-In this phase, we will use our trained deep learning model to predict the pose of the cube, and pick it up with our robot arm.  
+In this part, we will use our trained deep learning model to predict the pose of the cube, and pick it up with our robot arm.  
 
 <p align="center">
 <img src="Images/4_Pose_Estimation_ROS.png"/>
@@ -23,7 +23,7 @@ In this phase, we will use our trained deep learning model to predict the pose o
 ---
 
 ### Step 1: Setup
-If you have correctly followed phases 1 and 2, whether or not you choose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
+If you have correctly followed parts 1 and 2, whether or not you chose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
 
 **Note**: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
 
@@ -51,7 +51,7 @@ Here you have two options for the model:
 
 #### Option B: Use Your Own Model
 
-* **Action**: You can also use the model you have trained in [Phase 3](3_data_collection_mode_training.md). However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
+* **Action**: You can also use the model you have trained in [Part 3](3_data_collection_mode_training.md). However, be sure to rename your model `UR3_single_cube_model.tar` as the script that will call the model is expecting this name.
 
 #### Moving the Model to the ROS Folder
 
@@ -61,7 +61,7 @@ Here you have two options for the model:
 
 **Note**: This project has been developed with Python 3 and ROS Noetic.
 
-The provided ROS files require the following packages to be installed. The following section steps through configuring a Docker container as the ROS workspace for this tutorial. If you would like to manually set up your own ROS workspace with the provided files instead, follow the steps in [Phase 0: ROS Setup](0_ros_setup.md) to do so.
+The provided ROS files require the following packages to be installed. The following section steps through configuring a Docker container as the ROS workspace for this tutorial. If you would like to manually set up your own ROS workspace with the provided files instead, follow the steps in [Part 0: ROS Setup](0_ros_setup.md) to do so.
 
 Building this Docker container will install the necessary packages for this tutorial.
 
@@ -107,7 +107,7 @@ If your Pose Estimation Tutorial Unity project is not already open, select and o
 
 **Note**: A complete version of this step has been provided in this repository, called `PoseEstimationDemoProject`. If you have some experience with Unity and would like to skip the scene setup portion, you can open this provided project via Unity Hub and open the scene TutorialPoseEstimation. You will need to update the ROS Settings as described below, then skip to [Step 5: Putting it together](#step-5-putting-it-together).
 
-We will work on the same scene that was created in the [Phase 1](1_set_up_the_scene.md) and [Phase 2](2_set_up_the_data_collection_scene.md), so if you have not already, complete Phases 1 and 2 to set up the Unity project. 
+We will work on the same scene that was created in the [Part 1](1_set_up_the_scene.md) and [Part 2](2_set_up_the_data_collection_scene.md), so if you have not already, complete Parts 1 and 2 to set up the Unity project. 
 
 #### Connecting with ROS
 
@@ -183,6 +183,8 @@ This callback is automatically run when the Pose Estimation service response arr
 
 **Note**: The incoming position and rotation are converted `From<RUF>`, i.e. Unity's coordinate space, in order to cleanly convert from a `geometry_msgs/Point` and `geometry_msgs/Quaternion` to `UnityEngine.Vector3` and `UnityEngine.Quaternion`, respectively. This is equivalent to creating a `new Vector3(response.estimated_pose.position.x, response.estimated_pose.position.y, response.estimated_pose.position.z)`, and so on. This functionality is provided via the [ROSGeometry](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/dev/ROSGeometry.md) component of the ROS-TCP-Connector package.
 
+>Note: The `Randomizer Cube` button calls the `RandomizeCube()` method which randomizes the position, orientation of the cube, the position of the goal and the color, intensity and position of the light. More generally, it apply the randomization of the randomizers defined in the `Fixed Length Scenario` of the `Simulation Scenario` GameObject on the gameobjects possessing the corresponding tags. If you want to know more about it, check the [InferenceRandomizer.cs](../PoseEstimationDemoProject/Assets/TutorialAssets/Scripts/InferenceRandomizer.cs) script.
+
 Note that the TrajectoryPlanner component shows its member variables in the _**Inspector**_ window, which need to be assigned.
 
 * **Action**: Return to Unity. Select the `ROSObjects/Publisher` GameObject. Assign the `ur3_with_gripper` GameObject to the `Robot` field. Drag and drop the `Cube` GameObject from the _**Hierarchy**_ onto the `Target` Inspector field. Drag and drop the `Goal` to the `Goal` field. Finally, assign the `Simulation Scenario` object to the `Scenario` field. You should see the following:
@@ -193,7 +195,7 @@ Note that the TrajectoryPlanner component shows its member variables in the _**I
 
 #### Switching to Inference Mode
 
-* **Action**: On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it, as we are no longer in the Data Collection phase. If you want to collect new data in the future, you can always check back on the `Fixed Length Scenario` and uncheck to disable the `ROSObjects`. 
+* **Action**: On the `Simulation Scenario` GameObject, uncheck the `Fixed Length Scenario` component to disable it, as we are no longer in the Data Collection part. If you want to collect new data in the future, you can always check back on the `Fixed Length Scenario` and uncheck to disable the `ROSObjects`. 
 
 * **Action**: On the `Main Camera` GameObject, uncheck the `Perception Camera` script component, since we do not need it anymore. 
 
@@ -242,4 +244,5 @@ You should see the following:
 <img src="Gifs/0_demo.gif"/>
 </p>
 
-### Click here to go back to [Phase 3](3_data_collection_model_training.md).
+**Congrats! You did it!**
+### Click here to go back to [Part 3](3_data_collection_model_training.md).

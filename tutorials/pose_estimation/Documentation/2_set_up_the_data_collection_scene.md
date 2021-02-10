@@ -1,13 +1,13 @@
-# Pose Estimation Demo: Phase 2
+# Pose Estimation Demo: Part 2
 
-In [Phase 1](1_set_up_the_scene.md) of the tutorial, we learned:
+In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned:
 * How to create a Unity Scene
 * How to use Unity's Package Manager to download packages
 * How to move and rotate objects in the scene
 * How to instantiate Game Objects with Prefabs
 * How to import a robot from a URDF file  
     
-You should now have a table, cube, camera, and working robot arm in your scene. In this phase we will prepare the scene for data collection with the Perception package. 
+You should now have a table, cube, camera, and working robot arm in your scene. In this part we will prepare the scene for data collection with the Perception package. 
 
 <p align="center">
 <img src="Images/2_Pose_Estimation_Data_Collection.png" width="680" height="520"/>
@@ -29,7 +29,7 @@ We need to have a fixed aspect ratio so that you are sure to have the same size 
 <img src="Gifs/2_aspect_ratio.gif"/>
 </p>
 
-We need to add a few components to our camera in order to equip it for the perception workflow. 
+We need to add a few components to our camera in order to equip it for the synthetic-data-generation. 
 
 * **Action**: Select the `Main Camera` GameObject in the _**Hierarchy**_ tab and in the _**Inspector**_ tab, click on _**Add Component**_.
 
@@ -39,7 +39,7 @@ We need to add a few components to our camera in order to equip it for the perce
 
 * **Action**: Go to `Edit > Project Settings > Editor` and uncheck `Asynchronous Shader Compilation`.
 
-As you can see in the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`. 
+In the Inspector view for the Perception Camera component, the list of Camera Labelers is currently empty, as you can see with `List is Empty`. For each type of ground-truth you wish to generate alongside your captured frames, you will need to add a corresponding Camera Labeler to this list. In our project we want to extract the position and orientation of an object, so we will use the `BoudingBox3DLabeler`. 
 
 There are several other types of labelers available, and you can even write your own. If you want more information on labelers, you can consult the [Perception package documentation](https://github.com/Unity-Technologies/com.unity.perception).
 
@@ -56,7 +56,7 @@ Once you add the labeler, the Inspector view of the Perception Camera component 
 
 Our work above prepares us to collect RGB images from the camera and some associated 3D bounding box(es) for objects in our scene. However, we still need to specify _which_ objects we'd like to collect poses for. In this tutorial, we will only collect the pose of the cube, but you can add more objects if you'd like.
 
-You will notice that the `BoundingBox3DLabeler` component has a field named `Id Label Config`. The label configuration we link here will determine which object poses get saved in our dataset. 
+You will notice that the `BoundingBox3DLabeler` component has a field named `ID Label Config`. The label configuration we link here will determine which object poses get saved in our dataset. 
 
 * **Action**:  In the _**Project**_ tab, right-click the `Assets` folder, then click `Create -> Perception -> Id Label Config`.
 
@@ -91,13 +91,13 @@ The _**Inspector**_ view of the `Cube` should look like the following:
 
 #### Domain Randomization
 We will be collecting training data from a simulation, but most real perception use-cases occur in the real world. 
-To train a model to be robust enough to generalize to the real domain, we rely on a technique called [Domain Randomization](https://arxiv.org/pdf/1703.06907.pdf). Instead of training a model in a single fixed environment, we _randomize_ aspects of the environment during training in order to introduce sufficient variation into the generated data. This forces the machine learning model to handle many small visual variations, making it more robust.
+To train a model to be robust enough to generalize to the real domain, we rely on a technique called [Domain Randomization](https://arxiv.org/pdf/1703.06907.pdf). Instead of training a model in a single, fixed environment, we _randomize_ aspects of the environment during training in order to introduce sufficient variation into the generated data. This forces the machine learning model to handle many small visual variations, making it more robust.
 
-In this tutorial we will randomize the position and the orientation of the cube on the table but also the color, intensity and position of the light. However, the Randomizers in the Perception package can be extended to many other aspects of the environment.
+In this tutorial, we will randomize the position and the orientation of the cube on the table, and also the color, intensity, and position of the light. Note that the Randomizers in the Perception package can be extended to many other aspects of the environment as well.
 
 
 #### The Scenario
-To start randomizing your simulation, you will first need to add a **Scenario** to your scene. Scenarios control the execution flow of your simulation by coordinating all Randomizer components added to them. If you want to know more about it, you can go see [this tutorial](https://github.com/Unity-Technologies/com.unity.perception/blob/master/com.unity.perception/Documentation~/Tutorial/Phase1.md#step-5-set-up-background-randomizers). There are several pre-built randomizers provided by the Perception package, but they don't fit our specific problem. Fortunately, the Perception package also allows one to write [custom randomizers](https://github.com/Unity-Technologies/com.unity.perception/blob/master/com.unity.perception/Documentation~/Tutorial/Phase2.md), which we will do here.
+To start randomizing your simulation, you will first need to add a **Scenario** to your scene. Scenarios control the execution flow of your simulation by coordinating all Randomizer components added to them. If you want to know more about it, you can go see [this tutorial](https://github.com/Unity-Technologies/com.unity.perception/blob/master/com.unity.perception/Documentation~/Tutorial/Phase1.md#step-5-set-up-background-randomizers). There are several pre-built Randomizers provided by the Perception package, but they don't fit our specific problem. Fortunately, the Perception package also allows one to write [custom randomizers](https://github.com/Unity-Technologies/com.unity.perception/blob/master/com.unity.perception/Documentation~/Tutorial/Phase2.md), which we will do here.
 
 
 * **Action**: In the _**Hierarchy**_, select the **+** and `Create Empty`. Rename this GameObject `Simulation Scenario`.
@@ -108,7 +108,7 @@ Each Scenario executes a number of Iterations, and each Iteration carries on for
 
 
 #### Writing our Custom Object Rotation Randomizer
-Each new randomizer requires two C# scripts: a **Randomizer** and **RandomizerTag**. The **Randomizer** will go on the scenario to orchestrate the randomization. The corresponding **RandomizerTag** is added to any GameObject(s) we want to _apply_ the randomization to. 
+Each new Randomizer requires two C# scripts: a **Randomizer** and **RandomizerTag**. The **Randomizer** will go on the Scenario to orchestrate the randomization. The corresponding **RandomizerTag** is added to any GameObject(s) we want to _apply_ the randomization to. 
 
 First, we will write a randomizer to randomly rotate the cube around its y-axis each iteration. 
 
@@ -167,7 +167,7 @@ Let's go through the code above and understand each part:
 * The `YRotationRandomizer` class extends `Randomizer`, which is the base class for all Randomizers that can be added to a Scenario. This base class provides a plethora of useful functions and properties that can help catalyze the process of creating new Randomizers.
 * The `FloatParameter` field contains a seeded random number generator. We can set the range, and the distribution of this value in the editor UI. 
 * The `OnIterationStart()` function is a life-cycle method on all `Randomizer`s. It is called by the scenario every iteration (e.g., once per frame). 
-* The `OnCustomiteration()` function is responsible of the actions to randomize the Y-axis of the cube. Although you could incorporate the content of the `OnCustomIteration()` function inside the `OnIterationStart()` function, We chose this architecture so that we can call the method reponsible for the Y rotation axis in other scripts. 
+* The `OnCustomiteration()` function for responsible of the actions to randomize the Y-axis of the cube. Although you could incorporate the content of the `OnCustomIteration()` function inside the `OnIterationStart()` function, we chose this architecture so that we can call the method reponsible for the Y rotation axis in other scripts. 
 * The `tagManager` is an object available to every `Randomizer` that can help us find game objects tagged with a given `RandomizerTag`. In our case, we query the `tagManager` to gather references to all the objects with a `YRotationRandomizerTag` on them.
 * We then loop through these `tags` to rotate each object having one:
     * `random.Sample()` gives us a random float between 0 and 1, which we multiply by 360 to convert to degrees.
@@ -220,7 +220,7 @@ Before running, we will to make a little modification on the `Controller.cs` fil
 * **Action**: Select the `ur3_with_gripper` GameObject and in the _**Inspector**_ tab, on the `Controller` component, selects the three dots at the right extremity and click on `Edit Script`. 
 
 
-* **Action**: Run the simulation again and inspect how the cube now switches between different orientations. You can pause the simulation and then use the step button (to the right of the pause button) to move the simulation one frame forward and clearly see the variation of the cube's y-rotation. You should see something similar to the following. 
+* **Action**: Run the simulation and inspect how the cube now switches between different orientations. You can pause the simulation and then use the step button (to the right of the pause button) to move the simulation one frame forward and clearly see the variation of the cube's y-rotation. You should see something similar to the following. 
 
 <p align="center">
 <img src="Gifs/2_y_rotation_randomizer.gif" height=411 width=800/>
@@ -285,6 +285,6 @@ If you press play, you should see the color, direction, and intensity of the lig
 <img src="Gifs/2_light_randomizer.gif" height=600/>
 </p>
 
-### Proceed to [Phase 3](3_data_collection_model_training.md).
+### Proceed to [Part 3](3_data_collection_model_training.md).
 
-### Go back to [Phase 1](1_set_up_the_scene.md)
+### Go back to [Part 1](1_set_up_the_scene.md)
