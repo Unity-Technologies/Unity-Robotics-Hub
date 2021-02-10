@@ -28,18 +28,17 @@
 ### URDF Importer
 - If you are not seeing `Import Robot from URDF` in the `Assets` menu, check the console for compile errors. The project must compile correctly before the editor tools become available. 
 - If the robot appears loose/wiggly or is not moving with no console errors, ensure on the Controller script of the `ur3_with_gripper` that the `Stiffness` is **10000**, the `Damping` is **1000** and the `Force Limit` is **1000**. 
-- Note that the world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.77, 0)` in Unity coordinates. Moving the robot from its root position in Unity will require a change to its URDF definition.
+- Note that the world-space origin of the robot is defined in its URDF file. In this sample, we have assigned it to sit on top of the table, which is at `(0, 0.77, 0)` in Unity coordinates. Moving the robot from its root position in Unity will require a change to its URDF definition.	
 
-    ```xml
-    <joint name="joint_world" type="fixed">
-        <parent link="world" />
-            <child link="base_link" />
-        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.77"/>
-    </joint>
-    ```
+    ```xml	
+    <joint name="joint_world" type="fixed">	
+        <parent link="world" />	
+            <child link="base_link" />	
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.77"/>	
+    </joint>	
+    ```	
 
   **Note**: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
-
 
 ## Phase 3: Data Collection and model training
 
@@ -58,7 +57,7 @@
 <img src="Images/button_error.png" align="center" width=950/>
 </p>
 
-- Building the Docker image may throw an `Could not find a package configuration file provided by...` exception if one or more of the directories in ROS/ appears empty. Try downloading the submodules again via `git submodule update --init --recursive`.
+- Building the Docker image may throw an `Could not find a package configuration file provided by...` exception if one or more of the directories in ROS/ appears empty. Ensure you have run the `submodule.sh` script to populate the ROS packages.
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade packages.
 - `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?` The system-independent `docker info` command can verify whether or not Docker is running. This command will throw a `Server: ERROR` if the Docker daemon is not currently running, and will print the appropriate [system-wide information](https://docs.docker.com/engine/reference/commandline/info/) otherwise. 
 - Occasionally, not having enough memory allocated to the Docker container can cause the `server_endpoint` to fail. This may cause unexpected behavior during the pick-and-place task, such as constantly predicting the same pose. If this occurs, check your Docker settings. You may need to increase the `Memory` to 8GB. 

@@ -55,7 +55,7 @@ This YAML file is a rosparam set from the launch files provided for this tutoria
 ```xml
 <launch>
     <rosparam file="$(find ur3_moveit)/config/params.yaml" command="load"/>
-    '<include file="$(find ur3_moveit)/launch/gazebo.launch" />
+    '<include file="$(find ur3_moveit)/launch/demo.launch" />
     <node name="server_endpoint" pkg="ur3_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
     <node name="pose_estimation" pkg="ur3_moveit" type="pose_estimation_script.py" args="--wait" output="screen"/>
     <node name="mover" pkg="ur3_moveit" type="mover.py" args="--wait" output="screen" respawn="true" respawn_delay="2.0"/>

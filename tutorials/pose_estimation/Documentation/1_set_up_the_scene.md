@@ -14,14 +14,14 @@ In this first phase of the tutorial, we will start by downloading and installing
 
 ### <a name="reqs">Requirements</a>
 
-To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. In fact, we need the ROS folder of the repository which is dependent of gitsubmodules (hence the command `--recurse-submodules`). 
+To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch.
 
 
   > Note For Windows users: You need to have a software enabling you to run bash files. One option is to download [GIT](https://git-scm.com/downloads). During installation of GIT, add GIT Bash to windows context menu by selecting its option. After installation, right click in your folder, and select [GIT Bash Here](Images/0_GIT_installed.png).
 
 1. Open a terminal and put yourself where you want to host the repository. 
 ```bash
-git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
+git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
 Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the contents of the `universal_robot`, `moveit_msgs`, `ros_tcp_endpoint`, and the `robotiq` folders. 

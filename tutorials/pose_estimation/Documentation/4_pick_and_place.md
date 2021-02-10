@@ -25,6 +25,7 @@ In this phase, we will use our trained deep learning model to predict the pose o
 ### <a name="setup">Setup</a>
 If you have correctly followed phases 1 and 2, whether or not you choose to use the Unity project given by us or start it from scratch, you should have cloned the repository. 
 
+
 >Note: If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content (e.g. moveit_msgs or ros_tcp_endpoint), you can run the following command to grab the Git submodules. But before you need to be in the `pose_estimation` folder. 
 >```bash
 >cd /PATH/TO/Unity-Robotics-Hub/tutorials/pose_estimation &&
@@ -77,6 +78,7 @@ docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
 ```
 
 >Note: The provided Dockerfile uses the [ROS Noetic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages as well as copy the [provided ROS packages and submodules](../ROS/) to the container, predownload and cache the [VGG16 model](https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg16), and build the catkin workspace.
+
 
 3. Start the newly built Docker container: 
 
@@ -211,7 +213,7 @@ roslaunch ur3_moveit pose_est.launch
 
 ---
 
-This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`gazebo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
+This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`demo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
 
 This launch will print various messages to the console, including the set parameters and the nodes launched. The final message should confirm `You can start planning now!`.
 
