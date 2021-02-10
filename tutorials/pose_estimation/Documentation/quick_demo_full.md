@@ -132,7 +132,7 @@ This launch will print various messages to the console, including the set parame
 
 2. Return to Unity, and press Play.
 
->Note: If you encounter connection errors such as a `SocketException` or don't see a completed TCP handshake between ROS and Unity in the console window, return to the [Connecting with ROS](#connecting-with-ros) section above to update the ROS Settings and generate the ROSConnectionPrefab.
+>Note: If you encounter connection errors such as a `SocketException` or don't see a completed TCP handshake between ROS and Unity in the console window, return to the [Set up the Unity side](#set-up-the-unity-side) section above to update the ROS Settings and generate the ROSConnectionPrefab.
 
 
 Note that the robot arm must be in its default position, i.e. standing upright, to perform Pose Estimation. This is done by simply clicking the `Reset Robot Position` button after each run.

@@ -203,7 +203,7 @@ Also note that the UI elements have been provided in `ROSObjects/Canvas`, includ
 
 Then, run the following roslaunch in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service and Pose Estimation nodes, and launch MoveIt.
 
-1. In the terminal window of your ROS workspace opened in [Step 2](#step-3), run the provided launch file:
+1. In the terminal window of your ROS workspace opened in [Set up the ROS side](#step-3), run the provided launch file:
 
 ```bash
 roslaunch ur3_moveit pose_est.launch 

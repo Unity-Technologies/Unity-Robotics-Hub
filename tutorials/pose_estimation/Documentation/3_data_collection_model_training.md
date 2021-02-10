@@ -13,8 +13,8 @@ In this phase, we will be collecting a large dataset of RGB images of the scene,
 Steps included in this phase of the tutorial:
 
 **Table of Contents**
-  - [Collect the Training and Validation Data](#step-1-collect-the-training-and-validation-data)
-  - [Train the Deep Learning Model](#step-2-train-the-deep-learning-model)
+  - [Collect the Training and Validation Data](#step-1)
+  - [Train the Deep Learning Model](#step-2)
   - [Exercises for the Reader](#exercises-for-the-reader)
 
 ---
