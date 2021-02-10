@@ -7,6 +7,8 @@ variables:
     PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
 commands:
     - git submodule update --init --recursive
+      # TODO: Fix this hack - our bokken image is missing a .NET dependency (System.CodeDom) without which causes compilation to fail
+    - rm ./tutorials/pick_and_place/PickAndPlaceProject/Assets/DemoScripts/Demo.*
     - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
     - unity-downloader-cli -u 2020.2.0b9 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
     - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
