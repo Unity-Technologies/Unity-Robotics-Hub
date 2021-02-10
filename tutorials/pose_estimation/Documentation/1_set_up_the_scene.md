@@ -63,16 +63,15 @@ Installing the different packages may take some time (few minutes).
 
 
 #### Install Dependencies
-Install the following packages with the provided git URLs:
+1. Install the following packages with the provided git URLs:
+* [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
+  * This will help us collect training data for our machine learning model. 
 
-1. [Perception package](https://github.com/Unity-Technologies/com.unity.perception) - `com.unity.perception@0.7.0-preview.1`
-    * This will help us collect training data for our machine learning model. 
+* [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
+  * This package will help us import a robot into our scene from a file in the [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
 
-2. [URDF Importer package](https://github.com/Unity-Technologies/URDF-Importer) - `https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2`
-    * This package will help us import a robot into our scene from a file in the [Unified Robot Description Format (URDF)](http://wiki.ros.org/urdf).
-
-3. [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
-    * This package will enable a connection between ROS and Unity. 
+* [TCP Connector package](https://github.com/Unity-Technologies/ROS-TCP-Connector) - `https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2`
+  * This package will enable a connection between ROS and Unity. 
 
 >Note: If you encounter a Package Manager issue, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
@@ -155,7 +154,7 @@ For your convenience, we have provided prefabs for most of the components of the
 <img src="Gifs/1_import_prefabs.gif"/>
 </p>
 
-**Note**: If you encounter an issue with the imported prefab materials, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If you encounter an issue with the imported prefab materials, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 
 #### Importing the Robot
@@ -163,15 +162,15 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 
 8. In the _**Project**_ tab, go to `Assets > TutorialAssets > URDFs > ur3_with_gripper` and right click on the `ur3_with_gripper.urdf` file and select `Import Robot From Selected URDF file`. A window will pop up, keep the default **Y Axis** type in the Import menu and the **Mesh Decomposer** to `VHACD`. Then, click Import URDF. These set of actions are showed in the following video. 
 
-**Note**: Unity uses a "left handed" coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
+>Note: Unity uses a "left handed" coordinate system in which the y-axis points up. However, many robotics packages use a right-handed coordinate system in which the z-axis or x-axis points up. For this reason, it is important to pay attention to the coordinate system when importing URDF files or interfacing with other robotics software.
 
-**Note**: VHACD algorithm produces higher quality convex hull for collision detection than the default algorithm.
+>Note: VHACD algorithm produces higher quality convex hull for collision detection than the default algorithm.
 
 <p align="center">
 <img src="Gifs/1_URDF_importer.gif" width=800 height=548/>
 </p>
 
-**Note**: If you encounter an issue with importing the robot, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
+>Note: If you encounter an issue with importing the robot, check the [Troubleshooting Guide](troubleshooting.md) for potential solutions.
 
 #### Setting up the Robot
 
