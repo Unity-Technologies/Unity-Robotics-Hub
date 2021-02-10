@@ -30,7 +30,7 @@ You need to have a fixed aspect ratio so that you are sure to have the same size
 <img src="Gifs/2_aspect_ratio.gif"/>
 </p>
 
-We need to add a few components to our camera in order to equip it for the synthetic-data-generation. 
+We need to add a few components to our camera in order to equip it for synthetic data generation. 
 
 2. Select the `Main Camera` GameObject in the _**Hierarchy**_ tab and in the _**Inspector**_ tab, click on _**Add Component**_.
 
