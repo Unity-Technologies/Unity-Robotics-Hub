@@ -70,7 +70,7 @@ Now that you have created your label configuration, we need to assign them to th
 The `Perception Camera` component will now look like the image below:
 
 <p align="center">
-<img src="Images/2_final_perception_script.png" height=250/>
+<img src="Images/2_final_perception_script.png" height=450/>
 </p>
 
 Now we need to assign the same `IdLabelConfig` object to the cube, since it is the pose of the cube we wish to collect. 
