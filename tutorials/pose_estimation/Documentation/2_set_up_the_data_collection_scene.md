@@ -7,7 +7,7 @@ In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned:
 * How to instantiate Game Objects with Prefabs
 * How to import a robot from a URDF file  
     
-You should now have a table, cube, camera, and working robot arm in your scene. In this part we will prepare the scene for data collection with the Perception package. 
+You should now have a table, a cube, a camera, and a robot arm in your scene. In this part we will prepare the scene for data collection with the Perception package. 
 
 <p align="center">
 <img src="Images/2_Pose_Estimation_Data_Collection.png" width="680" height="520"/>

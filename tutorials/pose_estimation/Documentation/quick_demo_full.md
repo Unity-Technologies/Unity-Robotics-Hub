@@ -104,8 +104,6 @@ The ROS workspace is now ready to accept commands!
 <img src="Images/4_ros_settings.png" width="500"/>
 </p>
 
-Opening the ROS Settings has created a ROSConnectionPrefab in `Assets/Resources` with the user-input settings. When the static `ROSConnection.instance` is referenced in a script, if a `ROSConnection` instance is not already present, the prefab will be instantiated in the Unity scene, and the connection will begin.
-
 #### Switching to Inference Mode
 
 The completed project is set up for data collection by default, so we must switch it to inference mode.
