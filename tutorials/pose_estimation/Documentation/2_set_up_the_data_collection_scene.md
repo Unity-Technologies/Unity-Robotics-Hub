@@ -22,7 +22,7 @@ You should now have a table, cube, camera, and working robot arm in your scene. 
 
 ### <a name="step-1">Step 1: Equipping the Camera for Data Collection</a>
 
-We need to have a fixed aspect ratio so that you are sure to have the same size of images we have when you collect the data. 
+You need to have a fixed aspect ratio so that you are sure to have the same size of images you have when you collect the data. This matters as we have trained our Deep Learning model on it and during the pick-and-place task we will take a screenshot of the game view to feed to the model. This screenshot needs to also have the same resolution than the images collected during the training. 
 * **Action**: Select the `Game` view and select `Free Aspect`. Then select the **+**, with the message `Add new item` on it if you put your mouse over the + sign. For the Width select `650` and for the Height select `400`. A gif below shows you how to do it. 
 
 <p align="center">
