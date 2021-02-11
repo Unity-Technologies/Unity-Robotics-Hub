@@ -1,6 +1,6 @@
 # Pick-and-Place with Pose Estimation: Quick Demo
 
-_Expected completion time: 25-35 minutes_
+⌛ _Expected completion time: 25-35 minutes_
 
 If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning-based perception. To learn how to build something like this from scratch, see our [full tutorial](1_set_up_the_scene.md).
 
