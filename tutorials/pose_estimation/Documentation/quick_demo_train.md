@@ -1,6 +1,16 @@
 # Data Collection: Quick Demo
 
-## <a name="reqs">Requirements</a>
+If you just want to run the completed project in order to collect your training and validation data this section can help do it. 
+
+To learn how to build something like this from scratch, see [Part 1](1_set_up_the_scene.md) and [Part 2](2_set_up_the_data_collection_scene.md) of our tutorial.
+
+**Table of Contents**
+- [Prerequisites](#Prerequisites)
+- [Setup](#setup)
+- [Swichting to Data Collection Mode](#switch)
+- [Data Collection](#data-collection)
+
+## <a name="reqs">Prerequisites</a>
 
 To follow this tutorial you need to **clone** this repository even if you want to create your Unity project from scratch. 
 
@@ -27,9 +37,17 @@ git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 <img src="Gifs/2_aspect_ratio.gif"/>
 </p>
 
+## <a name="switch">Switching to Data Collection Mode</a>
+The completed project is set up for inference mode by default, so we must switch it to data collection mode.
+
+1. Uncheck the `ROSObjects` GameObject in the _**Hierarchy**_ tab to disable it.
+
+2. On the `Simulation Scenario` GameObject, check the `Fixed Length Scenario` component to enable it.
+
+3. On the `Main Camera` GameObject, check the `Perception Camera (Script)` component to enable it.
+
 ## <a name="data-collection">Data Collection</a>
-The project is set up for data collection by default, so you can get started without too much work. To see how,
-follow the instructions in [Part 3: Collect the Training and Validation Data](3_data_collection_model_training.md#step-1) of the tutorial. This section will explain how to set the random seed of the environment, choose how many training data examples you'd like to collect, and get it running. 
+To get strarted with the data collection, follow the instructions in [Part 3: Collect the Training and Validation Data](3_data_collection_model_training.md#step-1) of the tutorial. This section will explain how to set the random seed of the environment, choose how many training data examples you'd like to collect, and get it running. 
 
 If you'd like to then move on to training a pose estimation model on the data you've collected, move on to [Part 3: Train the Deep Learning Model](3_data_collection_model_training.md#step-2). 
 
