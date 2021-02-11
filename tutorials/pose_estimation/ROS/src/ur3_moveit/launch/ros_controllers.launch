@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find ur3_moveit)/config/ros_controllers.yaml" command="load"/>
+<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <rosparam param="/source_list"> [/arm_controller/joint_states] </rosparam>
+</node>
+  <!-- Load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args=""/>
+
+</launch>

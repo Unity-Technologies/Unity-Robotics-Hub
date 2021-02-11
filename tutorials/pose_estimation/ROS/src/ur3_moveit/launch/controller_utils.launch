@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Robot state publisher -->
+<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+<param name="publish_frequency" type="double" value="50.0" />
+<rosparam param="/source_list"> [/arm_controller/joint_states] </rosparam>
+</node>
+
+  <!-- Fake Calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+  
+  <!-- joint_state_controller -->
+  <rosparam file="$(find ur3_moveit)/controllers/joint_state_controller.yaml" command="load"/>
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+  
+</launch>

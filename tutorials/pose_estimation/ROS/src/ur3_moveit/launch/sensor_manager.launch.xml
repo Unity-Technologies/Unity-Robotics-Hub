@@ -1,0 +1,17 @@
+<launch>
+
+  <!-- This file makes it easy to include the settings for sensor managers -->
+
+  <!-- Params for 3D sensors config -->
+  <rosparam command="load" file="$(find ur3_moveit)/config/sensors_3d.yaml" />
+
+  <!-- Params for the octomap monitor -->
+  <!--  <param name="octomap_frame" type="string" value="some frame in which the robot moves" /> -->
+  <param name="octomap_resolution" type="double" value="0.025" />
+  <param name="max_range" type="double" value="5.0" />
+
+  <!-- Load the robot specific sensor manager; this sets the moveit_sensor_manager ROS parameter -->
+  <arg name="moveit_sensor_manager" default="ur3_with_gripper" />
+  <include file="$(find ur3_moveit)/launch/$(arg moveit_sensor_manager)_moveit_sensor_manager.launch.xml" />
+
+</launch>
