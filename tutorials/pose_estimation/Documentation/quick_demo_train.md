@@ -40,9 +40,11 @@ git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ## <a name="switch">Switching to Data Collection Mode</a>
 The completed project is set up for inference mode by default, so we must switch it to data collection mode.
 
-1. On the `Simulation Scenario` GameObject, check the `Fixed Length Scenario` component to enable it.
+1. Click on the `ROSObjects` GameObject in the _**Hierarchy**_ tab and in the _**Inspector**_ view uncheck the GameObject.
 
-2. On the `Main Camera` GameObject, check the `Perception Camera (Script)` component to enable it.
+2. On the `Simulation Scenario` GameObject, check the `Fixed Length Scenario` component to enable it.
+
+3. On the `Main Camera` GameObject, check the `Perception Camera (Script)` component to enable it.
 
 ## <a name="data-collection">Data Collection</a>
 To get strarted with the data collection, follow the instructions in [Part 3: Collect the Training and Validation Data](3_data_collection_model_training.md#step-1) of the tutorial. This section will explain how to set the random seed of the environment, choose how many training data examples you'd like to collect, and get it running. 
