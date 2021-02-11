@@ -8,7 +8,9 @@
   - [Part 3: Data Collection and model training](#part-3-data-collection-and-model-training)
     - [Docker, Environment](#docker-environment)
   - [Part 4: Pick-and-Place](#part-4-pick-and-place)
+    - [Unity Scene](#unity-scene)
     - [Docker, ROS-TCP Connection](#docker-ros-tcp-connection)
+    - [Ubuntu](#ubuntu)
 
 ## Part 1: Create Unity scene with imported URDF
 
@@ -44,22 +46,26 @@
 
 ### Docker, Environment
 - If you are using a Docker container to train your model but it is killed shortly after starting, you may need to increase the memory allocated to Docker. In the Docker Dashboard, navigate to Settings (via the gear icon) > Resources. The suggested minimum memory is 4.00 GB, but you may need to modify this for your particular needs.
-- If you encounter errors installing Pytorch via the above `pip3` command, try the following instead:
+- If you encounter errors installing Pytorch via the instructed `pip3` command, try the following instead:
   ```bash 
   sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
   ```
 
 ## Part 4: Pick-and-Place
 
-### Docker, ROS-TCP Connection
+### Unity Scene
 - The buttons might appear oversized compared to the rest of the objects in the scene view, this is a normal behavior. If you zoom out from the table you should see something similar to the following: 
 <p align="center">
 <img src="Images/button_error.png" align="center" width=950/>
 </p>
 
+### Docker, ROS-TCP Connection
 - Building the Docker image may throw an `Could not find a package configuration file provided by...` exception if one or more of the directories in ROS/ appears empty. Ensure you have run the `submodule.sh` script to populate the ROS packages.
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade packages.
 - `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?` The system-independent `docker info` command can verify whether or not Docker is running. This command will throw a `Server: ERROR` if the Docker daemon is not currently running, and will print the appropriate [system-wide information](https://docs.docker.com/engine/reference/commandline/info/) otherwise. 
 - Occasionally, not having enough memory allocated to the Docker container can cause the `server_endpoint` to fail. This may cause unexpected behavior during the pick-and-place task, such as constantly predicting the same pose. If this occurs, check your Docker settings. You may need to increase the `Memory` to 8GB. 
   - This can be found in Docker Desktop settings, under the gear icon. 
 - `Exception Raised: unpack requires a buffer of 4 bytes`: This may be caused by a mismatch in the expected Service Request formatting. Ensure that the [srv definition](../ROS/src/ur3_moveit/srv/MoverService.srv) matches the [generated C# script](../PoseEstimationDemoProject/Assets/TutorialAssets/RosMessages/Ur3Moveit/srv/MoverServiceRequest.cs), and that you have not modified these files since the last push to your ROS workspace.
+
+### Ubuntu
+- Running Unity and Docker on Ubuntu may throw a `System.Net.SocketException: Address already in use` error when using the loopback address. If this is the case, in your Unity Editor, under Robotics > ROS Settings, leave the `Override Unity IP Address` blank to let Unity automatically determine the address. Change the `ROS IP Address` to the IP of your Docker container, most likely `172.17.0.X`. You may need to modify these settings based on your unique network setup.
