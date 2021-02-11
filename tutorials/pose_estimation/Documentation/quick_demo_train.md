@@ -40,7 +40,7 @@ git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ## <a name="switch">Switching to Data Collection Mode</a>
 The completed project is set up for inference mode by default, so we must switch it to data collection mode.
 
-1. Click on the `ROSObjects` GameObject in the _**Hierarchy**_ tab and in the _**Inspector**_ view uncheck the GameObject.
+1. Uncheck the `ROSObjects` GameObject in the _**Hierarchy**_ tab to disable it.
 
 2. On the `Simulation Scenario` GameObject, check the `Fixed Length Scenario` component to enable it.
 
