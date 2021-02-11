@@ -1,5 +1,7 @@
 # Pick-and-Place with Pose Estimation: Quick Demo
 
+⌛ _Expected completion time: 25-35 minutes_
+
 If you just want to run the completed project, this section can help you get up and running quickly. Here, we provide a pre-trained pose estimation model for you to use, and assume a Docker workflow. By the end of this quick demo, you will be able to perform pick & place in Unity with machine learning-based perception. To learn how to build something like this from scratch, see our [full tutorial](1_set_up_the_scene.md).
 
 **Table of Contents**
@@ -36,7 +38,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 ## <a name='setup'>Setup</a>
 
-1. Open the completed project. In the Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from inside the file location where you cloned this repo. 
+1. Open the completed project. In the Unity Hub, click the `Add` button, and select `tutorials/pose_estimation/PoseEstimationDemoProject` from inside the file location where you cloned this repo. 
 
 2. Open the scene. Go to `Assets > Scenes` and double click on `TutorialPoseEstimation`. 
 
@@ -96,7 +98,7 @@ The ROS workspace is now ready to accept commands!
 
 ## Set up the Unity side
 
-1. Fill `ROS IP Address` and `Override Unity IP` with the loopback IP address `127.0.0.1`. 
+1. At the top of your screen, open the ROS settings by selecting `Robotics` > `ROS Settings`. Fill `ROS IP Address` and `Override Unity IP` with the loopback IP address `127.0.0.1`. 
 
 2. Ensure that the ROS Port is set to `10000` and the Unity Port is set to `5005`. You can leave the Show HUD box unchecked. This HUD can be helpful for debugging message and service requests with ROS. You may turn this on if you encounter connection issues.
 
@@ -114,9 +116,9 @@ Run the following `roslaunch` command in order to start roscore, set the ROS par
 roslaunch ur3_moveit pose_est.launch 
 ```
 
-This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot (`gazebo.launch`). The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
+This launch file also loads all relevant files and starts ROS nodes required for trajectory planning for the UR3 robot. The launch files for this project are available in the package's launch directory, i.e. `src/ur3_moveit/launch/`. 
 
-This launch will print various messages to the console, including the set parameters and the nodes launched. The final two messages should confirm `You can start planning now!`.
+This launch will print various messages to the console, including the set parameters and the nodes launched. The final message should confirm `You can start planning now!`.
 
 >Note: The launch file may throw errors regarding `[controller_spawner-5] process has died`. These are safe to ignore as long as the final message is `Ready to plan`. This confirmation may take up to a minute to appear.
 
