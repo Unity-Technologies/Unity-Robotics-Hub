@@ -2,7 +2,7 @@
 
 In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned:
 * How to create a Unity Scene
-* How to use Unity's Package Manager to download packages
+* How to use the Package Manager to download and install Unity packages
 * How to move and rotate objects in the scene
 * How to instantiate Game Objects with Prefabs
 * How to import a robot from a URDF file  
