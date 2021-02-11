@@ -1,17 +1,18 @@
 # Pose-Estimation-Demo Tutorial: Troubleshooting
 
 **Table of Contents**
-  - [Phase 1: Create Unity scene with imported URDF](#phase-1-create-unity-scene-with-imported-urdf)
+  - [Part 1: Create Unity scene with imported URDF](#part-1-create-unity-scene-with-imported-urdf)
     - [Package Installation](#package-installation)
     - [Assets, Materials](#assets-materials)
     - [URDF Importer](#urdf-importer)
-  - [Phase 3: Data Collection and model training](#phase-3-data-collection-and-model-training)
+  - [Part 3: Data Collection and model training](#part-3-data-collection-and-model-training)
     - [Docker, Environment](#docker-environment)
-  - [Phase 4: Pick-and-Place](#phase-4-pick-and-place)
-    - [Unity](#unity)
+  - [Part 4: Pick-and-Place](#part-4-pick-and-place)
+    - [Unity Scene](#unity-scene)
     - [Docker, ROS-TCP Connection](#docker-ros-tcp-connection)
+    - [Ubuntu](#ubuntu)
 
-## Phase 1: Create Unity scene with imported URDF
+## Part 1: Create Unity scene with imported URDF
 
 ### Package Installation
 - If you are receiving a `[Package Manager Window] Unable to add package ... xcrun: error: invalid developer path...`, you may need to install the [Command Line Tools](https://developer.apple.com/library/archive/technotes/tn2339/_index.html) package for macOS via `xcode-select --install`.
@@ -41,7 +42,7 @@
 
   **Note**: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate.
 
-## Phase 3: Data Collection and model training
+## Part 3: Data Collection and model training
 
 ### Docker, Environment
 - If you are using a Docker container to train your model but it is killed shortly after starting, you may need to increase the memory allocated to Docker. In the Docker Dashboard, navigate to Settings (via the gear icon) > Resources. The suggested minimum memory is 4.00 GB, but you may need to modify this for your particular needs.
@@ -50,9 +51,10 @@
   sudo pip3 install rospkg numpy jsonpickle scipy easydict torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
   ```
 
-## Phase 4: Pick-and-Place
-### Unity
-- The buttons might appear oversized compared to the rest of the objects in the scene view. This is the expected behavior with a Unity Canvas set as an Overlay (the default). If you zoom out from the table you should see something similar to the following: 
+## Part 4: Pick-and-Place
+
+### Unity Scene
+- The buttons might appear oversized compared to the rest of the objects in the scene view, this is a normal behavior. If you zoom out from the table you should see something similar to the following: 
 <p align="center">
 <img src="Images/button_error.png" align="center" width=950/>
 </p>
@@ -64,4 +66,6 @@
 - Occasionally, not having enough memory allocated to the Docker container can cause the `server_endpoint` to fail. This may cause unexpected behavior during the pick-and-place task, such as constantly predicting the same pose. If this occurs, check your Docker settings. You may need to increase the `Memory` to 8GB. 
   - This can be found in Docker Desktop settings, under the gear icon. 
 - `Exception Raised: unpack requires a buffer of 4 bytes`: This may be caused by a mismatch in the expected Service Request formatting. Ensure that the [srv definition](../ROS/src/ur3_moveit/srv/MoverService.srv) matches the [generated C# script](../PoseEstimationDemoProject/Assets/TutorialAssets/RosMessages/Ur3Moveit/srv/MoverServiceRequest.cs), and that you have not modified these files since the last push to your ROS workspace.
-- Running Unity and Docker on Ubuntu may throw a `System.Net.SocketException: Address already in use` error when using the loopback address. If this is the case, in your Unity Robotics > ROS Settings, leave the `Override Unity IP Address` blank to let Unity automatically determine the address. Change the `ROS IP Address` to the IP of your Docker container, most likely `172.17.0.X`. You may need to modify these settings based on your network setup.
+
+### Ubuntu
+- Running Unity and Docker on Ubuntu may throw a `System.Net.SocketException: Address already in use` error when using the loopback address. If this is the case, in your Unity Editor, under Robotics > ROS Settings, leave the `Override Unity IP Address` blank to let Unity automatically determine the address. Change the `ROS IP Address` to the IP of your Docker container, most likely `172.17.0.X`. You may need to modify these settings based on your unique network setup.
