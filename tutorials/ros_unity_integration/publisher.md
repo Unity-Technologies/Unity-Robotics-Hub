@@ -39,7 +39,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 ```csharp
 using RosMessageTypes.RoboticsDemo;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Unity.Robotics.ROSTCPConnector;
 
 /// <summary>
 /// 
@@ -49,14 +49,14 @@ public class RosPublisherExample : MonoBehaviour
     ROSConnection ros;
     public string topicName = "pos_rot";
 
-    // The GameObject 
+    // The game object 
     public GameObject cube;
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.5f;
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
-
+    
     void Start()
     {
         // start the ROS connection
