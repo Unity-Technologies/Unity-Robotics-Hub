@@ -39,10 +39,9 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
     - **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
 
 ```csharp
-using System;
 using RosMessageTypes.RoboticsDemo;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Unity.Robotics.ROSTCPConnector;
 
 public class RosServiceExample : MonoBehaviour
 {
