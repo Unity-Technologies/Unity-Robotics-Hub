@@ -198,3 +198,7 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 - If the robot moves to the incorrect location, or executes the poses in an expected order, verify that the shoulder_link (i.e. `niryo_one/world/base_link/shoulder_link`) X Drive Force Limit is `5`.
 
 - Before entering Play mode in the Unity Editor, ensure that all ROS processes are still running. The `server_endpoint` node may time out and will need to be re-run.
+
+---
+
+#### Proceed to [Part 4](4_pick_and_place.md).
