@@ -295,6 +295,12 @@ void Start()
 ## Setting Up The Unity Scene
 1. In Unity, Select Robotics -> ROS Settings from the top menu bar and update the ROS IP Address to that of the Niryo One.
 
+1. Select "Robotics/Generate ROS Messages..." from the menu and build the messages you will need - Build the contents of the moveit_msgs/msg folder, the niryo_one_ros/niryo_one_msgs/action folder and the niryo_one_ros/niryo_one_msgs/msg folder.
+
+    ![](img/4_build_niryo_msgs.png)
+
+1. Find PATH/TO/Unity-Robotics-Hub/tutorials/pick_and_place/Scripts_Part4 and copy into your project's Assets folder.
+
 1. Select the Publisher GameObject and add the `RealSimPickAndPlace` script as a component.
 
 1. Note that the RealSimPickAndPlace component shows its member variables in the Inspector window, which need to be assigned. 
