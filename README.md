@@ -19,10 +19,6 @@ Brief steps on installing the Unity Robotics packages.
 
 A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
 
-### [**New**][Pose Estimation Demo](tutorials/pose_estimation/README.md)
-
-A complete end-to-end demonstration, in which we collect training data in Unity, and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
-
 ### [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 
 A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
