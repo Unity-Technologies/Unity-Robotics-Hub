@@ -56,7 +56,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 
 ## Unity Scene
 1. Launch Unity and create a new scene.
-2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
+2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
 ![](images/add_package.png)
 
