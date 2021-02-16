@@ -1,4 +1,4 @@
-# Pose Estimation Demo: Part 1
+# Object Pose Estimation Demo: Part 1
 
 In this first part of the tutorial, we will start by downloading and installing the Unity Editor. We will install our project's dependencies: the Perception, URDF, and TCP Connector packages. We will then use a set of provided prefabs to easily prepare a simulated environment containing a table, a cube, and a working robot arm. 
 
@@ -24,9 +24,9 @@ To follow this tutorial you need to **clone** this repository even if you want t
 git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 ```
 
-Then we need to be in the `Unity-Robotics-Hub/tutorials/pose_estimation` folder and generate the contents of the `universal_robot`, `moveit_msgs`, `ros_tcp_endpoint`, and the `robotiq` folders. 
+Then we need to be in the `Unity-Robotics-Hub/tutorials/object_pose_estimation` folder and generate the contents of the `universal_robot`, `moveit_msgs`, `ros_tcp_endpoint`, and the `robotiq` folders. 
 ```bash
-cd Unity-Robotics-Hub/tutorials/pose_estimation
+cd Unity-Robotics-Hub/tutorials/object_pose_estimation
 ./submodule.sh
 ```
 

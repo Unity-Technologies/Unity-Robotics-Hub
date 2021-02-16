@@ -1,4 +1,4 @@
-# Pose Estimation Demo: Part 3
+# Object Pose Estimation Demo: Part 3
 
 In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor.
 
@@ -60,7 +60,7 @@ Now its time to train our deep learning model! We've provided the model training
 
 This step can take a long time if your computer doesn't have GPU support (~5 days on CPU). Even with a GPU, it can take around ~10 hours. We have provided an already trained model as an alternative to waiting for training to complete. If you would like to use this provided model, you can proceed to [Part 4](4_pick_and_place.md).
 
-1. Navigate to the `tutorials/pose_estimation/Model` directory.
+1. Navigate to the `tutorials/object_pose_estimation/Model` directory.
 
 ### Requirements
 
@@ -110,7 +110,7 @@ log_dir_system: /Users/jonathan.leban/Documents/models
 ### Training the model
 Now its time to train our deep learning model!
 
-6. If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there. 
+6. If you are not already in the `tutorials/object_pose_estimation/Model` directory, navigate there. 
 
 7. Enter the following command to start training: 
 ```bash 
@@ -131,7 +131,7 @@ However, first we need to specify a few settings in our config file.
 
 8. In [config.yaml](../Model/config.yaml), under `checkpoint`, you need to set the argument `log_dir_checkpoint` to the path where you have saved your newly trained model.
 
-9. If you are not already in the `tutorials/pose_estimation/Model` directory, navigate there.
+9. If you are not already in the `tutorials/object_pose_estimation/Model` directory, navigate there.
 
 10. To start the evaluation run, enter the following command: 
 ```bash 

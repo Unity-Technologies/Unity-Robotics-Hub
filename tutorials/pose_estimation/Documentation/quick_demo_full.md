@@ -1,4 +1,4 @@
-# Pick-and-Place with Pose Estimation: Quick Demo
+# Pick-and-Place with Object Pose Estimation: Quick Demo
 
 ⌛ _Expected completion time: 25-35 minutes_
 
@@ -30,7 +30,7 @@ Three package dependencies for this project, [Universal Robot](https://github.co
 
 2. Still in the same terminal, run:
 ```bash
-cd Unity-Robotics-Hub/tutorials/pose_estimation
+cd Unity-Robotics-Hub/tutorials/object_pose_estimation
 ./submodule.sh 
 ```
 
@@ -38,7 +38,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 ## <a name='setup'>Setup</a>
 
-1. Open the completed project. In the Unity Hub, click the `Add` button, and select `tutorials/pose_estimation/PoseEstimationDemoProject` from inside the file location where you cloned this repo. 
+1. Open the completed project. In the Unity Hub, click the `Add` button, and select `tutorials/object_pose_estimation/PoseEstimationDemoProject` from inside the file location where you cloned this repo. 
 
 2. Open the scene. Go to `Assets > Scenes` and double click on `TutorialPoseEstimation`. 
 
@@ -50,7 +50,7 @@ cd Unity-Robotics-Hub/tutorials/pose_estimation
 
 ## Add the Pose Estimation Model
 
-In your `pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
+In your `object_pose_estimation` folder, you should have a `ROS` folder. Inside that folder you should have a `src` folder and inside that one 5 folders: `moveit_msgs`, `robotiq`, `ros_tcp_endpoint`, `universal_robot` and `ur3_moveit`. 
 
 1. Download the [pose estimation model](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases/download/Pose-Estimation/UR3_single_cube_model.tar) we have trained.
 
@@ -69,7 +69,7 @@ We have provided a Docker container to get you up and running quickly.
 <img src="Images/4_docker_daemon.png" height=400/>
 </p>
 
-2. In the terminal, ensure the current location is at the root of the `pose_estimation` directory. Build the provided ROS Docker image as follows:
+2. In the terminal, ensure the current location is at the root of the `object_pose_estimation` directory. Build the provided ROS Docker image as follows:
 
 ```bash
 docker build -t unity-robotics:pose-estimation -f docker/Dockerfile .
