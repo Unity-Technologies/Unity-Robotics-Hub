@@ -1,4 +1,4 @@
-# Object Pose Estimation Demo: Part 3
+# Object Pose Estimation Tutorial: Part 3
 
 In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned how to create our scene in the Unity editor.
 
