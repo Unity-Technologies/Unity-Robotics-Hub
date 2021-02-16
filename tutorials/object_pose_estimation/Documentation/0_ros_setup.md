@@ -1,4 +1,4 @@
-# Object Pose Estimation Demo Tutorial: Part 0
+# Object Pose Estimation Tutorial: Part 0
 
 This page provides steps on how to manually set up a catkin workspace for the Pose Estimation tutorial.
 
