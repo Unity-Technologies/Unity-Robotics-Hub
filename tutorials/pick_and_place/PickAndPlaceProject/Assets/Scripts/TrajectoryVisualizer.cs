@@ -25,6 +25,7 @@ public class TrajectoryVisualizer : IMessageVisualizer<MoverServiceRequest>
 
     public void End()
     {
+        drawing.Destroy();
     }
 
     public void OnGUI()
