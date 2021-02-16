@@ -140,7 +140,7 @@ Your `Assets` folder should like this:
 </p>
 
 #### Using Prefabs
-Unity’s [Prefab](https://docs.unity3d.com/Manual/Prefabs.html) system allows you to create, configure, and store a **GameObject** complete with all its components, property values, and child **GameObjects** as a reusable **Asset**. It is a convenient way to store complex objects. 
+Unity’s [Prefab](https://docs.unity3d.com/2020.2/Documentation/Manual/Prefabs.html) system allows you to create, configure, and store a **GameObject** complete with all its components, property values, and child **GameObjects** as a reusable **Asset**. It is a convenient way to store complex objects. 
 
 A prefab is just a file, and you can easily create an instance of the object in the scene from a prefab by dragging it into the _**Hierarchy panel**_.
 

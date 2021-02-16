@@ -55,7 +55,7 @@ Here you have two options for the model:
 
 #### Moving the Model to the ROS Folder
 
-3. Go inside the `ROS/SRC/ur3_moveit` folder and create a folder called `models`. Then copy your model file (.tar) into it.
+3. Go inside the `ROS/src/ur3_moveit` folder and create a folder called `models`. Then copy your model file (.tar) into it.
 
 ### <a name="step-3">Set up the ROS side</a>
 
@@ -232,7 +232,7 @@ Note that the robot arm must be in its default position, i.e. standing upright, 
 
 3. Press the `Pose Estimation` button to send the image to ROS. 
 
-This will grab the current camera view, generate a [sensor_msgs/Image](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html) message, and send a new Pose Estimation Service Response to the ROS node running `pose_estimation_service.py`. This will run the trained model and return a Pose Estimation Service Response containing an estimated pose, which is subsequently converted and sent as a new Mover Service Response to the `mover.py` ROS node. Finally, MoveIt calculates and returns a list of trajectories to Unity, and the poses are executed to pick up and place the cube.
+This will grab the current camera view, generate a [sensor_msgs/Image](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html) message, and send a new Pose Estimation Service Request to the ROS node running `pose_estimation_service.py`. This will run the trained model and return a Pose Estimation Service Response containing an estimated pose, which is subsequently converted and sent as a new Mover Service Response to the `mover.py` ROS node. Finally, MoveIt calculates and returns a list of trajectories to Unity, and the poses are executed to pick up and place the cube.
 
 The target object and empty goal object can be moved around during runtime for different trajectory calculations, or can be randomized using the `Randomize Cube` button. 
 
