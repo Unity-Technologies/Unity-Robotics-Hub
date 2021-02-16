@@ -1,4 +1,4 @@
-# Object Pose Estimation Demo: Part 2
+# Object Pose Estimation Tutorial: Part 2
 
 In [Part 1](1_set_up_the_scene.md) of the tutorial, we learned:
 * How to create a Unity Scene
