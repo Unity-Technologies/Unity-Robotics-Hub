@@ -1,4 +1,4 @@
-# Object Pose Estimation Demo: Part 1
+# Object Pose Estimation Tutorial: Part 1
 
 In this first part of the tutorial, we will start by downloading and installing the Unity Editor. We will install our project's dependencies: the Perception, URDF, and TCP Connector packages. We will then use a set of provided prefabs to easily prepare a simulated environment containing a table, a cube, and a working robot arm. 
 
@@ -185,5 +185,4 @@ Finally we will add the robot and the URDF files in order to import the UR3 Robo
 
 
 ### Proceed to [Part 2](2_set_up_the_data_collection_scene.md).
-
 
