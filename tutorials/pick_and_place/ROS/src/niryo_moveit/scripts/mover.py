@@ -87,28 +87,41 @@ def plan_pick_and_place(req):
 
     # Pre grasp - position gripper directly above target object
     pre_grasp_pose = plan_trajectory(move_group, req.pick_pose, current_robot_joint_configuration)
+    
+    # If the trajectory has no points, planning has failed and we return an empty response
+    if not pre_grasp_pose.joint_trajectory.points:
+        return response
 
     previous_ending_joint_angles = pre_grasp_pose.joint_trajectory.points[-1].positions
-    response.trajectories.append(pre_grasp_pose)
 
     # Grasp - lower gripper so that fingers are on either side of object
     pick_pose = copy.deepcopy(req.pick_pose)
     pick_pose.position.z -= 0.05  # Static value coming from Unity, TODO: pass along with request
     grasp_pose = plan_trajectory(move_group, pick_pose, previous_ending_joint_angles)
+    
+    if not grasp_pose.joint_trajectory.points:
+        return response
 
     previous_ending_joint_angles = grasp_pose.joint_trajectory.points[-1].positions
-    response.trajectories.append(grasp_pose)
 
     # Pick Up - raise gripper back to the pre grasp position
     pick_up_pose = plan_trajectory(move_group, req.pick_pose, previous_ending_joint_angles)
+    
+    if not pick_up_pose.joint_trajectory.points:
+        return response
 
     previous_ending_joint_angles = pick_up_pose.joint_trajectory.points[-1].positions
-    response.trajectories.append(pick_up_pose)
 
     # Place - move gripper to desired placement position
     place_pose = plan_trajectory(move_group, req.place_pose, previous_ending_joint_angles)
 
-    previous_ending_joint_angles = place_pose.joint_trajectory.points[-1].positions
+    if not place_pose.joint_trajectory.points:
+        return response
+
+    # If trajectory planning worked for all pick and place stages, add plan to response
+    response.trajectories.append(pre_grasp_pose)
+    response.trajectories.append(grasp_pose)
+    response.trajectories.append(pick_up_pose)
     response.trajectories.append(place_pose)
 
     move_group.clear_pose_targets()
