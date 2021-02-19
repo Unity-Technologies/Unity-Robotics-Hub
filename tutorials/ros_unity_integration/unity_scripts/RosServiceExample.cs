@@ -1,7 +1,6 @@
-using System;
 using RosMessageTypes.RoboticsDemo;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
+using Unity.Robotics.ROSTCPConnector;
 
 public class RosServiceExample : MonoBehaviour
 {

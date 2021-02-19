@@ -1,6 +1,6 @@
 using RosMessageTypes.RoboticsDemo;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Unity.Robotics.ROSTCPConnector;
 
 /// <summary>
 /// 
