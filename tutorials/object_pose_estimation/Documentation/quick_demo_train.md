@@ -25,7 +25,7 @@ git clone https://github.com/Unity-Technologies/Unity-Robotics-Hub.git
 
 2. [Install Unity `2020.2.*`.](install_unity.md)
 
-3. Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from the `Unity-Robotics-Hub/tutorials/pose_estimation/` folder. 
+3. Open the completed project. To do so, open Unity Hub, click the `Add` button, and select `PoseEstimationDemoProject` from the `Unity-Robotics-Hub/tutorials/object_pose_estimation/` folder. 
 
 ## <a name='setup'>Setup</a>
 
