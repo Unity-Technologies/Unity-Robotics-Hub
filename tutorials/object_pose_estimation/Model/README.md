@@ -1,4 +1,4 @@
-Pose Estimation Model
+Object Pose Estimation Model
 =====================
 This section contains code for training and evaluating a deep neural network to predict the pose of a single object from RGB images. We provide support for running both locally and with Docker.  
 
