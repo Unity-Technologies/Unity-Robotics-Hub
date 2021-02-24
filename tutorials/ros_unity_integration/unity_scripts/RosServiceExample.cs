@@ -33,7 +33,7 @@ public class RosServiceExample : MonoBehaviour
         {
             Debug.Log("Destination reached.");
 
-            PosRot cubePos = new PosRot(
+            MPosRot cubePos = new MPosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
@@ -43,15 +43,15 @@ public class RosServiceExample : MonoBehaviour
                 cube.transform.rotation.w
             );
 
-            PositionServiceRequest positionServiceRequest = new PositionServiceRequest(cubePos);
+            MPositionServiceRequest positionServiceRequest = new MPositionServiceRequest(cubePos);
 
             // Send message to ROS and return the response
-            ros.SendServiceMessage<PositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
+            ros.SendServiceMessage<MPositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
             awaitingResponseUntilTimestamp = Time.time+1.0f; // don't send again for 1 second, or until we receive a response
         }
     }
 
-    void Callback_Destination(PositionServiceResponse response)
+    void Callback_Destination(MPositionServiceResponse response)
     {
         awaitingResponseUntilTimestamp = -1;
         destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.pos_z);
