@@ -19,8 +19,6 @@
 	- Click `Import`
    
 ## Using the Controller
-- By default a robot imported using the URDF Importer is loaded without any constraints or controller.
-	- A controller is pre-built in Unity URDF Importer to help showcase the movement of robots in Unity.
 - To add the controller to an imported robot click the `Enable` button in the Inspector window in front of the `Controller Script` option. This will add a Controller Script, FKrobot and Joint Control at runtime. 
 - To prevent the joints from slipping set the `Stiffness` and `Damping` to `100,000` and `10,000` respectively.
 - To be able to apply forces to the joints set the `Force Limit` to `10,000`.
