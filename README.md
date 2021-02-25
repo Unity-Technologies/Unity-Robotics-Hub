@@ -2,6 +2,8 @@
 
 # Unity Robotics Hub
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
 > The contents of this repository are in active development. Its features and API are subject to significant change as development progresses.
@@ -10,15 +12,28 @@ This is a central repository for tools, tutorials, resources, and documentation 
 
 Simulation plays an important role in robotics development, and we’re here to ensure that roboticists can use Unity for these simulations. We're starting off with a set of tools to make it easier to use Unity with existing ROS-based workflows. Try out some of our samples below to get started quickly.
 
-## Getting Started with Unity Robotics
+## Getting Started
+### [Quick Installation Instructions](tutorials/quick_setup.md)
+
+Brief steps on installing the Unity Robotics packages.
+
+### [Pick-and-Place Demo](tutorials/pick_and_place/README.md)
+
+A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
+
+### [**New!**] [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Object-Pose-Estimation)
+
+A complete end-to-end demonstration, in which we collect training data in Unity, and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
+
+### [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
+
+A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
+## Documentation
 
 | Tutorial | Description |
 |---|---|
-| [Quick Installation Instructions](tutorials/quick_setup.md) | Brief steps on installing the Unity Robotics packages |
-| [Pick-and-Place Demo](tutorials/pick_and_place/README.md) | A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control |
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
 | [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files | 
-| [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo) | A robot simulation demonstrating Unity's new physics solver (no ROS dependency)
 
 
 ## Component Repos
@@ -35,6 +50,7 @@ Simulation plays an important role in robotics development, and we’re here to 
 
 ### Blog Posts and Talks
 
+- (March 2, 2021) Teaching robots to see with Unity [blog post]()
 - (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
 - (November 12, 2020)
 Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.unity.com/unitenow/onlinesessions/simulating-robots-with-ros-and-unity)
@@ -47,6 +63,7 @@ Use articulation bodies to easily prototype industrial designs with realistic mo
 
 - [Unity Industrial Simulation](https://unity.com/products/unity-simulation)
 - [Unity Computer Vision](https://unity.com/computer-vision)
+- [Unity ML-Agents Toolkit](https://github.com/Unity-Technologies/ml-agents)
 
 ## Coming Soon - New Physics Features in Unity!
 Here’s a peek into what our Physics Team is hard at work on…
