@@ -2,6 +2,7 @@ using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using RosMessageTypes.Geometry;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
@@ -51,7 +52,7 @@ public class SourceDestinationPublisher : MonoBehaviour
 
     public void Publish()
     {
-        NiryoMoveitJoints sourceDestinationMessage = new NiryoMoveitJoints();
+        MNiryoMoveitJoints sourceDestinationMessage = new MNiryoMoveitJoints();
 
         sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
         sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
@@ -61,14 +62,14 @@ public class SourceDestinationPublisher : MonoBehaviour
         sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
 
         // Pick Pose
-        sourceDestinationMessage.pick_pose = new RosMessageTypes.Geometry.Pose
+        sourceDestinationMessage.pick_pose = new MPose
         {
             position = target.transform.position.To<FLU>(),
             orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
-        sourceDestinationMessage.place_pose = new RosMessageTypes.Geometry.Pose
+        sourceDestinationMessage.place_pose = new MPose
         {
             position = targetPlacement.transform.position.To<FLU>(),
             orientation = pickOrientation.To<FLU>()

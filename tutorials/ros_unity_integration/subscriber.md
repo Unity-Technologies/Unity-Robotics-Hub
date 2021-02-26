@@ -34,7 +34,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 ```csharp
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosColor = RosMessageTypes.RoboticsDemo.UnityColor;
+using RosColor = RosMessageTypes.RoboticsDemo.MUnityColor;
 
 public class RosSubscriberExample : MonoBehaviour
 {
