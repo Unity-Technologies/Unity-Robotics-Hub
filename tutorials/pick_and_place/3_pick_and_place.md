@@ -31,11 +31,11 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     ```csharp
     public void PublishJoints()
     {
-        MoverServiceRequest request = new MoverServiceRequest();
+        MMoverServiceRequest request = new MMoverServiceRequest();
         request.joints_input = CurrentJointConfig();
         
         // Pick Pose
-        request.pick_pose = new RosMessageTypes.Geometry.Pose
+        request.pick_pose = new MPose
         {
             position = (target.transform.position + pickPoseOffset).To<FLU>(),
             // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
@@ -43,16 +43,16 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
         };
 
         // Place Pose
-        request.place_pose = new RosMessageTypes.Geometry.Pose
+        request.place_pose = new MPose
         {
             position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
             orientation = pickOrientation.To<FLU>()
         };
 
-        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
+        ros.SendServiceMessage<MMoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
     }
 
-    void TrajectoryResponse(MoverServiceResponse response)
+    void TrajectoryResponse(MMoverServiceResponse response)
     {
         if (response.trajectories != null)
         {
@@ -71,7 +71,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     > The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` and executed as a [coroutine](https://docs.unity3d.com/Manual/Coroutines.html):
 
     ```csharp
-    private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
+    private IEnumerator ExecuteTrajectories(MMoverServiceResponse response)
     {
         if (response.trajectories != null)
         {
