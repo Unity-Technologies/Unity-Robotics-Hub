@@ -47,7 +47,7 @@ public class RosServiceExample : MonoBehaviour
 
             // Send message to ROS and return the response
             ros.SendServiceMessage<MPositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
-            awaitingResponseUntilTimestamp = Time.time + 1.0f; // don't send again for 1 second, or until we receive a response
+            awaitingResponseUntilTimestamp = Time.time+1.0f; // don't send again for 1 second, or until we receive a response
         }
     }
 
