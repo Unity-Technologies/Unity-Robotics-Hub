@@ -23,7 +23,7 @@ A complete end-to-end demonstration, including how to set up the Unity environme
 
 ### [**New!**] [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Object-Pose-Estimation)
 
-A complete end-to-end demonstration, in which we collect training data in Unity, and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
+A complete end-to-end demonstration in which we collect training data in Unity and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
 
 ### [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 
@@ -40,8 +40,8 @@ A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
 
 | Repo | Functionality |
 |---|---|
-| [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) | ROS node for sending/receiving messages from Unity |
-| [TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) | Unity package for sending/receiving messages from ROS |
+| [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) | ROS node for sending/receiving messages from Unity |
+| [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) | Unity package for sending/receiving messages from ROS |
 | [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) | Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
 
 
@@ -73,6 +73,9 @@ Here’s a peek into what our Physics Team is hard at work on…
 - **Collision detection modes exposed for ArticulationBody: discrete, sweep-based ccd, and speculative ccd**. New continuous collision detection (ccd) modes will ensure that fast-moving objects collide with objects, instead of tunneling or passing through those objects, which can happen in the default “discrete” mode. [Read more about continuous collision detection](https://docs.unity3d.com/Manual/ContinuousCollisionDetection.html).
 - **Force/Torque Sensor API**. This API will allow users to get the force and torque acting on an articulation body (useful for simulating a force/torque sensor!), as well as to get the motor torque applied by an articulation drive.
 - **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
+
+## ROS 2
+Interested in early access to ROS 2 integration? Email [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com) to join our alpha program.
 
 ## FAQs
 [FAQs](faq.md)
