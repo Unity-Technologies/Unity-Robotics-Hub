@@ -73,7 +73,7 @@ Here’s a peek into what our Physics Team is hard at work on…
 - **Force/Torque Sensor API**. This API will allow users to get the force and torque acting on an articulation body (useful for simulating a force/torque sensor!), as well as to get the motor torque applied by an articulation drive.
 - **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
 
-## ROS 2
+## [**New!**] ROS 2
 Interested in early access to ROS 2 integration? Email [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com) to join our alpha program.
 
 ## FAQs
