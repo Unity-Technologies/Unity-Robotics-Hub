@@ -85,5 +85,9 @@ For general questions, feedback, or feature requests, connect directly with the 
 
 For bugs or other issues, please file a GitHub issue and the Robotics team will investigate the issue as soon as possible.
 
+## Newsletter
+
+To get notified about new updates and features, sign up for our newsletter! https://create.unity3d.com/robotics-simulation-newsletter-sign-up
+
 ## License
 [Apache License 2.0](LICENSE)
