@@ -99,5 +99,9 @@ For feature requests, bugs, or other issues, please file a [GitHub issue](https:
 For any other questions or feedback, connect directly with the
 Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
 
+## Newsletter
+
+To get notified about new updates and features, [sign up for our newsletter](https://create.unity3d.com/robotics-simulation-newsletter-sign-up)!
+
 ## License
 [Apache License 2.0](LICENSE)
