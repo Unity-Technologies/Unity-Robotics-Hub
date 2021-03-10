@@ -1,5 +1,8 @@
 # ROS–Unity Integration
 
+## Editor Version
+Most of our projects are developed/tested on Unity Editor version 2020.2.0f9 or later. We expect that anything 2020.2+ should be compatible, and will be actively working to ensure this for future versions. 2020.1.X and below are unlikely to work well, if at all, and we strongly encourage updating to a more recent version to support the bleeding edge updates to Unity's physics and simulation components that we are leveraging.
+
 ## ROS–Unity Communication
 ![](images/unity_ros.png)
 
