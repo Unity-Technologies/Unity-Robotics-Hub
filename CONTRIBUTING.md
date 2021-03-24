@@ -17,10 +17,6 @@ briefly outlining the changes you plan to make. This will enable us to provide
 some context that may be helpful for you. This could range from advice and
 feedback on how to optimally perform your changes or reasons for not doing it.
 
-Lastly, if you're looking for input on what to contribute, feel free to reach
-out to our team directly at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com) 
-and/or browse the GitHub issues.
-
 ## Git Branches
 
 The `main` branch corresponds to the most recent stable version of the project. The `dev` branch
