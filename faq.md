@@ -7,9 +7,7 @@
 	- [How can I install the Unity Packages without starting from a template project?](#how-can-i-install-the-unity-packages-without-starting-from-a-template-project)
 - [ROS-TCP Endpoint/Connector](#ros-tcp-endpointconnector)
 	- [How does the TCP Endpoint compare to Rosbridge Server?](#how-does-the-tcp-endpoint-compare-to-rosbridge-server)
-	- [I receive a `Starting server on ...` message in my ROS terminal, but see a `SocketException: A connection attempt failed because the connected party did not respond after a period of time, or established connection failed because connected host has failed to respond.` in my Unity console.](#i-receive-a-starting-server-on--message-in-my-ros-terminal-but-see-a-socketexception-a-connection-attempt-failed-because-the-connected-party-did-not-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond-in-my-unity-console)
 	- [I'm getting the error: `...failed because unknown error handler name 'rosmsg'`.](#im-getting-the-error-failed-because-unknown-error-handler-name-rosmsg)
-	- [Unity can't connect to ROS!](#unity-cant-connect-to-ros)
 - [URDF-Importer](#urdf-importer)
 	- [I don't see an option to Import Robot from URDF, or I have compile errors upon importing the URDF-Importer.](#i-dont-see-an-option-to-import-robot-from-urdf-or-i-have-compile-errors-upon-importing-the-urdf-importer)
 - [Can't find what you're looking for?](#cant-find-what-youre-looking-for)
@@ -58,23 +56,16 @@ The time was logged when the message was sent from Unity before being serialized
 - ROS# with ROS Bridge Suite took ~2 seconds
 - TCP Connector with TCP Endpoint took ~0.17 seconds
 
-I receive a `Starting server on ...` message in my ROS terminal, but see a `SocketException: A connection attempt failed because the connected party did not respond after a period of time, or established connection failed because connected host has failed to respond.` in my Unity console.
----
-This is likely an issue with how your network adapters are set up if you are using a virtual machine. You may need to do some troubleshooting to ensure that your guest OS can talk to your host OS and vice versa. One simple way to do this is to set up a "Host-Only" style network, but this varies based on what virtualization software you're using. Try to ensure that you can `ping` your host OS's IP from inside the guest, and can `ping` the guest from the host, then try this last step again. 
-
 I'm getting the error: `...failed because unknown error handler name 'rosmsg'`.
 ---
 This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
-
-Unity can't connect to ROS!
----
-Ensure that the ROS IP address is entered correctly as the `Host Name` in the RosConnect component in Unity, and if you are using a `params.yaml` file, that the appropriate IP addresses are filled in.
 
 # URDF-Importer
 
 I don't see an option to Import Robot from URDF, or I have compile errors upon importing the URDF-Importer.
 ---
 The [ArticulationBody](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) has dependencies on Unity Editor versions [2020.2.0](https://unity3d.com/unity/whats-new/2020.2.0)+. Try updating your project to the latest 2020.2 release.
+
 
 # Can't find what you're looking for?
 Connect directly with the Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com)!
