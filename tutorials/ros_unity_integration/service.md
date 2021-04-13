@@ -74,7 +74,7 @@ public class RosServiceExample : MonoBehaviour
         {
             Debug.Log("Destination reached.");
 
-            PosRot cubePos = new PosRot(
+            MPosRot cubePos = new MPosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
