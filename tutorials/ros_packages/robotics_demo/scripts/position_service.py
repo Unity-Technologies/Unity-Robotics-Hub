@@ -18,7 +18,7 @@ def new_position(req):
 
 def translate_position_server():
     rospy.init_node('position_server')
-    s = rospy.Service('position_service', PositionService, new_position)
+    s = rospy.Service('pos_srv', PositionService, new_position)
     print("Ready to move cubes!")
     rospy.spin()
 
