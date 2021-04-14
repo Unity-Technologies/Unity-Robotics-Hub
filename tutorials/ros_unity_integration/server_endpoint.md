@@ -42,9 +42,9 @@ if __name__ == "__main__":
 
 ## Import Statements for Services and Messages
 ```python
-from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
+from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
 from robotics_demo.msg import PosRot, UnityColor
-from robotics_demo.srv import PositionService
+from robotics_demo.srv import PositionService, ObjectPoseService
 ```
 
 ## Creating the Server
