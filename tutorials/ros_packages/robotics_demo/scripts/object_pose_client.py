@@ -28,5 +28,5 @@ if __name__ == "__main__":
     else:
         print(usage())
         sys.exit(1)
-    print("Requestinng pose for %s"%(name))
+    print("Requesting pose for %s"%(name))
     print("Pose for %s: %s"%(name, get_object_pose_client(name)))

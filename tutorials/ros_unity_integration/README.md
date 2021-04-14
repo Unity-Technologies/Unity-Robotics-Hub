@@ -34,5 +34,5 @@ Example scripts implemented in tutorials:
 	- Returns a destination position for a GameObject to move towards each time the service is called.
 
 - `unity_scripts/RosUnityServiceExample.cs`
-	- Runs a service in the Unity scene that can takes GameObject names in a request and responds with the GameObject's Pose.
+	- Runs a service in the Unity scene that takes a GameObject's name and responds with the Pose of that object.
 

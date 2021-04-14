@@ -42,12 +42,13 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 /// </summary>
 public class RosUnityServiceExample : MonoBehaviour
 {
-    public string serviceName = "obj_pose_srv";
+    [SerializeField]
+    string m_ServiceName = "obj_pose_srv";
 
     void Start()
     {
         // register the service with ROS
-        ROSConnection.instance.ImplementService<MObjectPoseServiceRequest>(serviceName, GetObjectPose);
+        ROSConnection.instance.ImplementService<MObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>
@@ -92,7 +93,7 @@ public class RosUnityServiceExample : MonoBehaviour
 - This wil print an output similar to the following with the current pose information of the game object (note that the coordinates are converted to the ROS coordinate system in our Unity Service):
 
    ```bash
-   Requestinng pose for Cube
+   Requesting pose for Cube
    Pose for Cube: 
    position: 
      x: 0.0
