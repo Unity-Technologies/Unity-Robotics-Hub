@@ -12,7 +12,7 @@ public class RosUnityServiceExample : MonoBehaviour
 
     void Start()
     {
-        // register the service with ros
+        // register the service with ROS
         ROSConnection.instance.ImplementService<MObjectPoseServiceRequest>(serviceName, GetObjectPose);
     }
 
@@ -28,9 +28,11 @@ public class RosUnityServiceExample : MonoBehaviour
 
         // prepare a response
         MObjectPoseServiceResponse objectPoseResponse = new MObjectPoseServiceResponse();
+        // Find a game object with the requested name
         GameObject gameObject = GameObject.Find(request.object_name);
         if (gameObject) 
         {
+            // Fill-in the response with the object pose converted from Unity coordinate to ROS coordinate system
             objectPoseResponse.object_pose.position = gameObject.transform.position.To<FLU>();
             objectPoseResponse.object_pose.orientation = gameObject.transform.rotation.To<FLU>();
         }
