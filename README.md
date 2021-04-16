@@ -52,7 +52,7 @@ Use articulation bodies to easily prototype industrial designs with realistic mo
 
 ## New Physics Features in Unity
 ### New Features
-- **Contact Modification API** This API will allow users to define custom contact reactions, such as ignoring subsets of contact points, in order to help simulate holes, slippery surfaces, soft contacts, and more. It starts available with **2021.2a12**. [Read more about the new Contact Modification API](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/).
+- **Contact Modification API** This API will allow users to define custom contact reactions, such as ignoring subsets of contact points, in order to help simulate holes, slippery surfaces, soft contacts, and more. It is available in Unity versions **2021.2a12+**. [Read more about the new Contact Modification API](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/).
 - **Collision detection modes exposed for ArticulationBody: discrete, sweep-based ccd, and speculative ccd**. New continuous collision detection (ccd) modes will ensure that fast-moving objects collide with objects, instead of tunneling or passing through those objects, which can happen in the default “discrete” mode. This API starts available with **2020.3.5f1**. [Read more about continuous collision detection](https://docs.unity3d.com/2020.3/Documentation/ScriptReference/ArticulationBody-collisionDetectionMode.html).
 
 ### Coming Soon
