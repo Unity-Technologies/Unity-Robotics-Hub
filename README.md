@@ -50,12 +50,15 @@ Use articulation bodies to easily prototype industrial designs with realistic mo
 - [Unity Industrial Simulation](https://unity.com/products/unity-simulation)
 - [Unity Computer Vision](https://unity.com/computer-vision)
 
-## Coming Soon - New Physics Features in Unity!
+## New Physics Features in Unity
+### New Features
+- **Contact Modification API** This API will allow users to define custom contact reactions, such as ignoring subsets of contact points, in order to help simulate holes, slippery surfaces, soft contacts, and more. It is available in Unity versions **2021.2a12+**. [Read more about the new Contact Modification API](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/).
+- **Collision detection modes exposed for ArticulationBody: discrete, sweep-based CCD, and speculative CCD**. New continuous collision detection (CCD) modes will ensure that fast-moving objects collide with objects, instead of tunneling or passing through those objects, which can happen in the default “discrete” mode. This API is available in Unity versions **2020.3.5f1+**. [Read more about continuous collision detection](https://docs.unity3d.com/2020.3/Documentation/ScriptReference/ArticulationBody-collisionDetectionMode.html).
+
+### Coming Soon
 Here’s a peek into what our Physics Team is hard at work on…
 
-- **Contact Modification API**. This API will allow users to define custom contact reactions, such as ignoring subsets of contact points, in order to help simulate holes, slippery surfaces, soft contacts, and more. [Read more about the new Contact Modification API](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/).
 - **Wheel Collider shapes**. This feature will allow the user to specify the shape of the collider to be used for collision detection. Currently the collider shape is fixed to a cylinder, and collision detection is performed by casting a ray from the center of the cylinder. Custom shapes will improve the accuracy of simulating wheels over rough terrains, holes, etc. [Read more about Wheel Collider](https://docs.unity3d.com/Manual/class-WheelCollider.html).
-- **Collision detection modes exposed for ArticulationBody: discrete, sweep-based ccd, and speculative ccd**. New continuous collision detection (ccd) modes will ensure that fast-moving objects collide with objects, instead of tunneling or passing through those objects, which can happen in the default “discrete” mode. [Read more about continuous collision detection](https://docs.unity3d.com/Manual/ContinuousCollisionDetection.html).
 - **Force/Torque Sensor API**. This API will allow users to get the force and torque acting on an articulation body (useful for simulating a force/torque sensor!), as well as to get the motor torque applied by an articulation drive.
 - **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
 
