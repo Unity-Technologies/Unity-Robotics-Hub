@@ -29,7 +29,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ## Setting Up Unity Scene
 - Generate the C# code for `PositionService`'s messages by going to `Robotics` -> `Generate ROS Messages...`
-- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 1 srv`.
+- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs`.
 
 ![](images/generate_messages_2.png)
 
@@ -74,7 +74,7 @@ public class RosServiceExample : MonoBehaviour
         {
             Debug.Log("Destination reached.");
 
-            PosRot cubePos = new PosRot(
+            MPosRot cubePos = new MPosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
@@ -84,15 +84,15 @@ public class RosServiceExample : MonoBehaviour
                 cube.transform.rotation.w
             );
 
-            PositionServiceRequest positionServiceRequest = new PositionServiceRequest(cubePos);
+            MPositionServiceRequest positionServiceRequest = new MPositionServiceRequest(cubePos);
 
             // Send message to ROS and return the response
-            ros.SendServiceMessage<PositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
+            ros.SendServiceMessage<MPositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
             awaitingResponseUntilTimestamp = Time.time+1.0f; // don't send again for 1 second, or until we receive a response
         }
     }
 
-    void Callback_Destination(PositionServiceResponse response)
+    void Callback_Destination(MPositionServiceResponse response)
     {
         awaitingResponseUntilTimestamp = -1;
         destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.pos_z);
