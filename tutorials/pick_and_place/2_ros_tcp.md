@@ -140,7 +140,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    - If you are **not** running ROS services in a Docker container, replace the `ROS IP Address` value with the IP address of your ROS machine. Ensure that the `Host Port` is set to `10000`.
 
-   - If you **are** running ROS services in a Docker container, fill `ROS IP Address` and `Override Unity IP Address` with the loopback IP address `127.0.0.1`. Otherwise, leave the `Override Unity IP Address` field empty.
+   - If you **are** running ROS services in a Docker container, fill `ROS IP Address` with the loopback IP address `127.0.0.1` and the `Override Unity IP Address` as your local machine's IP address. Otherwise, leave the `Override Unity IP Address` field empty.
 
    ![](img/2_settings.png)
 

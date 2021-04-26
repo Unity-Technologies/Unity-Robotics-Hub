@@ -99,6 +99,8 @@ public class RosPublisherExample : MonoBehaviour
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
 
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
+
 ![](images/tcp_1.gif)
 
 Continue to the [ROS Subscriber](subscriber.md) tutorial.
