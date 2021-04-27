@@ -48,7 +48,7 @@ The `UNITY_IP` can be set in two different places.
 1. If set on the ROS side as a rosparam, the `server_endpoint` will only use this IP to send messages to Unity.
 1. If set on the Unity side as the `Override Unity IP Address`, the `UNITY_IP` on the ROS side will be set to this value during the initial handshake between ROS and Unity once play is pressed in the Editor.
 
-> If the `UNITY_IP` is not set in either of these places the IP that makes the first connection to ROS during the initial handshake will be used.
+> If the `UNITY_IP` is not set in either of these places, then the IP that makes the first connection to ROS during the initial handshake will be used.
 
 # Troubleshooting
 
@@ -56,9 +56,9 @@ The `UNITY_IP` can be set in two different places.
 
 ### 1. Can Unity send messages to ROS?
 
-When pressing play in the Editor a handshake message is sent from Unity to ROS.
+When play is pressed in the Editor, a handshake message is sent from Unity to ROS.
 
-If Unity can communicate with ROS the following message should be printed to the console screen running the `server_endpoint.py` script.
+If Unity can communicate with ROS, the following message should be printed to the console screen running the `server_endpoint.py` script.
 
 ```[UnityTcpSender]: ROS-Unity Handshake received, will connect to UNITY_IP_ADDRESS:5005```
 
