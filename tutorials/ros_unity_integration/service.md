@@ -106,4 +106,7 @@ public class RosServiceExample : MonoBehaviour
 - Attach the `RosServiceExample` script to the `RosService` GameObject. Drag the cube GameObject onto its `cube` parameter.
 - Pressing play in the Editor should start communication with the `position_service` script, running as a ROS node, causing the cube to move to random positions in the scene.
 
+
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
+
 ![](images/tcp_3.gif)
