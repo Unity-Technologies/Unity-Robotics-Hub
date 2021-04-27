@@ -29,7 +29,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ## Setting Up Unity Scene
 - Generate the C# code for `PositionService`'s messages by going to `Robotics` -> `Generate ROS Messages...`
-- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 1 srv`.
+- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs`.
 
 ![](images/generate_messages_2.png)
 
@@ -74,7 +74,7 @@ public class RosServiceExample : MonoBehaviour
         {
             Debug.Log("Destination reached.");
 
-            PosRot cubePos = new PosRot(
+            MPosRot cubePos = new MPosRot(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
