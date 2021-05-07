@@ -80,7 +80,7 @@ public class RosUnityServiceExample : MonoBehaviour
 - From the main menu bar, open `Robotics/ROS Settings`, and change the `ROS IP Address` variable to the ROS IP.
 - Create an empty GameObject and name it `UnityService`.
 - Attach the `RosUnityServiceExample` script to the `UnityService` GameObject. 
-- Pressing play in the Editor should start running as a ROS node, waiting to accept ObjectPose requests. Once a connection to ROS has been established, a message will be printed on the ROS terminal similar to `ROS-Unity Handshake received, will connect to 192.168.50.130:5005`.
+- Pressing play in the Editor should start running as a ROS node, waiting to accept ObjectPose requests. Once a connection to ROS has been established, a message will be printed on the ROS terminal similar to `Connection from 172.17.0.1`.
 
 
 ## Start the Client
