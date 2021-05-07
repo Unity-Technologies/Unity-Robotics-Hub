@@ -56,11 +56,6 @@ public class RosSubscriberExample : MonoBehaviour
 - Attach the `RosSubscriberExample` script to the `RosSubscriber` GameObject and drag the cube GameObject onto the `cube` parameter in the Inspector window.
 
 - From the Unity menu bar, open `Robotics/ROS Settings`, and set the `ROS IP Address` variable to your ROS IP.
-    - Unlike the previous tutorial, using a subscriber requires an incoming connection from ROS to Unity. You may need to adjust your firewall settings for this to work.
-    - The IP for Unity to listen on should be determined automatically, but if you're having trouble, you can set it manually in the `Override Unity IP` field. Finding the IP address of your local machine (the one running Unity) depends on your operating system.
-        - On a Mac, open `System Preferences > Network`. Your IP address should be listed on the active connection.
-        - On Windows, click the Wi-Fi icon on the taskbar, and open `Properties`. Your IP address should be listed near the bottom, next to "IPv4 address."
-
 - Press play in the editor
 
 ### In ROS Terminal Window
