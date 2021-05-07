@@ -61,6 +61,8 @@ public class RosSubscriberExample : MonoBehaviour
 ### In ROS Terminal Window
 - After the scene has entered Play mode, run the following command: `rosrun robotics_demo color_publisher.py` to change the color of the cube GameObject in Unity to a random color
 
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
+
 ![](images/tcp_2.gif)
 
 Continue to the [ROS–Unity Integration Service](service.md).
