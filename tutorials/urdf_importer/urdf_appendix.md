@@ -342,11 +342,11 @@ Note: You can also manually ignore collisions in Unity using [APIs](https://docs
 <collision>
 ```
 
-The size of the primitive will be set in Unity by changing the scale of gameObject containing UrdfCollision script.
+The URDF Importer will set the size of the primitive using the "scale" parameter of the GameObject that contains the UrdfCollsion script.
 
 | ![Collision gameObject in hierarchy](images/link_hierarchy.png)  | ![Size of primitive set using scale](images/primitive_scale.png) |
 |:---:|:---:|
 
-This is done, as opposed to using the size API of the primitive collider, to have consistency across different mesh types. The sizing API is only available for primitive mesh colliders and not for complex collider meshes and visual meshes. Thats why we use the parent's scaling to change the shape of the primitive mesh. This scale is exported as the primitive size during URDF export.
+The reason we set the size via the "scale" of the parent GameObject as opposed to the "size" of the primitive collider is to have consistency across different mesh types; the size API is only available for primitive mesh colliders and not for complex collider meshes and visual meshes, whose size must be changed using their parent GameObject's "scale" parameter. The "scale" parameter of the gameObject is also used set the values of primitive "size" in the URDF when performing an URDF export.
 
 
