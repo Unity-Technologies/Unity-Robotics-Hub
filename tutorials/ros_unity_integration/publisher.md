@@ -161,5 +161,8 @@ Its a non-static member of ROSConnection class. Its used to send a ROS message t
 | `string rosTopicName`  | Name of the topic to which the message will be published  |
 | `Message message`  | Message to be published on the topic. |
 
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
+
+![](images/tcp_1.gif)
 
 Continue to the [ROS Subscriber](subscriber.md) tutorial.

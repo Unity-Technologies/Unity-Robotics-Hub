@@ -115,5 +115,8 @@ void ColorChange(RosColor colorMessage)
 After a message is received in Unity, a callback function is called to process the incoming message. The callback is a delegate which defines a function that receives one parameter and returns nothing as described [here](https://docs.microsoft.com/en-us/dotnet/api/system.action-1?view=net-5.0). In this Subscribe API, that parameter is the message published in the topic. 
 In this example we extract the color's attributes from the message and assign it to the cube's material.
 
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
+
+![](images/tcp_2.gif)
 
 Continue to the [ROS–Unity Integration Service](service.md).
