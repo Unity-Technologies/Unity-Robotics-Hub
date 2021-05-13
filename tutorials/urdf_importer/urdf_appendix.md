@@ -317,7 +317,7 @@ To address this predicament we have integrated another algorithm to create Conve
 ![](images/ConvexMeshComparison.png)
 
 ## Disable Collision Support
-URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, rigidbodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
+URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, RigidBodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
 
 1. Identify the links between which you want to ignore the collisions.
 2. Add a tag in the URDF file with the format 
@@ -330,4 +330,23 @@ An example of the tag can be seen [here](https://github.com/Unity-Technologies/U
 The disable collision tag flags the links that need to be ignored to the URDF parser. Values of link1 and link2 attributes are the names of the two links between which the collision needs to be ignored. Make sure the names of the links match the names defined in the URDF file.
 
 Note: You can also manually ignore collisions in Unity using [APIs](https://docs.unity3d.com/ScriptReference/Physics.IgnoreCollision.html).
+
+## Sizing of Primitives
+
+```xml
+ <collision>
+      <geometry>
+        <cylinder size=".4 .3 .4" />
+      </geometry>
+    </collision>
+<collision>
+```
+
+The size of the primitive will be set in Unity by changing the scale of gameObject containing UrdfCollision script.
+
+| ![Collision gameObject in hierarchy](images/link_hierarchy.png)  | ![Size of primitive set using scale](images/primitive_scale.png) |
+|:---:|:---:|
+
+This is done, as opposed to using the size API of the primitive collider, to have consistency across different mesh types. The sizing API is only available for primitive mesh colliders and not for complex collider meshes and visual meshes. Thats why we use the parent's scaling to change the shape of the primitive mesh. This scale is exported as the primitive size during URDF export.
+
 
