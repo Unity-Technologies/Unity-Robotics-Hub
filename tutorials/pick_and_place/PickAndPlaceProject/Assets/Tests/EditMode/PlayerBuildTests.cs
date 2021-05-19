@@ -9,8 +9,7 @@ using UnityEngine.TestTools;
 
 namespace BuildTests
 {
-    [TestFixture]
-    [Category("BuildTests")]
+    [TestFixture, Explicit, Category("BuildTests")]
     public class PlayerBuilder
     {
         List<EditorBuildSettingsScene> m_EditorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
