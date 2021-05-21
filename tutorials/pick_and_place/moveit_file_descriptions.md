@@ -27,7 +27,7 @@ Starts the Niryo One driver, controller manager, and robot state publisher nodes
 - Starts ROS node `controller_manager` with arguments `joint_state_controller niryo_one_follow_joint_trajectory_controller
         --shutdown-timeout 1`
 
-- Starts ROS node `robot_state_publisher` package. 
+- Starts ROS node `robot_state_publisher` package.
 	- Ex. `rosrun robot_state_publisher robot_state_publisher`
 
 **move_group.launch**
@@ -41,7 +41,7 @@ Starts the Move Group node which is the entry point into using MoveIt. Also call
   - `moveit_controller_manager` set to `niryo_one`
 
 - Call `planning_context.launch`
-- Start ROS node `moveit_ros_move_group` 
+- Start ROS node `moveit_ros_move_group`
   - Set rosparam `allow_trajectory_execution` to true
   - Set rosparam `max_safe_path_cost` to 1
   - Set rosparam `jiggle_fraction` to 0.05
@@ -63,7 +63,7 @@ Loads the Niryo One URDF with accompanying parameters for command validation, se
 - Sets rosparams `service_timeout` to 2, `action_connection_timeout` to 2, `action_execute_timeout` to 15, and `action_preempt_timeout` to 3 for `niryo_one/python_api` namespace
 
 - Sets rosparams `rate_tf_listener` to 5.0 and `rate_publish_state` to 5.0 for `niryo_one/robot_state` namespace
-    
+
 - Loads `niryo_one_urdf.xacro` as rosparams `robot_description` and `robot_description_tf2`
 
 **niryo_one_moveit_controller_manager.launch.xml**
@@ -75,9 +75,9 @@ Set controllers available to MoveIt
 - Reads `controllers.yaml` into rosparam
 
 **ompl_planning_pipeline.launch.xml**
-  
+
 Sets ROS params and topics for OMPL pipeline communication
-  
+
 - Set rosparam `planning_plugin` with value of `ompl_interface/OMPLPlanner`
 - Set rosparam `planning_adapters` with value of:
 
@@ -138,7 +138,7 @@ Sets ROS params required for trajectory execution and then calls controller mana
 **niryo_one.srdf**
 
 - Defines joint groups, group states, and disables collisions between joints and links that are impossible to collide.
-- [MoveIt SRDF Documentation](https://ros-planning.github.io/moveit_tutorials/doc/urdf_srdf/urdf_srdf_tutorial.html#srdf) 
+- [MoveIt SRDF Documentation](https://ros-planning.github.io/moveit_tutorials/doc/urdf_srdf/urdf_srdf_tutorial.html#srdf)
 
 **niryo_one_controllers.yaml**
 

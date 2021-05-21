@@ -19,7 +19,7 @@ Simulation plays an important role in robotics development, and we’re here to 
 | [Quick Installation Instructions](tutorials/quick_setup.md) | Brief steps on installing the Unity Robotics packages |
 | [Pick-and-Place Demo](tutorials/pick_and_place/README.md) | A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control |
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
-| [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files | 
+| [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
 | [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo) | A robot simulation demonstrating Unity's new physics solver (no ROS dependency)
 
 
@@ -43,7 +43,7 @@ Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.u
 - (August 26, 2020)
 Announcing Unity Robotic Simulation [blog post](https://unity.com/solutions/automotive-transportation-manufacturing/robotics)
 - (May 20, 2020)
-Use articulation bodies to easily prototype industrial designs with realistic motion and behavior [blog post](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/) 
+Use articulation bodies to easily prototype industrial designs with realistic motion and behavior [blog post](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/)
 
 ### More from Unity
 
@@ -67,8 +67,8 @@ Here’s a peek into what our Physics Team is hard at work on…
 
 ## Community and Feedback
 
-The Unity Robotics projects are open-source and we encourage and welcome contributions. 
-If you wish to contribute, be sure to review our [contribution guidelines](CONTRIBUTING.md) 
+The Unity Robotics projects are open-source and we encourage and welcome contributions.
+If you wish to contribute, be sure to review our [contribution guidelines](CONTRIBUTING.md)
 and [code of conduct](CODE_OF_CONDUCT.md).
 
 ## Support
@@ -77,7 +77,7 @@ For questions or discussions about Unity Robotics package installations or how t
 
 For feature requests, bugs, or other issues, please file a [GitHub issue](https://github.com/Unity-Technologies/Unity-Robotics-Hub/issues) using the provided templates and the Robotics team will investigate as soon as possible.
 
-For any other questions or feedback, connect directly with the 
+For any other questions or feedback, connect directly with the
 Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
 
 ## License

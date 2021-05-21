@@ -1,8 +1,8 @@
-### Prerequisites 
+### Prerequisites
 
 Ensure physics solver is set to `Temporal Gauss Seidel` in [Physics Manager](https://docs.unity3d.com/Manual/class-PhysicsManager.html)
 
-### ROS & Simulated Arm Only 
+### ROS & Simulated Arm Only
 --
 
 **Terminal 1**
@@ -46,7 +46,7 @@ niryo_one_msgs/ShiftPose shift
 niryo_one_msgs/TrajectoryPlan Trajectory
 geometry_msgs/Pose pose_quat
 string  saved_position_name
-int32 saved_trajectory_id 
+int32 saved_trajectory_id
 ```
 
 **TrajectoryPlan.msg**

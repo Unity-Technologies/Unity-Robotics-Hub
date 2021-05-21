@@ -21,7 +21,7 @@ How does your Unity integration compare to ROS#?
 ---
 Two of the Unity Robotics repos (URDF Importer and TCP Connector) have been forked from the [Siemens ROS# repo](https://github.com/siemens/ros-sharp).
 
-In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) components on their corresponding joints. 
+In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) components on their corresponding joints.
 
 Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains the `MessageGeneration` code from ROS#. We added the extra functionality that when generating a C# class from a ROS message, functions are also generated that will serialize and deserialize the messages as ROS would internally.
 

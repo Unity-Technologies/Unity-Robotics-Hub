@@ -10,7 +10,8 @@ repos:
                         .*.meta|
                         .*.mat|
                         .*.preset|
-                        .*.lighting
+                        .*.lighting|
+                        .*.dae
                     )$
                 args: [--fix=lf]
 

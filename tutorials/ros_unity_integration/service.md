@@ -11,7 +11,7 @@ Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Serv
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-  
+
    ```bash
     source devel/setup.bash
     rosrun robotics_demo server_endpoint.py
