@@ -13,9 +13,6 @@ jobs:
             - uses: actions/setup-python@v2
               with:
                   python-version: 3.7.x
-            - uses: actions/setup-ruby@v1
-              with:
-                  ruby-version: '2.6'
             - uses: actions/setup-dotnet@v1
               with:
                   dotnet-version: '3.1.x'
