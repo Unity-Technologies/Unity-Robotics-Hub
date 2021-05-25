@@ -316,6 +316,57 @@ To address this predicament we have integrated another algorithm to create Conve
 
 ![](images/ConvexMeshComparison.png)
 
+## Supported Tags in URDF
+
+- Link
+    - Name
+    - Inertial
+        - origin
+            - xyz
+            - rpy
+        - mass
+        - inertia
+    - visual
+        - name
+        - origin
+            - xyz
+            - rpy
+        - geometry
+            - box
+            - cylinder
+            - sphere
+            - mesh
+        - material
+            - color
+            - texture
+    - collision
+        - name
+        - origin
+            - xyz
+            - rpy
+        - geometry
+- joint
+    - name
+    - type
+    - origin
+        - xyz
+        - rpy
+    - parent
+        - link
+    - child
+        - link
+    - axis
+        - xyz
+    - dynamics
+        - damping
+        - friction
+    - limit
+        - lower
+        - upper
+        
+    
+
+
 ## Disable Collision Support
 URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, RigidBodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
 
@@ -348,5 +399,7 @@ The URDF Importer will set the size of the primitive using the "scale" parameter
 |:---:|:---:|
 
 The reason we set the size via the "scale" of the parent GameObject as opposed to the "size" of the primitive collider is to have consistency across different mesh types; the size API is only available for primitive mesh colliders and not for complex collider meshes and visual meshes, whose size must be changed using their parent GameObject's "scale" parameter. The "scale" parameter of the gameObject is also used set the values of primitive "size" in the URDF when performing an URDF export.
+
+
 
 
