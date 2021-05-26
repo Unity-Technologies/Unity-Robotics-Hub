@@ -82,7 +82,6 @@ public class TrajectoryPlanner : MonoBehaviour
     {
         MNiryoMoveitJoints joints = new MNiryoMoveitJoints();
 
-
         joints.joint_00 = jointArticulationBodies[0].xDrive.target;
         joints.joint_01 = jointArticulationBodies[1].xDrive.target;
         joints.joint_02 = jointArticulationBodies[2].xDrive.target;
