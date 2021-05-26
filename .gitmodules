@@ -4,3 +4,6 @@
 [submodule "tutorials/pick_and_place/ROS/src/moveit_msgs"]
 	path = tutorials/pick_and_place/ROS/src/moveit_msgs
 	url = https://github.com/ros-planning/moveit_msgs.git
+[submodule "tutorials/pick_and_place/ROS/src/ros_tcp_endpoint"]
+	path = tutorials/pick_and_place/ROS/src/ros_tcp_endpoint
+	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
