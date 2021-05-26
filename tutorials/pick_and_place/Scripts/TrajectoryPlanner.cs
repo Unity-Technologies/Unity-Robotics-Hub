@@ -16,7 +16,7 @@ public class TrajectoryPlanner : MonoBehaviour
     private readonly float jointAssignmentWait = 0.1f;
     private readonly float poseAssignmentWait = 0.5f;
     private readonly Vector3 pickPoseOffset = Vector3.up * 0.1f;
-    
+
     // Assures that the gripper is always positioned above the target cube before grasping.
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
 
@@ -43,7 +43,7 @@ public class TrajectoryPlanner : MonoBehaviour
         PickUp,
         Place
     };
-    
+
     /// <summary>
     ///     Close the gripper
     /// </summary>
@@ -81,7 +81,7 @@ public class TrajectoryPlanner : MonoBehaviour
     MNiryoMoveitJoints CurrentJointConfig()
     {
         MNiryoMoveitJoints joints = new MNiryoMoveitJoints();
-        
+
         joints.joint_00 = jointArticulationBodies[0].xDrive.target;
         joints.joint_01 = jointArticulationBodies[1].xDrive.target;
         joints.joint_02 = jointArticulationBodies[2].xDrive.target;
@@ -103,7 +103,7 @@ public class TrajectoryPlanner : MonoBehaviour
     {
         MMoverServiceRequest request = new MMoverServiceRequest();
         request.joints_input = CurrentJointConfig();
-        
+
         // Pick Pose
         request.pick_pose = new MPose
         {
@@ -154,18 +154,18 @@ public class TrajectoryPlanner : MonoBehaviour
         if (response.trajectories != null)
         {
             // For every trajectory plan returned
-            for (int poseIndex  = 0 ; poseIndex < response.trajectories.Length; poseIndex++)
+            for (int poseIndex = 0; poseIndex < response.trajectories.Length; poseIndex++)
             {
                 // For every robot pose in trajectory plan
-                for (int jointConfigIndex  = 0 ; jointConfigIndex < response.trajectories[poseIndex].joint_trajectory.points.Length; jointConfigIndex++)
+                for (int jointConfigIndex = 0; jointConfigIndex < response.trajectories[poseIndex].joint_trajectory.points.Length; jointConfigIndex++)
                 {
                     var jointPositions = response.trajectories[poseIndex].joint_trajectory.points[jointConfigIndex].positions;
-                    float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
-                    
+                    float[] result = jointPositions.Select(r => (float)r * Mathf.Rad2Deg).ToArray();
+
                     // Set the joint values for every joint
                     for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
                     {
-                        var joint1XDrive  = jointArticulationBodies[joint].xDrive;
+                        var joint1XDrive = jointArticulationBodies[joint].xDrive;
                         joint1XDrive.target = result[joint];
                         jointArticulationBodies[joint].xDrive = joint1XDrive;
                     }
@@ -176,7 +176,7 @@ public class TrajectoryPlanner : MonoBehaviour
                 // Close the gripper if completed executing the trajectory for the Grasp pose
                 if (poseIndex == (int)Poses.Grasp)
                     CloseGripper();
-                
+
                 // Wait for the robot to achieve the final pose from joint assignment
                 yield return new WaitForSeconds(poseAssignmentWait);
             }
@@ -200,16 +200,16 @@ public class TrajectoryPlanner : MonoBehaviour
 
         string arm_link = shoulder_link + "/arm_link";
         jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
-        
+
         string elbow_link = arm_link + "/elbow_link";
         jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
-        
+
         string forearm_link = elbow_link + "/forearm_link";
         jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
-        
+
         string wrist_link = forearm_link + "/wrist_link";
         jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
-        
+
         string hand_link = wrist_link + "/hand_link";
         jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
 

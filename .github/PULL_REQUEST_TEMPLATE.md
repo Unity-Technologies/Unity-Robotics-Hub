@@ -16,7 +16,7 @@ Provide any relevant links here.
 
 ## Testing and Verification
 
-Please describe the tests that you ran to verify your changes. Please also provide instructions, ROS packages, and Unity project files as appropriate so we can reproduce the test environment. 
+Please describe the tests that you ran to verify your changes. Please also provide instructions, ROS packages, and Unity project files as appropriate so we can reproduce the test environment.
 
 ### Test Configuration:
 - Unity Version: [e.g. Unity 2020.2.0f1]

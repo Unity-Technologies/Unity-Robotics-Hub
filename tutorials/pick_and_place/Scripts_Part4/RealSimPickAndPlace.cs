@@ -18,7 +18,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     private ROSConnection ros;
     private const int NUM_ROBOT_JOINTS = 6;
 
-    // Hardcoded variables
+    // Hardcoded variables 
     private const float JOINT_ASSIGNMENT_WAIT = 0.038f;
     private readonly Vector3 PICK_POSE_OFFSET = Vector3.up * 0.15f;
 
@@ -151,7 +151,7 @@ public class RealSimPickAndPlace : MonoBehaviour
 
     /// <summary>
     ///   Execute robot commands receved from ROS Subscriber.
-    ///   Gripper commands will be executed immeditately wihle trajectories will be
+    ///   Gripper commands will be executed immeditately wihle trajectories will be 
     ///   executed in a coroutine.
     /// </summary>
     /// <param name="robotAction"> RobotMoveActionGoal of trajectory or gripper commands</param>
@@ -178,10 +178,10 @@ public class RealSimPickAndPlace : MonoBehaviour
 
     /// <summary>
     ///     Execute trajectories from RobotMoveActionGoal topic.
-    ///
-    ///     Execution will iterate through every robot pose in the trajectory pose
+    /// 
+    ///     Execution will iterate through every robot pose in the trajectory pose 
     ///     array while updating the joint values on the simulated robot.
-    ///
+    /// 
     /// </summary>
     /// <param name="trajectories"> The array of poses for the robot to execute</param>
     private IEnumerator ExecuteTrajectories(MRobotTrajectory trajectories)
@@ -190,12 +190,12 @@ public class RealSimPickAndPlace : MonoBehaviour
         foreach (var point in trajectories.joint_trajectory.points)
         {
             var jointPositions = point.positions;
-            float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
+            float[] result = jointPositions.Select(r => (float)r * Mathf.Rad2Deg).ToArray();
 
             // Set the joint values for every joint
             for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
             {
-                var joint1XDrive  = jointArticulationBodies[joint].xDrive;
+                var joint1XDrive = jointArticulationBodies[joint].xDrive;
                 joint1XDrive.target = result[joint];
                 jointArticulationBodies[joint].xDrive = joint1XDrive;
             }

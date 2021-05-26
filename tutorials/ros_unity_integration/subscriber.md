@@ -11,7 +11,7 @@ Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.or
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window, navigate to your Catkin workspace, and run the following commands:
-  
+
    ```bash
     source devel/setup.bash
     rosrun robotics_demo server_endpoint.py
@@ -21,7 +21,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 - In Unity, we need to generate the C# code for the `UnityColor` message. Open `Robotics` -> `Generate ROS Messages...`.
     - Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/`, expand the robotics_demo subfolder and click `Build 2 msgs`.
-    
+
 ![](images/generate_messages_1.png)
 
    - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
