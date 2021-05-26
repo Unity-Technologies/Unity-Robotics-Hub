@@ -2,7 +2,7 @@
 
 This package contains URDF file and meshes (collada + stl) for Niryo One.
 
-**Note** : 3D visualization is not available on the Niryo One Raspberry Pi image. To use the following commands, you must have installed ROS on your computer and downloaded the Niryo One ROS packages. 
+**Note** : 3D visualization is not available on the Niryo One Raspberry Pi image. To use the following commands, you must have installed ROS on your computer and downloaded the Niryo One ROS packages.
 
 * To display Niryo One on Rviz :
 

@@ -17,7 +17,7 @@ public class RosPublisherExample : MonoBehaviour
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
-    
+
     void Start()
     {
         // start the ROS connection

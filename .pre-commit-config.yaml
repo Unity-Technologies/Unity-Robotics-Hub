@@ -1,0 +1,32 @@
+repos:
+    -   repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v4.0.1
+        hooks:
+            -   id: mixed-line-ending
+                exclude: >
+                    (?x)^(
+                        .*cs.meta|
+                        .*.css|
+                        .*.meta|
+                        .*.mat|
+                        .*.preset|
+                        .*.lighting|
+                        .*.dae
+                    )$
+                args: [--fix=lf]
+
+            -   id: trailing-whitespace
+                name: trailing-whitespace-markdown
+                types: [markdown]
+            -   id: check-merge-conflict
+                args: [--assume-in-merge]
+            -   id: check-yaml
+                # Won't handle the templating in yamato
+                exclude: \.yamato/.*
+
+
+    - repo: https://github.com/dotnet/format
+      rev: "7e343070a0355c86f72bdee226b5e19ffcbac931"
+      hooks:
+          - id: dotnet-format
+            args: [--folder, --include]

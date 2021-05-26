@@ -24,14 +24,14 @@ def main():
     connections = rospy.get_param("/TCP_CONNECTIONS", 10)
     tcp_server = TcpServer(ros_node_name, buffer_size, connections)
     rospy.init_node(ros_node_name, anonymous=True)
-    
+
     tcp_server.start({
         'pos_rot': RosPublisher('pos_rot', PosRot, queue_size=10),
         'color': RosSubscriber('color', UnityColor, tcp_server),
         'pos_srv': RosService('pos_srv', PositionService),
         'obj_pose_srv': UnityService('obj_pose_srv', ObjectPoseService, tcp_server),
     })
-    
+
     rospy.spin()
 
 
@@ -74,7 +74,7 @@ The `ros_node_name` argument is required and the `buffer_size` and `connections`
         'pos_srv': RosService('pos_srv', PositionService),
         'obj_pose_srv': UnityService('obj_pose_srv', ObjectPoseService, tcp_server),
     })
-    
+
     rospy.spin()
 ```
 
@@ -141,7 +141,7 @@ An example launch file that will set the appropriate ROSPARAM values required fo
 
     <env name="ROS_IP" value="127.0.0.1"/>
     <env name="ROS_HOSTNAME" value="$(env ROS_IP)"/>
-    
+
     <param name="ROS_IP" type="str" value="$(env ROS_IP)" />
     <param name="ROS_TCP_PORT" type="int" value="10000" />
     <param name="TCP_NODE_NAME" type="str" value="TCPServer" />
