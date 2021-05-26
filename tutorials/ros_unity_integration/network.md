@@ -30,7 +30,7 @@ The minimum settings required for Unity to communicate with ROS is to set the `R
 
 ## If Using Docker
 
-The container will need to be started with the following arguments to forward the ports used for communication between ROS and Unity. 
+The container will need to be started with the following arguments to forward the ports used for communication between ROS and Unity.
 
 `-p 10000:10000 -p 5005:5005`
 
