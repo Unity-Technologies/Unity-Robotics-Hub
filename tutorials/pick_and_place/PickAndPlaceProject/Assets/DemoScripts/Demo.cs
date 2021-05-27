@@ -1,4 +1,4 @@
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
 using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
@@ -231,4 +231,4 @@ public class Demo : MonoBehaviour
         }
     }
 }
-//#endif
+#endif
