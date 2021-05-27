@@ -4,7 +4,7 @@ Create a simple Unity scene which publishes a GameObject's position and rotation
 
 ## Setting Up ROS
 
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+- If using ROS (melodic or noetic), copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
@@ -21,6 +21,27 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
    ```bash
     source devel/setup.bash
     rostopic echo pos_rot
+   ```
+
+## Setting Up ROS2
+
+- If using ROS2, copy the `tutorials/ros2_packages/robotics_demo` folder of this repo into the `src` folder in your Colcon workspace.
+
+- Follow the [ROS–Unity Initial Setup](setup.md) guide.
+
+- Open a new terminal window and run the following commands:
+
+   ```bash
+    source install/setup.bash
+    ros2 run robotics_demo server_endpoint.py
+   ```
+
+Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+
+- Open another new terminal window, navigate to your ROS workspace, and run the following commands:
+   ```bash
+    source install/setup.bash
+    ros2 topic echo pos_rot
    ```
 
 ## Setting Up Unity Scene
@@ -71,7 +92,7 @@ public class RosPublisherExample : MonoBehaviour
         {
             cube.transform.rotation = Random.rotation;
 
-            MPosRot cubePos = new MPosRot(
+            PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
@@ -94,6 +115,7 @@ public class RosPublisherExample : MonoBehaviour
 - Move the cube a little ways up so it is hovering above the plane
 - In the main menu bar, open `Robotics/ROS Settings`.
     - Set the ROS IP address and port to match the ROS IP and port variables defined when you set up ROS.
+	- If using ROS2, switch to the ROS2 protocol.
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
     - Drag the cube GameObject onto the `Cube` parameter.
 

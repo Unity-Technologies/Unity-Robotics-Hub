@@ -4,6 +4,8 @@ The minimum requirements for a ROS–Unity integration.
 
 ## ROS Environment
 
+1. Follow these steps if using ROS (melodic or noetic):
+
 1. Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
 
 1. Navigate to your Catkin workspace and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
@@ -17,8 +19,8 @@ The minimum requirements for a ROS–Unity integration.
 
 Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
-1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity.
-   - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
+1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine, which should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
+
 1. The ROS parameter values can be set using a YAML file. Create a `params.yaml` file in your package, e.g. `./config/params.yaml`. Open the file for editing.
 
 1. Update the `ROS_IP` below with the appropriate address and copy the contents into the `params.yaml` file.
@@ -54,6 +56,16 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 >
 > Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
 
+## ROS2 Environment
+
+1. Follow these steps if using ROS2:
+
+1. Download the [ROS2 TCP Endpoint](https://github.com/Unity-Technologies/ROS2-TCP-Endpoint) repository and copy the folders `ROS2_packages/ros2_tcp_endpoint` and `ROS2_packages/unity_interfaces` into the `src` folder in your Colcon workspace.
+
+1. Navigate to your Colcon workspace and run `colcon build && source install/setup.bash`. Ensure there are no errors.
+
+1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS2 machine - this should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
+
 ## Unity Scene
 1. Launch Unity and create a new scene.
 2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
@@ -61,5 +73,3 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
 ![](images/add_package.png)
 
 ![](images/add_package_2.png)
-
-Messages being passed between Unity and ROS need to be serialized exactly as ROS serializes them internally. This is achieved with the RosMessageGeneration utility, which generates C# classes, including serialization and deserialization functions, based on ROS message files. Adding the ROS TCP Connector package should have created a new Unity menu option, “Robotics/Generate ROS Messages”, which we will use to generate these messages later.

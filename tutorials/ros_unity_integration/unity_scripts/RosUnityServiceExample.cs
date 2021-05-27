@@ -14,7 +14,7 @@ public class RosUnityServiceExample : MonoBehaviour
     void Start()
     {
         // register the service with ROS
-        ROSConnection.instance.ImplementService<MObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
+        ROSConnection.instance.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>
@@ -22,13 +22,13 @@ public class RosUnityServiceExample : MonoBehaviour
     /// </summary>
     /// <param name="request">service request containing the object name</param>
     /// <returns>service response containing the object pose (or 0 if object not found)</returns>
-    private MObjectPoseServiceResponse GetObjectPose(MObjectPoseServiceRequest request)
+    private MObjectPoseServiceResponse GetObjectPose(ObjectPoseServiceRequest request)
     {
         // process the service request
         Debug.Log("Received request for object: " + request.object_name);
 
         // prepare a response
-        MObjectPoseServiceResponse objectPoseResponse = new MObjectPoseServiceResponse();
+        ObjectPoseServiceResponse objectPoseResponse = new ObjectPoseServiceResponse();
         // Find a game object with the requested name
         GameObject gameObject = GameObject.Find(request.object_name);
         if (gameObject)

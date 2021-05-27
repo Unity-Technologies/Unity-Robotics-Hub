@@ -32,7 +32,7 @@ public class RosPublisherExample : MonoBehaviour
         {
             cube.transform.rotation = Random.rotation;
 
-            MPosRot cubePos = new MPosRot(
+            PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
