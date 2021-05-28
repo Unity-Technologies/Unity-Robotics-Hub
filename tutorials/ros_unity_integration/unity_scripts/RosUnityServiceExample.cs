@@ -1,4 +1,4 @@
-using RosMessageTypes.RoboticsDemo;
+using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;

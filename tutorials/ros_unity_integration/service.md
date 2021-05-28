@@ -6,7 +6,7 @@ Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Serv
 
 (Skip to [Start the Position service](service.md#start-the-position-service) if you already did the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
 
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+- Copy the `tutorials/ros_unity_integration/ros_packages/unity_robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
@@ -29,7 +29,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ## Setting Up Unity Scene
 - Generate the C# code for `PositionService`'s messages by going to `Robotics` -> `Generate ROS Messages...`
-- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs`.
+- Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_unity_integration/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs`.
 
 ![](images/generate_messages_2.png)
 

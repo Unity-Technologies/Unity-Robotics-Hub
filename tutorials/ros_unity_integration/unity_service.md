@@ -1,12 +1,12 @@
 # ROS–Unity Integration: UnityService
 
-Create a simple Unity scene which create a [Service](http://wiki.ros.org/Services) in Unity that takes a request with a GameObject's name and responds with the GameObject's pose (position and orientation) in the ROS coordinate system.
+Create a simple Unity scene which runs a [Service](http://wiki.ros.org/Services) in Unity that takes a request with a GameObject's name and responds with the GameObject's pose (position and orientation) in the ROS coordinate system.
 
 ## Setting Up ROS
 
 (Skip to [Setting Up the Unity Scene](unity_service.md#setting-up-the-unity-scene) if you already did the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
 
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+- Copy the `tutorials/ros_unity_integration/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
@@ -21,7 +21,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ## Setting Up the Unity Scene
 - Generate the C# code for `ObjectPoseService`'s messages by going to `Robotics` -> `Generate ROS Messages...`
- - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs` (Note that you may skip this step if you have already done it in the previous tutorial).
+ - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_unity_integration/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs` (Note that you may skip this step if you have already done it in the previous tutorial).
 
  ![](images/generate_messages_2.png)
 

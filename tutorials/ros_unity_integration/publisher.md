@@ -4,7 +4,7 @@ Create a simple Unity scene which publishes a GameObject's position and rotation
 
 ## Setting Up ROS
 
-- If using ROS (melodic or noetic), copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+- If using ROS (melodic or noetic), copy the contents of `tutorials/ros_unity_integration/ros_packages` from this repo into the `src` folder in your Catkin workspace. (If using ROS2, instead go to the [Setting Up ROS2](publisher.md#setting-up-ros2) section.)
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
@@ -12,7 +12,7 @@ Create a simple Unity scene which publishes a GameObject's position and rotation
 
    ```bash
     source devel/setup.bash
-    rosrun robotics_demo server_endpoint.py
+    rosrun unity_robotics_demo server_endpoint.py
    ```
 
 Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
@@ -23,20 +23,30 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
     rostopic echo pos_rot
    ```
 
+- Now proceed to [Setting Up Unity Scene](publisher.md#setting-up-unity-scene).
+
 ## Setting Up ROS2
 
-- If using ROS2, copy the `tutorials/ros2_packages/robotics_demo` folder of this repo into the `src` folder in your Colcon workspace.
+- <img src="images/ros2_icon.png" alt="ros2" width="16" height="16"/> If using ROS2, copy the contents of `tutorials/ros_unity_integration/ros2_packages` from this repo into the `src` folder in your Colcon workspace.
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
+
+- The `server_endpoint` script we'll be using has a parameter ROS_IP. You will need to know the IP address of your ROS machine; the command `hostname -I` can be used to find it. Or, if you're using Docker, the IP address to use is `0.0.0.0`.
 
 - Open a new terminal window and run the following commands:
 
    ```bash
     source install/setup.bash
-    ros2 run robotics_demo server_endpoint.py
+	ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1
    ```
 
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+   Or if you need the server to listen on a port that's different from the default 10000, you can set the ROS_TCP_PORT parameter too:
+   
+   ```bash
+   ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
+   ```
+
+   Once the server_endpoint has started, if everything worked ok, it will print something similar to `[INFO] [1622239914.040931500] [TCPServer]: Starting server on 127.0.0.1:10000`.
 
 - Open another new terminal window, navigate to your ROS workspace, and run the following commands:
    ```bash
@@ -46,19 +56,19 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
 
 ## Setting Up Unity Scene
 - In the menu bar, find and select `Robotics` -> `Generate ROS Messages...`
-- Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`.
-    - Expand the robotics_demo subfolder and click "Build 2 msgs" to generate new C# scripts from the ROS .msg files.
+- Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_unity_integration/ros_packages/unity_robotics_demo_msgs`.(The version in the ros2_packages folder is equivalent; Ros2 users can feel free to use it, or not.)
+    - In the message browser, expand the unity_robotics_demo_msgs subfolder and click "Build 2 msgs" to generate new C# scripts from the ROS .msg files.
 
 ![](images/generate_messages_1.png)
 
-   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
+   - The generated files will be saved in the default directory `Assets/RosMessages/UnityRoboticsDemo/msg`.
 - Create a new directory in `Assets` and name it `Scripts`
 - Create a new script in the `Scripts` directory and name it `RosPublisherExample.cs`
 - Open `RosPublisherExample.cs` and paste the following code:
-    - **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
+    - (Alternatively, you can copy the script file from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs`)
 
 ```csharp
-using RosMessageTypes.RoboticsDemo;
+using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 
@@ -114,12 +124,15 @@ public class RosPublisherExample : MonoBehaviour
 - Add a plane and a cube to the empty Unity scene
 - Move the cube a little ways up so it is hovering above the plane
 - In the main menu bar, open `Robotics/ROS Settings`.
-    - Set the ROS IP address and port to match the ROS IP and port variables defined when you set up ROS.
-	- If using ROS2, switch to the ROS2 protocol.
+    - Set the ROS IP address and port to match the ROS IP and port variables defined when you started the ROS endpoint.
+	- If using ROS2, select the ROS2 protocol.
+	
+	![](images/ros2_protocol.png)
+
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
     - Drag the cube GameObject onto the `Cube` parameter.
 
-- Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
+- Pressing play in the Editor should publish a message every 0.5 seconds to the terminal running the `echo` command.
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
