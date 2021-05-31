@@ -4,11 +4,14 @@ using RosColor = RosMessageTypes.UnityRoboticsDemo.UnityColorMsg;
 
 public class RosSubscriberExample : MonoBehaviour
 {
+	ROSConnection ros;
     public GameObject cube;
 
     void Start()
     {
-        ROSConnection.instance.Subscribe<RosColor>("color", ColorChange);
+        ros = ROSConnection.instance;
+		ros.RegisterSubscriber<RosColor>("color");
+		ros.Subscribe<RosColor>("color", ColorChange);
     }
 
     void ColorChange(RosColor colorMessage)

@@ -2,85 +2,48 @@
 
 Create a simple Unity scene which publishes a GameObject's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
+These instructions cover the setup for both ROS1 and ROS2. If you're using ROS2, start with the [Setting Up ROS2](publisher.md#setting-up-ros2) section. Instructions for ROS2 users are marked with this icon: <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/>.
+
 ## Setting Up ROS
 
-- If using ROS (melodic or noetic), copy the contents of `tutorials/ros_unity_integration/ros_packages` from this repo into the `src` folder in your Catkin workspace. (If using ROS2, instead go to the [Setting Up ROS2](publisher.md#setting-up-ros2) section.)
+- Follow the [ROS–Unity Initial Setup](setup.md#ros2-environment) guide.
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide.
+## Start the Echo monitor
 
-- Open a new terminal window and run the following commands:
+- For this tutorial we will run the rostopic echo command, which watches the topic we're going to publish messages on, to prove they are being received.
 
-   ```bash
-    source devel/setup.bash
-    rosrun unity_robotics_demo server_endpoint.py
-   ```
+- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+	```bash
+	source devel/setup.bash
+	rostopic echo pos_rot
+	```
+- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
+	
+	```bash
+	source install/setup.bash
+	ros2 topic echo pos_rot
+	```
 
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
-
-- Open another new terminal window, navigate to your ROS workspace, and run the following commands:
-   ```bash
-    source devel/setup.bash
-    rostopic echo pos_rot
-   ```
-
-- Now proceed to [Setting Up Unity Scene](publisher.md#setting-up-unity-scene).
-
-## Setting Up ROS2
-
-- <img src="images/ros2_icon.png" alt="ros2" width="16" height="16"/> If using ROS2, copy the contents of `tutorials/ros_unity_integration/ros2_packages` from this repo into the `src` folder in your Colcon workspace.
-
-- Follow the [ROS–Unity Initial Setup](setup.md) guide.
-
-- The `server_endpoint` script we'll be using has a parameter ROS_IP. You will need to know the IP address of your ROS machine; the command `hostname -I` can be used to find it. Or, if you're using Docker, the IP address to use is `0.0.0.0`.
-
-- Open a new terminal window and run the following commands:
-
-   ```bash
-    source install/setup.bash
-	ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1
-   ```
-
-   Or if you need the server to listen on a port that's different from the default 10000, you can set the ROS_TCP_PORT parameter too:
-   
-   ```bash
-   ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
-   ```
-
-   Once the server_endpoint has started, if everything worked ok, it will print something similar to `[INFO] [1622239914.040931500] [TCPServer]: Starting server on 127.0.0.1:10000`.
-
-- Open another new terminal window, navigate to your ROS workspace, and run the following commands:
-   ```bash
-    source install/setup.bash
-    ros2 topic echo pos_rot
-   ```
+- If it's working correctly it will print nothing and wait for a message to be published.
 
 ## Setting Up Unity Scene
-- In the menu bar, find and select `Robotics` -> `Generate ROS Messages...`
-- Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_unity_integration/ros_packages/unity_robotics_demo_msgs`.(The version in the ros2_packages folder is equivalent; Ros2 users can feel free to use it, or not.)
-    - In the message browser, expand the unity_robotics_demo_msgs subfolder and click "Build 2 msgs" to generate new C# scripts from the ROS .msg files.
-
-![](images/generate_messages_1.png)
-
-   - The generated files will be saved in the default directory `Assets/RosMessages/UnityRoboticsDemo/msg`.
-- Create a new directory in `Assets` and name it `Scripts`
-- Create a new script in the `Scripts` directory and name it `RosPublisherExample.cs`
-- Open `RosPublisherExample.cs` and paste the following code:
-    - (Alternatively, you can copy the script file from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs`)
+- In the Project tab, create a new C# script and name it `RosPublisherExample`. Paste the following code into the new script file.
+    - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs`)
 
 ```csharp
-using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
+using RosMessageTypes.UnityRoboticsDemo;
 
 /// <summary>
-///
+/// 
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
     ROSConnection ros;
     public string topicName = "pos_rot";
 
-    // The game object
+    // The game object 
     public GameObject cube;
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.5f;
@@ -92,6 +55,7 @@ public class RosPublisherExample : MonoBehaviour
     {
         // start the ROS connection
         ros = ROSConnection.instance;
+        ros.RegisterPublisher<PosRotMsg>(topicName);
     }
 
     private void Update()
@@ -101,7 +65,7 @@ public class RosPublisherExample : MonoBehaviour
         if (timeElapsed > publishMessageFrequency)
         {
             cube.transform.rotation = Random.rotation;
-
+            
             PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
@@ -125,14 +89,16 @@ public class RosPublisherExample : MonoBehaviour
 - Move the cube a little ways up so it is hovering above the plane
 - In the main menu bar, open `Robotics/ROS Settings`.
     - Set the ROS IP address and port to match the ROS IP and port variables defined when you started the ROS endpoint.
-	- If using ROS2, select the ROS2 protocol.
+	- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, switch the protocol to ROS2.
 	
 	![](images/ros2_protocol.png)
 
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
     - Drag the cube GameObject onto the `Cube` parameter.
 
-- Pressing play in the Editor should publish a message every 0.5 seconds to the terminal running the `echo` command.
+- Press play in the Editor. You should see the connection lights at the top left corner of the Game window turn blue, and something like `[INFO] [1622242057.562860400] [TCPServer]: Connection from 172.17.0.1` appear in the terminal running your server_endpoint.
+	
+	In the window running your echo monitor, you should see the contents of your messages from Unity appearing every 0.5 seconds.
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 

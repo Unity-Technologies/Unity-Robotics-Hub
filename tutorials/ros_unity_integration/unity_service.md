@@ -4,35 +4,15 @@ Create a simple Unity scene which runs a [Service](http://wiki.ros.org/Services)
 
 ## Setting Up ROS
 
-(Skip to [Setting Up the Unity Scene](unity_service.md#setting-up-the-unity-scene) if you already did the [ROS–Unity Integration Publisher](publisher.md) or [Subscriber](subscriber.md) tutorials.)
-
-- Copy the `tutorials/ros_unity_integration/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
-
-- Follow the [ROS–Unity Initial Setup](setup.md) guide.
-
-- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-
-   ```bash
-    source devel/setup.bash
-    rosrun robotics_demo server_endpoint.py
-   ```
-
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+- Follow the [ROS–Unity Initial Setup](setup.md) guide if you haven't already done so.
 
 ## Setting Up the Unity Scene
-- Generate the C# code for `ObjectPoseService`'s messages by going to `Robotics` -> `Generate ROS Messages...`
- - Set the input file path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_unity_integration/ros_packages/robotics_demo`, expand the robotics_demo folder and click `Build 2 srvs` (Note that you may skip this step if you have already done it in the previous tutorial).
-
- ![](images/generate_messages_2.png)
-
- - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/srv`.
-
 - Create a new C# script and name it `RosUnityServiceExample.cs`
 - Paste the following code into `RosUnityServiceExample.cs`
-    - **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
+    - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts`).
 
 ```csharp
-using RosMessageTypes.RoboticsDemo;
+using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
@@ -42,13 +22,17 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 /// </summary>
 public class RosUnityServiceExample : MonoBehaviour
 {
+    ROSConnection ros;
+
     [SerializeField]
     string m_ServiceName = "obj_pose_srv";
 
     void Start()
     {
         // register the service with ROS
-        ROSConnection.instance.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
+        ros = ROSConnection.instance;
+        ros.RegisterUnityService<ObjectPoseServiceRequest>(m_ServiceName);
+        ros.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>
@@ -88,8 +72,14 @@ public class RosUnityServiceExample : MonoBehaviour
 
    ```bash
     source devel/setup.bash
-    rosrun robotics_demo object_pose_client.py Cube
+    rosrun unity_robotics_demo object_pose_client.py Cube
    ```
+     - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, the command is:
+	   ```bash
+		source install/setup.bash
+		ros2 run unity_robotics_demo object_pose_client Cube
+	   ```
+
 - This wil print an output similar to the following with the current pose information of the game object (note that the coordinates are converted to the ROS coordinate system in our Unity Service):
 
    ```bash
@@ -112,7 +102,13 @@ You may replace `Cube` with the name of any other GameObject currently present i
    ```bash
    rosservice call /obj_pose_srv Cube
    ```
-   ```bash
+   
+   - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, the command is:
+      ```bash
+       ros2 service call obj_pose_srv unity_robotics_demo_msgs/ObjectPoseService "{object_name: Cube}"
+      ```
+	  
+  ```bash
    object_pose:
     position:
       x: 0.0
@@ -123,4 +119,4 @@ You may replace `Cube` with the name of any other GameObject currently present i
       y: -0.0
       z: 0.0
       w: -1.0
-   ```
+  ```
