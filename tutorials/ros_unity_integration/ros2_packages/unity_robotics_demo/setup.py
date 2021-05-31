@@ -3,7 +3,7 @@ import os
 
 from setuptools import setup
 
-package_name = 'ros2_test'
+package_name = 'unity_robotics_demo'
 
 setup(
     name=package_name,
@@ -12,18 +12,16 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name), ['launch/test_launcher.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Unity Robotics',
-    maintainer_email='laurie.cheers@unity3d.com',
+    maintainer_email='unity-robotics@unity3d.com',
     description='ROS2 Unity Integration Testing',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'server_endpoint = ros2_test.server_endpoint:main',
             'color_publisher = ros2_test.color_publisher:main',
             'position_service = ros2_test.position_service:main',
         ],
