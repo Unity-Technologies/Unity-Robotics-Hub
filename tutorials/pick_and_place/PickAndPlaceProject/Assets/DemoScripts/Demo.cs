@@ -37,7 +37,7 @@ public class Demo : MonoBehaviour
 
     string niryoOneName = "niryo_one";
     string baseLinkName = "base_link";
-    float controllerStiffness = 10000;
+    float controllerStiffness = 100000;
     float controllerDamping = 1000;
     float controllerForceLimit = 1000;
     float controllerSpeed = 30;
