@@ -20,7 +20,8 @@ Simulation plays an important role in robotics development, and we’re here to 
 | [Pick-and-Place Demo](tutorials/pick_and_place/README.md) | A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control |
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
 | [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
-| [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo) | A robot simulation demonstrating Unity's new physics solver (no ROS dependency)
+| [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo) | A robot simulation demonstrating Unity's new physics solver (no ROS dependency) |
+| [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation) | A complete end-to-end demonstration in which we collect training data in Unity and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task
 
 
 ## Component Repos
