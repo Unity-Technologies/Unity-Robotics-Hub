@@ -3,7 +3,7 @@
 import random
 import rclpy
 
-#from unity_interfaces.srv import PositionService
+from unity_robotics_demo_msgs.srv import PositionService
 
 from rclpy.node import Node
 
@@ -11,7 +11,7 @@ class PositionServiceNode(Node):
 
     def __init__(self):
         super().__init__('position_service_node')
-        #self.srv = self.create_service(PositionService, 'pos_srv', self.new_position_callback)
+        self.srv = self.create_service(PositionService, 'pos_srv', self.new_position_callback)
 
     def new_position_callback(self, request, response):
         response.output.pos_x = random.uniform(-4.0, 4.0)

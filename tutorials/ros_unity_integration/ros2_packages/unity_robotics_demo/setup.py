@@ -22,8 +22,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'color_publisher = ros2_test.color_publisher:main',
-            'position_service = ros2_test.position_service:main',
+            'color_publisher = unity_robotics_demo.color_publisher:main',
+            'position_service = unity_robotics_demo.position_service:main',
         ],
     },
 )

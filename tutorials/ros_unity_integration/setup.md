@@ -21,7 +21,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
    Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
-5. Run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
+5. In your previous terminal, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
     ```bash
     rosparam set ROS_IP 127.0.0.1
     ```
@@ -54,19 +54,18 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 	
 	Ensure there are no errors.
 
-5. Open a new terminal window and run the following commands, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
+5. Run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
 
 	```bash
-    source install/setup.bash
 	ros2 run ros2_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1
     ```
 
   Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to set the ROS_TCP_PORT parameter:
+6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
 
 	```bash
-	`ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000`
+	ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
 	```
 
 ## Unity Scene
@@ -77,11 +76,11 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
   ![](images/add_package_2.png)
 
-3. From the Unity menu bar, open `Robotics/ROS Settings`, and set the `ROS IP Address` variable to the IP you set earlier.
+3. From the Unity menu bar, open `Robotics/ROS Settings`, and set the `ROS IP Address` variable to the IP you set earlier. (If using a Docker container, you can leave it on the default 127.0.0.1).
 
 	![](images/settings_ros_ip.png)
 
-4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If you're using ROS2, you should also switch the protocol to ROS2 now.
+4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now.
 	![](images/ros2_protocol.png)
 
 ## Setting up the Ros-Unity Integration tutorials
@@ -99,6 +98,6 @@ The instructions so far have set up the ROS-TCP-Connector package for general us
 
 3. In the message browser, expand the unity_robotics_demo_msgs subfolder and click "Build 2 msgs" and "Build 2 srvs" to generate C# scripts from the ROS .msg and .srv files.
 
-  ![](images/generate_messages_1.png)
+  ![](images/generate_messages_3.png)
 
   The generated files will be saved in the default directories `Assets/RosMessages/UnityRoboticsDemo/msg` and `Assets/RosMessages/UnityRoboticsDemo/srv`.

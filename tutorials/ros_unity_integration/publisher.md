@@ -8,27 +8,9 @@ These instructions cover the setup for both ROS1 and ROS2. If you're using ROS2,
 
 - Follow the [ROS–Unity Initial Setup](setup.md#ros2-environment) guide.
 
-## Start the Echo monitor
-
-- For this tutorial we will run the rostopic echo command, which watches the topic we're going to publish messages on, to prove they are being received.
-
-- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-	```bash
-	source devel/setup.bash
-	rostopic echo pos_rot
-	```
-- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
-	
-	```bash
-	source install/setup.bash
-	ros2 topic echo pos_rot
-	```
-
-- If it's working correctly it will print nothing and wait for a message to be published.
-
 ## Setting Up Unity Scene
 - In the Project tab, create a new C# script and name it `RosPublisherExample`. Paste the following code into the new script file.
-    - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs`)
+    - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs` in this repo.)
 
 ```csharp
 using UnityEngine;
@@ -97,8 +79,24 @@ public class RosPublisherExample : MonoBehaviour
     - Drag the cube GameObject onto the `Cube` parameter.
 
 - Press play in the Editor. You should see the connection lights at the top left corner of the Game window turn blue, and something like `[INFO] [1622242057.562860400] [TCPServer]: Connection from 172.17.0.1` appear in the terminal running your server_endpoint.
+
+## Start the Echo monitor
+
+- To prove that messages are actually being received by ROS, let's run the rostopic echo command.
+
+- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+	```bash
+	source devel/setup.bash
+	rostopic echo pos_rot
+	```
+- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
 	
-	In the window running your echo monitor, you should see the contents of your messages from Unity appearing every 0.5 seconds.
+	```bash
+	source install/setup.bash
+	ros2 topic echo pos_rot
+	```
+
+- If it's working correctly, you should see the contents of the message Unity is sending appearing every 0.5 seconds.
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
