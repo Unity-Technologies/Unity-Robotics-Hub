@@ -14,14 +14,14 @@ public class RealSimPickAndPlace : MonoBehaviour
     private const int CLOSE_GRIPPER = 2;
     private const int TOOL_COMMAND_EXECUTION = 6;
     private const int TRAJECTORY_COMMAND_EXECUTION = 7;
-    
+
     private ROSConnection ros;
     private const int NUM_ROBOT_JOINTS = 6;
-    
+
     // Hardcoded variables 
     private const float JOINT_ASSIGNMENT_WAIT = 0.038f;
     private readonly Vector3 PICK_POSE_OFFSET = Vector3.up * 0.15f;
-    
+
     // Assures that the gripper is always positioned above the target cube before grasping.
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
 
@@ -104,10 +104,10 @@ public class RealSimPickAndPlace : MonoBehaviour
                 orientation = pickOrientation.To<FLU>()
             }
         };
-        
+
         ros.Send(rosJointPublishTopicName, request);
     }
-    
+
     /// <summary>
     ///     Find all robot joints in Awake() and add them to the jointArticulationBodies array.
     ///     Find left and right finger joints and assign them to their respective articulation body objects.
@@ -120,16 +120,16 @@ public class RealSimPickAndPlace : MonoBehaviour
 
         string armLink = shoulder_link + "/arm_link";
         jointArticulationBodies[1] = niryoOne.transform.Find(armLink).GetComponent<ArticulationBody>();
-        
+
         string elbowLink = armLink + "/elbow_link";
         jointArticulationBodies[2] = niryoOne.transform.Find(elbowLink).GetComponent<ArticulationBody>();
-        
+
         string forearmLink = elbowLink + "/forearm_link";
         jointArticulationBodies[3] = niryoOne.transform.Find(forearmLink).GetComponent<ArticulationBody>();
-        
+
         string wristLink = forearmLink + "/wrist_link";
         jointArticulationBodies[4] = niryoOne.transform.Find(wristLink).GetComponent<ArticulationBody>();
-        
+
         string handLink = wristLink + "/hand_link";
         jointArticulationBodies[5] = niryoOne.transform.Find(handLink).GetComponent<ArticulationBody>();
 
@@ -143,7 +143,7 @@ public class RealSimPickAndPlace : MonoBehaviour
         rightGripperJoint = rightGripperGameObject.GetComponent<ArticulationBody>();
         leftGripperJoint = leftGripperGameObject.GetComponent<ArticulationBody>();
     }
-    
+
     void Start()
     {
         ros.Subscribe<MRobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
@@ -190,12 +190,12 @@ public class RealSimPickAndPlace : MonoBehaviour
         foreach (var point in trajectories.joint_trajectory.points)
         {
             var jointPositions = point.positions;
-            float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
-            
+            float[] result = jointPositions.Select(r => (float)r * Mathf.Rad2Deg).ToArray();
+
             // Set the joint values for every joint
             for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
             {
-                var joint1XDrive  = jointArticulationBodies[joint].xDrive;
+                var joint1XDrive = jointArticulationBodies[joint].xDrive;
                 joint1XDrive.target = result[joint];
                 jointArticulationBodies[joint].xDrive = joint1XDrive;
             }

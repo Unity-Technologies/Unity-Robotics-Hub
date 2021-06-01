@@ -20,7 +20,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 ## The Unity Side
 
-1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now. 
+1. If you have not already completed the steps in [Part 1](1_urdf.md) to set up the Unity project and [Part 2](2_ros_tcp.md) to integrate ROS with Unity, do so now.
 
 1. If the PickAndPlaceProject Unity project is not already open, select and open it from the Unity Hub.
 
@@ -33,7 +33,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     {
         MMoverServiceRequest request = new MMoverServiceRequest();
         request.joints_input = CurrentJointConfig();
-        
+
         // Pick Pose
         request.pick_pose = new MPose
         {
@@ -81,7 +81,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
                 {
                     var jointPositions = response.trajectories[poseIndex].joint_trajectory.points[jointConfigIndex].positions;
                     float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
-                    
+
                     for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
                     {
                         var joint1XDrive  = jointArticulationBodies[joint].xDrive;
@@ -93,7 +93,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
                 if (poseIndex == (int)Poses.Grasp)
                     CloseGripper();
-                
+
                 yield return new WaitForSeconds(poseAssignmentWait);
             }
             // Open Gripper at end of sequence
@@ -106,9 +106,9 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 
 1. Return to Unity. Select the Publisher GameObject and add the `TrajectoryPlanner` script as a component.
 
-1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned. 
+1. Note that the TrajectoryPlanner component shows its member variables in the Inspector window, which need to be assigned.
 
-    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
+    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field.
 
     ![](img/3_target.gif)
 
@@ -127,7 +127,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
 > Note the file `src/niryo_moveit/scripts/mover.py`. This script holds the ROS-side logic for the MoverService. When the service is called, the function `plan_pick_and_place()` runs. This calls `plan_trajectory` on the current joint configurations (sent from Unity) to a destination pose (dependent on the phase of the pick-and-place task).
 
 ```python
-def plan_trajectory(move_group, destination_pose, start_joint_angles): 
+def plan_trajectory(move_group, destination_pose, start_joint_angles):
     current_joint_state = JointState()
     current_joint_state.name = joint_names
     current_joint_state.position = start_joint_angles
@@ -149,11 +149,11 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
 ## ROS–Unity Communication
 
-1. If you have not already completed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace, do so now. 
+1. If you have not already completed the steps in [Part 0](0_ros_setup.md) to set up your ROS workspace, do so now.
 
-1. Open a new terminal window in the ROS workspace. Once again, source the workspace. 
+1. Open a new terminal window in the ROS workspace. Once again, source the workspace.
 
-    Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt. 
+    Then, run the following `roslaunch` in order to start roscore, set the ROS parameters, start the server endpoint, start the Mover Service node, and launch MoveIt.
 
     ```bash
     roslaunch niryo_moveit part_3.launch
@@ -165,9 +165,9 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
     > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 
-1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick up and place the cube! 
-   - The target object and placement positions can be moved around during runtime for different trajectory calculations. 
-  
+1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick up and place the cube!
+   - The target object and placement positions can be moved around during runtime for different trajectory calculations.
+
 ![](img/0_pick_place.gif)
 
 ---
@@ -184,12 +184,12 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 ### Errors and Warnings
 
 - If the motion planning script throws a `RuntimeError: Unable to connect to move_group action server 'move_group' within allotted time (5s)`, ensure the `roslaunch niryo_moveit part_3.launch` process launched correctly and has printed `You can start planning now!`.
-  
+
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
 
 ### Hangs, Timeouts, and Freezes
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the `ROS IP Address` in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly. 
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the `ROS IP Address` in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly.
 
 ### Miscellaneous Issues
 

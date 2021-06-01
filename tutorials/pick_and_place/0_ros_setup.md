@@ -1,7 +1,7 @@
 # Pick-and-Place Tutorial: Part 0
 
 This part provides two options for setting up your ROS workspace: using Docker, or manually setting up a catkin workspace.
-  
+
 **Table of Contents**
   - [Option A: Use Docker](#option-a-use-docker)
   - [Option B: Manual Setup](#option-b-manual-setup)
@@ -34,15 +34,15 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
     docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
     ```
 
-    > Note: The provided Dockerfile uses the [ROS Melodic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages, copy the [provided ROS packages and submodules](ROS/) to the container, and build the catkin workspace. 
-    
-1. Start the newly built Docker container: 
-   
+    > Note: The provided Dockerfile uses the [ROS Melodic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages, copy the [provided ROS packages and submodules](ROS/) to the container, and build the catkin workspace.
+
+1. Start the newly built Docker container:
+
     ```docker
     docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place /bin/bash
     ```
 
-    When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`. 
+    When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`.
 
 The ROS workspace is now ready to accept commands!
 
@@ -50,12 +50,12 @@ The ROS workspace is now ready to accept commands!
 
 ## Option B: Manual Setup
 
-1. Navigate to the `/PATH/TO/Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo. 
+1. Navigate to the `/PATH/TO/Unity-Robotics-Hub/tutorials/pick_and_place/ROS` directory of this downloaded repo.
    - This directory will be used as the [ROS catkin workspace](http://wiki.ros.org/catkin/Tutorials/using_a_workspace).
-   - If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules. 
+   - If you cloned the project and forgot to use `--recurse-submodules`, or if any submodule in this directory doesn't have content, you can run the command `git submodule update --init --recursive` to download packages for Git submodules.
    - Copy or download this directory to your ROS operating system if you are doing ROS operations in another machine, VM, or container.
     > Note: This contains the ROS packages for the pick-and-place task, including [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint), [Niryo One ROS stack](https://github.com/NiryoRobotics/niryo_one_ros), [MoveIt Msgs](https://github.com/ros-planning/moveit_msgs), `niryo_moveit`, and `niryo_one_urdf`.
-  
+
 1. The provided files require the following packages to be installed. ROS Melodic users should run the following commands if the packages are not already present:
 
    ```bash
@@ -75,7 +75,7 @@ The ROS workspace is now ready to accept commands!
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection, stored in `src/niryo_moveit/config/params.yaml`. From your ROS workspace, assign the ROS IP in this `yaml` file:
-    
+
     ```bash
     echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml
     ```
@@ -85,7 +85,7 @@ The ROS workspace is now ready to accept commands!
     ```yaml
     ROS_IP: <your ROS IP>
     ```
-    
+
     e.g.
 
     ```yaml
@@ -98,9 +98,9 @@ The ROS workspace is now ready to accept commands!
 
 ## Troubleshooting
 - Building the Docker image may throw an `Could not find a package configuration file provided by...` exception if one or more of the directories in ROS/ appears empty. Try downloading the submodules again via `git submodule update --init --recursive`.
-  
+
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade packages.
-  
+
 - If the ROS TCP handshake fails (e.g. `ROS-Unity server listening...` printed on the Unity side but no `ROS-Unity Handshake received` on the ROS side), the ROS IP may not have been set correctly in the params.yaml file. Try running `echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml` in a terminal from your ROS workspace.
 
 ---
@@ -108,7 +108,7 @@ The ROS workspace is now ready to accept commands!
 ## Resources
 - [Getting started with Docker](https://docs.docker.com/get-started/)
 - Setting up a ROS workspace:
-   
+
    > Note: this tutorial has been tested with ROS Melodic as well as ROS Noetic.
    -  http://wiki.ros.org/ROS/Installation
    -  http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment

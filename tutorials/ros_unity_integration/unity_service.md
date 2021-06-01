@@ -11,7 +11,7 @@ Create a simple Unity scene which create a [Service](http://wiki.ros.org/Service
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-  
+
    ```bash
     source devel/setup.bash
     rosrun robotics_demo server_endpoint.py
@@ -26,7 +26,7 @@ Once the server_endpoint has started, it will print something similar to `[INFO]
  ![](images/generate_messages_2.png)
 
  - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/srv`.
- 
+
 - Create a new C# script and name it `RosUnityServiceExample.cs`
 - Paste the following code into `RosUnityServiceExample.cs`
     - **Note:** This script can be found at `tutorials/ros_unity_integration/unity_scripts`.
@@ -65,13 +65,13 @@ public class RosUnityServiceExample : MonoBehaviour
         MObjectPoseServiceResponse objectPoseResponse = new MObjectPoseServiceResponse();
         // Find a game object with the requested name
         GameObject gameObject = GameObject.Find(request.object_name);
-        if (gameObject) 
+        if (gameObject)
         {
             // Fill-in the response with the object pose converted from Unity coordinate to ROS coordinate system
             objectPoseResponse.object_pose.position = gameObject.transform.position.To<FLU>();
             objectPoseResponse.object_pose.orientation = gameObject.transform.rotation.To<FLU>();
         }
-       
+
         return objectPoseResponse;
     }
 }
@@ -79,8 +79,8 @@ public class RosUnityServiceExample : MonoBehaviour
 
 - From the main menu bar, open `Robotics/ROS Settings`, and change the `ROS IP Address` variable to the ROS IP.
 - Create an empty GameObject and name it `UnityService`.
-- Attach the `RosUnityServiceExample` script to the `UnityService` GameObject. 
-- Pressing play in the Editor should start running as a ROS node, waiting to accept ObjectPose requests. Once a connection to ROS has been established, a message will be printed on the ROS terminal similar to `ROS-Unity Handshake received, will connect to 192.168.50.130:5005`.
+- Attach the `RosUnityServiceExample` script to the `UnityService` GameObject.
+- Pressing play in the Editor should start running as a ROS node, waiting to accept ObjectPose requests. Once a connection to ROS has been established, a message will be printed on the ROS terminal similar to `Connection from 172.17.0.1`.
 
 
 ## Start the Client
@@ -94,12 +94,12 @@ public class RosUnityServiceExample : MonoBehaviour
 
    ```bash
    Requesting pose for Cube
-   Pose for Cube: 
-   position: 
+   Pose for Cube:
+   position:
      x: 0.0
      y: -1.0
      z: 0.20000000298023224
-   orientation: 
+   orientation:
      x: 0.0
      y: -0.0
      z: 0.0
@@ -113,12 +113,12 @@ You may replace `Cube` with the name of any other GameObject currently present i
    rosservice call /obj_pose_srv Cube
    ```
    ```bash
-   object_pose: 
-    position: 
+   object_pose:
+    position:
       x: 0.0
       y: -1.0
       z: 0.20000000298023224
-    orientation: 
+    orientation:
       x: 0.0
       y: -0.0
       z: 0.0

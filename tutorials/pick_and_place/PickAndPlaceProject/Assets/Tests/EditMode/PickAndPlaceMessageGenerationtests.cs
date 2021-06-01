@@ -18,7 +18,7 @@ public class PickAndPlaceMessageGenerationTests
     {
         yield return new TestCaseData(Path.Combine(k_ROSDirectory, "moveit_msgs", "msg", "RobotTrajectory.msg"));
     }
-    
+
     // Define directories of message files to be generated here
     static IEnumerable<TestCaseData> MessageDirectories()
     {
@@ -46,7 +46,7 @@ public class PickAndPlaceMessageGenerationTests
         MessageAutoGen.GenerateDirectoryMessages(directoryToBuild, m_MessageGenOutputPath);
         AssetDatabase.Refresh();
     }
-    
+
     [Test]
     [TestCaseSource(nameof(ServiceDirectories))]
     public void TestServiceBuildDirectory_ThrowsNoExceptions(string directoryToBuild)

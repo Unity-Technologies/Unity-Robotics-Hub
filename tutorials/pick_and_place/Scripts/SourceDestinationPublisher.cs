@@ -8,20 +8,20 @@ public class SourceDestinationPublisher : MonoBehaviour
 {
     // ROS Connector
     private ROSConnection ros;
-    
+
     // Variables required for ROS communication
     public string topicName = "SourceDestination_input";
 
     public GameObject niryoOne;
     public GameObject target;
     public GameObject targetPlacement;
-    
+
     private int numRobotJoints = 6;
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
-    
+
     // Articulation Bodies
     private ArticulationBody[] jointArticulationBodies;
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -36,16 +36,16 @@ public class SourceDestinationPublisher : MonoBehaviour
 
         string arm_link = shoulder_link + "/arm_link";
         jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
-        
+
         string elbow_link = arm_link + "/elbow_link";
         jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
-        
+
         string forearm_link = elbow_link + "/forearm_link";
         jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
-        
+
         string wrist_link = forearm_link + "/wrist_link";
         jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
-        
+
         string hand_link = wrist_link + "/hand_link";
         jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
     }

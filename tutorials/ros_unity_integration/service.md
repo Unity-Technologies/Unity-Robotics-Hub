@@ -11,7 +11,7 @@ Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Serv
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-  
+
    ```bash
     source devel/setup.bash
     rosrun robotics_demo server_endpoint.py
@@ -105,5 +105,8 @@ public class RosServiceExample : MonoBehaviour
 - Create an empty GameObject and name it `RosService`.
 - Attach the `RosServiceExample` script to the `RosService` GameObject. Drag the cube GameObject onto its `cube` parameter.
 - Pressing play in the Editor should start communication with the `position_service` script, running as a ROS node, causing the cube to move to random positions in the scene.
+
+
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
 ![](images/tcp_3.gif)

@@ -9,7 +9,7 @@ The minimum requirements for a ROS–Unity integration.
 1. Navigate to your Catkin workspace and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
 1. Open a new terminal, navigate to your Catkin workspace, and run:
-   
+
    ```bash
    source devel/setup.bash
    roscore &
@@ -17,9 +17,9 @@ The minimum requirements for a ROS–Unity integration.
 
 Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
-1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity. 
+1. Note that in the `server_endpoint`, the script fetches parameters for the TCP connection. You will need to know the IP address of your ROS machine as well as the IP address of the machine running Unity.
    - The ROS machine IP, i.e. `ROS_IP` should be the same value as the one set as `Host Name` on the RosConnect component in Unity.
-1. The ROS parameter values can be set using a YAML file. Create a `params.yaml` file in your package, e.g. `./config/params.yaml`. Open the file for editing. 
+1. The ROS parameter values can be set using a YAML file. Create a `params.yaml` file in your package, e.g. `./config/params.yaml`. Open the file for editing.
 
 1. Update the `ROS_IP` below with the appropriate address and copy the contents into the `params.yaml` file.
 
@@ -27,7 +27,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
     ROS_IP: <your ROS IP>
     ROS_TCP_PORT: 10000
     ```
-    
+
     e.g.
 
     ```yaml
@@ -49,7 +49,7 @@ Once ROS Core has started, it will print `started core service [/rosout]` to the
         <rosparam file="$(find <PACKAGE_NAME>)/config/params.yaml" command="load"/>
     </launch>
     ```
-	
+
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 >
 > Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).

@@ -9,7 +9,7 @@ Create a simple Unity scene which publishes a GameObject's position and rotation
 - Follow the [ROS–Unity Initial Setup](setup.md) guide.
 
 - Open a new terminal window and run the following commands:
-  
+
    ```bash
     source devel/setup.bash
     rosrun robotics_demo server_endpoint.py
@@ -42,21 +42,21 @@ using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
     ROSConnection ros;
     public string topicName = "pos_rot";
 
-    // The game object 
+    // The game object
     public GameObject cube;
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.5f;
 
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
-    
+
     void Start()
     {
         // start the ROS connection
@@ -98,6 +98,8 @@ public class RosPublisherExample : MonoBehaviour
     - Drag the cube GameObject onto the `Cube` parameter.
 
 - Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
+
+> Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
 ![](images/tcp_1.gif)
 

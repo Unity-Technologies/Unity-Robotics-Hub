@@ -16,7 +16,7 @@ This part is going to be a little different than the previous tutorials in that 
   	- [Add niryo_moveit Package](#add-niryo_moveit-package)
   - [Execution](#execution)
 
-  
+
 # Niryo One Information
 
 The best source of information for the Niryo One is the [User Manual](https://niryo.com/docs/niryo-one/user-manual/complete-user-manual/). It contains a lot of general information about the Niryo One, such as how to connect it to a network, how to log in to it, and how to use the Niryo One Studio desktop application.
@@ -115,7 +115,7 @@ command_list:
 
 ```
 
-From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` variable will need to be `2` to close the gripper and `1` to open it. 
+From here we see that the `RobotMoveGoal.RobotMoveCommand.ToolCommand.cmd_type` variable will need to be `2` to close the gripper and `1` to open it.
 
 
 # Differences From Part 3
@@ -173,20 +173,20 @@ We will also make use of the `sim_and_real_pnp.py` script. It is very similar to
 
 	```python
 	def send_trajectory_goal(client, trajectory):
-	
+
 	    # Build the goal
 	    goal = RobotMoveGoal()
 	    goal.cmd.Trajectory = trajectory
 	    goal.cmd.cmd_type = TRAJECTORY_COMMAND_ID
-	
+
 	    client.send_goal(goal)
 	    client.wait_for_result()
-	
+
 	    return
 	```
 
 	- To send a gripper command:
-	
+
 	```python
 	def send_tool_goal(client, gripper_command):
 	    tool_command = ToolCommand()
@@ -194,35 +194,35 @@ We will also make use of the `sim_and_real_pnp.py` script. It is very similar to
 	    tool_command.cmd_type = gripper_command
 	    tool_command.gripper_open_speed = GRIPPER_SPEED
 	    tool_command.gripper_close_speed = GRIPPER_SPEED
-	
+
 	    goal = RobotMoveGoal()
 	    goal.cmd.tool_cmd = tool_command
 	    goal.cmd.cmd_type = TOOL_COMMAND_ID
-	
+
 	    client.send_goal(goal)
 	    client.wait_for_result()
-	
+
 	    return
 	```
 
 - The `pick_and_place` function has been updated to call the two previous functions instead of appending the trajectory or gripper command to a list.
 
 	- Example from `mover.py`
-	
+
 	```python
 	    previous_ending_joint_angles = grasp_pose.joint_trajectory.points[-1].positions
 	    response.trajectories.append(grasp_pose)
 	```
-	
+
 	- Updated code in `sim_real_pnp.py`
-	
+
 	```python
 	    previous_ending_joint_angles = grasp_pose.trajectory.joint_trajectory.points[-1].positions
 	    send_trajectory_goal(client, grasp_pose)
 	```
 
 # The Unity Side
-Using the same scene from [Part 3](3_pick_and_place.md), we are going to use a new script, `RealSimPickAndPlace.cs`, that mirrors a lot of the functionality of the `TrajectoryPlanner.cs` script. 
+Using the same scene from [Part 3](3_pick_and_place.md), we are going to use a new script, `RealSimPickAndPlace.cs`, that mirrors a lot of the functionality of the `TrajectoryPlanner.cs` script.
 
 
 ## Key Differences
@@ -272,7 +272,7 @@ void Start()
         {
             var jointPositions = point.positions;
             float[] result = jointPositions.Select(r=> (float)r * Mathf.Rad2Deg).ToArray();
-            
+
             // Set the joint values for every joint
             for (int joint = 0; joint < jointArticulationBodies.Length; joint++)
             {
@@ -303,9 +303,9 @@ void Start()
 
 1. Select the Publisher GameObject and add the `RealSimPickAndPlace` script as a component.
 
-1. Note that the RealSimPickAndPlace component shows its member variables in the Inspector window, which need to be assigned. 
+1. Note that the RealSimPickAndPlace component shows its member variables in the Inspector window, which need to be assigned.
 
-    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field. 
+    Once again, drag and drop the `Target` and `TargetPlacement` objects onto the Target and Target Placement Inspector fields, respectively. Assign the `niryo_one` robot to the Niryo One field.
 
     ![](img/4_script.png)
 
@@ -325,7 +325,7 @@ void Start()
 
 - The two files that will need to be updated are `niryo_one.urdf.xacro`  and `without_mesh_niryo_one.urdf.xacro` located in the `/home/niryo/catkin_ws/src/niryo_one_description/urdf/v2` directory.
 	- Look for the joint named `joint_world` and update the `origin`'s `xyz` to `0 0 0.63` to reflect that the simulated Niryo is placed at `0.63` on the Z axis.
-	
+
 	```xml
 	    <joint name="joint_world" type="fixed">
 	        <parent link="world" />

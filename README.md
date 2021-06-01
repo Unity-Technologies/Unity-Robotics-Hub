@@ -33,8 +33,7 @@ A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
 | Tutorial | Description |
 |---|---|
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
-| [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files | 
-
+| [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
 
 ## Component Repos
 
@@ -57,7 +56,7 @@ Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.u
 - (August 26, 2020)
 Announcing Unity Robotic Simulation [blog post](https://unity.com/solutions/automotive-transportation-manufacturing/robotics)
 - (May 20, 2020)
-Use articulation bodies to easily prototype industrial designs with realistic motion and behavior [blog post](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/) 
+Use articulation bodies to easily prototype industrial designs with realistic motion and behavior [blog post](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/)
 
 ### More from Unity
 
@@ -85,19 +84,20 @@ Interested in early access to ROS 2 integration? Email [unity-robotics@unity3d.c
 
 ## Community and Feedback
 
-The Unity Robotics projects are open-source and we encourage and welcome contributions. 
-If you wish to contribute, be sure to review our [contribution guidelines](CONTRIBUTING.md) 
+The Unity Robotics projects are open-source and we encourage and welcome contributions.
+If you wish to contribute, be sure to review our [contribution guidelines](CONTRIBUTING.md)
 and [code of conduct](CODE_OF_CONDUCT.md).
 
 ## Support
-For general questions, feedback, or feature requests, connect directly with the 
+
+For questions or discussions about Unity Robotics package installations or how to best set up and integrate your robotics projects, please create a new thread on the [Unity Robotics forum](https://forum.unity.com/forums/robotics.623/) and make sure to include as much detail as possible.
+
+For feature requests, bugs, or other issues, please file a [GitHub issue](https://github.com/Unity-Technologies/Unity-Robotics-Hub/issues) using the provided templates and the Robotics team will investigate as soon as possible.
+
+For any other questions or feedback, connect directly with the
 Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
 
-For bugs or other issues, please file a GitHub issue and the Robotics team will 
-investigate the issue as soon as possible.
-
 ## Newsletter
-
 To get notified about new updates and features, [sign up for our newsletter](https://create.unity3d.com/robotics-simulation-newsletter-sign-up)!
 
 ## License

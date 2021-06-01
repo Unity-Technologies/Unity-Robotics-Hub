@@ -14,6 +14,8 @@ The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Uni
 
 
 ## Tutorials
+- [ROS–Unity Integration: Initial Setup](setup.md) - ROS-Unity Initial Setup
+- [ROS–Unity Integration: Network Description](network.md) - Description of network settings and troubleshooting
 - [ROS–Unity Integration: Publisher](publisher.md) - Adding a Publisher to a Unity Scene
 - [ROS–Unity Integration: Subscriber](subscriber.md) - Adding a Subscriber to a Unity Scene
 - [ROS–Unity Integration: Service](service.md) - Adding a Service call to a Unity Scene

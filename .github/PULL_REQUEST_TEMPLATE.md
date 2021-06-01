@@ -16,7 +16,7 @@ Provide any relevant links here.
 
 ## Testing and Verification
 
-Please describe the tests that you ran to verify your changes. Please also provide instructions, ROS packages, and Unity project files as appropriate so we can reproduce the test environment. 
+Please describe the tests that you ran to verify your changes. Please also provide instructions, ROS packages, and Unity project files as appropriate so we can reproduce the test environment.
 
 ### Test Configuration:
 - Unity Version: [e.g. Unity 2020.2.0f1]
@@ -27,8 +27,9 @@ Please describe the tests that you ran to verify your changes. Please also provi
 ## Checklist
 - [ ] Ensured this PR is up-to-date with the `dev` branch
 - [ ] Created this PR to target the `dev` branch
-- [ ] Followed the style guidelines as described in the [Contribution Guidelines](../CONTRIBUTING.md)
+- [ ] Followed the style guidelines as described in the [Contribution Guidelines](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/CONTRIBUTING.md)
 - [ ] Added tests that prove my fix is effective or that my feature works
+- [ ] Updated the [Changelog](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/dev/CHANGELOG.md) and described changes in the [Unreleased section](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/dev/CHANGELOG.md#unreleased)
 - [ ] Updated the documentation as appropriate
 
 ## Other comments
