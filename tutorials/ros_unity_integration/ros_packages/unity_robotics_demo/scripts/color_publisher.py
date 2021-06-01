@@ -2,7 +2,7 @@
 
 import random
 import rospy
-from robotics_demo.msg import UnityColor
+from unity_robotics_demo_msgs.msg import UnityColor
 
 
 TOPIC_NAME = 'color'
