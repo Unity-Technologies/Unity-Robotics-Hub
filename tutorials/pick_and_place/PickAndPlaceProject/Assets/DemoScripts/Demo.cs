@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using RosSharp;
 using RosSharp.Control;
+using RosSharp.Urdf;
 using RosSharp.Urdf.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -166,12 +167,8 @@ public class Demo : MonoBehaviour
         // Create RosConnect
         GameObject rosConnect = new GameObject(rosConnectName);
         rosConnection = rosConnect.AddComponent<ROSConnection>();
-        rosConnection.rosIPAddress = hostIP;
-        rosConnection.rosPort = hostPort;
-        rosConnection.overrideUnityIP = overrideUnityIP;
-        rosConnection.unityPort = unityPort;
-        rosConnection.awaitDataMaxRetries = awaitDataMaxRetries;
-        rosConnection.awaitDataSleepSeconds = awaitDataSleepSeconds;
+        rosConnection.RosIPAddress = hostIP;
+        rosConnection.RosPort = hostPort;
     }
 
     private void ImportRobot()
@@ -185,7 +182,7 @@ public class Demo : MonoBehaviour
         string urdfFilepath = Path.Combine(Application.dataPath, urdfRelativeFilepath);
         // Create is a coroutine that would usually run only in EditMode, so we need to force its execution here
         var robotImporter = UrdfRobotExtensions.Create(urdfFilepath, urdfImportSettings, false);
-        while (robotImporter.MoveNext()) {}
+        while (robotImporter.MoveNext()) { }
         // Adjust robot parameters
         Controller controller = GameObject.Find(niryoOneName).GetComponent<Controller>();
         controller.stiffness = controllerStiffness;
@@ -210,9 +207,9 @@ public class Demo : MonoBehaviour
         parameters.GenerateExecutable = false;
 
         string[] texts = new string[filepaths.Length];
-        for (int i = 0; i < filepaths.Length; i ++)
+        for (int i = 0; i < filepaths.Length; i++)
         {
-            texts[i] = File.ReadAllText(filepaths[i]); 
+            texts[i] = File.ReadAllText(filepaths[i]);
         }
         CompilerResults results = provider.CompileAssemblyFromSource(parameters, texts);
         checkCompileErrors(results);
