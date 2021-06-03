@@ -65,7 +65,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
 
 	```bash
-	ros2 run unity_robotics_demo server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
+	ros2 run ros2_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
 	```
 
 ## Unity Scene
