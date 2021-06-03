@@ -24,7 +24,6 @@ public class RosSubscriberExample : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.instance;
-		ros.RegisterSubscriber<RosColor>("color");
 		ros.Subscribe<RosColor>("color", ColorChange);
     }
 
