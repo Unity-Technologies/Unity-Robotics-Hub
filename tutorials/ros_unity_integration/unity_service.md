@@ -100,3 +100,5 @@ public class RosUnityServiceExample : MonoBehaviour
     response:
 	unity_robotics_demo_msgs.srv.ObjectPoseService_Response(object_pose=geometry_msgs.msg.Pose(position=geometry_msgs.msg.Point(x=0.0, y=-0.0, z=0.0), orientation=geometry_msgs.msg.Quaternion(x=-0.558996319770813, y=-0.3232670724391937, z=-0.6114855408668518, w=-0.4572822153568268)))
     ```
+	
+Continue to the [ROS–Unity Integration Service Call](service_call.md).

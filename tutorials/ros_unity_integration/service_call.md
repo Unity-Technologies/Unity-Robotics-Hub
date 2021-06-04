@@ -1,13 +1,13 @@
-# ROS–Unity Integration: Service
+# ROS–Unity Integration: Service Call
 
-Create a simple Unity scene which calls a [ROS service](http://wiki.ros.org/Services) with a GameObject's position and rotation to receive a new position to move the GameObject towards.
+Create a simple Unity scene which calls an external [ROS service](http://wiki.ros.org/Services) with a GameObject's position and rotation to receive a new position to move the GameObject towards.
 
 ## Setting Up ROS
 
 - Follow the [ROS–Unity Initial Setup](setup.md) guide if you haven't already done so.
 
 ## Start the Position service
-- For this tutorial we will start the position_service executable, which runs a ros service. Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+- For this tutorial we will need a ros service for Unity to call. Open a new terminal window, navigate to your ROS workspace, and run the following commands:
 
    ```bash
     source devel/setup.bash
@@ -99,5 +99,3 @@ public class RosServiceExample : MonoBehaviour
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
 ![](images/tcp_3.gif)
-
-Continue to the [ROS–Unity Integration Unity Service](unity_service.md).
