@@ -22,4 +22,8 @@ RUN dos2unix /tutorial && dos2unix /setup.sh && chmod +x /setup.sh && /setup.sh 
 
 WORKDIR $ROS_WORKSPACE
 
+# making sure the file modes are executable
+RUN chmod +x src/niryo_moveit/scripts/*.py
+
 ENTRYPOINT ["/tutorial"]
+
