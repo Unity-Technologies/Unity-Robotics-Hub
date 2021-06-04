@@ -87,10 +87,14 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [Ros-Unity-Integration tutorials](README.md), you'll need to do the following additional steps:
 
-1. Copy `unity_robotics_demo` and `unity_robotics_demo_msgs` from the `tutorials/ros_unity_integration/ros_packages` folder of this repo into the `src` folder in your Catkin workspace, and then run `catkin_make`.
+1. Copy `unity_robotics_demo` and `unity_robotics_demo_msgs` from the `tutorials/ros_unity_integration/ros_packages` folder of this repo into the `src` folder in your Catkin workspace.
 
-    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, instead copy the versions from `tutorials/ros_unity_integration/ros2_packages`, and then run `colcon build`.
+    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, instead copy the versions from `tutorials/ros_unity_integration/ros2_packages`.
 
+
+1. Run `catkin_make`, and then `source devel/setup.bash` (again) so that ROS can find the newly built messages.
+
+    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, the commands are `colcon build`, then `source install/setup.bash`.
 
 2. In the Unity menu bar, go to `Robotics` -> `Generate ROS Messages...`. In the Message Browser window, click the Browse button at the top right to set the ROS message path to `tutorials/ros_unity_integration/ros_packages/unity_robotics_demo_msgs` in this repo.
 
