@@ -48,8 +48,8 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
-    colcon build
 	source install/setup.bash
+    colcon build
 	```
 	
 	Ensure there are no errors.
