@@ -18,7 +18,6 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 public class Demo : MonoBehaviour
 {
     public string hostIP = "127.0.0.1";
-    public string overrideUnityIP = "127.0.0.1";
 
     public bool generateRosMessages = true;
     public bool deleteRosMessagesAfterSimulation = true;
@@ -38,8 +37,8 @@ public class Demo : MonoBehaviour
 
     string niryoOneName = "niryo_one";
     string baseLinkName = "base_link";
-    float controllerStiffness = 10000;
-    float controllerDamping = 100;
+    float controllerStiffness = 100000;
+    float controllerDamping = 1000;
     float controllerForceLimit = 1000;
     float controllerSpeed = 30;
     float controllerAcceleration = 10;
