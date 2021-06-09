@@ -103,4 +103,120 @@ public class RosPublisherExample : MonoBehaviour
 
 ![](images/tcp_1.gif)
 
+## ROSSPublisherExample script
+
+```csharp
+using RosMessageTypes.RoboticsDemo;
+using UnityEngine;
+using Unity.Robotics.ROSTCPConnector;
+
+/// <summary>
+/// 
+/// </summary>
+public class RosPublisherExample : MonoBehaviour
+{
+    ROSConnection ros;
+    public string topicName = "pos_rot";
+
+    // The game object 
+    public GameObject cube;
+    // Publish the cube's position and rotation every N seconds
+    public float publishMessageFrequency = 0.5f;
+
+    // Used to determine how much time has elapsed since the last message was published
+    private float timeElapsed;
+    
+    void Start()
+    {
+        // start the ROS connection
+        ros = ROSConnection.instance;
+    }
+
+    private void Update()
+    {
+        timeElapsed += Time.deltaTime;
+
+        if (timeElapsed > publishMessageFrequency)
+        {
+            cube.transform.rotation = Random.rotation;
+
+            MPosRot cubePos = new MPosRot(
+                cube.transform.position.x,
+                cube.transform.position.y,
+                cube.transform.position.z,
+                cube.transform.rotation.x,
+                cube.transform.rotation.y,
+                cube.transform.rotation.z,
+                cube.transform.rotation.w
+            );
+
+            // Finally send the message to server_endpoint.py running in ROS
+            ros.Send(topicName, cubePos);
+
+            timeElapsed = 0;
+        }
+    }
+}
+```
+
+### Import Statements for Publisher and Messages 
+
+```csharp
+using RosMessageTypes.RoboticsDemo;
+using UnityEngine;
+using Unity.Robotics.ROSTCPConnector;
+```
+
+### Instantiating the ROSConnection class in unity
+
+```csharp
+void Start()
+    {
+        // start the ROS connection
+        ros = ROSConnection.instance;
+    }
+```
+To access the APIs needed to communicate with ROS, we need to create a variable of the class ROSConnection in the script. In the rest of the script, we will use `ros` variable to access the APIs needed to publish the message on the desired topic.
+
+### Creating the message
+
+```csharp
+timeElapsed += Time.deltaTime;
+
+        if (timeElapsed > publishMessageFrequency)
+        {
+            cube.transform.rotation = Random.rotation;
+
+            MPosRot cubePos = new MPosRot(
+                cube.transform.position.x,
+                cube.transform.position.y,
+                cube.transform.position.z,
+                cube.transform.rotation.x,
+                cube.transform.rotation.y,
+                cube.transform.rotation.z,
+                cube.transform.rotation.w
+            );
+```
+We create the message  by instantiating a new variable of the message class. In this case we are instantiating a new `MPosRot` message class and assigning the current position and rotation of the cube to the message.
+
+### Publishing the message
+
+```csharp
+ros.Send(topicName, cubePos);
+```
+After we have created the message, we use the `Send` API to publish the topic.
+
+### Send API
+```csharp
+public async void Send(string rosTopicName, Message message)
+```
+### Summary
+Its a non-static member of ROSConnection class. Its used to send a ROS message to the desired topic on the ROS machine.
+### Parameters
+ Parameters  | Description |
+| ------------- | ------------- |
+| `string rosTopicName`  | Name of the topic to which the message will be published  |
+| `Message message`  | Message to be published on the topic. 
+
+
 Continue to the [ROS Subscriber](subscriber.md) tutorial.
