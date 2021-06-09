@@ -6,10 +6,10 @@ These instructions cover the setup for both ROS1 and ROS2. Instructions for ROS2
 
 ## Setting Up ROS
 
-- Follow the [ROS–Unity Initial Setup](setup.md#ros2-environment) guide.
+- Follow the [ROS–Unity Demo Setup](setup.md#ros2-environment) guide.
 
-## Setting Up Unity Scene
-- In the Project tab, create a new C# script and name it `RosPublisherExample`. Paste the following code into the new script file.
+## Create Unity Publisher
+- In your Project tab in Unity, create a new C# script and name it `RosPublisherExample`. Paste the following code into the new script file.
     - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs` in this repo.)
 
 ```csharp
@@ -78,13 +78,13 @@ public class RosPublisherExample : MonoBehaviour
 
 - To prove that messages are actually being received by ROS, let's run the rostopic echo command.
 
-	- In ROS1, open a new terminal window, navigate to your ROS workspace, and run the following commands:
+	a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, open a new terminal window, navigate to your ROS workspace, and run the following commands:
 		```bash
 		source devel/setup.bash
 		rostopic echo pos_rot
 		```
 
-	- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
+	b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
 		
 		```bash
 		source install/setup.bash

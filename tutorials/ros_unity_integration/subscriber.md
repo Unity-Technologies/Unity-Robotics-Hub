@@ -4,9 +4,9 @@ Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.or
 
 ## Setting Up ROS
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide if you haven't already done so.
+- Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
-## Setting Up Unity Scene
+## Create Unity Subscriber
 
 - In Unity, create a new C# script and name it `RosSubscriberExample`. Paste the following code into the new script file.
     (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosSubscriberExample.cs`.)
@@ -40,9 +40,11 @@ public class RosSubscriberExample : MonoBehaviour
 - Press play in the editor
 
 ### In ROS Terminal Window
-- Run the following command: `rosrun unity_robotics_demo color_publisher.py` to change the color of the cube GameObject in Unity to a random color.
+Let's send a color message to change the color of the cube GameObject in Unity to a random color.
 
-- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run `ros2 run unity_robotics_demo color_publisher`.
+   a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, run: `rosrun unity_robotics_demo color_publisher.py`
+
+   b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run: `ros2 run unity_robotics_demo color_publisher`
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 

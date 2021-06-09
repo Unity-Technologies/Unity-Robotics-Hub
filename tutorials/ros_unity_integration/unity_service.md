@@ -4,9 +4,9 @@ Create a simple Unity scene which runs a [Service](http://wiki.ros.org/Services)
 
 ## Setting Up ROS
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide if you haven't already done so.
+- Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
-## Setting Up the Unity Scene
+## Create Unity Service
 - Create a new C# script and name it `RosUnityServiceExample.cs`
 - Paste the following code into `RosUnityServiceExample.cs`
     - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts`).
@@ -67,15 +67,17 @@ public class RosUnityServiceExample : MonoBehaviour
 
 ## Start the Client
 
-- To test our new service is working, run the following command in your ROS terminal:
+- To test our new service is working, let's call it using the built-in ROS service command.
+
+   a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, run the following command in your ROS terminal:
 
    ```bash
    rosservice call /obj_pose_srv Cube
    ```
    
-- In your Unity console you should see the log message `Received request for object: Cube`, and in your terminal it will report the object's position, like this:
+   In your Unity console you should see the log message `Received request for object: Cube`, and in your terminal it will report the object's position, like this:
 
-  ```bash
+   ```bash
    object_pose:
     position:
       x: 0.0
@@ -86,9 +88,9 @@ public class RosUnityServiceExample : MonoBehaviour
       y: -0.0
       z: 0.0
       w: -1.0
-  ```
+   ```
   
-- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If you're using ROS2, the command is:
+   b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If you're using ROS2, the command is:
     ```bash
     ros2 service call obj_pose_srv unity_robotics_demo_msgs/ObjectPoseService "{object_name: Cube}"
 	```

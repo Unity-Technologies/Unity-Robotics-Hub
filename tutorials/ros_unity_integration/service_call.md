@@ -4,17 +4,19 @@ Create a simple Unity scene which calls an external [ROS service](http://wiki.ro
 
 ## Setting Up ROS
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide if you haven't already done so.
+- Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
 ## Start the Position service
-- For this tutorial we will need a ros service for Unity to call. Open a new terminal window, navigate to your ROS workspace, and run the following commands:
+- For this tutorial we will need a ros service for Unity to call. In a new terminal window, navigate to your ROS workspace.
+
+   a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, run the following commands:
 
    ```bash
     source devel/setup.bash
     rosrun unity_robotics_demo position_service.py
    ```
 
-  - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run
+   b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run:
   
      ```bash
       source install/setup.bash
@@ -22,7 +24,7 @@ Create a simple Unity scene which calls an external [ROS service](http://wiki.ro
      ```
 
 
-## Setting Up Unity Scene
+## Create Unity Service Caller
 - Create a script and name it `RosServiceExample.cs`
 - Paste the following code into `RosServiceExample.cs`
     - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts`).

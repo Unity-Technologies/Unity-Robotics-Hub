@@ -14,7 +14,7 @@ The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Uni
 
 
 ## Tutorials
-- [ROS–Unity Integration: Initial Setup](setup.md) - ROS-Unity Initial Setup
+- [ROS–Unity Integration: Initial Setup](setup.md) - ROS–Unity Initial Setup
 - [ROS–Unity Integration: Network Description](network.md) - Description of network settings and troubleshooting
 - [ROS–Unity Integration: Publisher](publisher.md) - Publish messages from a Unity Scene
 - [ROS–Unity Integration: Subscriber](subscriber.md) - Subscribe to receive messages in a Unity Scene
