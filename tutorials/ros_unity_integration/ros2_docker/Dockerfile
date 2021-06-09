@@ -4,10 +4,10 @@ FROM ros:foxy-ros-base
 RUN mkdir -p /home/dev_ws/src
 
 # Copy ROS2 packages into workspace
-COPY ./ROS2_packages/ /home/dev_ws/src
+COPY ./ros2_packages/ /home/dev_ws/src
 
 # Reference script with commands to source workspace
-COPY ./docker/source_ros.sh /home/dev_ws/source_ros.sh
+COPY ./ros2_docker/source_ros.sh /home/dev_ws/source_ros.sh
 
 # Change to workspace on sign in
 RUN echo "cd home/dev_ws" >> ~/.bashrc

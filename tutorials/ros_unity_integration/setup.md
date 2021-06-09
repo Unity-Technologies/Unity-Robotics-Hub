@@ -42,19 +42,29 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 ## <img src="images/ros2_icon.png" alt="ros2" width="46" height="28"/> ROS2 Environment
 
-1. Follow these steps if using ROS2:
+Follow these steps if using ROS2:
 
-1. Download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
+1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials\ros_unity_integration` in your copy of this repo and run the following commands:
+
+   ```bash
+   docker build -t foxy -f ros2_docker/Dockerfile .
+   docker run -it --rm -p 10000:10000 foxy /bin/bash
+   ```
+   
+   This should build a docker image and start it. You can skip the next instruction.
+
+1. If you're not using the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
 	source install/setup.bash
     colcon build
+	source install/setup.bash
 	```
 	
-	Ensure there are no errors.
+	NB: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
-5. Run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
+5. In your Colcon workspace, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
 
 	```bash
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1
