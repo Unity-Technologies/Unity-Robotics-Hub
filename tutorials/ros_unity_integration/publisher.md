@@ -78,17 +78,18 @@ public class RosPublisherExample : MonoBehaviour
 
 - To prove that messages are actually being received by ROS, let's run the rostopic echo command.
 
-- Open a new terminal window, navigate to your ROS workspace, and run the following commands:
-	```bash
-	source devel/setup.bash
-	rostopic echo pos_rot
-	```
-- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
-	
-	```bash
-	source install/setup.bash
-	ros2 topic echo pos_rot
-	```
+	- In ROS1, open a new terminal window, navigate to your ROS workspace, and run the following commands:
+		```bash
+		source devel/setup.bash
+		rostopic echo pos_rot
+		```
+
+	- <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
+		
+		```bash
+		source install/setup.bash
+		ros2 topic echo pos_rot
+		```
 
 - If it's working correctly, you should see the contents of the message Unity is sending appearing every 0.5 seconds.
 

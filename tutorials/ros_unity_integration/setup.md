@@ -56,7 +56,7 @@ Follow these steps if using ROS2:
    
    This should build a docker image and start it.
 
-   b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
+   b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
@@ -67,10 +67,10 @@ Follow these steps if using ROS2:
 	
 	Note: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
-5. In your Colcon workspace, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
+5. In your Colcon workspace, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`.
 
 	```bash
-	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1
+	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=$(hostname -I)
     ```
 
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
@@ -83,7 +83,7 @@ Follow these steps if using ROS2:
 
 ## Unity Scene
 1. Launch Unity and create a new project.
-2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
+2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
   ![](images/add_package.png)
 
@@ -96,22 +96,25 @@ Follow these steps if using ROS2:
 4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now.
 	![](images/ros2_protocol.png)
 
-## Setting up the Ros-Unity Integration tutorials
+## Setting up the ROS–Unity Integration tutorials
 
-The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [Ros-Unity-Integration tutorials](README.md), you'll need to do the following additional steps:
+The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [ROS–Unity Integration tutorials](README.md), you'll need to do the following additional steps:
 
-1. Copy the `unity_robotics_demo` and `unity_robotics_demo_msgs` packages from `tutorials/ros_unity_integration/ros_packages` in this repo into the `src` folder in your Catkin workspace.
+1. Copy the `unity_robotics_demo` and `unity_robotics_demo_msgs` packages into the `src` folder in your Catkin workspace. (Skip this step if you're using one of the Dockerfiles from this repo: they have the demo packages pre-installed.)
 
-    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, instead copy the versions from `tutorials/ros_unity_integration/ros2_packages`.
+    - If using ROS1, copy them from from `tutorials/ros_unity_integration/ros_packages` in this repo.
 
+    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, copy them from `tutorials/ros_unity_integration/ros2_packages` in this repo.
 
-1. Run `catkin_make`, and then `source devel/setup.bash` (again) so that ROS can find the newly built messages.
+1. Build the new packages.
 
-    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, the commands are `colcon build`, then `source install/setup.bash`.
+	- In ROS1: Run `catkin_make`, and then `source devel/setup.bash` (again) so that ROS can find the newly built messages.
+
+    - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2: run `colcon build`, then `source install/setup.bash` (again) so that ROS can find the newly built messages.
 
 2. In the Unity menu bar, go to `Robotics` -> `Generate ROS Messages...`. In the Message Browser window, click the Browse button at the top right to set the ROS message path to `tutorials/ros_unity_integration/ros_packages/unity_robotics_demo_msgs` in this repo.
 
-   (Note: The version in the ros2_packages folder is equivalent; Ros2 users can feel free to use it, or not.)
+   (Note: The version in the ros2_packages folder is equivalent; ROS2 users can feel free to use it, or not.)
 
 3. In the message browser, expand the unity_robotics_demo_msgs subfolder and click "Build 2 msgs" and "Build 2 srvs" to generate C# scripts from the ROS .msg and .srv files.
 
