@@ -74,6 +74,10 @@ public class RosPublisherExample : MonoBehaviour
 
 - Press play in the Editor. You should see the connection lights at the top left corner of the Game window turn blue, and something like `[INFO] [1622242057.562860400] [TCPServer]: Connection from 172.17.0.1` appear in the terminal running your server_endpoint.
 
+## Common Errors
+
+If you see the error `Failed to resolve message name: No module named unity_robotics_demo_msgs.msg` followed by `Topic 'pos_rot' is not registered` in the ROS-TCP-Endpoint log, you may have missed the step about installing the unity_robotics_demo_msgs package, or perhaps you forgot to build and/or source it afterwards. Try following [these instructions](setup.md#install-unity-robotics-demo).
+
 ## Start the Echo monitor
 
 - To prove that messages are actually being received by ROS, let's run the rostopic echo command.

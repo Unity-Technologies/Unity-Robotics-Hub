@@ -8,7 +8,18 @@ These instructions cover both ROS1 and ROS2. The symbols <img src="images/ros1_i
 
 Follow these steps to use ROS (melodic or noetic):
 
-1. Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
+1.
+   a) If you don't already have a ROS environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
+
+   ```bash
+   docker build -t melodic -f ros_docker/Dockerfile .
+   docker run -it --rm -p 10000:10000 melodic /bin/bash
+   ```
+   
+   This should build a docker image and start it.
+
+   b) (Alternative) If you're not using the Docker image, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
+
 
 1. Navigate to your Catkin workspace and run `catkin_make`, then `source devel/setup.bash`. Ensure there are no errors.
 
@@ -81,7 +92,7 @@ Follow these steps if using ROS2:
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
 	```
 
-## Unity Scene
+## Unity Setup
 1. Launch Unity and create a new project.
 2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
@@ -96,7 +107,7 @@ Follow these steps if using ROS2:
 4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now.
 	![](images/ros2_protocol.png)
 
-## Setting up the ROS–Unity Integration tutorials
+## Install Unity Robotics Demo
 
 The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [ROS–Unity Integration tutorials](README.md), you'll need to do the following additional steps:
 
