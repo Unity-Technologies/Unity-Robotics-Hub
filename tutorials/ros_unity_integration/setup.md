@@ -47,6 +47,7 @@ Follow these steps if using ROS2:
 1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials\ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
+   git submodule init
    git submodule update
    docker build -t foxy -f ros2_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 foxy /bin/bash
