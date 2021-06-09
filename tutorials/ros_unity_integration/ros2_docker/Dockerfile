@@ -1,0 +1,19 @@
+FROM ros:foxy-ros-base
+
+# Make ROS2 Workspace Dirss
+RUN mkdir -p /home/dev_ws/src
+
+# Copy ROS2 packages into workspace
+COPY ./ROS2_packages/ /home/dev_ws/src
+
+# Reference script with commands to source workspace
+COPY ./docker/source_ros.sh /home/dev_ws/source_ros.sh
+
+# Change to workspace on sign in
+RUN echo "cd home/dev_ws" >> ~/.bashrc
+
+# Build the workspace
+RUN cd home/dev_ws && . /opt/ros/foxy/setup.sh && colcon build
+
+# Source the workspace on sign in
+RUN echo ". install/local_setup.bash" >> ~/.bashrc

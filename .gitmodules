@@ -7,3 +7,6 @@
 [submodule "tutorials/pick_and_place/ROS/src/ros_tcp_endpoint"]
 	path = tutorials/pick_and_place/ROS/src/ros_tcp_endpoint
 	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
+[submodule "tutorials/ros_unity_integration/ros2_packages/ROS-TCP-Endpoint"]
+	path = tutorials/ros_unity_integration/ros2_packages/ROS-TCP-Endpoint
+	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint
