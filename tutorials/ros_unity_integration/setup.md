@@ -44,7 +44,8 @@ Follow these steps to use ROS (melodic or noetic):
 
 Follow these steps if using ROS2:
 
-1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
+1. 
+   a) If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
    git submodule init
@@ -55,7 +56,7 @@ Follow these steps if using ROS2:
    
    This should build a docker image and start it.
 
-1. (Alternative) If you're not using the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
+   b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
@@ -110,7 +111,7 @@ The instructions so far have set up the ROS-TCP-Connector package for general us
 
 2. In the Unity menu bar, go to `Robotics` -> `Generate ROS Messages...`. In the Message Browser window, click the Browse button at the top right to set the ROS message path to `tutorials/ros_unity_integration/ros_packages/unity_robotics_demo_msgs` in this repo.
 
-  (Note: The version in the ros2_packages folder is equivalent; Ros2 users can feel free to use it, or not.)
+   (Note: The version in the ros2_packages folder is equivalent; Ros2 users can feel free to use it, or not.)
 
 3. In the message browser, expand the unity_robotics_demo_msgs subfolder and click "Build 2 msgs" and "Build 2 srvs" to generate C# scripts from the ROS .msg and .srv files.
 
