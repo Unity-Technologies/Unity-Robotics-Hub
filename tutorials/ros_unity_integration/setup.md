@@ -4,7 +4,7 @@ This document is in two parts - part 1 covers the minimum requirements for a ROS
 
 These instructions cover both ROS1 and ROS2. The symbols <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> and <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> indicate instructions for ROS1 and ROS2 users, respectively. If using ROS2, start with [ROS2 Environment](setup.md#-ros2-environment).
 
-## ROS Environment
+## <img src="images/ros1_icon.png" alt="ros1" width="28" height="28"/> ROS Environment
 
 Follow these steps to use ROS (melodic or noetic):
 
@@ -102,13 +102,13 @@ The instructions so far have set up the ROS-TCP-Connector package for general us
 
 1. Copy the `unity_robotics_demo` and `unity_robotics_demo_msgs` packages into the `src` folder in your Catkin workspace. (Skip this step if you're using one of the Dockerfiles from this repo: they have the demo packages pre-installed.)
 
-    - If using ROS1, copy them from from `tutorials/ros_unity_integration/ros_packages` in this repo.
+    - <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> If using ROS1, copy them from from `tutorials/ros_unity_integration/ros_packages` in this repo.
 
     - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, copy them from `tutorials/ros_unity_integration/ros2_packages` in this repo.
 
 1. Build the new packages.
 
-	- In ROS1: Run `catkin_make`, and then `source devel/setup.bash` (again) so that ROS can find the newly built messages.
+	- <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1: Run `catkin_make`, and then `source devel/setup.bash` (again) so that ROS can find the newly built messages.
 
     - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2: run `colcon build`, then `source install/setup.bash` (again) so that ROS can find the newly built messages.
 

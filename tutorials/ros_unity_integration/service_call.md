@@ -25,8 +25,8 @@ Create a simple Unity scene which calls an external [ROS service](http://wiki.ro
 
 
 ## Create Unity Service Caller
-- Create a script and name it `RosServiceExample.cs`
-- Paste the following code into `RosServiceExample.cs`
+- Create a script and name it `RosServiceCallExample.cs`
+- Paste the following code into `RosServiceCallExample.cs`
     - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts`).
 
 ```csharp
@@ -34,7 +34,7 @@ using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.UnityRoboticsDemo;
 
-public class RosServiceExample : MonoBehaviour
+public class RosServiceCallExample : MonoBehaviour
 {
     ROSConnection ros;
 
@@ -58,7 +58,7 @@ public class RosServiceExample : MonoBehaviour
 
     private void Update()
     {
-        // M ove our position a step closer to the target. 
+        // Move our position a step closer to the target. 
         float step = speed * Time.deltaTime; // calculate distance to move
         cube.transform.position = Vector3.MoveTowards(cube.transform.position, destination, step);
 
