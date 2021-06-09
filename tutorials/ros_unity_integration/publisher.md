@@ -2,7 +2,7 @@
 
 Create a simple Unity scene which publishes a GameObject's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
-These instructions cover the setup for both ROS1 and ROS2. If you're using ROS2, start with the [Setting Up ROS2](publisher.md#setting-up-ros2) section. Instructions for ROS2 users are marked with this icon: <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/>.
+These instructions cover the setup for both ROS1 and ROS2. Instructions for ROS2 users are marked with this icon: <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/>.
 
 ## Setting Up ROS
 
