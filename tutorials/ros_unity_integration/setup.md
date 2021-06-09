@@ -44,7 +44,7 @@ Follow these steps to use ROS (melodic or noetic):
 
 Follow these steps if using ROS2:
 
-1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials\ros_unity_integration` in your copy of this repo and run the following commands:
+1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
    git submodule init
@@ -64,7 +64,7 @@ Follow these steps if using ROS2:
 	source install/setup.bash
 	```
 	
-	NB: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
+	Note: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
 5. In your Colcon workspace, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
 
