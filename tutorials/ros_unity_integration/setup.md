@@ -6,7 +6,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 ## ROS Environment
 
-1. Follow these steps if using ROS (melodic or noetic):
+Follow these steps to use ROS (melodic or noetic):
 
 1. Download and copy the [TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
 
@@ -47,13 +47,14 @@ Follow these steps if using ROS2:
 1. If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials\ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
+   git submodule update
    docker build -t foxy -f ros2_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 foxy /bin/bash
    ```
    
-   This should build a docker image and start it. You can skip the next instruction.
+   This should build a docker image and start it.
 
-1. If you're not using the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
+1. (Alternative) If you're not using the Docker image, download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
