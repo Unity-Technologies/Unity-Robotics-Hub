@@ -34,7 +34,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
     rosrun ros_tcp_endpoint default_server_endpoint.py
    ```
 
-  Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+   Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 >
@@ -44,7 +44,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 1. Follow these steps if using ROS2:
 
-1. Download the [ROS2 TCP Endpoint](https://github.com/Unity-Technologies/ROS2-TCP-Endpoint) repository and copy the folders `ROS2_packages/ros2_tcp_endpoint` and `ROS2_packages/unity_interfaces` into the `src` folder in your Colcon workspace.
+1. Download the [ROS2 branch of the ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
 
 1. Navigate to your Colcon workspace and run the following commands
     ```bash
@@ -57,7 +57,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 5. Run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
 
 	```bash
-	ros2 run ros2_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1
+	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1
     ```
 
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
@@ -65,7 +65,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
 
 	```bash
-	ros2 run ros2_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
+	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
 	```
 
 ## Unity Scene
@@ -87,7 +87,7 @@ The minimum requirements for a ROS–Unity integration. These instructions cover
 
 The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [Ros-Unity-Integration tutorials](README.md), you'll need to do the following additional steps:
 
-1. Copy `unity_robotics_demo` and `unity_robotics_demo_msgs` from the `tutorials/ros_unity_integration/ros_packages` folder of this repo into the `src` folder in your Catkin workspace.
+1. Copy the `unity_robotics_demo` and `unity_robotics_demo_msgs` packages from `tutorials/ros_unity_integration/ros_packages` in this repo into the `src` folder in your Catkin workspace.
 
     - <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If using ROS2, instead copy the versions from `tutorials/ros_unity_integration/ros2_packages`.
 
