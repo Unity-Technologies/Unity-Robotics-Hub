@@ -8,16 +8,13 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 /// </summary>
 public class RosUnityServiceExample : MonoBehaviour
 {
-    ROSConnection ros;
-
     [SerializeField]
     string m_ServiceName = "obj_pose_srv";
 
     void Start()
     {
         // register the service with ROS
-        ros = ROSConnection.instance;
-        ros.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
+        ROSConnection.instance.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>

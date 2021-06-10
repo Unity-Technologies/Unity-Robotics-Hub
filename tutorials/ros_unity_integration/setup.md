@@ -103,8 +103,8 @@ Follow these steps if using ROS2:
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000
 	```
 
-## Unity Setup
-1. Launch Unity and create a new project.
+## <img src="images/unity-tab-square-white.png" alt="ros2" width="24" height="24"/> Unity Setup
+1. Launch Unity and create a new project. The Robotics package works best with a version of Unity no older than 2020.
 2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
   ![](images/add_package.png)
@@ -115,7 +115,7 @@ Follow these steps if using ROS2:
 
 	![](images/settings_ros_ip.png)
 
-4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now in the ROS Settings window.
+4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> Also in the ROS Settings window, ROS2 users should switch the protocol to ROS2 now.
 	![](images/ros2_protocol.png)
 
 ## Install Unity Robotics Demo
@@ -142,4 +142,4 @@ The instructions so far have set up the ROS-TCP-Connector package for general us
 
   ![](images/generate_messages_3.png)
 
-  The generated files will be saved in the default directories `Assets/RosMessages/UnityRoboticsDemo/msg` and `Assets/RosMessages/UnityRoboticsDemo/srv`.
+  The generated files will be saved in the default directories `Assets/RosMessages/UnityRoboticsDemo/msg` and `Assets/RosMessages/UnityRoboticsDemo/srv`. Note, there is no difference between the message scripts generated in ROS1 and ROS2 mode. You don't need to regenerate messages when you switch between them.

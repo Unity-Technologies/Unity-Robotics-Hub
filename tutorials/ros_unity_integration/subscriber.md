@@ -2,7 +2,7 @@
 
 Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a GameObject.
 
-## Setting Up ROS
+## Setting Up
 
 - Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
@@ -18,13 +18,11 @@ using RosColor = RosMessageTypes.UnityRoboticsDemo.UnityColorMsg;
 
 public class RosSubscriberExample : MonoBehaviour
 {
-	ROSConnection ros;
     public GameObject cube;
 
     void Start()
     {
-        ros = ROSConnection.instance;
-		ros.Subscribe<RosColor>("color", ColorChange);
+        ROSConnection.instance.Subscribe<RosColor>("color", ColorChange);
     }
 
     void ColorChange(RosColor colorMessage)

@@ -2,7 +2,7 @@
 
 Create a simple Unity scene which calls an external [ROS service](http://wiki.ros.org/Services) with a GameObject's position and rotation to receive a new position to move the GameObject towards.
 
-## Setting Up ROS
+## Setting Up
 
 - Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 

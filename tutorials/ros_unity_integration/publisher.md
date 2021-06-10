@@ -4,7 +4,7 @@ Create a simple Unity scene which publishes a GameObject's position and rotation
 
 These instructions cover the setup for both ROS1 and ROS2. Instructions for ROS2 users are marked with this icon: <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/>.
 
-## Setting Up ROS
+## Setting Up
 
 - Follow the [ROS–Unity Demo Setup](setup.md#ros2-environment) guide.
 
@@ -67,8 +67,16 @@ public class RosPublisherExample : MonoBehaviour
 }
 ```
 
-- Add a plane and a cube to the empty Unity scene
-- Move the cube a little ways up so it is hovering above the plane
+- Add a plane and a cube to your Unity scene. You can create simple geometric shapes in Unity by going to the Hierarchy window, clicking the + button, and navigating to the shape you want to create.
+
+![](images/create_cube.png)
+
+- Move the cube a little ways up so it is hovering above the plane. To do this, select the cube in the hierarchy window, and click on the move tool in the toolbar at the top left of the Unity window.
+
+![](images/move_tool.png)
+
+- Draggable arrows will appear around the cube in the Scene view; to move the cube up, drag the vertical (green) arrow upwards.
+
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
     - Drag the cube GameObject onto the `Cube` parameter.
 
@@ -76,7 +84,7 @@ public class RosPublisherExample : MonoBehaviour
 
 ## Common Errors
 
-If you see the error `Failed to resolve message name: No module named unity_robotics_demo_msgs.msg` followed by `Topic 'pos_rot' is not registered` in the ROS-TCP-Endpoint log, you may have missed the step about installing the unity_robotics_demo_msgs package, or perhaps you forgot to build and/or source it afterwards. Try following [these instructions](setup.md#install-unity-robotics-demo).
+If you see the error `Failed to resolve message name: No module named unity_robotics_demo_msgs.msg` followed by `Topic 'pos_rot' is not registered` in the ROS-TCP-Endpoint log, you may have missed the step about installing the unity_robotics_demo_msgs package, or perhaps you forgot to build and/or source it afterwards. Try following the "Install Unity Robotics Demo" instructions [here](setup.md#install-unity-robotics-demo).
 
 ## Start the Echo monitor
 
@@ -94,6 +102,10 @@ If you see the error `Failed to resolve message name: No module named unity_robo
 		source install/setup.bash
 		ros2 topic echo pos_rot
 		```
+
+- If you're using Docker, you can use the command `docker ps` to get a list of all running containers; `docker exec -ti bash <container name> bash` starts a new terminal for the specified container. Alternatively, click the "CLI" button in the Docker UI to open a new terminal ("command line interface").
+
+![](images/docker_cli.png)
 
 - If it's working correctly, you should see the contents of the message Unity is sending appearing every 0.5 seconds.
 

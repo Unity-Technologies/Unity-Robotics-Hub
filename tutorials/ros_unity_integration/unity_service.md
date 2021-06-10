@@ -2,7 +2,7 @@
 
 Create a simple Unity scene which runs a [Service](http://wiki.ros.org/Services) in Unity that takes a request with a GameObject's name and responds with the GameObject's pose (position and orientation) in the ROS coordinate system.
 
-## Setting Up ROS
+## Setting Up
 
 - Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
@@ -22,16 +22,13 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 /// </summary>
 public class RosUnityServiceExample : MonoBehaviour
 {
-    ROSConnection ros;
-
     [SerializeField]
     string m_ServiceName = "obj_pose_srv";
 
     void Start()
     {
         // register the service with ROS
-        ros = ROSConnection.instance;
-        ros.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
+        ROSConnection.instance.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>
