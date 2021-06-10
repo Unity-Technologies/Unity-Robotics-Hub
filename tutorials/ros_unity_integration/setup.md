@@ -12,13 +12,15 @@ Follow these steps to use ROS (melodic or noetic):
    a) If you don't already have a ROS environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
+   git submodule init
+   git submodule update
    docker build -t melodic -f ros_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 melodic /bin/bash
    ```
    
    This should build a docker image and start it.
 
-   b) (Alternative) If you're not using the Docker image, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package to the `src` folder in your Catkin workspace.
+   b) (Alternative) If you're using your own ROS environment, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package into the `src` folder in your Catkin workspace.
 
 
 1. Navigate to your Catkin workspace and run `catkin_make`, then `source devel/setup.bash`. Ensure there are no errors.
@@ -32,10 +34,15 @@ Follow these steps to use ROS (melodic or noetic):
 
    Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
-5. In your previous terminal, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`. If you're running ROS in a Docker container, the default incoming IP address is 0.0.0.0.)
+5. In your previous terminal, run the following command, replacing the `<your IP address>` with your ROS machine's IP or hostname.
+   
     ```bash
-    rosparam set ROS_IP 127.0.0.1
+    rosparam set ROS_IP <your IP address>
     ```
+
+   - If you're running ROS in a Docker container, you can just use `rosparam set ROS_IP 0.0.0.0`
+   - On Linux you can find out your IP address with the command `hostname -I`
+   - On MacOS you can find out your IP address with `ipconfig getifaddr en0`
 
 6. (Optional) By default, the server_endpoint will listen on port 10000, but this is also controlled by a parameter. If you need to change it, you can run the command `rosparam set ROS_TCP_PORT 10000`, replacing 10000 with the desired port number.
 
@@ -78,12 +85,16 @@ Follow these steps if using ROS2:
 	
 	Note: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
-5. In your Colcon workspace, run the following command, replacing the IP address 127.0.0.1 with your ROS machine's IP or hostname. (If you don't know your IP address, you can find it out with the command `hostname -I`.
+5. In your Colcon workspace, run the following command, replacing `<your IP address>` with your ROS machine's IP or hostname.
 
 	```bash
-	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=$(hostname -I)
+	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=<your IP address>
     ```
 
+   - If you're running ROS in a Docker container, 0.0.0.0 is a valid incoming address, so you can write `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=ROS_IP 0.0.0.0`
+   - On Linux you can find out your IP address with the command `hostname -I`
+   - On MacOS you can find out your IP address with `ipconfig getifaddr en0`
+   
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
@@ -100,11 +111,11 @@ Follow these steps if using ROS2:
 
   ![](images/add_package_2.png)
 
-3. From the Unity menu bar, open `Robotics/ROS Settings`, and set the `ROS IP Address` variable to the IP you set earlier. (If using a Docker container, you can leave it on the default 127.0.0.1).
+3. If you're not using a Docker container, open `Robotics/ROS Settings` from the Unity menu bar, and set the `ROS IP Address` variable to the IP you set earlier. (If you're using Docker, leave it as the default 127.0.0.1.)
 
 	![](images/settings_ros_ip.png)
 
-4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now.
+4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> ROS2 users should also switch the protocol to ROS2 now in the ROS Settings window.
 	![](images/ros2_protocol.png)
 
 ## Install Unity Robotics Demo

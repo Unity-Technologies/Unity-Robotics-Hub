@@ -10,3 +10,6 @@
 [submodule "tutorials/ros_unity_integration/ros2_packages/ROS-TCP-Endpoint"]
 	path = tutorials/ros_unity_integration/ros2_packages/ROS-TCP-Endpoint
 	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint
+[submodule "tutorials/ros_unity_integration/ros_packages/ROS-TCP-Endpoint"]
+	path = tutorials/ros_unity_integration/ros_packages/ROS-TCP-Endpoint
+	url = https://github.com/Unity-Technologies/ROS-TCP-Endpoint
