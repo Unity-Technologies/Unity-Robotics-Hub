@@ -118,7 +118,7 @@ namespace Unity.Robotics.PickAndPlace
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.name == k_NameExpectedTarget)
+            if (other.gameObject.name == m_Target.name)
             {
                 CurrentState = PlacementState.InsideFloating;
             }
@@ -126,7 +126,7 @@ namespace Unity.Robotics.PickAndPlace
 
         void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.name == k_NameExpectedTarget)
+            if (other.gameObject.name == m_Target.name)
             {
                 CurrentState = PlacementState.Outside;
             }
