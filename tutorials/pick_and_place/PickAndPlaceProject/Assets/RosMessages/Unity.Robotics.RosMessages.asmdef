@@ -1,0 +1,16 @@
+{
+    "name": "Unity.Robotics.RosMessages",
+    "rootNamespace": "",
+    "references": [
+        "GUID:625bfc588fb96c74696858f2c467e978"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

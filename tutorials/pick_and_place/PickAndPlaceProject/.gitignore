@@ -12,6 +12,12 @@
 /[Aa]ssets/[Rr]os[Mm]essages/
 /[Aa]ssets/[Rr]os[Mm]essages.meta
 
+
+# Ignore scripts that are expected to get copied in at some point
+/**/SourceDestinationPublisher.*
+/**/TrajectoryPlanner.*
+
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
