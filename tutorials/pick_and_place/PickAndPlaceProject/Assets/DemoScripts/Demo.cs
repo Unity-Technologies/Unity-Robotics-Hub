@@ -80,7 +80,7 @@ public class Demo : MonoBehaviour
         CreateRosConnection();
         CreateTrajectoryPlannerPublisher();
     }
-
+    
     void Update()
     {
         // Make sure to publish only once in the demo

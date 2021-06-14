@@ -574,7 +574,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: 
+    1: INTEGRATION_TEST
   additionalCompilerArguments:
     1: []
   platformArchitecture: {}
