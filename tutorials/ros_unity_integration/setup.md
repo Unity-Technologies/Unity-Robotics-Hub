@@ -91,7 +91,7 @@ Follow these steps if using ROS2:
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=<your IP address>
     ```
 
-   - If you're running ROS in a Docker container, 0.0.0.0 is a valid incoming address, so you can write `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=ROS_IP 0.0.0.0`
+   - If you're running ROS in a Docker container, 0.0.0.0 is a valid incoming address, so you can write `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=0.0.0.0`
    - On Linux you can find out your IP address with the command `hostname -I`
    - On MacOS you can find out your IP address with `ipconfig getifaddr en0`
    
