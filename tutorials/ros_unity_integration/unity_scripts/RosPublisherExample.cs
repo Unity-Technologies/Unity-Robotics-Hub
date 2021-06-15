@@ -32,7 +32,7 @@ public class RosPublisherExample : MonoBehaviour
         if (timeElapsed > publishMessageFrequency)
         {
             cube.transform.rotation = Random.rotation;
-            
+
             PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,

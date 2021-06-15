@@ -17,7 +17,7 @@ Create a simple Unity scene which calls an external [ROS service](http://wiki.ro
    ```
 
    b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run:
-  
+
      ```bash
       source install/setup.bash
       ros2 run unity_robotics_demo position_service
@@ -49,7 +49,7 @@ public class RosServiceCallExample : MonoBehaviour
 
     float awaitingResponseUntilTimestamp = -1;
 
-    void Start() 
+    void Start()
     {
         ros = ROSConnection.instance;
         ros.RegisterRosService<PositionServiceRequest>(serviceName);
@@ -58,12 +58,12 @@ public class RosServiceCallExample : MonoBehaviour
 
     private void Update()
     {
-        // Move our position a step closer to the target. 
+        // Move our position a step closer to the target.
         float step = speed * Time.deltaTime; // calculate distance to move
         cube.transform.position = Vector3.MoveTowards(cube.transform.position, destination, step);
 
         if (Vector3.Distance(cube.transform.position, destination) < delta && Time.time > awaitingResponseUntilTimestamp)
-        { 
+        {
             Debug.Log("Destination reached.");
 
             PosRotMsg cubePos = new PosRotMsg(

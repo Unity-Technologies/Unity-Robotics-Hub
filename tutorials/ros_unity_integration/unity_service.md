@@ -71,7 +71,7 @@ public class RosUnityServiceExample : MonoBehaviour
    ```bash
    rosservice call /obj_pose_srv Cube
    ```
-   
+
    In your Unity console you should see the log message `Received request for object: Cube`, and in your terminal it will report the object's position, like this:
 
    ```bash
@@ -86,12 +86,12 @@ public class RosUnityServiceExample : MonoBehaviour
       z: 0.0
       w: -1.0
    ```
-  
+
    b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> If you're using ROS2, the command is:
     ```bash
     ros2 service call obj_pose_srv unity_robotics_demo_msgs/ObjectPoseService "{object_name: Cube}"
 	```
-    
+
 	And the output will look like this:
 
     ```bash
@@ -99,5 +99,5 @@ public class RosUnityServiceExample : MonoBehaviour
     response:
 	unity_robotics_demo_msgs.srv.ObjectPoseService_Response(object_pose=geometry_msgs.msg.Pose(position=geometry_msgs.msg.Point(x=0.0, y=-0.0, z=0.0), orientation=geometry_msgs.msg.Quaternion(x=-0.558996319770813, y=-0.3232670724391937, z=-0.6114855408668518, w=-0.4572822153568268)))
     ```
-	
+
 Continue to the [ROS–Unity Integration Service Call](service_call.md).

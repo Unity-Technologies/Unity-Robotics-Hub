@@ -17,7 +17,7 @@ Follow these steps to use ROS (melodic or noetic):
    docker build -t melodic -f ros_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 melodic /bin/bash
    ```
-   
+
    This should build a docker image and start it.
 
    b) (Alternative) If you're using your own ROS environment, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package into the `src` folder in your Catkin workspace. Then navigate to your Catkin workspace and run `catkin_make`, then `source devel/setup.bash`. Ensure there are no errors.
@@ -32,7 +32,7 @@ Follow these steps to use ROS (melodic or noetic):
    Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
 3. In your previous terminal, run the following command, replacing the `<your IP address>` with your ROS machine's IP or hostname.
-   
+
     ```bash
     rosparam set ROS_IP <your IP address>
     ```
@@ -63,7 +63,7 @@ Follow these steps to use ROS (melodic or noetic):
 
 Follow these steps if using ROS2:
 
-1. 
+1.
    a) If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
@@ -72,7 +72,7 @@ Follow these steps if using ROS2:
    docker build -t foxy -f ros2_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 foxy /bin/bash
    ```
-   
+
    This should build a docker image and start it.
 
    b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace. Then navigate to your Colcon workspace and run the following commands:
@@ -82,7 +82,7 @@ Follow these steps if using ROS2:
     colcon build
 	source install/setup.bash
 	```
-	
+
 	Note: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
 2. In your Colcon workspace, run the following command, replacing `<your IP address>` with your ROS machine's IP or hostname.
@@ -94,7 +94,7 @@ Follow these steps if using ROS2:
    - If you're running ROS in a Docker container, 0.0.0.0 is a valid incoming address, so you can write `ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=0.0.0.0`
    - On Linux you can find out your IP address with the command `hostname -I`
    - On MacOS you can find out your IP address with `ipconfig getifaddr en0`
-   
+
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 3. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:

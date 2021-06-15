@@ -18,14 +18,14 @@ using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.UnityRoboticsDemo;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class RosPublisherExample : MonoBehaviour
 {
     ROSConnection ros;
     public string topicName = "pos_rot";
 
-    // The game object 
+    // The game object
     public GameObject cube;
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.5f;
@@ -47,7 +47,7 @@ public class RosPublisherExample : MonoBehaviour
         if (timeElapsed > publishMessageFrequency)
         {
             cube.transform.rotation = Random.rotation;
-            
+
             PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
@@ -97,7 +97,7 @@ If you see the error `Failed to resolve message name: No module named unity_robo
 		```
 
 	b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
-		
+
 		```bash
 		source install/setup.bash
 		ros2 topic echo pos_rot
