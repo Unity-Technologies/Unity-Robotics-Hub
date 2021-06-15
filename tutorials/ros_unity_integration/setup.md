@@ -20,12 +20,9 @@ Follow these steps to use ROS (melodic or noetic):
    
    This should build a docker image and start it.
 
-   b) (Alternative) If you're using your own ROS environment, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package into the `src` folder in your Catkin workspace.
+   b) (Alternative) If you're using your own ROS environment, download and copy the [ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) package into the `src` folder in your Catkin workspace. Then navigate to your Catkin workspace and run `catkin_make`, then `source devel/setup.bash`. Ensure there are no errors.
 
-
-1. Navigate to your Catkin workspace and run `catkin_make`, then `source devel/setup.bash`. Ensure there are no errors.
-
-1. Open a new terminal, navigate to your Catkin workspace, and run:
+2. Open a new terminal, navigate to your Catkin workspace, and run:
 
    ```bash
    source devel/setup.bash
@@ -34,7 +31,7 @@ Follow these steps to use ROS (melodic or noetic):
 
    Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
 
-5. In your previous terminal, run the following command, replacing the `<your IP address>` with your ROS machine's IP or hostname.
+3. In your previous terminal, run the following command, replacing the `<your IP address>` with your ROS machine's IP or hostname.
    
     ```bash
     rosparam set ROS_IP <your IP address>
@@ -53,6 +50,9 @@ Follow these steps to use ROS (melodic or noetic):
    ```
 
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
+
+> Note, for this tutorial we have illustrated how to do everything manually, but for day-to-day use, we recommend starting the endpoint with a launch file. Replace all the above (including the roscore step) with the following command: `roslaunch ros_tcp_endpoint endpoint.launch`.
+> To define the ROS_IP and ROS_TCP_PORT when using a launch file
 
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 >
@@ -74,9 +74,8 @@ Follow these steps if using ROS2:
    
    This should build a docker image and start it.
 
-   b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace.
+   b) Alternatively, if you're not going to use the Docker image, download the [ROS2 branch of the ROS-TCP-Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint/tree/ROS2) repository and copy it into the `src` folder in your Colcon workspace. Then navigate to your Colcon workspace and run the following commands:
 
-1. Navigate to your Colcon workspace and run the following commands
     ```bash
 	source install/setup.bash
     colcon build
@@ -85,7 +84,7 @@ Follow these steps if using ROS2:
 	
 	Note: yes, you need to run the source command twice. The first sets up the environment for the build to use, the second time adds the newly built packages to the environent.
 
-5. In your Colcon workspace, run the following command, replacing `<your IP address>` with your ROS machine's IP or hostname.
+2. In your Colcon workspace, run the following command, replacing `<your IP address>` with your ROS machine's IP or hostname.
 
 	```bash
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=<your IP address>
@@ -97,7 +96,7 @@ Follow these steps if using ROS2:
    
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-6. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
+3. (Alternative) If you need the server to listen on a port that's different from the default 10000, here's the command line to also set the ROS_TCP_PORT parameter:
 
 	```bash
 	ros2 run ros_tcp_endpoint default_server_endpoint --ros-args -p ROS_IP:=127.0.0.1 -p ROS_TCP_PORT:=10000

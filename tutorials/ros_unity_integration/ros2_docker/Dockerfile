@@ -6,6 +6,9 @@ RUN mkdir -p /home/dev_ws/src
 # Copy ROS2 packages into workspace
 COPY ./ros2_packages/ /home/dev_ws/src
 
+#Check out ROS-TCP-Endpoint, ROS2 version
+RUN git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint /home/dev_ws/src/ros_tcp_endpoint -b ROS2
+
 # Reference script with commands to source workspace
 COPY ./ros2_docker/source_ros.sh /home/dev_ws/source_ros.sh
 
