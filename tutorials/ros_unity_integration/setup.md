@@ -52,7 +52,8 @@ Follow these steps to use ROS (melodic or noetic):
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
 > Note, for this tutorial we have illustrated how to do everything manually, but for day-to-day use, we recommend starting the endpoint with a launch file. Replace all the above (including the roscore step) with the following command: `roslaunch ros_tcp_endpoint endpoint.launch`.
-> To define the ROS_IP and ROS_TCP_PORT when using a launch file
+> While using this launch file, your ROS_IP and ROS_TCP_PORT parameters are read from the file src/ros_tcp_endpoint/config/params.yaml. You can edit this file to adjust your settings - for example, this command will set the appropriate IP address for your machine:
+> `echo "ROS_IP: $(hostname -i)" > src/ros-tcp-endpoint/config/params.yaml`
 
 > Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
 >
