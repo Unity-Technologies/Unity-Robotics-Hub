@@ -12,8 +12,6 @@ Follow these steps to use ROS (melodic or noetic):
    a) If you don't already have a ROS environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
-   git submodule init
-   git submodule update
    docker build -t melodic -f ros_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 melodic /bin/bash
    ```
@@ -67,8 +65,6 @@ Follow these steps if using ROS2:
    a) If you don't already have a ROS2 environment set up, we recommend using Docker. Navigate to `tutorials/ros_unity_integration` in your copy of this repo and run the following commands:
 
    ```bash
-   git submodule init
-   git submodule update
    docker build -t foxy -f ros2_docker/Dockerfile .
    docker run -it --rm -p 10000:10000 foxy /bin/bash
    ```
@@ -105,7 +101,7 @@ Follow these steps if using ROS2:
 
 ## <img src="images/unity-tab-square-white.png" alt="ros2" width="24" height="24"/> Unity Setup
 1. Launch Unity and create a new project. The Robotics package works best with a version of Unity no older than 2020.
-2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector" to install the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
+2. Open Package Manager and click the + button at the top left corner. Select "add package from git URL" and enter "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector#laurie/Ros2Merge" to install the [ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) package.
 
   ![](images/add_package.png)
 
