@@ -91,17 +91,18 @@ If you see the error `Failed to resolve message name: No module named unity_robo
 - To prove that messages are actually being received by ROS, let's run the rostopic echo command.
 
 	a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, open a new terminal window, navigate to your ROS workspace, and run the following commands:
-		```bash
-		source devel/setup.bash
-		rostopic echo pos_rot
-		```
+
+    ```bash
+    source devel/setup.bash
+    rostopic echo pos_rot
+    ```
 
 	b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
 
-		```bash
-		source install/setup.bash
-		ros2 topic echo pos_rot
-		```
+    ```bash
+    source install/setup.bash
+    ros2 topic echo pos_rot
+    ```
 
 - If you're using Docker, you can use the command `docker ps` to get a list of all running containers; `docker exec -ti bash <container name> bash` starts a new terminal for the specified container. Alternatively, click the "CLI" button in the Docker UI to open a new terminal ("command line interface").
 
