@@ -31,11 +31,11 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     ```csharp
     public void PublishJoints()
     {
-        MMoverServiceRequest request = new MMoverServiceRequest();
+        MoverServiceRequest request = new MoverServiceRequest();
         request.joints_input = CurrentJointConfig();
 
         // Pick Pose
-        request.pick_pose = new MPose
+        request.pick_pose = new PoseMsg
         {
             position = (target.transform.position + pickPoseOffset).To<FLU>(),
             // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
@@ -43,16 +43,16 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
         };
 
         // Place Pose
-        request.place_pose = new MPose
+        request.place_pose = new PoseMsg
         {
             position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
             orientation = pickOrientation.To<FLU>()
         };
 
-        ros.SendServiceMessage<MMoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
+        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
     }
 
-    void TrajectoryResponse(MMoverServiceResponse response)
+    void TrajectoryResponse(MoverServiceResponse response)
     {
         if (response.trajectories != null)
         {
@@ -71,7 +71,7 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     > The `response.trajectories` are received in the `TrajectoryResponse()` callback, as defined in the `ros.SendServiceMessage` parameters. These trajectories are passed to `ExecuteTrajectories()` and executed as a [coroutine](https://docs.unity3d.com/Manual/Coroutines.html):
 
     ```csharp
-    private IEnumerator ExecuteTrajectories(MMoverServiceResponse response)
+    private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
     {
         if (response.trajectories != null)
         {
