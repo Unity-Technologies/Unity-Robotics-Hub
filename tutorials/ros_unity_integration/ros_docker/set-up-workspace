@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source /opt/ros/melodic/setup.bash
+echo "ROS_IP: 0.0.0.0" > $ROS_WORKSPACE/src/ros_tcp_endpoint/config/params.yaml
+cd $ROS_WORKSPACE
+catkin_make

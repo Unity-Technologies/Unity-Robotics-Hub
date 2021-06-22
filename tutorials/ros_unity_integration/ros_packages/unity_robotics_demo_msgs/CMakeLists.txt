@@ -1,17 +1,21 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(robotics_demo)
+project(unity_robotics_demo_msgs)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   geometry_msgs
-  ros_tcp_endpoint
   message_generation
 )
 
-add_message_files(DIRECTORY msg)
-
-add_service_files(DIRECTORY srv)
+add_message_files(FILES
+    PosRot.msg
+    UnityColor.msg
+)
+add_service_files(FILES
+    ObjectPoseService.srv
+	PositionService.srv
+)
 
 generate_messages(
   DEPENDENCIES
@@ -20,16 +24,7 @@ generate_messages(
 )
 
 catkin_package(CATKIN_DEPENDS
-    ros_tcp_endpoint
     message_runtime)
-
-catkin_install_python(PROGRAMS
-  scripts/server_endpoint.py
-  scripts/position_service.py
-  scripts/color_publisher.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
 
 #############
 ## Testing ##

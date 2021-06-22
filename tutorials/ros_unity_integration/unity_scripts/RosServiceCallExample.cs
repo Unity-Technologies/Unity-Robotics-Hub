@@ -1,4 +1,4 @@
-using RosMessageTypes.RoboticsDemo;
+using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 
@@ -20,6 +20,7 @@ public class RosServiceExample : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.instance;
+        ros.RegisterRosService<PositionServiceRequest>(serviceName);
         destination = cube.transform.position;
     }
 
@@ -33,7 +34,7 @@ public class RosServiceExample : MonoBehaviour
         {
             Debug.Log("Destination reached.");
 
-            MPosRot cubePos = new MPosRot(
+            PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
@@ -43,15 +44,15 @@ public class RosServiceExample : MonoBehaviour
                 cube.transform.rotation.w
             );
 
-            MPositionServiceRequest positionServiceRequest = new MPositionServiceRequest(cubePos);
+            PositionServiceRequest positionServiceRequest = new PositionServiceRequest(cubePos);
 
             // Send message to ROS and return the response
-            ros.SendServiceMessage<MPositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
+            ros.SendServiceMessage<PositionServiceResponse>(serviceName, positionServiceRequest, Callback_Destination);
             awaitingResponseUntilTimestamp = Time.time + 1.0f; // don't send again for 1 second, or until we receive a response
         }
     }
 
-    void Callback_Destination(MPositionServiceResponse response)
+    void Callback_Destination(PositionServiceResponse response)
     {
         awaitingResponseUntilTimestamp = -1;
         destination = new Vector3(response.output.pos_x, response.output.pos_y, response.output.pos_z);
