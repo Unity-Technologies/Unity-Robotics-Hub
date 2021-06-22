@@ -78,9 +78,9 @@ public class TrajectoryPlanner : MonoBehaviour
     ///     Get the current values of the robot's joint angles.
     /// </summary>
     /// <returns>NiryoMoveitJoints</returns>
-    MNiryoMoveitJoints CurrentJointConfig()
+    NiryoMoveitJointsMsg CurrentJointConfig()
     {
-        MNiryoMoveitJoints joints = new MNiryoMoveitJoints();
+        NiryoMoveitJointsMsg joints = new NiryoMoveitJointsMsg();
 
         joints.joint_00 = jointArticulationBodies[0].xDrive.target;
         joints.joint_01 = jointArticulationBodies[1].xDrive.target;
@@ -101,11 +101,11 @@ public class TrajectoryPlanner : MonoBehaviour
     /// </summary>
     public void PublishJoints()
     {
-        MMoverServiceRequest request = new MMoverServiceRequest();
+        MoverServiceRequest request = new MoverServiceRequest();
         request.joints_input = CurrentJointConfig();
 
         // Pick Pose
-        request.pick_pose = new MPose
+        request.pick_pose = new PoseMsg
         {
             position = (target.transform.position + pickPoseOffset).To<FLU>(),
             // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
@@ -113,16 +113,16 @@ public class TrajectoryPlanner : MonoBehaviour
         };
 
         // Place Pose
-        request.place_pose = new MPose
+        request.place_pose = new PoseMsg
         {
             position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
             orientation = pickOrientation.To<FLU>()
         };
 
-        ros.SendServiceMessage<MMoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
+        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
     }
 
-    void TrajectoryResponse(MMoverServiceResponse response)
+    void TrajectoryResponse(MoverServiceResponse response)
     {
         if (response.trajectories.Length > 0)
         {
@@ -149,7 +149,7 @@ public class TrajectoryPlanner : MonoBehaviour
     /// </summary>
     /// <param name="response"> MoverServiceResponse received from niryo_moveit mover service running in ROS</param>
     /// <returns></returns>
-    private IEnumerator ExecuteTrajectories(MMoverServiceResponse response)
+    private IEnumerator ExecuteTrajectories(MoverServiceResponse response)
     {
         if (response.trajectories != null)
         {

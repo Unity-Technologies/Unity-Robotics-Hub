@@ -59,9 +59,6 @@ public class Demo : MonoBehaviour
     string rosConnectName = "ROSConnect";
     string publisherName = "Publisher";
     int hostPort = 10000;
-    int unityPort = 5005;
-    int awaitDataMaxRetries = 10;
-    int awaitDataSleepSeconds = 1;
 
     string trajectoryPlannerType = "TrajectoryPlanner";
     string rosServiceName = "niryo_moveit";

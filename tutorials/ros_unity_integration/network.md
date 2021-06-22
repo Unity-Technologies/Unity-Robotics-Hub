@@ -15,8 +15,6 @@
 
 `ROS_IP` : The IP address of the machine, VM, or container running ROS.
 
-`UNITY_IP` : The IP address of the machine running Unity.
-
 > It is possible to set both of these variables on the machines running Unity and ROS. The specifics of where and why each of these settings will be described below.
 
 On the ROS machine these settings are set as a rosparam and will typically be set in a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_packages/robotics_demo/launch/robo_demo.launch) or in a [param file](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/config/params.yaml) loaded by a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/launch/part_3.launch#L2). The param file can also be loaded manually by running the `rosparam load params.yaml` command.
@@ -37,18 +35,9 @@ The container will need to be started with the following arguments to forward th
 
 - On the ROS side, set `ROS_IP` to `0.0.0.0`.
 
-- On the Unity side, set `ROS_IP` to `127.0.0.1` and the `Override Unity IP Address` to your local machine's IP address.
+- On the Unity side, set `ROS_IP` to `127.0.0.1`.
 
 ![](images/troubleshoot-docker-unity.png)
-
-## Explicitly setting `UNITY_IP`
-
-The `UNITY_IP` can be set in two different places.
-
-1. If set on the ROS side as a rosparam, the `server_endpoint` will only use this IP to send messages to Unity.
-1. If set on the Unity side as the `Override Unity IP Address`, the `UNITY_IP` on the ROS side will be set to this value during the initial handshake between ROS and Unity once play is pressed in the Editor.
-
-> If the `UNITY_IP` is not set in either of these places, then the IP that makes the first connection to ROS during the initial handshake will be used.
 
 # Troubleshooting
 

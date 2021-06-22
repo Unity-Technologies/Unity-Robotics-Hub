@@ -5,7 +5,7 @@ from __future__ import print_function
 import random
 import rospy
 
-from robotics_demo.srv import PositionService, PositionServiceResponse
+from unity_robotics_demo_msgs.srv import PositionService, PositionServiceResponse
 
 
 def new_position(req):
