@@ -265,7 +265,7 @@ void Start()
 - The ExecuteTrajectories function has been updated to accept a single RobotTrajectory object and execute the robot poses one at a time:
 
 ```csharp
-    private IEnumerator ExecuteTrajectories(RobotTrajectory trajectories)
+    private IEnumerator ExecuteTrajectories(RobotTrajectoryMsg trajectories)
     {
         // For every robot pose in trajectory plan
         foreach (var point in trajectories.joint_trajectory.points)
