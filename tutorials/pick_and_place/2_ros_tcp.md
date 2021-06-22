@@ -55,7 +55,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_robottraj.png)
 
-	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: MRobotTrajectory. This name is the same as the message you built, with an "M" prefix (for message).
+	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectoryMsg.cs. This name is the same as the message you built, with an "Msg" suffix (for message).
 
 1. Next, the custom message scripts for this tutorial will need to be generated.
 
@@ -63,7 +63,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_msg.png)
 
-	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: MNiryoMoveitJoints and MNiryoTrajectory. MNiryoMoveitJoints describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. MNiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
+	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJointsMsg.cs and NiryoTrajectoryMsg.cs. The NiryoMoveitJoints message describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. NiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
 
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
@@ -73,7 +73,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_srv.png)
 
-   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MMoverServiceRequest and MMoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories.
+   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories.
 
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
@@ -86,7 +86,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    ```csharp
    public void Publish()
    {
-      MNiryoMoveitJoints sourceDestinationMessage = new MNiryoMoveitJoints();
+      NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
       sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
       sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
@@ -96,7 +96,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
 
       // Pick Pose
-      sourceDestinationMessage.pick_pose = new MPose
+      sourceDestinationMessage.pick_pose = new PoseMsg
       {
          position = target.transform.position.To<FLU>(),
          // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
@@ -104,7 +104,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       };
 
       // Place Pose
-      sourceDestinationMessage.place_pose = new MPose
+      sourceDestinationMessage.place_pose = new PoseMsg
       {
          position = targetPlacement.transform.position.To<FLU>(),
          orientation = pickOrientation.To<FLU>()
@@ -117,7 +117,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`).
 
-   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are provided via the [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md) in the ROS-TCP-Connector package.
+   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's coordinate space has x Right, y Up, and z Forward (hence "RUF" coordinates); ROS has x Forward, y Left and z Up (hence "FLU"). So a Unity `(x,y,z)` coordinate is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are done by the `To<FLU>` function in the ROS-TCP-Connector package's [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md).
 
 1. Return to the Unity Editor. Now that the message contents have been defined and the publisher script added, it needs to be added to the Unity world to run its functionality.
 
