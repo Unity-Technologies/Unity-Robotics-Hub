@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Robotics.PickAndPlace",
+    "rootNamespace": "",
+    "references": [
+        "GUID:204b12c73a0ba074c888ec09a2713605",
+        "GUID:625bfc588fb96c74696858f2c467e978"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

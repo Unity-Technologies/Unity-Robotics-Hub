@@ -4,54 +4,93 @@ using NUnit.Framework;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Unity.Robotics.ROSTCPConnector.Editor.MessageGeneration;
 using UnityEditor;
+using UnityEngine;
 
-[TestFixture]
-[Category("MessageGeneration")]
-public class PickAndPlaceMessageGenerationTests
+namespace MessageGenerationTests
 {
-    // Relative path to the directory containing the catkin packages
-    static readonly string k_ROSDirectory = Path.GetFullPath(Path.Combine("..", "ROS", "src"));
-    static string m_MessageGenOutputPath => MessageGenBrowserSettings.Get().outputPath;
-
-    // Define more individual messages to run generation on within this test case enumerable
-    static IEnumerable<TestCaseData> IndividualMessages()
+    // This gets a special category to enable running independently when needed to generate message definitions
+    [TestFixture, Category("MessageGeneration")]
+    public class MessageGenerationTests
     {
-        yield return new TestCaseData(Path.Combine(k_ROSDirectory, "moveit_msgs", "msg", "RobotTrajectory.msg"));
-    }
+        enum PathType
+        {
+            File,
+            Directory
+        }
 
-    // Define directories of message files to be generated here
-    static IEnumerable<TestCaseData> MessageDirectories()
-    {
-        yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "msg"));
-    }
+        // Relative path to the directory containing the catkin packages
+        static readonly string k_ROSDirectory = Path.GetFullPath(Path.Combine("..", "ROS", "src"));
+        static string m_MessageGenOutputPath => MessageGenBrowserSettings.Get().outputPath;
 
-    // Define directories of service files to be generated here
-    static IEnumerable<TestCaseData> ServiceDirectories()
-    {
-        yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "srv"));
-    }
+        static void WarnIfAlreadyExists(string path, PathType pathType)
+        {
+            var alreadyExists = pathType == PathType.File ? File.Exists(path) : Directory.Exists(path);
+            if (alreadyExists)
+            {
+                Debug.LogWarning($"{path} already exists. Test can't validate files were generated correctly unless " +
+                    "this path is manually deleted first.");
+            }
+        }
 
-    [Test]
-    [TestCaseSource(nameof(IndividualMessages))]
-    public void TestMessageBuildSingle_ThrowsNoExceptions(string messageToBuild)
-    {
-        MessageAutoGen.GenerateSingleMessage(messageToBuild, m_MessageGenOutputPath);
-        AssetDatabase.Refresh();
-    }
+        static void AssertExists(string path, PathType pathType)
+        {
+            Assert.IsTrue(pathType == PathType.File ? File.Exists(path) : Directory.Exists(path));
+        }
 
-    [Test]
-    [TestCaseSource(nameof(MessageDirectories))]
-    public void TestMessageBuildDirectory_ThrowsNoExceptions(string directoryToBuild)
-    {
-        MessageAutoGen.GenerateDirectoryMessages(directoryToBuild, m_MessageGenOutputPath);
-        AssetDatabase.Refresh();
-    }
+        // Define more individual messages to run generation on within this test case enumerable
+        static IEnumerable<TestCaseData> IndividualMessages()
+        {
+            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "moveit_msgs", "msg", "RobotTrajectory.msg"));
+        }
 
-    [Test]
-    [TestCaseSource(nameof(ServiceDirectories))]
-    public void TestServiceBuildDirectory_ThrowsNoExceptions(string directoryToBuild)
-    {
-        ServiceAutoGen.GenerateDirectoryServices(directoryToBuild, m_MessageGenOutputPath);
-        AssetDatabase.Refresh();
+        // Define directories of message files to be generated here
+        static IEnumerable<TestCaseData> MessageDirectories()
+        {
+            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "msg"));
+        }
+
+        // Define directories of service files to be generated here
+        static IEnumerable<TestCaseData> ServiceDirectories()
+        {
+            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "srv"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(IndividualMessages))]
+        public void TestMessageBuildSingle_ThrowsNoExceptions(string messageToBuild)
+        {
+            var msgPath = MessageAutoGen.GetMessageClassPath(messageToBuild, m_MessageGenOutputPath);
+            Debug.Log($"Generating code for {messageToBuild}, output should be at {msgPath}");
+            WarnIfAlreadyExists(msgPath, PathType.File);
+            MessageAutoGen.GenerateSingleMessage(messageToBuild, m_MessageGenOutputPath);
+            AssetDatabase.Refresh();
+            AssertExists(msgPath, PathType.File);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(MessageDirectories))]
+        public void TestMessageBuildDirectory_ThrowsNoExceptions(string directoryToBuild)
+        {
+            var msgPath = MessageAutoGen.GetMessageClassPath(directoryToBuild, m_MessageGenOutputPath);
+            var msgDirectory = Path.GetDirectoryName(msgPath);
+            Debug.Log($"Generating code in {directoryToBuild}, output should be in {msgDirectory}");
+            WarnIfAlreadyExists(msgDirectory, PathType.Directory);
+            MessageAutoGen.GenerateDirectoryMessages(directoryToBuild, m_MessageGenOutputPath);
+            AssetDatabase.Refresh();
+            AssertExists(msgDirectory, PathType.Directory);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(ServiceDirectories))]
+        public void TestServiceBuildDirectory_ThrowsNoExceptions(string directoryToBuild)
+        {
+            var msgPath = ServiceAutoGen.GetServiceClassPaths(directoryToBuild, m_MessageGenOutputPath);
+            var msgDirectory = Path.GetDirectoryName(msgPath[0]);
+            Debug.Log($"Generating code in {directoryToBuild}, output should be in {msgDirectory}");
+            WarnIfAlreadyExists(msgDirectory, PathType.Directory);
+            ServiceAutoGen.GenerateDirectoryServices(directoryToBuild, m_MessageGenOutputPath);
+            AssetDatabase.Refresh();
+            AssertExists(msgDirectory, PathType.Directory);
+        }
     }
 }
