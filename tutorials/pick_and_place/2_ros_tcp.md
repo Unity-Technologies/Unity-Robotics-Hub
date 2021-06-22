@@ -63,7 +63,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_msg.png)
 
-	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory with NiryoMoveitJointsMsg.cs and NiryoTrajectoryMsg.cs. The NiryoMoveitJoints message describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. NiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
+	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJointsMsg.cs and NiryoTrajectoryMsg.cs. The NiryoMoveitJoints message describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. NiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
 
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
