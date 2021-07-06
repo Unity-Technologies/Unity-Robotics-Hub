@@ -1,4 +1,15 @@
 # URDF Tutorials Appendix
+- [File Hierarchy](##File-Hierarchy)
+- [GameObject Hierarchy](##GameObject-Hierarchy)
+- [URDF Comparator](##URDF-Comparator)
+- [Articulation Body axis definition](##Articulation-Body-axis-definition)
+- [Guide to write your own controller](##Guide-to-write-your-own-controller)
+- [Using FK Robot Script](##Using-FK-Robot-Script)
+- [Convex Mesh Collider](##Convex-Mesh-Collider)
+- [Supported Tags in URDF](##Supported-Tags-in-URDF)
+- [Disable Collision Support](##Disable-Collision-Support)
+- [Sizing of Primitives](##Sizing-of-Primitives)
+
 
 ## File Hierarchy
 URDF files and associated meshes should be placed in a single folder within the Assets directory of Unity. We suggest creating a new folder with the robot's name and place the URDF file in its root with all associated mesh files in sub folders. Be sure to update the file locations as described by the URDF file.
@@ -316,8 +327,59 @@ To address this predicament we have integrated another algorithm to create Conve
 
 ![](images/ConvexMeshComparison.png)
 
+## Supported Tags in URDF
+
+- Link
+    - Name
+    - Inertial
+        - origin
+            - xyz
+            - rpy
+        - mass
+        - inertia
+    - visual
+        - name
+        - origin
+            - xyz
+            - rpy
+        - geometry
+            - box
+            - cylinder
+            - sphere
+            - mesh
+        - material
+            - color
+            - texture
+    - collision
+        - name
+        - origin
+            - xyz
+            - rpy
+        - geometry
+- joint
+    - name
+    - type
+    - origin
+        - xyz
+        - rpy
+    - parent
+        - link
+    - child
+        - link
+    - axis
+        - xyz
+    - dynamics
+        - damping
+        - friction
+    - limit
+        - lower
+        - upper
+        
+    
+
+
 ## Disable Collision Support
-URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, rigidbodies cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
+URDF defines the robot visually using Visual Meshes, and its collision using Collision Meshes. Collision meshes define the physical volume of the links, and are used to calculate the inertia of the links and also to detect collisions between different physical objects. In Unity, [RigidBodies](https://docs.unity3d.com/ScriptReference/Rigidbody.html) cannot have concave collision meshes, so when importing a concave collision mesh, all concave regions are closed over to produce a convex outline. As a result, the convex shapes might intersect with each other, creating a hindrance in robot movement. To remedy this, we support a ```disable collision``` tag in URDF. To add an exception for collision detection in Unity:
 
 1. Identify the links between which you want to ignore the collisions.
 2. Add a tag in the URDF file with the format
@@ -330,4 +392,24 @@ An example of the tag can be seen [here](https://github.com/Unity-Technologies/U
 The disable collision tag flags the links that need to be ignored to the URDF parser. Values of link1 and link2 attributes are the names of the two links between which the collision needs to be ignored. Make sure the names of the links match the names defined in the URDF file.
 
 Note: You can also manually ignore collisions in Unity using [APIs](https://docs.unity3d.com/ScriptReference/Physics.IgnoreCollision.html).
+
+## Sizing of Primitives
+
+```xml
+<collision>
+    <geometry>
+        <cylinder size=".4 .3 .4" />
+    </geometry>
+</collision>
+```
+
+The URDF Importer will set the size of the primitive using the "scale" parameter of the GameObject that contains the UrdfCollsion script.
+
+| ![Collision gameObject in hierarchy](images/link_hierarchy.png)  | ![Size of primitive set using scale](images/primitive_scale.png) |
+|:---:|:---:|
+
+The reason we set the size via the "scale" of the parent GameObject as opposed to the "size" of the primitive collider is to have consistency across different mesh types; the size API is only available for primitive mesh colliders and not for complex collider meshes and visual meshes, whose size must be changed using their parent GameObject's "scale" parameter. The "scale" parameter of the gameObject is also used to set the values of primitive "size" in the URDF when performing a URDF export.
+
+
+
 
