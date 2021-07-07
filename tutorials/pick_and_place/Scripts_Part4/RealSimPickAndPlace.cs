@@ -81,7 +81,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     /// </summary>
     public void PublishJoints()
     {
-        MMoverServiceRequest request = new MMoverServiceRequest
+        MoverServiceRequest request = new MoverServiceRequest
         {
             joints_input =
             {
@@ -92,13 +92,13 @@ public class RealSimPickAndPlace : MonoBehaviour
                 joint_04 = jointArticulationBodies[4].xDrive.target,
                 joint_05 = jointArticulationBodies[5].xDrive.target
             },
-            pick_pose = new MPose
+            pick_pose = new PoseMsg
             {
                 position = (target.transform.position + PICK_POSE_OFFSET).To<FLU>(),
                 // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
                 orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
             },
-            place_pose = new MPose
+            place_pose = new PoseMsg
             {
                 position = (targetPlacement.transform.position + PICK_POSE_OFFSET).To<FLU>(),
                 orientation = pickOrientation.To<FLU>()
@@ -146,7 +146,7 @@ public class RealSimPickAndPlace : MonoBehaviour
 
     void Start()
     {
-        ros.Subscribe<MRobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
+        ros.Subscribe<RobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     ///   executed in a coroutine.
     /// </summary>
     /// <param name="robotAction"> RobotMoveActionGoal of trajectory or gripper commands</param>
-    void ExecuteRobotCommands(MRobotMoveActionGoal robotAction)
+    void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
     {
         if (robotAction.goal.cmd.cmd_type == TRAJECTORY_COMMAND_EXECUTION)
         {
@@ -184,7 +184,7 @@ public class RealSimPickAndPlace : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="trajectories"> The array of poses for the robot to execute</param>
-    private IEnumerator ExecuteTrajectories(MRobotTrajectory trajectories)
+    private IEnumerator ExecuteTrajectories(RobotTrajectoryMsg trajectories)
     {
         // For every robot pose in trajectory plan
         foreach (var point in trajectories.joint_trajectory.points)

@@ -37,8 +37,8 @@ public class Demo : MonoBehaviour
 
     string niryoOneName = "niryo_one";
     string baseLinkName = "base_link";
-    float controllerStiffness = 100000;
-    float controllerDamping = 1000;
+    float controllerStiffness = 10000;
+    float controllerDamping = 100;
     float controllerForceLimit = 1000;
     float controllerSpeed = 30;
     float controllerAcceleration = 10;
@@ -59,9 +59,6 @@ public class Demo : MonoBehaviour
     string rosConnectName = "ROSConnect";
     string publisherName = "Publisher";
     int hostPort = 10000;
-    int unityPort = 5005;
-    int awaitDataMaxRetries = 10;
-    int awaitDataSleepSeconds = 1;
 
     string trajectoryPlannerType = "TrajectoryPlanner";
     string rosServiceName = "niryo_moveit";

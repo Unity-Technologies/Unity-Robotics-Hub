@@ -2,39 +2,19 @@
 
 Create a simple Unity scene which subscribes to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics) to change the colour of a GameObject.
 
-## Setting Up ROS
+## Setting Up
 
-(Skip to [Setting Up Unity Scene](subscriber.md#setting-up-unity-scene) if you already did the [Publisher](publisher.md) tutorial.)
+- Follow the [ROS–Unity Demo Setup](setup.md) guide if you haven't already done so.
 
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+## Create Unity Subscriber
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide.
-
-- Open a new terminal window, navigate to your Catkin workspace, and run the following commands:
-
-   ```bash
-    source devel/setup.bash
-    rosrun robotics_demo server_endpoint.py
-   ```
-
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
-
-- In Unity, we need to generate the C# code for the `UnityColor` message. Open `Robotics` -> `Generate ROS Messages...`.
-    - Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo/`, expand the robotics_demo subfolder and click `Build 2 msgs`.
-
-![](images/generate_messages_1.png)
-
-   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
-
-## Setting Up Unity Scene
-- Create a script and name it `RosSubscriberExample.cs`
-- Paste the following code into `RosSubscriberExample.cs`
-    - **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
+- In Unity, create a new C# script and name it `RosSubscriberExample`. Paste the following code into the new script file.
+    (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosSubscriberExample.cs`.)
 
 ```csharp
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosColor = RosMessageTypes.RoboticsDemo.MUnityColor;
+using RosColor = RosMessageTypes.UnityRoboticsDemo.UnityColorMsg;
 
 public class RosSubscriberExample : MonoBehaviour
 {
@@ -55,14 +35,17 @@ public class RosSubscriberExample : MonoBehaviour
 - Create an empty GameObject and name it `RosSubscriber`
 - Attach the `RosSubscriberExample` script to the `RosSubscriber` GameObject and drag the cube GameObject onto the `cube` parameter in the Inspector window.
 
-- From the Unity menu bar, open `Robotics/ROS Settings`, and set the `ROS IP Address` variable to your ROS IP.
 - Press play in the editor
 
 ### In ROS Terminal Window
-- After the scene has entered Play mode, run the following command: `rosrun robotics_demo color_publisher.py` to change the color of the cube GameObject in Unity to a random color
+Let's send a color message to change the color of the cube GameObject in Unity to a random color.
+
+   a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, run: `rosrun unity_robotics_demo color_publisher.py`
+
+   b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, instead run: `ros2 run unity_robotics_demo color_publisher`
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 
 ![](images/tcp_2.gif)
 
-Continue to the [ROS–Unity Integration Service](service.md).
+Continue to the [ROS–Unity Integration Unity Service](unity_service.md).

@@ -2,44 +2,20 @@
 
 Create a simple Unity scene which publishes a GameObject's position and rotation to a [ROS topic](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics#ROS_Topics).
 
-## Setting Up ROS
+These instructions cover the setup for both ROS1 and ROS2. Instructions for ROS2 users are marked with this icon: <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/>.
 
-- Copy the `tutorials/ros_packages/robotics_demo` folder of this repo into the `src` folder in your Catkin workspace.
+## Setting Up
 
-- Follow the [ROS–Unity Initial Setup](setup.md) guide.
+- Follow the [ROS–Unity Demo Setup](setup.md#ros2-environment) guide.
 
-- Open a new terminal window and run the following commands:
-
-   ```bash
-    source devel/setup.bash
-    rosrun robotics_demo server_endpoint.py
-   ```
-
-Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
-
-- Open another new terminal window, navigate to your ROS workspace, and run the following commands:
-   ```bash
-    source devel/setup.bash
-    rostopic echo pos_rot
-   ```
-
-## Setting Up Unity Scene
-- In the menu bar, find and select `Robotics` -> `Generate ROS Messages...`
-- Set the ROS message path to `PATH/TO/Unity-Robotics-Hub/tutorials/ros_packages/robotics_demo`.
-    - Expand the robotics_demo subfolder and click "Build 2 msgs" to generate new C# scripts from the ROS .msg files.
-
-![](images/generate_messages_1.png)
-
-   - The generated files will be saved in the default directory `Assets/RosMessages/RoboticsDemo/msg`.
-- Create a new directory in `Assets` and name it `Scripts`
-- Create a new script in the `Scripts` directory and name it `RosPublisherExample.cs`
-- Open `RosPublisherExample.cs` and paste the following code:
-    - **Note** Script can be found at `tutorials/ros_unity_integration/unity_scripts`
+## Create Unity Publisher
+- In your Project tab in Unity, create a new C# script and name it `RosPublisherExample`. Paste the following code into the new script file.
+    - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts/RosPublisherExample.cs` in this repo.)
 
 ```csharp
-using RosMessageTypes.RoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
+using RosMessageTypes.UnityRoboticsDemo;
 
 /// <summary>
 ///
@@ -61,6 +37,7 @@ public class RosPublisherExample : MonoBehaviour
     {
         // start the ROS connection
         ros = ROSConnection.instance;
+        ros.RegisterPublisher<PosRotMsg>(topicName);
     }
 
     private void Update()
@@ -71,7 +48,7 @@ public class RosPublisherExample : MonoBehaviour
         {
             cube.transform.rotation = Random.rotation;
 
-            MPosRot cubePos = new MPosRot(
+            PosRotMsg cubePos = new PosRotMsg(
                 cube.transform.position.x,
                 cube.transform.position.y,
                 cube.transform.position.z,
@@ -90,14 +67,48 @@ public class RosPublisherExample : MonoBehaviour
 }
 ```
 
-- Add a plane and a cube to the empty Unity scene
-- Move the cube a little ways up so it is hovering above the plane
-- In the main menu bar, open `Robotics/ROS Settings`.
-    - Set the ROS IP address and port to match the ROS IP and port variables defined when you set up ROS.
+- Add a plane and a cube to your Unity scene. You can create simple geometric shapes in Unity by going to the Hierarchy window, clicking the + button, and navigating to the shape you want to create.
+
+![](images/create_cube.png)
+
+- Move the cube a little ways up so it is hovering above the plane. To do this, select the cube in the hierarchy window, and click on the move tool in the toolbar at the top left of the Unity window.
+
+![](images/move_tool.png)
+
+- Draggable arrows will appear around the cube in the Scene view; to move the cube up, drag the vertical (green) arrow upwards.
+
 - Create another empty GameObject, name it `RosPublisher` and attach the `RosPublisherExample` script.
     - Drag the cube GameObject onto the `Cube` parameter.
 
-- Pressing play in the Editor should publish a message to the terminal running the `rostopic echo pos_rot` command every 0.5 seconds
+- Press play in the Editor. You should see the connection lights at the top left corner of the Game window turn blue, and something like `[INFO] [1622242057.562860400] [TCPServer]: Connection from 172.17.0.1` appear in the terminal running your server_endpoint.
+
+## Common Errors
+
+If you see the error `Failed to resolve message name: No module named unity_robotics_demo_msgs.msg` followed by `Topic 'pos_rot' is not registered` in the ROS-TCP-Endpoint log, you may have missed the step about installing the unity_robotics_demo_msgs package, or perhaps you forgot to build and/or source it afterwards. Try following the "Install Unity Robotics Demo" instructions [here](setup.md#install-unity-robotics-demo).
+
+## Start the Echo monitor
+
+- To prove that messages are actually being received by ROS, let's run the rostopic echo command.
+
+	a) <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> In ROS1, open a new terminal window, navigate to your ROS workspace, and run the following commands:
+
+    ```bash
+    source devel/setup.bash
+    rostopic echo pos_rot
+    ```
+
+	b) <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> In ROS2, the commands to run are
+
+    ```bash
+    source install/setup.bash
+    ros2 topic echo pos_rot
+    ```
+
+- If you're using Docker, you can use the command `docker ps` to get a list of all running containers; `docker exec -ti bash <container name> bash` starts a new terminal for the specified container. Alternatively, click the "CLI" button in the Docker UI to open a new terminal ("command line interface").
+
+![](images/docker_cli.png)
+
+- If it's working correctly, you should see the contents of the message Unity is sending appearing every 0.5 seconds.
 
 > Please reference [networking troubleshooting](network.md) doc if any errors are thrown.
 

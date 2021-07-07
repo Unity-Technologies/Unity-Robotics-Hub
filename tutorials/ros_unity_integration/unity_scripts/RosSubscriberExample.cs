@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosColor = RosMessageTypes.RoboticsDemo.MUnityColor;
+using RosColor = RosMessageTypes.UnityRoboticsDemo.UnityColorMsg;
 
 public class RosSubscriberExample : MonoBehaviour
 {
