@@ -208,7 +208,7 @@ ROS and Unity have now successfully connected!
 
 - If the ROS TCP handshake fails (e.g. `ROS-Unity server listening...` printed on the Unity side but no `ROS-Unity Handshake received` on the ROS side), the ROS IP may not have been set correctly in the params.yaml file. Try running `echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml` in a terminal from your ROS workspace.
 
-- If the UI buttons appear to be unresponsive, such as not responding to clicks, ensure there is an [EventSystem](https://docs.unity3d.com/2020.1/Documentation/Manual/UIE-Events.html) in the scene hierarchy. This should be added automatically when adding UI elements, but if it is not, you can add one to your scene via `(+) > UI > Event System`.
+- If the UI buttons appear to be unresponsive, such as not responding to clicks, ensure there is an [EventSystem](https://docs.unity3d.com/2020.1/Documentation/Manual/UIE-Events.html) in the scene hierarchy. This should be added automatically when adding UI elements, but if it is not, you can add one to your scene from the Hierarchy window via `(+) > UI > Event System`. You can also access this dropdown from right-clicking in an empty area in the Hierarchy window.
 
 ---
 
