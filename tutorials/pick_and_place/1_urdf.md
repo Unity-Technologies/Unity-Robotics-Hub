@@ -22,7 +22,7 @@ This part includes downloading and installing the Unity Editor, setting up a bas
 
 1. Install [Unity Hub](https://unity3d.com/get-unity/download).
 
-1. Go it the "Installs" tab in the Unity Hub, and click the "Add" button. Select Unity **2020.3.11f1 (LTS)**. If this version is no longer available through the hub, you can find it in the [Unity Download Archive](https://unity3d.com/get-unity/download/archive). 
+1. Go it the "Installs" tab in the Unity Hub, and click the "Add" button. Select Unity **2020.3.11f1 (LTS)**. If this version is no longer available through the hub, you can find it in the [Unity Download Archive](https://unity3d.com/get-unity/download/archive).
    > Note: If you want to use another Unity version, the following versions work for the Pick-and-Place tutorial:
 
    > - Unity 2020.3: 2020.3.10f1 or later
