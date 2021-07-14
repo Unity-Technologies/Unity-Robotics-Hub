@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.IO;
 using NUnit.Framework;
-using RosSharp;
-using RosSharp.Control;
-using RosSharp.Urdf;
 using Unity.Robotics.PickAndPlace;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.UrdfImporter;
+using Unity.Robotics.UrdfImporter.Control;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.TestTools;
@@ -101,16 +100,16 @@ namespace IntegrationTests
                 m_TimeElapsedSeconds += Time.deltaTime;
                 yield return null;
             }
-            
+
             Assert.IsTrue(DidPlacementSucceed, "Pick and Place did not complete before test timed out.");
-            
+
             yield return new ExitPlayMode();
         }
 
         void SetUpScene()
         {
             EditorSceneManager.OpenScene(k_PathTestScene);
-            
+
             InstantiatePrefabFromName(k_NameTable);
             InstantiatePrefabFromName(k_NameTarget);
             InstantiatePrefabFromName(k_NameTargetPlacement);
