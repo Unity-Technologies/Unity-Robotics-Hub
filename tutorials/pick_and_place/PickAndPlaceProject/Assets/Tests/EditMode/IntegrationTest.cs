@@ -6,6 +6,7 @@ using Unity.Robotics.PickAndPlace;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.UrdfImporter;
+using Unity.Robotics.UrdfImporter.Control;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.TestTools;
