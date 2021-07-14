@@ -71,6 +71,8 @@ public class TargetPlacementTests
         const string name = "TargetPlacementStateChange";
         var targetPlacement = GetTargetPlacement(name);
 
+        Debug.Log(targetPlacement.transform.position);
+
         Assert.AreEqual(TargetPlacement.PlacementState.Outside, targetPlacement.CurrentState,
             $"{name} should start with no Target in its bounds.");
 
