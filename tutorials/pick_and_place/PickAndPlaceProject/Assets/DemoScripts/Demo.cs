@@ -6,19 +6,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using RosSharp;
-using RosSharp.Control;
-using RosSharp.Urdf;
-using RosSharp.Urdf.Editor;
 using UnityEditor;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
+using Unity.Robotics.UrdfImporter;
+using Unity.Robotics.UrdfImporter.Control;
 
 public class Demo : MonoBehaviour
 {
     public string hostIP = "127.0.0.1";
-    public string overrideUnityIP = "127.0.0.1";
 
     public bool generateRosMessages = true;
     public bool deleteRosMessagesAfterSimulation = true;
@@ -44,7 +41,7 @@ public class Demo : MonoBehaviour
     float controllerSpeed = 30;
     float controllerAcceleration = 10;
 
-    string rosMessagesDirectory = "Assets/RosMessages";
+    string rosMessagesDirectory = "Assets/Scripts/RosMessages";
     string rosSrcDirectory = "../ROS/src";
     string msgDirectory = "msg";
     string srvDirectory = "srv";
@@ -54,15 +51,23 @@ public class Demo : MonoBehaviour
     string moverServiceFileName = "MoverService.srv";
     string scriptPattern = "*.cs";
 
+    string registerMethodName = "Register";
+    string[] rosGeneratedTypeFullName = new string[]
+    {
+        "RosMessageTypes.Moveit.RobotTrajectoryMsg",
+        "RosMessageTypes.NiryoMoveit.NiryoMoveitJointsMsg",
+        "RosMessageTypes.NiryoMoveit.NiryoTrajectoryMsg",
+        "RosMessageTypes.NiryoMoveit.MoverServiceResponse",
+        "RosMessageTypes.NiryoMoveit.MoverServiceRequest"
+    };
+
+
     string externalScriptsDirectory = "../Scripts";
     //string scriptsDirectory = "Assets/Scripts";
 
     string rosConnectName = "ROSConnect";
     string publisherName = "Publisher";
     int hostPort = 10000;
-    int unityPort = 5005;
-    int awaitDataMaxRetries = 10;
-    int awaitDataSleepSeconds = 1;
 
     string trajectoryPlannerType = "TrajectoryPlanner";
     string rosServiceName = "niryo_moveit";
@@ -142,6 +147,12 @@ public class Demo : MonoBehaviour
         scripts.AddRange(Directory.GetFiles(rosMessagesDirectory, scriptPattern, SearchOption.AllDirectories));
         scripts.AddRange(Directory.GetFiles(externalScriptsDirectory));
         RecompileScripts(scripts.ToArray());
+
+        // Register Ros message names and their deserialize function
+        foreach (var typeFullName in rosGeneratedTypeFullName)
+        {
+            assembly.GetType(typeFullName).GetMethod(registerMethodName).Invoke(null, null);
+        }
     }
 
     private void CreateTrajectoryPlannerPublisher()

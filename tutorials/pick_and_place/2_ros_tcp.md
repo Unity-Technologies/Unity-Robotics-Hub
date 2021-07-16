@@ -47,6 +47,8 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    In the ROS Message Browser window, click `Browse` next to the ROS message path. Navigate to and select the ROS directory of this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`). This window will populate with all msg and srv files found in this directory.
 
+   In the ROS Message Browser window, type in `Scripts/RosMessages` in the text field of Build message path.
+
    ![](img/2_browser.png)
 
    > Note: If any of these ROS directories appear to be empty, you can run the command `git submodule update --init --recursive` to download the packages via Git submodules.
@@ -55,7 +57,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_robottraj.png)
 
-	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: MRobotTrajectory. This name is the same as the message you built, with an "M" prefix (for message).
+	- One new C# script should populate the `Assets/RosMessages/Moveit/msg` directory: RobotTrajectoryMsg.cs. This name is the same as the message you built, with an "Msg" suffix (for message).
 
 1. Next, the custom message scripts for this tutorial will need to be generated.
 
@@ -63,7 +65,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_msg.png)
 
-	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: MNiryoMoveitJoints and MNiryoTrajectory. MNiryoMoveitJoints describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. MNiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
+	- Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/msg` directory: NiryoMoveitJointsMsg.cs and NiryoTrajectoryMsg.cs. The NiryoMoveitJoints message describes a value for each joint in the Niryo arm as well as poses for the target object and target goal. NiryoTrajectory describes a list of RobotTrajectory values, which will hold the calculated trajectories for the pick-and-place task.
 
    > MessageGeneration generates a C# class from a ROS msg file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Messages](https://wiki.ros.org/Messages).
 
@@ -73,7 +75,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ![](img/2_srv.png)
 
-   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MMoverServiceRequest and MMoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories.
+   - Two new C# scripts should populate the `Assets/RosMessages/NiryoMoveit/srv` directory: MoverServiceRequest and MoverServiceResponse. These files describe the expected input and output formats for the service requests and responses when calculating trajectories.
 
    > MessageGeneration generates two C# classes, a request and response, from a ROS srv file with protections for use of C# reserved keywords and conversion to C# datatypes. Learn more about [ROS Services](https://wiki.ros.org/Services).
 
@@ -86,7 +88,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    ```csharp
    public void Publish()
    {
-      MNiryoMoveitJoints sourceDestinationMessage = new MNiryoMoveitJoints();
+      NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
       sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
       sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
@@ -96,7 +98,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
 
       // Pick Pose
-      sourceDestinationMessage.pick_pose = new MPose
+      sourceDestinationMessage.pick_pose = new PoseMsg
       {
          position = target.transform.position.To<FLU>(),
          // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
@@ -104,7 +106,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
       };
 
       // Place Pose
-      sourceDestinationMessage.place_pose = new MPose
+      sourceDestinationMessage.place_pose = new PoseMsg
       {
          position = targetPlacement.transform.position.To<FLU>(),
          orientation = pickOrientation.To<FLU>()
@@ -117,7 +119,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`).
 
-   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's `(x,y,z)` is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are provided via the [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md) in the ROS-TCP-Connector package.
+   > Note: Going from Unity world space to ROS world space requires a conversion. Unity's coordinate space has x Right, y Up, and z Forward (hence "RUF" coordinates); ROS has x Forward, y Left and z Up (hence "FLU"). So a Unity `(x,y,z)` coordinate is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are done by the `To<FLU>` function in the ROS-TCP-Connector package's [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md).
 
 1. Return to the Unity Editor. Now that the message contents have been defined and the publisher script added, it needs to be added to the Unity world to run its functionality.
 
@@ -148,7 +150,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    > Note: While using the ROS Settings menu is the suggested workflow as of this version, you may still manually create a GameObject with an attached ROSConnection component.
 
-1. Next, we will add a UI element that will allow user input to trigger the `Publish()` function. In the Hierarchy window, right click to add a new UI > Button. Note that this will create a new Canvas parent as well.
+1. Next, we will add a UI element that will allow user input to trigger the `Publish()` function. In the Hierarchy window, right click to add a new UI > Button. Note that this will also create a new Canvas parent, as well as an Event System.
 	> Note: In the `Game` view, you will see the button appear in the bottom left corner as an overlay. In `Scene` view the button will be rendered on a canvas object that may not be visible.
 
    > Note: In case the Button does not start in the bottom left, it can be moved by setting the `Pos X` and `Pos Y` values in its Rect Transform component. For example, setting its Position to `(-200, -200, 0)` would set its position to the bottom right area of the screen.
@@ -207,6 +209,8 @@ ROS and Unity have now successfully connected!
 - If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the ROS IP Address in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly.
 
 - If the ROS TCP handshake fails (e.g. `ROS-Unity server listening...` printed on the Unity side but no `ROS-Unity Handshake received` on the ROS side), the ROS IP may not have been set correctly in the params.yaml file. Try running `echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml` in a terminal from your ROS workspace.
+
+- If the UI buttons appear to be unresponsive, such as not responding to clicks, ensure there is an [EventSystem](https://docs.unity3d.com/2020.1/Documentation/Manual/UIE-Events.html) in the scene hierarchy. This should be added automatically when adding UI elements, but if it is not, you can add one to your scene from the Hierarchy window via `(+) > UI > Event System`. You can also access this dropdown from right-clicking in an empty area in the Hierarchy window.
 
 ---
 

@@ -1,30 +1,41 @@
 name: Robotics Hub Tests
 agent:
-    type: Unity::VM
-    image: robotics/ci-ubuntu20:latest
-    flavor: i1.large
+  type: Unity::VM
+  image: robotics/ci-ubuntu20:v0.1.0pnp-796097
+  flavor: i1.large
 variables:
-    PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
+  PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
 commands:
-    - git submodule update --init --recursive
-      # TODO: Fix this hack - our bokken image is missing a .NET dependency (System.CodeDom) without which causes compilation to fail
-    - rm ./tutorials/pick_and_place/PickAndPlaceProject/Assets/DemoScripts/Demo.*
-      # This is another hack to ensure audio is disabled. Unity built-in audio fails to initialize in our Bokken image.
-    - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./tutorials/pick_and_place/PickAndPlaceProject/ProjectSettings/AudioManager.asset"
-    - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
-    - unity-downloader-cli -u 2020.2.0b9 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
-    - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
-    - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestsCategories MessageGeneration
-    - mkdir -p ./tutorials/pick_and_place/PickAndPlaceProject/Assets/Scripts && cp ./tutorials/pick_and_place/Scripts/*.cs ./tutorials/pick_and_place/PickAndPlaceProject/Assets
-    - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestsCategories BuildTests
+  - git submodule update --init --recursive
+  # We must remove the Demo.cs script because the System.CodeDom assembly is not in the bokken .NET sdk
+  - rm ./tutorials/pick_and_place/PickAndPlaceProject/Assets/DemoScripts/Demo.*
+  # Ensure audio is disabled. Unity built-in audio fails to initialize in our Bokken image.
+  - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./tutorials/pick_and_place/PickAndPlaceProject/ProjectSettings/AudioManager.asset"
+  - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
+  - unity-downloader-cli -u 2020.3.11f1 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
+  - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
+  # Explicitly run MessageGeneration tests first to generate dependencies
+  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+    --artifacts_path=test-results --suite=editor --platform=Editor --editorTestsCategories
+    MessageGeneration
+  # Run each category of tests in its own process, in order of increasing complexity
+  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+    --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestCategories UnitTests
+    #  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+    #--artifacts_path=test-results --suite=editor --platform=Editor --testfilter BuildTests.PlayerBuilder.BuildPlayerLinux
+  - python3 .yamato/PickAndPlaceTests/set-up-integration-tests.py
+  #TODO: Determine how best to capture ROS logging as test artifacts
+  - /bin/bash .yamato/PickAndPlaceTests/start-ros.bash
+  # NOTE: Simply specifying the testCategory is not enough to get a test marked with [Explicit] to run
+  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+    --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.RosIntegrationTests
+  #TODO: Determine when it would be prudent to run BuildTests and add them here or in a new config
 triggers:
-    cancel_old_ci: true
-    expression: |
-        (pull_request.target eq "main"  AND
-        NOT pull_request.push.changes.all match ["**/*.md","**/*.jpg","**/*.jpeg","**/*.gif","**/*.pdf"]) OR
-        (push.branch eq "dev" AND
-        NOT push.changes.all match ["**/*.md","**/*.jpg","**/*.jpeg","**/*.gif","**/*.pdf"])
+  cancel_old_ci: true
+  expression: |
+    (pull_request.target in ["main", "dev"] AND
+    NOT pull_request.changes.all match ["**/*.md","**/*.jpg","**/*.jpeg","**/*.gif","**/*.pdf"])
 artifacts:
-    logs:
-        paths:
-            - "test-results/**/*"
+  logs:
+    paths:
+      - "test-results/**/*"
