@@ -5,7 +5,7 @@ ENV ROS_WORKSPACE=/catkin_ws
 # Copy packages
 COPY ./ros_packages/ $ROS_WORKSPACE/src/
 	
-RUN git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint -b laurie/Ros2SinglePackage
+RUN git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint -b v0.5.0
 
 COPY ./ros_docker/set-up-workspace /setup.sh
 #COPY docker/tutorial /
