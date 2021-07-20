@@ -13,9 +13,10 @@
 - [Can't find what you're looking for?](#cant-find-what-youre-looking-for)
 
 # General Questions
-Is ROS 2 support planned?
+Does the package support ROS 2?
 ---
-We definitely plan to support ROS 2 in the future. Let us know more about your use case in order to prioritize our work by reaching out to us at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
+Yes it does! Get started by following the tutorial here:
+https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md
 
 How does your Unity integration compare to ROS#?
 ---
