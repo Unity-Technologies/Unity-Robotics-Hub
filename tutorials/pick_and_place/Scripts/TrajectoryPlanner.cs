@@ -82,12 +82,12 @@ public class TrajectoryPlanner : MonoBehaviour
     {
         NiryoMoveitJointsMsg joints = new NiryoMoveitJointsMsg();
 
-        joints.joint_00 = jointArticulationBodies[0].xDrive.target;
-        joints.joint_01 = jointArticulationBodies[1].xDrive.target;
-        joints.joint_02 = jointArticulationBodies[2].xDrive.target;
-        joints.joint_03 = jointArticulationBodies[3].xDrive.target;
-        joints.joint_04 = jointArticulationBodies[4].xDrive.target;
-        joints.joint_05 = jointArticulationBodies[5].xDrive.target;
+        joints.joint_00 = jointArticulationBodies[0].jointPositions[0] * Mathf.Rad2Deg;
+        joints.joint_01 = jointArticulationBodies[1].jointPositions[0] * Mathf.Rad2Deg;
+        joints.joint_02 = jointArticulationBodies[2].jointPositions[0] * Mathf.Rad2Deg;
+        joints.joint_03 = jointArticulationBodies[3].jointPositions[0] * Mathf.Rad2Deg;
+        joints.joint_04 = jointArticulationBodies[4].jointPositions[0] * Mathf.Rad2Deg;
+        joints.joint_05 = jointArticulationBodies[5].jointPositions[0] * Mathf.Rad2Deg;
 
         return joints;
     }
