@@ -54,12 +54,12 @@ public class SourceDestinationPublisher : MonoBehaviour
     {
         NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
-        sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
-        sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
-        sourceDestinationMessage.joint_02 = jointArticulationBodies[2].xDrive.target;
-        sourceDestinationMessage.joint_03 = jointArticulationBodies[3].xDrive.target;
-        sourceDestinationMessage.joint_04 = jointArticulationBodies[4].xDrive.target;
-        sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
+        sourceDestinationMessage.joint_00 = jointArticulationBodies[0].jointPositions[0] * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_01 = jointArticulationBodies[1].jointPositions[0] * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_02 = jointArticulationBodies[2].jointPositions[0] * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_03 = jointArticulationBodies[3].jointPositions[0] * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_04 = jointArticulationBodies[4].jointPositions[0] * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_05 = jointArticulationBodies[5].jointPositions[0] * Mathf.Rad2Deg;
 
         // Pick Pose
         sourceDestinationMessage.pick_pose = new PoseMsg
