@@ -15,8 +15,7 @@
 # General Questions
 Does the package support ROS 2?
 ---
-Yes it does! Get started by following the tutorial here:
-https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md
+Yes it does! You can get started by following [this tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md).
 
 How does your Unity integration compare to ROS#?
 ---

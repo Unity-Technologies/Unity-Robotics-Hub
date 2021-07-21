@@ -82,8 +82,8 @@ Here’s a peek into what our Physics Team is hard at work on…
 - **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
 
 ## [**New!**] ROS 2
-ROS2 support is now available! Get started by following the tutorial here:
-https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md
+ROS2 support is now available! You can get started by following [this tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md).
+
 
 ## FAQs
 [FAQs](faq.md)
