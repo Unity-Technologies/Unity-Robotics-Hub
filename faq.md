@@ -13,9 +13,9 @@
 - [Can't find what you're looking for?](#cant-find-what-youre-looking-for)
 
 # General Questions
-Is ROS 2 support planned?
+Does the package support ROS 2?
 ---
-We definitely plan to support ROS 2 in the future. Let us know more about your use case in order to prioritize our work by reaching out to us at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
+Yes it does! You can get started by following [this tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md).
 
 How does your Unity integration compare to ROS#?
 ---
@@ -23,7 +23,7 @@ Two of the Unity Robotics repos (URDF Importer and TCP Connector) have been fork
 
 In the URDF Importer we have added the functionality to instantiate a robot from URDF into a Unity scene with [Articulation Body](https://docs.unity3d.com/2020.2/Documentation/Manual/class-ArticulationBody.html) components on their corresponding joints.
 
-Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains the `MessageGeneration` code from ROS#. We added the extra functionality that when generating a C# class from a ROS message, functions are also generated that will serialize and deserialize the messages as ROS would internally.
+Aside from facilitating communication with the TCP Endpoint, the TCP Connector contains an adapted version of the `MessageGeneration` code from ROS#. However, unlike ROS# our messages are transmitted in ROS's own serialization format, eliminating the JSON encoding/decoding step for some significant performance improvements.
 
 You can find more details about the differences between our implementation and ROS#, along with some of their future plans, in the [ROS# project](https://github.com/siemens/ros-sharp/wiki/Ext_RosSharp_RoboticsHub#differences-between-unity-robotics-hub-and-ros).
 
