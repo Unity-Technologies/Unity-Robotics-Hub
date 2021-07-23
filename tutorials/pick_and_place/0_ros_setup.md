@@ -92,6 +92,8 @@ The ROS workspace is now ready to accept commands!
     ROS_IP: 192.168.50.149
     ```
 
+1. (Optional) By default, the server_endpoint will listen on port 10000, but this is also controlled by a parameter. If you need to change it, you can run the command `rosparam set ROS_TCP_PORT 10000`, replacing 10000 with the desired port number.
+
 The ROS workspace is now ready to accept commands!
 
 ---
