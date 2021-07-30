@@ -21,3 +21,5 @@ Changed the Pick and Place Demo's topic from SourceDestination to SourceDestinat
 ### Removed
 
 ### Fixed
+
+Fixed the ROS-Unity Integration tutorial to use the correct link to install ROS-TCP-Connector package
