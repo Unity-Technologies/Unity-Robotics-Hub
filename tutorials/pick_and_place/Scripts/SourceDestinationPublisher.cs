@@ -2,6 +2,7 @@ using RosMessageTypes.NiryoMoveit;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using Unity.Robotics.UrdfImporter;
 using RosMessageTypes.Geometry;
 
 public class SourceDestinationPublisher : MonoBehaviour
@@ -19,8 +20,8 @@ public class SourceDestinationPublisher : MonoBehaviour
     private int numRobotJoints = 6;
     private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
 
-    // Articulation Bodies
-    private ArticulationBody[] jointArticulationBodies;
+    // Robot Joints
+    private UrdfJointRevolute[] revoluteJoints;
 
     /// <summary>
     /// 
@@ -30,36 +31,36 @@ public class SourceDestinationPublisher : MonoBehaviour
         // Get ROS connection static instance
         ros = ROSConnection.instance;
 
-        jointArticulationBodies = new ArticulationBody[numRobotJoints];
+        revoluteJoints = new UrdfJointRevolute[numRobotJoints];
         string shoulder_link = "world/base_link/shoulder_link";
-        jointArticulationBodies[0] = niryoOne.transform.Find(shoulder_link).GetComponent<ArticulationBody>();
+        revoluteJoints[0] = niryoOne.transform.Find(shoulder_link).GetComponent<UrdfJointRevolute>();
 
         string arm_link = shoulder_link + "/arm_link";
-        jointArticulationBodies[1] = niryoOne.transform.Find(arm_link).GetComponent<ArticulationBody>();
+        revoluteJoints[1] = niryoOne.transform.Find(arm_link).GetComponent<UrdfJointRevolute>();
 
         string elbow_link = arm_link + "/elbow_link";
-        jointArticulationBodies[2] = niryoOne.transform.Find(elbow_link).GetComponent<ArticulationBody>();
+        revoluteJoints[2] = niryoOne.transform.Find(elbow_link).GetComponent<UrdfJointRevolute>();
 
         string forearm_link = elbow_link + "/forearm_link";
-        jointArticulationBodies[3] = niryoOne.transform.Find(forearm_link).GetComponent<ArticulationBody>();
+        revoluteJoints[3] = niryoOne.transform.Find(forearm_link).GetComponent<UrdfJointRevolute>();
 
         string wrist_link = forearm_link + "/wrist_link";
-        jointArticulationBodies[4] = niryoOne.transform.Find(wrist_link).GetComponent<ArticulationBody>();
+        revoluteJoints[4] = niryoOne.transform.Find(wrist_link).GetComponent<UrdfJointRevolute>();
 
         string hand_link = wrist_link + "/hand_link";
-        jointArticulationBodies[5] = niryoOne.transform.Find(hand_link).GetComponent<ArticulationBody>();
+        revoluteJoints[5] = niryoOne.transform.Find(hand_link).GetComponent<UrdfJointRevolute>();
     }
 
     public void Publish()
     {
         NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
-        sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
-        sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
-        sourceDestinationMessage.joint_02 = jointArticulationBodies[2].xDrive.target;
-        sourceDestinationMessage.joint_03 = jointArticulationBodies[3].xDrive.target;
-        sourceDestinationMessage.joint_04 = jointArticulationBodies[4].xDrive.target;
-        sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
+        sourceDestinationMessage.joint_00 = revoluteJoints[0].GetPosition() * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_01 = revoluteJoints[1].GetPosition() * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_02 = revoluteJoints[2].GetPosition() * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_03 = revoluteJoints[3].GetPosition() * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_04 = revoluteJoints[4].GetPosition() * Mathf.Rad2Deg;
+        sourceDestinationMessage.joint_05 = revoluteJoints[5].GetPosition() * Mathf.Rad2Deg;
 
         // Pick Pose
         sourceDestinationMessage.pick_pose = new PoseMsg
