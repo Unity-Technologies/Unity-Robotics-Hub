@@ -47,9 +47,9 @@ The container will need to be started with the following arguments to forward th
 
 ### 1. Can Unity send messages to ROS?
 
-When play is pressed in the Editor, Unity will establish the connection to ROS using the ROS_IP. 
+When play is pressed in the Editor, Unity will establish the connection to ROS using the ROS_IP.
 
-If Unity can communicate with ROS, you should see a heads-up display showing the connection in Unity Editor. 
+If Unity can communicate with ROS, you should see a heads-up display showing the connection in Unity Editor.
 
 ![](images/troubleshoot_hud_success.png)
 
@@ -83,9 +83,9 @@ If issue still persists:
 
 ### 2. Can ROS send messages to Unity?
 
-After it is confirmed that Unity can communicate with ROS, publish a message to a ROS topic to which Unity has instantiated a subscriber. 
+After it is confirmed that Unity can communicate with ROS, publish a message to a ROS topic to which Unity has instantiated a subscriber.
 
-You can confirm the connection status by checking the heads up display in your Unity Scene after entering the Play mode.  
+You can confirm the connection status by checking the heads-up display in your Unity Scene after entering the Play mode.
 
 If an error is thrown in the `server_endpoint` console then ROS cannot connect to Unity.
 
