@@ -4,7 +4,6 @@
 - [Definitions](#definitions)
 - [Communicaton Minimum Requirements](#communication-minimum-requirements)
 	- [If Using Docker](#if-using-docker)
-	- [Explicitly Setting UNITY_IP](#explicitly-setting-unity_ip)
 - [Troubleshoooting](#troubleshooting)
 	- [Where Does Communication Break Down](#where-does-communication-break-down)
 		- [1. Can Unity send messages to ROS?](#1-can-unity-send-messages-to-ros)
@@ -34,10 +33,13 @@ The container will need to be started with the following arguments to forward th
 
 
 - On the ROS side, set `ROS_IP` to `0.0.0.0`.
+  ```bash
+  rosparam set ROS_IP 0.0.0.0
+  ```
 
 - On the Unity side, set `ROS_IP` to `127.0.0.1`.
 
-![](images/troubleshoot-docker-unity.png)
+![](images/settings_ros_ip.png)
 
 # Troubleshooting
 
@@ -45,15 +47,18 @@ The container will need to be started with the following arguments to forward th
 
 ### 1. Can Unity send messages to ROS?
 
-When play is pressed in the Editor, a handshake message is sent from Unity to ROS.
+When play is pressed in the Editor, Unity will establish the connection to ROS using the ROS_IP.
 
-If Unity can communicate with ROS, the following message should be printed to the console screen running the `server_endpoint.py` script.
+If Unity can communicate with ROS, you should see a heads-up display showing the connection in Unity Editor.
 
-```[UnityTcpSender]: ROS-Unity Handshake received, will connect to UNITY_IP_ADDRESS:5005```
+![](images/troubleshoot_hud_success.png)
 
-With the corresponding response message printed to the Unity console,
+The icon in front of ROS IP should be blue indicating the connection between Unity and ROS is successful.
 
-```ROS-Unity server listening on UNITY_IP_ADDRESS:5005```
+
+On ROS side, you should see a message printed to the console screen running the `server_endpoint.py` script, something similar to the following:
+
+```Connection from 172.17.0.1```
 
 
 If the previous message is not shown and either of the following errors are thrown instead:
@@ -68,25 +73,24 @@ SocketException: Connection refused
 
 Confirm that:
 
-- `server_endpoint` is running
+- `server_endpoint` is running. On ROS side, you can run ```rosrun ros_tcp_endpoint default_server_endpoint.py```
 - You can ping ROS machine from Unity machine
 	- From a terminal on the Unity machine, run the following command to confirm whether the ROS machine is reachable over the network. ```ping ROS_IP```
 
 If issue still persists:
 
-- Confirm your IP addresses
 - If on Windows you may need to [open ports for the firewall](#open-port-on-windows-firewall).
 
 ### 2. Can ROS send messages to Unity?
 
 After it is confirmed that Unity can communicate with ROS, publish a message to a ROS topic to which Unity has instantiated a subscriber.
 
+You can confirm the connection status by checking the heads-up display in your Unity Scene after entering the Play mode.
+
 If an error is thrown in the `server_endpoint` console then ROS cannot connect to Unity.
 
 If issue still persists:
 
-- Confirm your IP addresses
-- Explicitly set the `UNITY_IP`
 - If on Windows you may need to [open ports for the firewall](#open-port-on-windows-firewall).
 
 ## Open port on Windows Firewall
