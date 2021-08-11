@@ -21,3 +21,9 @@ Changed the Pick and Place Demo's topic from SourceDestination to SourceDestinat
 ### Removed
 
 ### Fixed
+
+Fixed the ROS-Unity Integration tutorial to use the correct link to install ROS-TCP-Connector package
+
+Fixed the Pick and Place Tutorial to use ArticulationBody jointPositions, rather than the xDrive.target, for updating the current joint angle positions
+
+Fixed network.md in ROS-Unity Integration tutorial by removing the obsolete UNITY_IP
