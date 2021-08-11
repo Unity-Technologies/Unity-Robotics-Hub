@@ -26,13 +26,18 @@ Brief steps on installing the Unity Robotics packages.
 
 A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
 
-### [**New!**] [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation)
+### [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation)
 
 A complete end-to-end demonstration in which we collect training data in Unity and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
 
 ### [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
 
 A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
+
+### [**New!**] [Navigation 2 SLAM Example](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example)
+
+An example simulation environment, integrated with ROS 2, which enables the exercise of ROS 2's Navigation 2 and slam_toolbox packages using a simulated Turtlebot 3.
+
 ## Documentation
 
 | Tutorial | Description |
@@ -54,7 +59,7 @@ A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
 
 ### Blog Posts and Talks
 
-- [**New!**] (March 2, 2021) Teaching robots to see with Unity [blog post](https://blogs.unity3d.com/2021/03/02/teaching-robots-to-see-with-unity/)
+- (March 2, 2021) Teaching robots to see with Unity [blog post](https://blogs.unity3d.com/2021/03/02/teaching-robots-to-see-with-unity/)
 - (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
 - (November 12, 2020)
 Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.unity.com/unitenow/onlinesessions/simulating-robots-with-ros-and-unity)
