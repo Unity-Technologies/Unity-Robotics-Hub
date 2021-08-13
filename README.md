@@ -22,11 +22,11 @@ Simulation plays an important role in robotics development, and we’re here to 
 
 Brief steps on installing the Unity Robotics packages.
 
-### [Pick-and-Place Demo](tutorials/pick_and_place/README.md)
+### [Pick-and-Place Tutorial](tutorials/pick_and_place/README.md)
 
 A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
 
-### [Object Pose Estimation Demo](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation)
+### [Object Pose Estimation Tutorial](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation)
 
 A complete end-to-end demonstration in which we collect training data in Unity and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
 
