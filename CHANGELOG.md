@@ -16,11 +16,17 @@ Fixed the ROS-Unity Integration tutorial `robo_demo.launch` to be up-to-date wit
 
 ### Changed
 
-Changed the Pick and Place Demo's topic from SourceDestination to SourceDestination_input
-
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## v0.5.1
+
+### Changed
+
+Added link to Robotics-Nav2-SLAM-Example to list of "Getting Started" resources.
 
 ### Fixed
 
