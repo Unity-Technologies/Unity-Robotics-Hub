@@ -14,11 +14,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Changed
 
-Changed the Pick and Place Demo's topic from SourceDestination to SourceDestination_input
-
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## v0.5.1
+
+### Changed
+
+Added link to Robotics-Nav2-SLAM-Example to list of "Getting Started" resources.
 
 ### Fixed
 
