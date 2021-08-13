@@ -16,9 +16,9 @@
 
 > It is possible to set both of these variables on the machines running Unity and ROS. The specifics of where and why each of these settings will be described below.
 
-On the ROS machine these settings are set as a rosparam and will typically be set in a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_packages/robotics_demo/launch/robo_demo.launch) or in a [param file](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/config/params.yaml) loaded by a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/launch/part_3.launch#L2). The param file can also be loaded manually by running the `rosparam load params.yaml` command.
+On the ROS machine, these settings are set as a rosparam and will typically be set in a launch file like [this](ros_packages/unity_robotics_demo/launch/robo_demo.launch) or in a [param file](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/config/params.yaml) loaded by a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/launch/part_3.launch#L2). The param file can also be loaded manually by running the `rosparam load params.yaml` command.
 
-On the Unity machine these settings are set from the menu by going to `Robotics` -> `ROS Settings`
+On the Unity machine, these settings are set from the menu by going to `Robotics` -> `ROS Settings`
 
 
 # Communication Minimum Requirements

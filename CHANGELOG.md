@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## Unreleased
 
+Fixed the ROS-Unity Integration tutorial `robo_demo.launch` to be up-to-date with file paths, and updated Pick-and-Place Part 2 ROS Settings screenshot.
+
 ### Upgrade Notes
 
 ### Known Issues
