@@ -1,0 +1,27 @@
+name: 'Stale issue handler'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 17 * * *' # 17:00 UTC; 10:00 PDT
+
+permissions:
+  issues: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v4.0.0
+        id: stale
+        with:
+          stale-issue-label: 'stale'
+          stale-issue-message: 'This issue has been marked stale because it has been open for 14 days with no activity. Please remove the stale label or comment on this issue, or the issue will be automatically closed in the next 14 days.'
+          days-before-stale: 14
+          days-before-pr-stale: -1
+          days-before-close: 14
+          days-before-pr-close: -1
+          exempt-issue-labels: 'blocked,must,should,keep,pinned,work-in-progress,request,announcement'
+          close-issue-message: 'This issue has been marked stale for 14 days and will now be closed. If this issue is still valid, please ping a maintainer.'
+      - name: Print outputs
+        run: echo ${{ join(steps.stale.outputs.*, ',') }}
+        
