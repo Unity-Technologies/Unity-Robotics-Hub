@@ -1,14 +1,14 @@
 # URDF Tutorials Appendix
-- [File Hierarchy](##File-Hierarchy)
-- [GameObject Hierarchy](##GameObject-Hierarchy)
-- [URDF Comparator](##URDF-Comparator)
-- [Articulation Body axis definition](##Articulation-Body-axis-definition)
-- [Guide to write your own controller](##Guide-to-write-your-own-controller)
-- [Using FK Robot Script](##Using-FK-Robot-Script)
-- [Convex Mesh Collider](##Convex-Mesh-Collider)
-- [Supported Tags in URDF](##Supported-Tags-in-URDF)
-- [Disable Collision Support](##Disable-Collision-Support)
-- [Sizing of Primitives](##Sizing-of-Primitives)
+- [File Hierarchy](#File-Hierarchy)
+- [GameObject Hierarchy](#GameObject-Hierarchy)
+- [URDF Comparator](#URDF-Comparator)
+- [Articulation Body axis definition](#Articulation-Body-axis-definition)
+- [Guide to write your own controller](#Guide-to-write-your-own-controller)
+- [Using FK Robot Script](#Using-FK-Robot-Script)
+- [Convex Mesh Collider](#Convex-Mesh-Collider)
+- [Supported Tags in URDF](#Supported-Tags-in-URDF)
+- [Disable Collision Support](#Disable-Collision-Support)
+- [Sizing of Primitives](#Sizing-of-Primitives)
 
 
 ## File Hierarchy
