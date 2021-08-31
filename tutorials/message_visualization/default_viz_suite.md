@@ -42,7 +42,7 @@ This page provides steps on how to get started with message visualizations in a 
 
 3. This package contains a `DefaultVisualizationSuite` prefab that provides visualizer components for many common ROS message types, organized in the hierarchy by package. These components control how messages are displayed in the Unity scene.
 
-    To add the default visualization suite, open the Unity scene that you would like add message visualizations to. In the Project window, expand `Packages/Message Visualizations`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
+    To add the default visualization suite, open the Unity scene that you would like add message visualizations to. In the Project window, expand and select `Packages/Message Visualizations`. Select the `DefaultVisualizationSuite` (indicated by the blue cube Prefab icon) and drag it into your scene Hierarchy.
 
     ![](images/prefab.png)
 
@@ -53,7 +53,7 @@ This page provides steps on how to get started with message visualizations in a 
 5. In your ROS environment, start the default server endpoint if it is not already running:
 
     ```
-    rosrun ros_tcp_endpoint default_server_endpoint
+    rosrun ros_tcp_endpoint default_server_endpoint.py
     ```
 
     > If you have not yet set up the ROS–Unity integration, you can follow the steps [here](../ros_unity_integration/setup.md) to do so now.
@@ -78,7 +78,7 @@ This page provides steps on how to get started with message visualizations in a 
 
     You can click and drag the edges of the UI to adjust the size and placement of the topic's window. Additionally, the `Viz` is being drawn and updated in the scene as the rosbag plays! However, you'll notice that it's hard to see from this camera distance--move onto the next step to begin customizing this visualization.
 
-1.  Exit Play mode. Find the `Odometry Default Visualizer` component in the Inspector by expanding the `DefaultVisualizationSuite` GameObject in the scene Hierarchy and selecting the `Nav` child (for nav_msgs).
+10. Exit Play mode. In the scene Hierarchy, expand the `DefaultVisualizationSuite`. Select the `Nav` child object (for nav_msgs). In its Inspector window, scroll down until you find the `Odometry Default Visualizer`.
 
     Increase the `Thickness` to `0.1`, and change the color--we chose yellow (and don't forget to increase the color's Alpha value to 1!).
 
@@ -112,7 +112,7 @@ Using the Message Visualizations package, point cloud visualizations are highly 
 
     ```bash
     # Terminal 1
-    rosrun ros_tcp_endpoint default_server_endpoint
+    rosrun ros_tcp_endpoint default_server_endpoint.py
     ```
 
     ```bash
@@ -204,13 +204,13 @@ The 3D visualizations offer customizations such as `label` and `color` fields, w
 
 ### Joy Messages
 
-TODO: describe configuration assets and creating custom button mapping
+TODO
 
 ### More on Point Clouds
 
-Similar to the Visualization Settings, point cloud visualizations are highly customizable. Settings for these message visualizers (PointCloud, LaserScan, etc.) will be saved during runtime. For more information on this, you can check out the [base SettingsBasedVisualizer](../Runtime/Scripts/DrawingVisualizerWithSettings.cs) class, as well as read more about Unity's [ScriptableObjects](https://docs.unity3d.com/Manual/class-ScriptableObject.html).
+Similar to the Visualization Settings, point cloud visualizations are highly customizable. Settings for these message visualizers (PointCloud, LaserScan, etc.) will be saved during runtime. For more information on this, you can check out the [base SettingsBasedVisualizer](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Editor/SettingsBasedVisualizerEditor.cs) class, as well as read more about Unity's [ScriptableObjects](https://docs.unity3d.com/Manual/class-ScriptableObject.html).
 
-The standard settings are provided in ScriptableObjects. Default settings are provided in the [`DefaultVisualizers/Sensor/ScriptableObjects/`](../Runtime/DefaultVisualizers/Sensor/ScriptableObjects/) directory, and can be created by right-clicking in the Project window under `Create > Robotics > Sensor`. After being created, this configuration can be dragged and dropped into the component's Inspector field `Visualizer settings,` or selected by clicking on the small circle to the right of the field.
+The standard settings are provided in ScriptableObjects. Default settings are provided in the [`DefaultVisualizers/Sensor/ScriptableObjects/`]([../Runtime/DefaultVisualizers/Sensor/ScriptableObjects/](https://github.com/Unity-Technologies/ROS-TCP-Connector/tree/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Runtime/DefaultVisualizers/Sensor/ScriptableObjects)) directory, and can be created by right-clicking in the Project window under `Create > Robotics > Sensor`. After being created, this configuration can be dragged and dropped into the component's Inspector field `Visualizer settings,` or selected by clicking on the small circle to the right of the field.
 
 ![](images/pcl2.png)
 

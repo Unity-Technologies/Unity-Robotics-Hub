@@ -44,6 +44,7 @@ An example simulation environment, integrated with ROS 2, which enables the exer
 |---|---|
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
 | [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
+| [Message Visualizations](tutorials/message_visualization/default_viz_suite.md) | A set of tutorials for setting up and customizing ROS message visualizations in Unity |
 
 ## Component Repos
 
