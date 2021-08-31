@@ -20,6 +20,7 @@ The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Uni
 - [ROS–Unity Integration: Subscriber](subscriber.md) - Subscribe to receive messages in a Unity Scene
 - [ROS–Unity Integration: Unity Service](unity_service.md) - Implement a service inside a Unity Scene
 - [ROS–Unity Integration: Service Call](service_call.md) - Call an external service from a Unity Scene
+- [Message Visualizations: Getting Started](../message_visualization/default_viz_suite.md) - Visualize incoming and outgoing ROS messages in a Unity Scene
 
 ## Example Unity Scripts
 
