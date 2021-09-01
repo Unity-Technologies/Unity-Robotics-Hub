@@ -15,7 +15,7 @@ The message visualizations package enables Unity projects to visualize incoming 
     - [Message Topics](#message-topics)
     - [TF Topics and Tracking](#tf-topics-and-tracking)
     - [Visualization Settings](#visualization-settings)
-    <!-- - [Joy Messages](#joy-messages) -->
+    - [Joy Messages](#joy-messages)
     - [More on Point Clouds](#more-on-point-clouds)
 
 ---
@@ -28,6 +28,7 @@ This page provides steps on how to get started with message visualizations in a 
 
 ## Prerequisites
 - You will need to have ROS—Unity Integration set up in your project in order to send and receive ROS messages. If this is not yet set up, follow the steps [here](../ros_unity_integration/README.md). These steps assume you are continuing to use the project created in the [Setup](../ros_unity_integration/setup.md) step, but these steps can also be done in any Unity project with ROS integration.
+- [TEMP] This package currently requires the URDF-Importer package to be installed in the Unity project as well. Follow the [Installation Steps](../quick_setup.md) for URDF-Importer.
 - This tutorial will visualize odometry and point cloud data playing back from a rosbag. In your ROS environment, download this demo rosbag from [here](https://open-source-webviz-ui.s3.amazonaws.com/demo.bag), or use the `wget` command:
     ```bash
     wget https://open-source-webviz-ui.s3.amazonaws.com/demo.bag
@@ -167,7 +168,7 @@ The default tabs on the HUD panel includes:
 - **Layout**: Contains options to save and load this visualization configuration. While the visualization components are by default saved via the scene or the prefab, the window layout and visualized message list is saved as a JSON file. By default, this file is saved to a `RosHudLayout.json` file on your machine's [`Application.persistentDataPath`](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html) and loaded on each session. In this Layout tab, you can choose to `Export` this JSON file with a custom name to a chosen location on your device, as well as `Import` a layout JSON file to begin using that saved visualization configuration.
 <!-- - **Markers**: TODO -->
 
-The HUD is also designed to be customizable; you may add custom tabs or headers to the HUD. You can write a custom script similar to the [VisualizationLayoutTab](../Runtime/Scripts/VisualizationLayoutTab.cs) to extend the HUD. <!-- - TODO -->
+[TEMP link] The HUD is also designed to be customizable; you may add custom tabs or headers to the HUD. You can write a custom script similar to the [VisualizationLayoutTab](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Runtime/Scripts/VisualizationLayoutTab.cs) to extend the HUD. <!-- - TODO -->
 
 ## Using the Inspector
 
@@ -200,15 +201,19 @@ The 3D visualizations offer customizations such as `label` and `color` fields, w
 > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter.
 
 
-<!-- ### Joy Messages
+### Joy Messages
 
-TODO -->
+This package contains preconfigured button maps for the Xbox 360 wired and wireless controllers for Windows and Linux mappings, provided as ScriptableObjects in the [TEMP link] [`Resources/VisualizerSettings`](https://github.com/Unity-Technologies/ROS-TCP-Connector/tree/laurie/JoySettings/com.unity.robotics.message-visualizations/Runtime/DefaultVisualizers/Sensor/ScriptableObjects) directory.
+
+You can create your own custom mapping for the Joy Default Visualizer by right-clicking in the Project window under `Create > Robotics > Sensor Visualizers > Joy`. Once the file is made, you can click into the asset and manually assign the button or axis index appropriate for your custom controller.
+
+Once the mapping is done, in your Joy Default Visualizer component (e.g. `DefaultVisualizationSuite/Sensor/JoyDefaultVisualizer`), assign the `Settings` field to your newly made button map.
 
 ### More on Point Clouds
 
-Similar to the Visualization Settings, point cloud visualizations are highly customizable. Settings for these message visualizers (PointCloud, LaserScan, etc.) will be saved during runtime. For more information on this, you can check out the [base SettingsBasedVisualizer](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Editor/SettingsBasedVisualizerEditor.cs) class, as well as read more about Unity's [ScriptableObjects](https://docs.unity3d.com/Manual/class-ScriptableObject.html).
+Similar to the Visualization Settings, point cloud visualizations are highly customizable. Settings for these message visualizers (PointCloud, LaserScan, etc.) will be saved during runtime. For more information on this, you can check out the [TEMP link] [base SettingsBasedVisualizer](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Editor/SettingsBasedVisualizerEditor.cs) class, as well as read more about Unity's [ScriptableObjects](https://docs.unity3d.com/Manual/class-ScriptableObject.html).
 
-The standard settings are provided in ScriptableObjects. Default settings are provided in the [`DefaultVisualizers/Sensor/ScriptableObjects/`]([../Runtime/DefaultVisualizers/Sensor/ScriptableObjects/](https://github.com/Unity-Technologies/ROS-TCP-Connector/tree/laurie/VisualizationPackage/com.unity.robotics.message-visualizations/Runtime/DefaultVisualizers/Sensor/ScriptableObjects)) directory, and can be created by right-clicking in the Project window under `Create > Robotics > Sensor`. After being created, this configuration can be dragged and dropped into the component's Inspector field `Visualizer settings,` or selected by clicking on the small circle to the right of the field.
+The standard settings are provided in ScriptableObjects. Default settings are provided in the [TEMP link] [`Resources/VisualizerSettings`](https://github.com/Unity-Technologies/ROS-TCP-Connector/tree/laurie/JoySettings/com.unity.robotics.message-visualizations/Runtime/DefaultVisualizers/Sensor/ScriptableObjects) directory, and can be created by right-clicking in the Project window under `Create > Robotics > Sensor Visualizers`. After being created, this configuration can be dragged and dropped into the component's Inspector field `Visualizer settings,` or selected by clicking on the small circle to the right of the field.
 
 ![](images/pcl2.png)
 
