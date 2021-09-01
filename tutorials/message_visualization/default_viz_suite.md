@@ -15,7 +15,7 @@ The message visualizations package enables Unity projects to visualize incoming 
     - [Message Topics](#message-topics)
     - [TF Topics and Tracking](#tf-topics-and-tracking)
     - [Visualization Settings](#visualization-settings)
-    - [Joy Messages](#joy-messages)
+    <!-- - [Joy Messages](#joy-messages) -->
     - [More on Point Clouds](#more-on-point-clouds)
 
 ---
@@ -158,8 +158,6 @@ The UI windows for visualizations will automatically be laid out as they are tur
 
 ![](images/hud.png)
 
-<!-- ![](../images~/HudAreas.png) -->
-
 The top-left panel in the Game view provides a GUI system that offers tabs to toggle additional information about the state of the ROS communication and visualizations.
 
 The default tabs on the HUD panel includes:
@@ -167,9 +165,9 @@ The default tabs on the HUD panel includes:
 - **Topics**: Contains a list of all ROS topics on which this current session has sent or received a message. The `UI` toggle enables a window that shows the last message sent or received on that topic. The `Viz` toggle enables an in-scene drawing that represents the last message sent or received on that topic. If no `Viz` toggle is enabled, that topic does not have a default visualizer enabled in the Unity scene.
 - **Transforms**: Contains [`tf`](http://wiki.ros.org/tf) visualization options, including displaying the axes, links, and labels for each frame.
 - **Layout**: Contains options to save and load this visualization configuration. While the visualization components are by default saved via the scene or the prefab, the window layout and visualized message list is saved as a JSON file. By default, this file is saved to a `RosHudLayout.json` file on your machine's [`Application.persistentDataPath`](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html) and loaded on each session. In this Layout tab, you can choose to `Export` this JSON file with a custom name to a chosen location on your device, as well as `Import` a layout JSON file to begin using that saved visualization configuration.
-- **Markers**: TODO
+<!-- - **Markers**: TODO -->
 
-The HUD is also designed to be customizable; you may add custom tabs or headers to the HUD. You can write a custom script similar to the [VisualizationLayoutTab](../Runtime/Scripts/VisualizationLayoutTab.cs) to extend the HUD. TODO
+The HUD is also designed to be customizable; you may add custom tabs or headers to the HUD. You can write a custom script similar to the [VisualizationLayoutTab](../Runtime/Scripts/VisualizationLayoutTab.cs) to extend the HUD. <!-- - TODO -->
 
 ## Using the Inspector
 
@@ -202,9 +200,9 @@ The 3D visualizations offer customizations such as `label` and `color` fields, w
 > Note: Size-related fields are in Unity coordinates, where 1 unit = 1 meter.
 
 
-### Joy Messages
+<!-- ### Joy Messages
 
-TODO
+TODO -->
 
 ### More on Point Clouds
 
