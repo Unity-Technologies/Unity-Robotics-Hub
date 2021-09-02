@@ -24,6 +24,8 @@ Add the [Close Stale Issues](https://github.com/marketplace/actions/close-stale-
 
 ### Fixed
 
+Fixed dotnet format
+
 ## v0.5.1
 
 ### Changed
