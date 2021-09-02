@@ -4,16 +4,16 @@ repos:
     hooks:
       - id: mixed-line-ending
         exclude: >
-                    (?x)^(
-                        .*cs.meta|
-                        .*.css|
-                        .*.meta|
-                        .*.mat|
-                        .*.preset|
-                        .*.lighting|
-                        .*.dae
-                    )$
-                args: [--fix=lf]
+            (?x)^(
+                .*cs.meta|
+                .*.css|
+                .*.meta|
+                .*.mat|
+                .*.preset|
+                .*.lighting|
+                .*.dae
+            )$
+        args: [--fix=lf]
 
       - id: trailing-whitespace
         name: trailing-whitespace-markdown
