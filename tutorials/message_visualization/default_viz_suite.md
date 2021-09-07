@@ -3,7 +3,7 @@
 ![](images/pcl2.png)
 ## Introduction
 
-There are a variety of reasons that visualizations can be useful in a simulation, both in realtime and in playback. Seeing the data being sent and received within the context of the simulated world offers more information and a better understanding of the state of the simulation, offering insights into data like realtime sensor readings and control signals. Visualizations also enable users to more efficiently debug their robotic simulations with the ability to visually verify coordinate frames, object scaling, offsets, and more.
+There are a variety of reasons that visualizations can be useful in a simulation, both in realtime and in playback. Seeing the data being sent and received offers more information and a better understanding of the state of the simulation, offering insights into data like realtime sensor readings and control signals. Visualizations also enable users to more efficiently debug their robotic simulations with the ability to visually verify coordinate frames, object scaling, offsets, and more.
 
 This tutorial will show you how to show and customize visualizations for rosbag playback, including steps from installing the Message Visualizations package in your Unity project to customizing the visualization suite.
 
