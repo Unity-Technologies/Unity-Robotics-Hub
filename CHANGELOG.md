@@ -26,6 +26,8 @@ Add the [Close Stale Issues](https://github.com/marketplace/actions/close-stale-
 
 Fixed dotnet format
 
+Fixed Source Destination topic on the ROS side
+
 ## v0.5.1
 
 ### Changed
