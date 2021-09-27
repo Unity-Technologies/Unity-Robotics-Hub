@@ -87,33 +87,30 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    ```csharp
    public void Publish()
-   {
-      NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
+    {
+        var sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
-      sourceDestinationMessage.joint_00 = jointArticulationBodies[0].xDrive.target;
-      sourceDestinationMessage.joint_01 = jointArticulationBodies[1].xDrive.target;
-      sourceDestinationMessage.joint_02 = jointArticulationBodies[2].xDrive.target;
-      sourceDestinationMessage.joint_03 = jointArticulationBodies[3].xDrive.target;
-      sourceDestinationMessage.joint_04 = jointArticulationBodies[4].xDrive.target;
-      sourceDestinationMessage.joint_05 = jointArticulationBodies[5].xDrive.target;
+        for (var i = 0; i < k_NumRobotJoints; i++)
+        {
+            sourceDestinationMessage.joints[i] = m_JointArticulationBodies[i].GetPosition();
+        }
 
-      // Pick Pose
-      sourceDestinationMessage.pick_pose = new PoseMsg
-      {
-         position = target.transform.position.To<FLU>(),
-         // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
-         orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
-      };
+        // Pick Pose
+        sourceDestinationMessage.pick_pose = new PoseMsg
+        {
+            position = m_Target.transform.position.To<FLU>(),
+            orientation = Quaternion.Euler(90, m_Target.transform.eulerAngles.y, 0).To<FLU>()
+        };
 
-      // Place Pose
-      sourceDestinationMessage.place_pose = new PoseMsg
-      {
-         position = targetPlacement.transform.position.To<FLU>(),
-         orientation = pickOrientation.To<FLU>()
-      };
+        // Place Pose
+        sourceDestinationMessage.place_pose = new PoseMsg
+        {
+            position = m_TargetPlacement.transform.position.To<FLU>(),
+            orientation = m_PickOrientation.To<FLU>()
+        };
 
-      // Finally send the message to server_endpoint.py running in ROS
-      ros.Send(topicName, sourceDestinationMessage);
+        // Finally send the message to server_endpoint.py running in ROS
+        m_Ros.Send(m_TopicName, sourceDestinationMessage);
    }
    ```
 
