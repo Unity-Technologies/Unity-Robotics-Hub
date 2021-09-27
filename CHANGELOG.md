@@ -10,6 +10,8 @@ Fixed the ROS-Unity Integration tutorial `robo_demo.launch` to be up-to-date wit
 
 Add the [Close Stale Issues](https://github.com/marketplace/actions/close-stale-issues) action
 
+Updated Pick-and-Place scripts for style conformity, updated custom msg formats and made according script and tutorial changes.
+
 ### Upgrade Notes
 
 ### Known Issues
