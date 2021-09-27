@@ -1,82 +1,83 @@
+using System;
+using RosMessageTypes.Geometry;
 using RosMessageTypes.NiryoMoveit;
-using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 using Unity.Robotics.UrdfImporter;
-using RosMessageTypes.Geometry;
+using UnityEngine;
 
 public class SourceDestinationPublisher : MonoBehaviour
 {
-    // ROS Connector
-    private ROSConnection ros;
+    const int k_NumRobotJoints = 6;
 
     // Variables required for ROS communication
-    public string topicName = "SourceDestination_input";
+    [SerializeField]
+    string m_TopicName = "/niryo_joints";
 
-    public GameObject niryoOne;
-    public GameObject target;
-    public GameObject targetPlacement;
-
-    private int numRobotJoints = 6;
-    private readonly Quaternion pickOrientation = Quaternion.Euler(90, 90, 0);
+    [SerializeField]
+    GameObject m_NiryoOne;
+    [SerializeField]
+    GameObject m_Target;
+    [SerializeField]
+    GameObject m_TargetPlacement;
+    readonly Quaternion m_PickOrientation = Quaternion.Euler(90, 90, 0);
 
     // Robot Joints
-    private UrdfJointRevolute[] revoluteJoints;
+    UrdfJointRevolute[] m_JointArticulationBodies;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    // ROS Connector
+    ROSConnection m_Ros;
+
     void Start()
     {
         // Get ROS connection static instance
-        ros = ROSConnection.instance;
+        m_Ros = ROSConnection.GetOrCreateInstance();
+        m_Ros.RegisterPublisher<NiryoMoveitJointsMsg>(m_TopicName);
 
-        revoluteJoints = new UrdfJointRevolute[numRobotJoints];
-        string shoulder_link = "world/base_link/shoulder_link";
-        revoluteJoints[0] = niryoOne.transform.Find(shoulder_link).GetComponent<UrdfJointRevolute>();
+        m_JointArticulationBodies = new UrdfJointRevolute[k_NumRobotJoints];
+        var linkName = "world/base_link/shoulder_link";
+        m_JointArticulationBodies[0] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        string arm_link = shoulder_link + "/arm_link";
-        revoluteJoints[1] = niryoOne.transform.Find(arm_link).GetComponent<UrdfJointRevolute>();
+        linkName += "/arm_link";
+        m_JointArticulationBodies[1] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        string elbow_link = arm_link + "/elbow_link";
-        revoluteJoints[2] = niryoOne.transform.Find(elbow_link).GetComponent<UrdfJointRevolute>();
+        linkName += "/elbow_link";
+        m_JointArticulationBodies[2] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        string forearm_link = elbow_link + "/forearm_link";
-        revoluteJoints[3] = niryoOne.transform.Find(forearm_link).GetComponent<UrdfJointRevolute>();
+        linkName += "/forearm_link";
+        m_JointArticulationBodies[3] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        string wrist_link = forearm_link + "/wrist_link";
-        revoluteJoints[4] = niryoOne.transform.Find(wrist_link).GetComponent<UrdfJointRevolute>();
+        linkName += "/wrist_link";
+        m_JointArticulationBodies[4] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        string hand_link = wrist_link + "/hand_link";
-        revoluteJoints[5] = niryoOne.transform.Find(hand_link).GetComponent<UrdfJointRevolute>();
+        linkName += "/hand_link";
+        m_JointArticulationBodies[5] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
     }
 
     public void Publish()
     {
-        NiryoMoveitJointsMsg sourceDestinationMessage = new NiryoMoveitJointsMsg();
+        var sourceDestinationMessage = new NiryoMoveitJointsMsg();
 
-        sourceDestinationMessage.joint_00 = revoluteJoints[0].GetPosition() * Mathf.Rad2Deg;
-        sourceDestinationMessage.joint_01 = revoluteJoints[1].GetPosition() * Mathf.Rad2Deg;
-        sourceDestinationMessage.joint_02 = revoluteJoints[2].GetPosition() * Mathf.Rad2Deg;
-        sourceDestinationMessage.joint_03 = revoluteJoints[3].GetPosition() * Mathf.Rad2Deg;
-        sourceDestinationMessage.joint_04 = revoluteJoints[4].GetPosition() * Mathf.Rad2Deg;
-        sourceDestinationMessage.joint_05 = revoluteJoints[5].GetPosition() * Mathf.Rad2Deg;
+        for (var i = 0; i < k_NumRobotJoints; i++)
+        {
+            sourceDestinationMessage.joints[i] = m_JointArticulationBodies[i].GetPosition();
+        }
 
         // Pick Pose
         sourceDestinationMessage.pick_pose = new PoseMsg
         {
-            position = target.transform.position.To<FLU>(),
-            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
+            position = m_Target.transform.position.To<FLU>(),
+            orientation = Quaternion.Euler(90, m_Target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         sourceDestinationMessage.place_pose = new PoseMsg
         {
-            position = targetPlacement.transform.position.To<FLU>(),
-            orientation = pickOrientation.To<FLU>()
+            position = m_TargetPlacement.transform.position.To<FLU>(),
+            orientation = m_PickOrientation.To<FLU>()
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        ros.Send(topicName, sourceDestinationMessage);
+        m_Ros.Send(m_TopicName, sourceDestinationMessage);
     }
 }
