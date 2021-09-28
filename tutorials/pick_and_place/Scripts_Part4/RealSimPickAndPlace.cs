@@ -50,23 +50,13 @@ public class RealSimPickAndPlace : MonoBehaviour
     void Awake()
     {
         m_JointArticulationBodies = new ArticulationBody[k_NumRobotJoints];
-        var linkName = "world/base_link/shoulder_link";
-        m_JointArticulationBodies[0] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
 
-        linkName += "/arm_link";
-        m_JointArticulationBodies[1] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/elbow_link";
-        m_JointArticulationBodies[2] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/forearm_link";
-        m_JointArticulationBodies[3] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/wrist_link";
-        m_JointArticulationBodies[4] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/hand_link";
-        m_JointArticulationBodies[5] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
+        var linkName = string.Empty;
+        for (var i = 0; i < k_NumRobotJoints; i++)
+        {
+            linkName += SourceDestinationPublisher.LinkNames[i];
+            m_JointArticulationBodies[i] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
+        }
 
         // Find left and right fingers
         var rightGripper = linkName + "/tool_link/gripper_base/servo_head/control_rod_right/right_gripper";
@@ -139,9 +129,11 @@ public class RealSimPickAndPlace : MonoBehaviour
         };
 
         for (var i = 0; i < k_NumRobotJoints; i++)
+        {
             request.joints_input.joints[i] = m_JointArticulationBodies[i].jointPosition[0];
+        }
 
-        m_Ros.Send(rosJointPublishTopicName, request);
+        m_Ros.Publish(rosJointPublishTopicName, request);
     }
 
     /// <summary>
@@ -152,22 +144,24 @@ public class RealSimPickAndPlace : MonoBehaviour
     /// <param name="robotAction"> RobotMoveActionGoal of trajectory or gripper commands</param>
     void ExecuteRobotCommands(RobotMoveActionGoal robotAction)
     {
-        if (robotAction.goal.cmd.cmd_type == k_TrajectoryCommandExecution)
+        switch (robotAction.goal.cmd.cmd_type)
         {
-            StartCoroutine(ExecuteTrajectories(robotAction.goal.cmd.Trajectory.trajectory));
-        }
-        else if (robotAction.goal.cmd.cmd_type == k_ToolCommandExecution)
-        {
-            if (robotAction.goal.cmd.tool_cmd.cmd_type == k_OpenGripper)
-            {
-                Debug.Log("Open Tool Command");
-                OpenGripper();
-            }
-            else if (robotAction.goal.cmd.tool_cmd.cmd_type == k_CloseGripper)
-            {
-                Debug.Log("Close Tool Command");
-                CloseGripper();
-            }
+            case k_TrajectoryCommandExecution:
+                StartCoroutine(ExecuteTrajectories(robotAction.goal.cmd.Trajectory.trajectory));
+                break;
+            case k_ToolCommandExecution:
+                switch (robotAction.goal.cmd.tool_cmd.cmd_type)
+                {
+                    case k_OpenGripper:
+                        Debug.Log("Open Tool Command");
+                        OpenGripper();
+                        break;
+                    case k_CloseGripper:
+                        Debug.Log("Close Tool Command");
+                        CloseGripper();
+                        break;
+                }
+                break;
         }
     }
 

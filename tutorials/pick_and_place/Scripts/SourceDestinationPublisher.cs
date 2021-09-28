@@ -10,6 +10,9 @@ public class SourceDestinationPublisher : MonoBehaviour
 {
     const int k_NumRobotJoints = 6;
 
+    public static readonly string[] LinkNames =
+        { "world/base_link/shoulder_link", "/arm_link", "/elbow_link", "/forearm_link", "/wrist_link", "/hand_link" };
+
     // Variables required for ROS communication
     [SerializeField]
     string m_TopicName = "/niryo_joints";
@@ -35,23 +38,13 @@ public class SourceDestinationPublisher : MonoBehaviour
         m_Ros.RegisterPublisher<NiryoMoveitJointsMsg>(m_TopicName);
 
         m_JointArticulationBodies = new UrdfJointRevolute[k_NumRobotJoints];
-        var linkName = "world/base_link/shoulder_link";
-        m_JointArticulationBodies[0] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
 
-        linkName += "/arm_link";
-        m_JointArticulationBodies[1] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
-
-        linkName += "/elbow_link";
-        m_JointArticulationBodies[2] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
-
-        linkName += "/forearm_link";
-        m_JointArticulationBodies[3] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
-
-        linkName += "/wrist_link";
-        m_JointArticulationBodies[4] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
-
-        linkName += "/hand_link";
-        m_JointArticulationBodies[5] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
+        var linkName = string.Empty;
+        for (var i = 0; i < k_NumRobotJoints; i++)
+        {
+            linkName += LinkNames[i];
+            m_JointArticulationBodies[i] = m_NiryoOne.transform.Find(linkName).GetComponent<UrdfJointRevolute>();
+        }
     }
 
     public void Publish()
@@ -78,6 +71,6 @@ public class SourceDestinationPublisher : MonoBehaviour
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        m_Ros.Send(m_TopicName, sourceDestinationMessage);
+        m_Ros.Publish(m_TopicName, sourceDestinationMessage);
     }
 }

@@ -17,15 +17,19 @@ public class TrajectoryPlanner : MonoBehaviour
     // Variables required for ROS communication
     [SerializeField]
     string m_RosServiceName = "niryo_moveit";
+    public string RosServiceName { get => m_RosServiceName; set => m_RosServiceName = value; }
 
     [SerializeField]
     GameObject m_NiryoOne;
+    public GameObject NiryoOne { get => m_NiryoOne; set => m_NiryoOne = value; }
     [SerializeField]
     GameObject m_Target;
+    public GameObject Target { get => m_Target; set => m_Target = value; }
     [SerializeField]
     GameObject m_TargetPlacement;
+    public GameObject TargetPlacement { get => m_TargetPlacement; set => m_TargetPlacement = value; }
 
-    // Assures that the gripper is always positioned above the target cube before grasping.
+    // Assures that the gripper is always positioned above the m_Target cube before grasping.
     readonly Quaternion m_PickOrientation = Quaternion.Euler(90, 90, 0);
     readonly Vector3 m_PickPoseOffset = Vector3.up * 0.1f;
 
@@ -48,23 +52,13 @@ public class TrajectoryPlanner : MonoBehaviour
         m_Ros.RegisterRosService<MoverServiceRequest, MoverServiceResponse>(m_RosServiceName);
 
         m_JointArticulationBodies = new ArticulationBody[k_NumRobotJoints];
-        var linkName = "world/base_link/shoulder_link";
-        m_JointArticulationBodies[0] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
 
-        linkName += "/arm_link";
-        m_JointArticulationBodies[1] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/elbow_link";
-        m_JointArticulationBodies[2] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/forearm_link";
-        m_JointArticulationBodies[3] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/wrist_link";
-        m_JointArticulationBodies[4] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
-
-        linkName += "/hand_link";
-        m_JointArticulationBodies[5] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
+        var linkName = string.Empty;
+        for (var i = 0; i < k_NumRobotJoints; i++)
+        {
+            linkName += SourceDestinationPublisher.LinkNames[i];
+            m_JointArticulationBodies[i] = m_NiryoOne.transform.Find(linkName).GetComponent<ArticulationBody>();
+        }
 
         // Find left and right fingers
         var rightGripper = linkName + "/tool_link/gripper_base/servo_head/control_rod_right/right_gripper";
@@ -200,8 +194,10 @@ public class TrajectoryPlanner : MonoBehaviour
                 }
 
                 // Close the gripper if completed executing the trajectory for the Grasp pose
-                if (poseIndex == (int)Poses.Grasp)
+                if (poseIndex == (int)Poses.Grasp) 
+                {
                     CloseGripper();
+                }
 
                 // Wait for the robot to achieve the final pose from joint assignment
                 yield return new WaitForSeconds(k_PoseAssignmentWait);
