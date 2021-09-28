@@ -194,7 +194,7 @@ public class TrajectoryPlanner : MonoBehaviour
                 }
 
                 // Close the gripper if completed executing the trajectory for the Grasp pose
-                if (poseIndex == (int)Poses.Grasp) 
+                if (poseIndex == (int)Poses.Grasp)
                 {
                     CloseGripper();
                 }
