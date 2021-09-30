@@ -47,8 +47,6 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
    In the ROS Message Browser window, click `Browse` next to the ROS message path. Navigate to and select the ROS directory of this cloned repository (`Unity-Robotics-Hub/tutorials/pick_and_place/ROS/`). This window will populate with all msg and srv files found in this directory.
 
-   In the ROS Message Browser window, type in `Scripts/RosMessages` in the text field of Build message path.
-
    ![](img/2_browser.png)
 
    > Note: If any of these ROS directories appear to be empty, you can run the command `git submodule update --init --recursive` to download the packages via Git submodules.
