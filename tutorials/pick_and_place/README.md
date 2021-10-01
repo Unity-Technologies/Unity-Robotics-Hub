@@ -10,6 +10,12 @@ This tutorial is designed such that you do not need prior experience with Unity 
 
 > Note: This project has been tested with Python 2 and ROS Melodic, as well as Python 3 and ROS Noetic.
 
+---
+
+We're currently working on lots of things! As a first step for this tutorial, please take a short moment fill out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+
+---
+
 ### Pick-and-Place Tutorial
   - [Requirements](#requirements)
   - [Part 0: ROS Setup](#part-0-ros-setup)

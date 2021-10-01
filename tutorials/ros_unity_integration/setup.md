@@ -1,6 +1,6 @@
 # ROS–Unity Demo Setup
 
-This document is in two parts - part 1 covers the minimum requirements for a ROS–Unity integration. Part 2 sets up the Unity Robotics Demo package, which you will need if you're following the ROS–Unity Integration tutorials.
+This document is in two parts - [Part 1](#-ros-environment) covers the minimum requirements for a ROS–Unity integration. [Part 2](#install-unity-robotics-demo) sets up the Unity Robotics Demo package, which you will need if you're following the ROS–Unity Integration tutorials.
 
 These instructions cover both ROS1 and ROS2. The symbols <img src="images/ros1_icon.png" alt="ros1" width="14" height="14"/> and <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> indicate instructions for ROS1 and ROS2 users, respectively. If using ROS2, start with [ROS2 Environment](setup.md#-ros2-environment).
 

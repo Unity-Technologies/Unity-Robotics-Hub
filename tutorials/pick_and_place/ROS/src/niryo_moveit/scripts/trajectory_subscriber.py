@@ -15,7 +15,7 @@ def callback(data):
 
 def listener():
     rospy.init_node('Trajectory_Subscriber', anonymous=True)
-    rospy.Subscriber("SourceDestination", NiryoMoveitJoints, callback)
+    rospy.Subscriber("/niryo_joints", NiryoMoveitJoints, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

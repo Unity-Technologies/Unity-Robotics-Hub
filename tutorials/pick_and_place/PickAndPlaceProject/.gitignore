@@ -16,6 +16,7 @@
 # Ignore scripts that are expected to get copied in at some point
 /**/SourceDestinationPublisher.*
 /**/TrajectoryPlanner.*
+/**/RealSimPickAndPlace.*
 
 
 # MemoryCaptures can get excessive in size.

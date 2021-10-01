@@ -2,7 +2,7 @@
 
 # Unity Robotics Hub
 
-[![Version](https://img.shields.io/github/v/tag/Unity-Technologies/Unity-Robotics-Hub)](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases)
+<!-- [![Version](https://img.shields.io/github/v/tag/Unity-Technologies/Unity-Robotics-Hub)](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) -->
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
 ![ROS](https://img.shields.io/badge/ros-melodic-brightgreen)
 ![ROS](https://img.shields.io/badge/ros-noetic-brightgreen)
@@ -12,6 +12,12 @@
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
 > The contents of this repository are in active development. Its features and API are subject to significant change as development progresses.
+
+---
+
+We're currently working on lots of things! Please take a short moment fill out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+
+---
 
 ## Introduction
 
@@ -36,7 +42,7 @@ A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
 
 ### [**New!**] [Navigation 2 SLAM Example](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example)
 
-An example simulation environment, integrated with ROS 2, which enables the exercise of ROS 2's Navigation 2 and slam_toolbox packages using a simulated Turtlebot 3.
+An example simulation environment, integrated with ROS 2 and **[New!] Visualizations**, which enables the exercise of ROS 2's Navigation 2 and slam_toolbox packages using a simulated Turtlebot 3.
 
 ## Documentation
 
@@ -44,13 +50,14 @@ An example simulation environment, integrated with ROS 2, which enables the exer
 |---|---|
 | [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
 | [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
+| [**New!**] [Visualizations](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md) | Usage instructions for adding visualizations for incoming and outgoing ROS messages |
 
 ## Component Repos
 
 | Repo | Functionality |
 |---|---|
 | [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) | ROS node for sending/receiving messages from Unity |
-| [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) | Unity package for sending/receiving messages from ROS |
+| [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) | Unity package for sending, receiving, and visualizing messages from ROS |
 | [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) | Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
 
 
@@ -59,7 +66,8 @@ An example simulation environment, integrated with ROS 2, which enables the exer
 
 ### Blog Posts and Talks
 
-- [**New!**] (August 13, 2021) Advance your robot autonomy with ROS 2 and Unity [blog post](https://blog.unity.com/manufacturing/advance-your-robot-autonomy-with-ros-2-and-unity)
+- [**New!**] (October 4, 2021) Introducing: Unity Robotics Visualizations Package [blog post](https://blog.unity.com/manufacturing/Introducing-Unity-Robotics-Visualizations-Package)
+- (August 13, 2021) Advance your robot autonomy with ROS 2 and Unity [blog post](https://blog.unity.com/manufacturing/advance-your-robot-autonomy-with-ros-2-and-unity)
 - (March 2, 2021) Teaching robots to see with Unity [blog post](https://blogs.unity3d.com/2021/03/02/teaching-robots-to-see-with-unity/)
 - (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
 - (November 12, 2020)
@@ -87,12 +95,8 @@ Here’s a peek into what our Physics Team is hard at work on…
 - **Force/Torque Sensor API**. This API will allow users to get the force and torque acting on an articulation body (useful for simulating a force/torque sensor!), as well as to get the motor torque applied by an articulation drive.
 - **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
 
-## [**New!**] ROS 2
+## ROS 2
 ROS2 support is now available! You can get started by following [this tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md).
-
-
-## FAQs
-[FAQs](faq.md)
 
 ## Community and Feedback
 
@@ -111,6 +115,9 @@ Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com)
 
 ## Newsletter
 To get notified about new updates and features, [sign up for our newsletter](https://create.unity3d.com/robotics-simulation-newsletter-sign-up)!
+
+## FAQs
+[FAQs](faq.md)
 
 ## License
 [Apache License 2.0](LICENSE)

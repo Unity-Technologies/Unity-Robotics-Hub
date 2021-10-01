@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## Unreleased
 
+Fixed the ROS-Unity Integration tutorial `robo_demo.launch` to be up-to-date with file paths, and updated Pick-and-Place Part 2 ROS Settings screenshot.
+
+Add the [Close Stale Issues](https://github.com/marketplace/actions/close-stale-issues) action
+
+Updated Pick-and-Place scripts for style conformity, updated custom msg formats and made according script and tutorial changes.
+
 ### Upgrade Notes
 
 ### Known Issues
@@ -19,6 +25,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Removed
 
 ### Fixed
+
+Fixed dotnet format
+
+Fixed Source Destination topic on the ROS side
 
 ## v0.5.1
 
