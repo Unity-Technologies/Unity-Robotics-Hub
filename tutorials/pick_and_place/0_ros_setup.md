@@ -39,7 +39,7 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
 1. Start the newly built Docker container:
 
     ```docker
-    docker run -it --rm -p 10000:10000 -p 5005:5005 unity-robotics:pick-and-place /bin/bash
+    docker run -it --rm -p 10000:10000 unity-robotics:pick-and-place /bin/bash
     ```
 
     When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`.

@@ -126,14 +126,7 @@ def plan_pick_and_place(req):
     group_name = "arm"
     move_group = moveit_commander.MoveGroupCommander(group_name)
 
-    current_robot_joint_configuration = [
-        math.radians(req.joints_input.joint_00),
-        math.radians(req.joints_input.joint_01),
-        math.radians(req.joints_input.joint_02),
-        math.radians(req.joints_input.joint_03),
-        math.radians(req.joints_input.joint_04),
-        math.radians(req.joints_input.joint_05),
-    ]
+    current_robot_joint_configuration = req.joints_input.joints
 
     # Pre grasp - position gripper directly above target object
     pre_grasp_pose = plan_trajectory(move_group, req.pick_pose, current_robot_joint_configuration)

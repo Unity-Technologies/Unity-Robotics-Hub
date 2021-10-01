@@ -2,7 +2,7 @@ using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 
-public class RosServiceExample : MonoBehaviour
+public class RosServiceCallExample : MonoBehaviour
 {
     ROSConnection ros;
 
@@ -19,8 +19,8 @@ public class RosServiceExample : MonoBehaviour
 
     void Start()
     {
-        ros = ROSConnection.instance;
-        ros.RegisterRosService<PositionServiceRequest>(serviceName);
+        ros = ROSConnection.GetOrCreateInstance();
+        ros.RegisterRosService<PositionServiceRequest, PositionServiceResponse>(serviceName);
         destination = cube.transform.position;
     }
 

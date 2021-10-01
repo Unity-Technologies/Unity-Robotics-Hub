@@ -31,30 +31,31 @@ Steps covered in this tutorial includes invoking a motion planning service in RO
     ```csharp
     public void PublishJoints()
     {
-        MoverServiceRequest request = new MoverServiceRequest();
+        var request = new MoverServiceRequest();
         request.joints_input = CurrentJointConfig();
 
         // Pick Pose
         request.pick_pose = new PoseMsg
         {
-            position = (target.transform.position + pickPoseOffset).To<FLU>(),
+            position = (m_Target.transform.position + m_PickPoseOffset).To<FLU>(),
+
             // The hardcoded x/z angles assure that the gripper is always positioned above the target cube before grasping.
-            orientation = Quaternion.Euler(90, target.transform.eulerAngles.y, 0).To<FLU>()
+            orientation = Quaternion.Euler(90, m_Target.transform.eulerAngles.y, 0).To<FLU>()
         };
 
         // Place Pose
         request.place_pose = new PoseMsg
         {
-            position = (targetPlacement.transform.position + pickPoseOffset).To<FLU>(),
-            orientation = pickOrientation.To<FLU>()
+            position = (m_TargetPlacement.transform.position + m_PickPoseOffset).To<FLU>(),
+            orientation = m_PickOrientation.To<FLU>()
         };
 
-        ros.SendServiceMessage<MoverServiceResponse>(rosServiceName, request, TrajectoryResponse);
+        m_Ros.SendServiceMessage<MoverServiceResponse>(m_RosServiceName, request, TrajectoryResponse);
     }
 
     void TrajectoryResponse(MoverServiceResponse response)
     {
-        if (response.trajectories != null)
+        if (response.trajectories.Length > 0)
         {
             Debug.Log("Trajectory returned.");
             StartCoroutine(ExecuteTrajectories(response));
@@ -137,12 +138,16 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
     move_group.set_start_state(moveit_robot_state)
 
     move_group.set_pose_target(destination_pose)
-    plan = move_group.go(wait=True)
+    plan = move_group.plan()
 
     if not plan:
-        print("RAISE NO PLAN ERROR")
+        exception_str = """
+            Trajectory could not be planned for a destination of {} with starting joint angles {}.
+            Please make sure target and destination are reachable by the robot.
+        """.format(destination_pose, destination_pose)
+        raise Exception(exception_str)
 
-    return move_group.plan()
+    return planCompat(plan)
 ```
 
 > This creates a set of planned trajectories, iterating through a pre-grasp, grasp, pick up, and place set of poses. Finally, this set of trajectories is sent back to Unity.
