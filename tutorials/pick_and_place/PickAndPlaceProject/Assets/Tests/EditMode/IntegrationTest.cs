@@ -122,10 +122,10 @@ namespace IntegrationTests
         void CreateTrajectoryPlannerPublisher()
         {
             var planner = new GameObject(k_NamePublisher).AddComponent<TrajectoryPlanner>();
-            planner.rosServiceName = k_NamePackageNiryoMoveIt;
-            planner.niryoOne = GameObject.Find(k_NameNiryoOne);
-            planner.target = GameObject.Find(k_NameTarget);
-            planner.targetPlacement = GameObject.Find(k_NameTargetPlacement);
+            planner.RosServiceName = k_NamePackageNiryoMoveIt;
+            planner.NiryoOne = GameObject.Find(k_NameNiryoOne);
+            planner.Target = GameObject.Find(k_NameTarget);
+            planner.TargetPlacement = GameObject.Find(k_NameTargetPlacement);
         }
 
         GameObject InstantiatePrefabFromName(string name)

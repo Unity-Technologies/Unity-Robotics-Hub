@@ -21,7 +21,7 @@ public class RosPublisherExample : MonoBehaviour
     void Start()
     {
         // start the ROS connection
-        ros = ROSConnection.instance;
+        ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<PosRotMsg>(topicName);
     }
 
@@ -44,7 +44,7 @@ public class RosPublisherExample : MonoBehaviour
             );
 
             // Finally send the message to server_endpoint.py running in ROS
-            ros.Send(topicName, cubePos);
+            ros.Publish(topicName, cubePos);
 
             timeElapsed = 0;
         }

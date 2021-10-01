@@ -1,58 +1,70 @@
 #if UNITY_EDITOR
-using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using UnityEditor;
-using UnityEngine;
+using Microsoft.CSharp;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using Unity.Robotics.UrdfImporter;
 using Unity.Robotics.UrdfImporter.Control;
+using UnityEditor;
+using UnityEngine;
 
 public class Demo : MonoBehaviour
 {
-    public string hostIP = "127.0.0.1";
+    const string k_BaseLinkName = "base_link";
 
-    public bool generateRosMessages = true;
-    public bool deleteRosMessagesAfterSimulation = true;
+    const string k_CameraName = "Main Camera";
+    const float k_ControllerAcceleration = 10;
+    const float k_ControllerDamping = 100;
+    const float k_ControllerForceLimit = 1000;
+    const float k_ControllerSpeed = 30;
+    const float k_ControllerStiffness = 10000;
 
-    string prefabDirectory = "Assets/Prefabs";
-    string prefabSuffix = ".prefab";
+    const string k_ExternalScriptsDirectory = "../Scripts";
+    const int k_HostPort = 10000;
+    const string k_MoveitMsgPackageName = "moveit_msgs";
+    const string k_MoverServiceFileName = "MoverService.srv";
+    const string k_MsgDirectory = "msg";
+    const string k_NiryoMoveitPackageName = "niryo_moveit";
 
-    string tableName = "Table";
-    string targetName = "Target";
-    string targetPlacementName = "TargetPlacement";
+    const string k_NiryoOneName = "niryo_one";
 
-    string cameraName = "Main Camera";
-    Vector3 cameraPosition = new Vector3(0, 1.4f, -0.7f);
-    Quaternion cameraRotation = Quaternion.Euler(new Vector3(45, 0, 0));
+    const string k_PrefabDirectory = "Assets/Prefabs";
+    const string k_PrefabSuffix = ".prefab";
+    const string k_PublisherName = "Publisher";
 
-    string urdfRelativeFilepath = "URDF/niryo_one/niryo_one.urdf";
+    const string k_RegisterMethodName = "Register";
+    const string k_RobotTrajectoryMessageFileName = "RobotTrajectory.msg";
 
-    string niryoOneName = "niryo_one";
-    string baseLinkName = "base_link";
-    float controllerStiffness = 10000;
-    float controllerDamping = 100;
-    float controllerForceLimit = 1000;
-    float controllerSpeed = 30;
-    float controllerAcceleration = 10;
+    //string scriptsDirectory = "Assets/Scripts";
 
-    string rosMessagesDirectory = "Assets/Scripts/RosMessages";
-    string rosSrcDirectory = "../ROS/src";
-    string msgDirectory = "msg";
-    string srvDirectory = "srv";
-    string moveitMsgPackageName = "moveit_msgs";
-    string niryoMoveitPackageName = "niryo_moveit";
-    string robotTrajectoryMessageFileName = "RobotTrajectory.msg";
-    string moverServiceFileName = "MoverService.srv";
-    string scriptPattern = "*.cs";
+    const string k_RosConnectName = "ROSConnect";
 
-    string registerMethodName = "Register";
-    string[] rosGeneratedTypeFullName = new string[]
+    const string k_RosMessagesDirectory = "Assets/Scripts/RosMessages";
+    const string k_RosServiceName = "niryo_moveit";
+    const string k_RosSrcDirectory = "../ROS/src";
+    const string k_ScriptPattern = "*.cs";
+    const string k_SrvDirectory = "srv";
+
+    const string k_TableName = "Table";
+    const string k_TargetName = "Target";
+    const string k_TargetPlacementName = "TargetPlacement";
+
+    const string k_TrajectoryPlannerType = "TrajectoryPlanner";
+
+    const string k_UrdfRelativeFilepath = "URDF/niryo_one/niryo_one.urdf";
+    [SerializeField]
+    string m_HostIP = "127.0.0.1";
+
+    [SerializeField]
+    bool m_GenerateRosMessages = true;
+    [SerializeField]
+    bool m_DeleteRosMessagesAfterSimulation = true;
+    readonly string[] m_RosGeneratedTypeFullName =
     {
         "RosMessageTypes.Moveit.RobotTrajectoryMsg",
         "RosMessageTypes.NiryoMoveit.NiryoMoveitJointsMsg",
@@ -61,21 +73,12 @@ public class Demo : MonoBehaviour
         "RosMessageTypes.NiryoMoveit.MoverServiceRequest"
     };
 
+    Assembly m_Assembly;
+    Vector3 m_CameraPosition = new Vector3(0, 1.4f, -0.7f);
+    Quaternion m_CameraRotation = Quaternion.Euler(new Vector3(45, 0, 0));
 
-    string externalScriptsDirectory = "../Scripts";
-    //string scriptsDirectory = "Assets/Scripts";
-
-    string rosConnectName = "ROSConnect";
-    string publisherName = "Publisher";
-    int hostPort = 10000;
-
-    string trajectoryPlannerType = "TrajectoryPlanner";
-    string rosServiceName = "niryo_moveit";
-
-    bool hasPublished = false;
-
-    Assembly assembly;
-    ROSConnection rosConnection;
+    bool m_HasPublished;
+    ROSConnection m_RosConnection;
 
     void Awake()
     {
@@ -90,150 +93,156 @@ public class Demo : MonoBehaviour
     void Update()
     {
         // Make sure to publish only once in the demo
-        if (!hasPublished)
+        if (!m_HasPublished)
         {
-            dynamic publisher = GameObject.Find(publisherName).GetComponent(assembly.GetType(trajectoryPlannerType));
+            dynamic publisher = GameObject.Find(k_PublisherName)
+                .GetComponent(m_Assembly.GetType(k_TrajectoryPlannerType));
             publisher.PublishJoints();
-            hasPublished = true;
+            m_HasPublished = true;
         }
     }
 
     void OnApplicationQuit()
     {
-        if (deleteRosMessagesAfterSimulation)
+        if (m_DeleteRosMessagesAfterSimulation)
         {
-            Directory.Delete(rosMessagesDirectory, recursive: true);
-            File.Delete($"{rosMessagesDirectory}.meta");
+            Directory.Delete(k_RosMessagesDirectory, true);
+            File.Delete($"{k_RosMessagesDirectory}.meta");
         }
+
         EditorApplication.UnlockReloadAssemblies();
     }
 
     // Tutorial Part 1
-    private void SetupScene()
+    void SetupScene()
     {
         // Instantiate the table, target, and target placement
-        InstantiatePrefab(tableName);
-        InstantiatePrefab(targetName);
-        InstantiatePrefab(targetPlacementName);
+        InstantiatePrefab(k_TableName);
+        InstantiatePrefab(k_TargetName);
+        InstantiatePrefab(k_TargetPlacementName);
 
         // Adjust main camera
-        GameObject camera = GameObject.Find(cameraName);
-        camera.transform.position = cameraPosition;
-        camera.transform.rotation = cameraRotation;
+        var camera = GameObject.Find(k_CameraName);
+        camera.transform.position = m_CameraPosition;
+        camera.transform.rotation = m_CameraRotation;
     }
 
     // Tutorial Part 2 without the Publisher object
-    private void AddRosMessages()
+    void AddRosMessages()
     {
-        if (generateRosMessages)
+        if (m_GenerateRosMessages)
         {
             // Generate ROS messages
             MessageAutoGen.GenerateSingleMessage(
-                Path.Combine(rosSrcDirectory, moveitMsgPackageName, msgDirectory, robotTrajectoryMessageFileName),
-                rosMessagesDirectory, moveitMsgPackageName);
+                Path.Combine(k_RosSrcDirectory, k_MoveitMsgPackageName, k_MsgDirectory,
+                    k_RobotTrajectoryMessageFileName),
+                k_RosMessagesDirectory, k_MoveitMsgPackageName);
 
             MessageAutoGen.GenerateDirectoryMessages(
-                Path.Combine(rosSrcDirectory, niryoMoveitPackageName, msgDirectory),
-                rosMessagesDirectory);
+                Path.Combine(k_RosSrcDirectory, k_NiryoMoveitPackageName, k_MsgDirectory),
+                k_RosMessagesDirectory);
 
             // Generate ROS services
             ServiceAutoGen.GenerateSingleService(
-                Path.Combine(rosSrcDirectory, niryoMoveitPackageName, srvDirectory, moverServiceFileName),
-                rosMessagesDirectory, niryoMoveitPackageName);
+                Path.Combine(k_RosSrcDirectory, k_NiryoMoveitPackageName, k_SrvDirectory, k_MoverServiceFileName),
+                k_RosMessagesDirectory, k_NiryoMoveitPackageName);
         }
 
         // Recompile ROS message scripts and external scripts
-        List<string> scripts = new List<string>();
-        scripts.AddRange(Directory.GetFiles(rosMessagesDirectory, scriptPattern, SearchOption.AllDirectories));
-        scripts.AddRange(Directory.GetFiles(externalScriptsDirectory));
+        var scripts = new List<string>();
+        scripts.AddRange(Directory.GetFiles(k_RosMessagesDirectory, k_ScriptPattern, SearchOption.AllDirectories));
+        scripts.AddRange(Directory.GetFiles(k_ExternalScriptsDirectory));
         RecompileScripts(scripts.ToArray());
 
         // Register Ros message names and their deserialize function
-        foreach (var typeFullName in rosGeneratedTypeFullName)
+        foreach (var typeFullName in m_RosGeneratedTypeFullName)
         {
-            assembly.GetType(typeFullName).GetMethod(registerMethodName).Invoke(null, null);
+            m_Assembly.GetType(typeFullName).GetMethod(k_RegisterMethodName).Invoke(null, null);
         }
     }
 
-    private void CreateTrajectoryPlannerPublisher()
+    void CreateTrajectoryPlannerPublisher()
     {
-        GameObject publisher = new GameObject(publisherName);
-        dynamic planner = publisher.AddComponent(assembly.GetType(trajectoryPlannerType));
-        planner.rosServiceName = rosServiceName;
-        planner.niryoOne = GameObject.Find(niryoOneName);
-        planner.target = GameObject.Find(targetName);
-        planner.targetPlacement = GameObject.Find(targetPlacementName);
+        var publisher = new GameObject(k_PublisherName);
+        dynamic planner = publisher.AddComponent(m_Assembly.GetType(k_TrajectoryPlannerType));
+        planner.RosServiceName = k_RosServiceName;
+        planner.NiryoOne = GameObject.Find(k_NiryoOneName);
+        planner.Target = GameObject.Find(k_TargetName);
+        planner.TargetPlacement = GameObject.Find(k_TargetPlacementName);
     }
 
-    private GameObject InstantiatePrefab(string name)
+    GameObject InstantiatePrefab(string name)
     {
-        string filepath = Path.Combine(prefabDirectory, $"{name}{prefabSuffix}");
-        GameObject gameObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(filepath));
+        var filepath = Path.Combine(k_PrefabDirectory, $"{name}{k_PrefabSuffix}");
+        var gameObject = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(filepath));
         gameObject.name = name;
         return gameObject;
     }
 
-    private void CreateRosConnection()
+    void CreateRosConnection()
     {
         // Create RosConnect
-        GameObject rosConnect = new GameObject(rosConnectName);
-        rosConnection = rosConnect.AddComponent<ROSConnection>();
-        rosConnection.RosIPAddress = hostIP;
-        rosConnection.RosPort = hostPort;
+        var rosConnect = new GameObject(k_RosConnectName);
+        m_RosConnection = rosConnect.AddComponent<ROSConnection>();
+        m_RosConnection.RosIPAddress = m_HostIP;
+        m_RosConnection.RosPort = k_HostPort;
     }
 
-    private void ImportRobot()
+    void ImportRobot()
     {
-        ImportSettings urdfImportSettings = new ImportSettings
+        var urdfImportSettings = new ImportSettings
         {
             choosenAxis = ImportSettings.axisType.yAxis,
             convexMethod = ImportSettings.convexDecomposer.unity
         };
+
         // Import Niryo One with URDF importer
-        string urdfFilepath = Path.Combine(Application.dataPath, urdfRelativeFilepath);
+        var urdfFilepath = Path.Combine(Application.dataPath, k_UrdfRelativeFilepath);
+
         // Create is a coroutine that would usually run only in EditMode, so we need to force its execution here
-        var robotImporter = UrdfRobotExtensions.Create(urdfFilepath, urdfImportSettings, false);
+        var robotImporter = UrdfRobotExtensions.Create(urdfFilepath, urdfImportSettings);
         while (robotImporter.MoveNext()) { }
+
         // Adjust robot parameters
-        Controller controller = GameObject.Find(niryoOneName).GetComponent<Controller>();
-        controller.stiffness = controllerStiffness;
-        controller.damping = controllerDamping;
-        controller.forceLimit = controllerForceLimit;
-        controller.speed = controllerSpeed;
-        controller.acceleration = controllerAcceleration;
-        GameObject.Find(baseLinkName).GetComponent<ArticulationBody>().immovable = true;
+        var controller = GameObject.Find(k_NiryoOneName).GetComponent<Controller>();
+        controller.stiffness = k_ControllerStiffness;
+        controller.damping = k_ControllerDamping;
+        controller.forceLimit = k_ControllerForceLimit;
+        controller.speed = k_ControllerSpeed;
+        controller.acceleration = k_ControllerAcceleration;
+        GameObject.Find(k_BaseLinkName).GetComponent<ArticulationBody>().immovable = true;
     }
 
     // Credit to https://www.codeproject.com/Tips/715891/Compiling-Csharp-Code-at-Runtime
     // and https://gamedev.stackexchange.com/questions/130268/how-do-i-compile-a-c-script-at-runtime-and-attach-it-as-a-component-to-a-game-o
-    private void RecompileScripts(string[] filepaths)
+    void RecompileScripts(string[] filepaths)
     {
-        CSharpCodeProvider provider = new CSharpCodeProvider();
-        CompilerParameters parameters = new CompilerParameters();
-        foreach (Assembly unityAssembly in AppDomain.CurrentDomain.GetAssemblies())
+        var provider = new CSharpCodeProvider();
+        var parameters = new CompilerParameters();
+        foreach (var unityAssembly in AppDomain.CurrentDomain.GetAssemblies())
         {
             parameters.ReferencedAssemblies.Add(unityAssembly.Location);
         }
         parameters.GenerateInMemory = true;
         parameters.GenerateExecutable = false;
 
-        string[] texts = new string[filepaths.Length];
-        for (int i = 0; i < filepaths.Length; i++)
+        var texts = new string[filepaths.Length];
+        for (var i = 0; i < filepaths.Length; i++)
         {
             texts[i] = File.ReadAllText(filepaths[i]);
         }
-        CompilerResults results = provider.CompileAssemblyFromSource(parameters, texts);
+        var results = provider.CompileAssemblyFromSource(parameters, texts);
         checkCompileErrors(results);
 
         // Update the assembly
-        assembly = results.CompiledAssembly;
+        m_Assembly = results.CompiledAssembly;
     }
 
-    private void checkCompileErrors(CompilerResults results)
+    void checkCompileErrors(CompilerResults results)
     {
         if (results.Errors.HasErrors)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             foreach (CompilerError error in results.Errors)
             {
                 stringBuilder.AppendLine($"Error {error.ErrorNumber} {error.ErrorText}");
