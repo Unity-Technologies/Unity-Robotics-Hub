@@ -12,6 +12,12 @@ The messages being passed between Unity and ROS are expected to be serialized as
 
 The `ROSConnection` plugin (also from [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector)) provides the Unity scripts necessary to publish, subscribe, or call a service.
 
+---
+
+We're currently working on lots of things! As a first step for these tutorials, please take a short moment fill out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+
+---
+
 
 ## Tutorials
 - [ROS–Unity Integration: Initial Setup](setup.md) - ROS–Unity Initial Setup

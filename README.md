@@ -2,7 +2,7 @@
 
 # Unity Robotics Hub
 
-[![Version](https://img.shields.io/github/v/tag/Unity-Technologies/Unity-Robotics-Hub)](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases)
+<!-- [![Version](https://img.shields.io/github/v/tag/Unity-Technologies/Unity-Robotics-Hub)](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) -->
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
 ![ROS](https://img.shields.io/badge/ros-melodic-brightgreen)
 ![ROS](https://img.shields.io/badge/ros-noetic-brightgreen)
@@ -12,6 +12,12 @@
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
 > The contents of this repository are in active development. Its features and API are subject to significant change as development progresses.
+
+---
+
+We're interested in learning more about who is interested in the Unity Robotics tools! Please consider filling out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+
+---
 
 ## Introduction
 
@@ -60,7 +66,7 @@ An example simulation environment, integrated with ROS 2 and **[New!] Visualizat
 
 ### Blog Posts and Talks
 
-- [**New!**] (October 4, 2021) Introducing: Unity Robotics Visualizations Package [blog post](https://blog.unity.com/manufacturing/introducing-unity-robotics-visualizations-package)
+- [**New!**] (October 4, 2021) Introducing: Unity Robotics Visualizations Package [blog post](https://blog.unity.com/manufacturing/Introducing-Unity-Robotics-Visualizations-Package)
 - (August 13, 2021) Advance your robot autonomy with ROS 2 and Unity [blog post](https://blog.unity.com/manufacturing/advance-your-robot-autonomy-with-ros-2-and-unity)
 - (March 2, 2021) Teaching robots to see with Unity [blog post](https://blogs.unity3d.com/2021/03/02/teaching-robots-to-see-with-unity/)
 - (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
@@ -106,10 +112,6 @@ For feature requests, bugs, or other issues, please file a [GitHub issue](https:
 
 For any other questions or feedback, connect directly with the
 Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
-
-## Survey
-
-We're interested in learning more about who is interested in the Unity Robotics tools! Please consider filling out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us better understand your scenarios and use cases for robotics and simulation.
 
 ## Newsletter
 To get notified about new updates and features, [sign up for our newsletter](https://create.unity3d.com/robotics-simulation-newsletter-sign-up)!
