@@ -15,7 +15,7 @@ This is a central repository for tools, tutorials, resources, and documentation 
 
 ---
 
-We're interested in learning more about who is interested in the Unity Robotics tools! Please consider filling out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+We're currently working on lots of things! Please take a short moment fill out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
 
 ---
 
