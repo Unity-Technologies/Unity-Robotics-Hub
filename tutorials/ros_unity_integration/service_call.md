@@ -30,9 +30,9 @@ Create a simple Unity scene which calls an external [ROS service](http://wiki.ro
     - (Alternatively, you can drag the script file into Unity from `tutorials/ros_unity_integration/unity_scripts`).
 
 ```csharp
+using RosMessageTypes.UnityRoboticsDemo;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using RosMessageTypes.UnityRoboticsDemo;
 
 public class RosServiceCallExample : MonoBehaviour
 {
@@ -51,8 +51,8 @@ public class RosServiceCallExample : MonoBehaviour
 
     void Start()
     {
-        ros = ROSConnection.instance;
-        ros.RegisterRosService<PositionServiceRequest>(serviceName);
+        ros = ROSConnection.GetOrCreateInstance();
+        ros.RegisterRosService<PositionServiceRequest, PositionServiceResponse>(serviceName);
         destination = cube.transform.position;
     }
 

@@ -14,7 +14,7 @@ public class RosUnityServiceExample : MonoBehaviour
     void Start()
     {
         // register the service with ROS
-        ROSConnection.instance.ImplementService<ObjectPoseServiceRequest>(m_ServiceName, GetObjectPose);
+        ROSConnection.GetOrCreateInstance().ImplementService<ObjectPoseServiceRequest, ObjectPoseServiceResponse>(m_ServiceName, GetObjectPose);
     }
 
     /// <summary>
