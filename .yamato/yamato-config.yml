@@ -25,7 +25,7 @@ commands:
     #--artifacts_path=test-results --suite=editor --platform=Editor --testfilter BuildTests.PlayerBuilder.BuildPlayerLinux
   - python3 .yamato/PickAndPlaceTests/set-up-integration-tests.py
   #TODO: Determine how best to capture ROS logging as test artifacts
-  - /bin/bash .yamato/PickAndPlaceTests/start-ros.bash
+  - sudo ln -s $(which python3) /usr/bin/python && /bin/bash .yamato/PickAndPlaceTests/start-ros.bash
   # NOTE: Simply specifying the testCategory is not enough to get a test marked with [Explicit] to run
   - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
     --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.RosIntegrationTests
