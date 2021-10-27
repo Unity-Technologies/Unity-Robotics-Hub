@@ -3,9 +3,6 @@ name: jira-link
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-    branches:
-      - main
-      - dev
 
 jobs:
   jira-link:
