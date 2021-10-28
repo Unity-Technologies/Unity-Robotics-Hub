@@ -6,30 +6,42 @@ agent:
 variables:
   PATH: /root/.local/bin:/home/bokken/bin:/home/bokken/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/home/bokken/.npm-global/bin
 commands:
+  - sudo ln -s $(which python3) /usr/bin/python
   - git submodule update --init --recursive
+  
   # We must remove the Demo.cs script because the System.CodeDom assembly is not in the bokken .NET sdk
   - rm ./tutorials/pick_and_place/PickAndPlaceProject/Assets/DemoScripts/Demo.*
+  
   # Ensure audio is disabled. Unity built-in audio fails to initialize in our Bokken image.
   - "sed -i -e '/m_DisableAudio/ s/: .*/: 1/' ./tutorials/pick_and_place/PickAndPlaceProject/ProjectSettings/AudioManager.asset"
   - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
   - unity-downloader-cli -u 2020.3.11f1 -c editor -c StandaloneSupport-IL2CPP -c Linux --wait --published
   - git clone git@github.cds.internal.unity3d.com:unity/utr.git utr
+
   # Explicitly run MessageGeneration tests first to generate dependencies
-  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
-    --artifacts_path=test-results --suite=editor --platform=Editor --editorTestsCategories
+  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 
+    --artifacts_path=test-results --suite=editor --platform=Editor --editorTestsCategories 
     MessageGeneration
+  
   # Run each category of tests in its own process, in order of increasing complexity
-  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 
     --artifacts_path=test-results --suite=playmode --suite=editor --platform=Editor --editorTestCategories UnitTests
-    #  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
-    #--artifacts_path=test-results --suite=editor --platform=Editor --testfilter BuildTests.PlayerBuilder.BuildPlayerLinux
-  - python3 .yamato/PickAndPlaceTests/set-up-integration-tests.py
-  #TODO: Determine how best to capture ROS logging as test artifacts
-  - sudo ln -s $(which python3) /usr/bin/python && /bin/bash .yamato/PickAndPlaceTests/start-ros.bash
+  
+  #  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
+  #--artifacts_path=test-results --suite=editor --platform=Editor --testfilter BuildTests.PlayerBuilder.BuildPlayerLinux
+  
+  # Run Pick and Place Test
   # NOTE: Simply specifying the testCategory is not enough to get a test marked with [Explicit] to run
-  - utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0
-    --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.RosIntegrationTests
-  #TODO: Determine when it would be prudent to run BuildTests and add them here or in a new config
+  # TODO: Determine how best to capture ROS logging as test artifacts
+  # TODO: Determine when it would be prudent to run BuildTests and add them here or in a new config
+  - |
+    python3 .yamato/PickAndPlaceTests/set-up-integration-tests.py
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash build_pick_and_place
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash start_pick_and_place & 
+    export PID=$!
+    utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.RosIntegrationTests
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $PID
+  
 triggers:
   cancel_old_ci: true
   expression: |
