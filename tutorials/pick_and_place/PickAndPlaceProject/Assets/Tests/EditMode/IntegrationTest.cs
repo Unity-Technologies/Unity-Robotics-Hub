@@ -16,7 +16,7 @@ namespace IntegrationTests
     [TestFixture, Explicit, Category("IntegrationTests")]
     // IMPORTANT: In order for this category of tests to run correctly, MessageGeneration must be run first and the
     //            INTEGRATION_TEST script define must be set
-    public class RosIntegrationTests
+    public class PickAndPlaceIntegrationTests
     {
         #region Parameters
 

@@ -39,7 +39,7 @@ commands:
     /bin/bash .yamato/PickAndPlaceTests/ros.bash build_pick_and_place
     /bin/bash .yamato/PickAndPlaceTests/ros.bash start_pick_and_place & 
     export PID=$!
-    utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.RosIntegrationTests
+    utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --testfilter IntegrationTests.PickAndPlaceIntegrationTests
     /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $PID
   
 triggers:
