@@ -51,6 +51,7 @@ commands:
     /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros1 &
     export PID=$!
     sleep 10  # Wait for ROS endpoint to stand up
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_color_publisher &
     utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
     /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $PID
 

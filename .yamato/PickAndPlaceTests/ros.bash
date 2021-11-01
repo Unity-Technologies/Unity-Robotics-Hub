@@ -3,7 +3,7 @@ source /opt/ros/noetic/setup.bash
 set -e
 
 help() {
-        echo "usage: $0 [start_pick_and_place|stop]"
+  echo "usage: $0 [start_pick_and_place|stop]"
 }
 
 if [ $1 == "stop" ]; then
@@ -35,5 +35,13 @@ elif [ $1 == "start_ros1" ]; then
   rosparam set ROS_IP 127.0.0.1
   echo "Starting ROS1 default server endpoint"
   rosrun ros_tcp_endpoint default_server_endpoint.py
+elif [ $1 == "run_ros1_color_publisher" ]; then
+  source ros1_ws/devel/setup.bash
+  echo "Schedule to run ROS1 color publisher in 30 seconds"
+  sleep 30
+  rosrun unity_robotics_demo color_publisher.py
+  echo "Completed to run ROS1 color publisher"
+else
+  help
 fi
 # Assuming this script is invoked from the root of the repository...
