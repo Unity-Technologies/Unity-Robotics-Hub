@@ -37,10 +37,19 @@ elif [ $1 == "start_ros1" ]; then
   rosrun ros_tcp_endpoint default_server_endpoint.py
 elif [ $1 == "run_ros1_color_publisher" ]; then
   source ros1_ws/devel/setup.bash
-  echo "Schedule to run ROS1 color publisher in 30 seconds"
-  sleep 30
-  rosrun unity_robotics_demo color_publisher.py
+  echo "Starting to run ROS1 color publisher every 30 seconds"
+  count=0
+  while [[ $counter -le 10 ]]
+  do
+    sleep 30
+    rosrun unity_robotics_demo color_publisher.py
+    count=$(( $count + 1 ))
+  done
   echo "Completed to run ROS1 color publisher"
+elif [ $1 == "run_ros1_position_service" ]; then
+  source ros1_ws/devel/setup.bash
+  echo "Starting ROS1 position service"
+  rosrun unity_robotics_demo position_service.py
 else
   help
 fi

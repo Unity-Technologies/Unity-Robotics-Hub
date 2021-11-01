@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEditor;
@@ -36,8 +37,7 @@ namespace IntegrationTests
         public IEnumerator RosIntegration_Publisher_Success()
         {
 #if INTEGRATION_TEST
-            var publisher = m_Cube.AddComponent<RosPublisherExample>();
-            publisher.cube = m_Cube;
+            m_Cube.AddComponent<RosPublisherExample>().cube = m_Cube;
             yield return new EnterPlayMode();
             while (Time.time < k_SimulationTime)
             {
@@ -46,6 +46,7 @@ namespace IntegrationTests
 
             yield return new ExitPlayMode();
             LogAssert.NoUnexpectedReceived();
+            Object.DestroyImmediate(Object.FindObjectOfType<RosPublisherExample>().gameObject);
 #else
             throw new NotImplementedException(
                 "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
@@ -67,6 +68,28 @@ namespace IntegrationTests
             }
             Assert.AreNotEqual(color, subscriber.GetComponent<Renderer>().material.color);
             yield return new ExitPlayMode();
+            Object.DestroyImmediate(Object.FindObjectOfType<RosSubscriberExample>().gameObject);
+#else
+            throw new NotImplementedException(
+                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
+                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+#endif
+        }
+
+        [UnityTest]
+        public IEnumerator RosIntegration_Service_Success()
+        {
+#if INTEGRATION_TEST
+            m_Cube.AddComponent<RosServiceCallExample>().cube = m_Cube;
+            yield return new EnterPlayMode();
+            while (Time.time < k_SimulationTime)
+            {
+                yield return null;
+            }
+            LogAssert.Expect(LogType.Log, "Destination reached.");
+            LogAssert.Expect(LogType.Log, new Regex(@"^New Destination: .*$"));
+            yield return new ExitPlayMode();
+            Object.DestroyImmediate(Object.FindObjectOfType<RosServiceCallExample>().gameObject);
 #else
             throw new NotImplementedException(
                 "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
