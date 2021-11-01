@@ -60,6 +60,10 @@ namespace IntegrationTests
 #if INTEGRATION_TEST
             m_Cube.AddComponent<RosSubscriberExample>().cube = m_Cube;
             yield return new EnterPlayMode();
+
+            // Avoid cross-validation from other ros services (e.g. ROS service server test)
+            LogAssert.ignoreFailingMessages = true;
+
             var subscriber = Object.FindObjectOfType<RosSubscriberExample>();
             var color = subscriber.GetComponent<Renderer>().material.color;
             while (Time.time < k_SimulationTimeout && subscriber.GetComponent<Renderer>().material.color.Equals(color))
@@ -67,6 +71,7 @@ namespace IntegrationTests
                 yield return null;
             }
             Assert.AreNotEqual(color, subscriber.GetComponent<Renderer>().material.color);
+            LogAssert.ignoreFailingMessages = false;
             yield return new ExitPlayMode();
             Object.DestroyImmediate(Object.FindObjectOfType<RosSubscriberExample>().gameObject);
 #else
@@ -77,7 +82,27 @@ namespace IntegrationTests
         }
 
         [UnityTest]
-        public IEnumerator RosIntegration_Service_Success()
+        public IEnumerator RosIntegration_ServiceServer_Success()
+        {
+#if INTEGRATION_TEST
+            m_Cube.AddComponent<RosUnityServiceExample>();
+            yield return new EnterPlayMode();
+            while (Time.time < k_SimulationTimeout)
+            {
+                yield return null;
+            }
+            LogAssert.Expect(LogType.Log, new Regex(@"^Received request for object: .*$"));
+            yield return new ExitPlayMode();
+            Object.DestroyImmediate(Object.FindObjectOfType<RosUnityServiceExample>().gameObject);
+#else
+            throw new NotImplementedException(
+                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
+                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+#endif
+        }
+
+        [UnityTest]
+        public IEnumerator RosIntegration_ServiceClient_Success()
         {
 #if INTEGRATION_TEST
             m_Cube.AddComponent<RosServiceCallExample>().cube = m_Cube;

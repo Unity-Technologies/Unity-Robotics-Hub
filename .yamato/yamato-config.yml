@@ -55,6 +55,7 @@ commands:
     /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_position_service &
     export POSITION_SERVICE_PID=$!
     /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_color_publisher &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_pose_service_client &
     
     utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
     

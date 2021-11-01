@@ -46,6 +46,17 @@ elif [ $1 == "run_ros1_color_publisher" ]; then
     count=$(( $count + 1 ))
   done
   echo "Completed to run ROS1 color publisher"
+elif [ $1 == "run_ros1_pose_service_client" ]; then
+  source ros1_ws/devel/setup.bash
+  echo "Starting to run ROS1 pose service client and send requests every 30 seconds"
+  count=0
+  while [[ $counter -le 10 ]]
+  do
+    sleep 30
+    rosservice call /obj_pose_srv Cube
+    count=$(( $count + 1 ))
+  done
+  echo "Completed to run ROS1 pose service client"
 elif [ $1 == "run_ros1_position_service" ]; then
   source ros1_ws/devel/setup.bash
   echo "Starting ROS1 position service"
