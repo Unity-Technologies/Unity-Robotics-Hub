@@ -41,28 +41,56 @@ commands:
     /bin/bash .yamato/PickAndPlaceTests/ros.bash start_pick_and_place & 
     export PID=$!
     utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.PickAndPlaceIntegrationTests
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $PID
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop ros1 $PID
 
   # Run ROS1 Integration Tests
   # This step requires to execute set-up-integration-tests.py
   - |
     export ROS_DISTRO=noetic
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash build_ros1
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros1 &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash build_ros ros1
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros ros1 &
     export PID=$!
     sleep 10  # Wait for ROS endpoint to stand up
     
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_position_service &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_position_service ros1 &
     export POSITION_SERVICE_PID=$!
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_color_publisher &
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros1_pose_service_client &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_color_publisher ros1 &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_pose_service_client ros1 &
     
     utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
     
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $POSITION_SERVICE_PID
-    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $PID
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop ros1 $POSITION_SERVICE_PID
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop ros1 $PID
 
-  
+  # Install ROS2 foxy
+  # TODO: move this part to image builder
+  - |
+    curl http://repo.ros2.org/repos.key | sudo apt-key add -
+    sudo apt update && sudo apt install -y curl gnupg2 lsb-release
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    sudo apt update && sudo apt install -y ros-foxy-ros-base python3-colcon-common-extensions
+
+  # Run ROS2 Integration Tests
+  # This step requires to execute set-up-integration-tests.py
+  - |
+    export ROS_DISTRO=foxy
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash build_ros ros2
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros ros2 &
+    export PID=$!
+    sleep 10  # Wait for ROS endpoint to stand up
+
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_position_service ros2 &
+    export POSITION_SERVICE_PID=$!
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_color_publisher ros2 &
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_pose_service_client ros2 &
+
+    export ROS_PROTOCOL=ROS2
+    utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
+    
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop ros2 $POSITION_SERVICE_PID
+    /bin/bash .yamato/PickAndPlaceTests/ros.bash stop ros2 $PID
+
 triggers:
   cancel_old_ci: true
   expression: |
