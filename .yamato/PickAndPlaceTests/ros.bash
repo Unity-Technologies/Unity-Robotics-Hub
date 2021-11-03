@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 help() {
   echo "usage: $0 [COMMAND] [ROS]"
   echo "COMMAND:"
@@ -43,14 +41,14 @@ elif [ "$COMMAND" == "build_ros" ]; then
     export ROS_WORKSPACE=$(pwd)/ros1_ws
     mkdir -p $ROS_WORKSPACE/src
     cp -r tutorials/ros_unity_integration/ros_packages/ $ROS_WORKSPACE/src/
-    cp -r tutorials/pick_and_place/ROS/src/ros_tcp_endpoint $ROS_WORKSPACE/src/
+    git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint -b main
     /bin/bash tutorials/ros_unity_integration/ros_docker/set-up-workspace
     chmod +x $ROS_WORKSPACE/src/ros_tcp_endpoint/src/ros_tcp_endpoint/*.py
   elif [ "$ROS" == "ros2" ]; then
     export ROS_WORKSPACE=$(pwd)/ros2_ws
     mkdir -p $ROS_WORKSPACE/src
     cp -r tutorials/ros_unity_integration/ros2_packages/ $ROS_WORKSPACE/src/
-    git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint -b ROS2v0.6.0
+    git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint $ROS_WORKSPACE/src/ros_tcp_endpoint -b main-ros2
     source /opt/ros/$ROS_DISTRO/setup.sh
     pushd $(pwd)
     cd $ROS_WORKSPACE
