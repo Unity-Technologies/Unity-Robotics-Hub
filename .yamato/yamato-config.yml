@@ -104,6 +104,8 @@ ros_{{rosDistro}}_integration:
         ROS=ros2
       fi
 
+      python3 .yamato/PickAndPlaceTests/set-up-ros-define.py $ROS
+
       /bin/bash .yamato/PickAndPlaceTests/ros.bash build_ros $ROS
       /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros $ROS &
       export PID=$!
@@ -116,9 +118,6 @@ ros_{{rosDistro}}_integration:
       /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_pose_service_client $ROS &
       export POSE_SERVICE_PID=$!
       
-      if [ $ROS == "ros2" ]; then
-        export ROS_PROTOCOL=ROS2
-      fi
       utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
       
       /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $POSE_SERVICE_PID

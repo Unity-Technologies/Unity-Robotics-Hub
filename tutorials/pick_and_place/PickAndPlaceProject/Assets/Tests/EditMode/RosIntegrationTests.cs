@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Unity.Robotics.ROSTCPConnector;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
@@ -29,7 +28,6 @@ namespace IntegrationTests
         {
             m_Cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             m_Ros = ROSConnection.GetOrCreateInstance();
-            UpdateRosProtocol();
             m_Ros.listenForTFMessages = false;
         }
 
@@ -123,23 +121,6 @@ namespace IntegrationTests
         {
             Object.DestroyImmediate(m_Cube);
             Object.DestroyImmediate(m_Ros);
-        }
-
-        void UpdateRosProtocol()
-        {
-            string protocol = Environment.GetEnvironmentVariable(k_RosProtocolVariableName);
-            var buildTarget = EditorUserBuildSettings.activeBuildTarget;
-            var buildTargetGroup = BuildPipeline.GetBuildTargetGroup(buildTarget);
-            List<string> allDefines = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';').ToList();
-            if (protocol == "ROS2")
-            {
-                allDefines.Add("ROS2");
-            }
-            else
-            {
-                allDefines.Remove("ROS2");
-            }
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", allDefines));
         }
 
         void ThrowNotImplementedException()
