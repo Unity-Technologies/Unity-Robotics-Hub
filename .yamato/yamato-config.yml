@@ -95,6 +95,7 @@ ros_{{rosDistro}}_integration:
 
     # Run ROS Integration Tests
     # This step requires to execute set-up-integration-tests.py
+    # TODO: move ROS_DISTRO exporting to image builder
     - |
       export ROS_DISTRO=$(ls -1 /opt/ros | head -n1)
       if [ $ROS_DISTRO == "noetic" ]; then
@@ -130,6 +131,7 @@ ros_{{rosDistro}}_integration:
     expression: |
       (pull_request.target in ["main", "dev"] AND
       NOT pull_request.changes.all match ["**/*.md","**/*.jpg","**/*.jpeg","**/*.gif","**/*.pdf"])
+      OR (push.branch in ["main", "dev"])
   artifacts:
     logs:
       paths:

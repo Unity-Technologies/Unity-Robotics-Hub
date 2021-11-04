@@ -1,4 +1,5 @@
 #!/bin/bash
+# Assuming this script is invoked from the root of the repository...
 help() {
   echo "usage: $0 [COMMAND] [ROS]"
   echo "COMMAND:"
@@ -97,7 +98,7 @@ elif [ "$COMMAND" == "run_ros_color_publisher" ]; then
     fi
     count=$(( $count + 1 ))
   done
-  echo "Completed to run $ROS color publisher"
+  echo "Completed run: $ROS color publisher"
 
 elif [ "$COMMAND" == "run_ros_pose_service_client" ]; then
   if [ "$ROS" == "ros1" ]; then
@@ -121,7 +122,7 @@ elif [ "$COMMAND" == "run_ros_pose_service_client" ]; then
     fi
     count=$(( $count + 1 ))
   done
-  echo "Completed to run $ROS pose service client"
+  echo "Completed run: $ROS pose service client"
 
 elif [ "$COMMAND" == "run_ros_position_service" ]; then
   if [ "$ROS" == "ros1" ]; then
@@ -143,4 +144,3 @@ elif [ "$COMMAND" == "run_ros_position_service" ]; then
 else
   help
 fi
-# Assuming this script is invoked from the root of the repository...

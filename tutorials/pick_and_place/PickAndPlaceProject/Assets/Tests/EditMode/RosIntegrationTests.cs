@@ -48,9 +48,8 @@ namespace IntegrationTests
             LogAssert.NoUnexpectedReceived();
             Object.DestroyImmediate(Object.FindObjectOfType<RosPublisherExample>().gameObject);
 #else
-            throw new NotImplementedException(
-                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
-                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+            ThrowNotImplementedException();
+            yield return null;
 #endif
         }
 
@@ -75,9 +74,8 @@ namespace IntegrationTests
             yield return new ExitPlayMode();
             Object.DestroyImmediate(Object.FindObjectOfType<RosSubscriberExample>().gameObject);
 #else
-            throw new NotImplementedException(
-                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
-                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+            ThrowNotImplementedException();
+            yield return null;
 #endif
         }
 
@@ -95,9 +93,8 @@ namespace IntegrationTests
             yield return new ExitPlayMode();
             Object.DestroyImmediate(Object.FindObjectOfType<RosUnityServiceExample>().gameObject);
 #else
-            throw new NotImplementedException(
-                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
-                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+            ThrowNotImplementedException();
+            yield return null;
 #endif
         }
 
@@ -116,9 +113,8 @@ namespace IntegrationTests
             yield return new ExitPlayMode();
             Object.DestroyImmediate(Object.FindObjectOfType<RosServiceCallExample>().gameObject);
 #else
-            throw new NotImplementedException(
-                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
-                "The dependencies of this test are not guaranteed to exist in the Project by default.");
+            ThrowNotImplementedException();
+            yield return null;
 #endif
         }
 
@@ -144,6 +140,13 @@ namespace IntegrationTests
                 allDefines.Remove("ROS2");
             }
             PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", allDefines));
+        }
+
+        void ThrowNotImplementedException()
+        {
+            throw new NotImplementedException(
+                "This integration test can only be executed with the INTEGRATION_TEST scripting define set. " +
+                "The dependencies of this test are not guaranteed to exist in the Project by default.");
         }
     }
 }
