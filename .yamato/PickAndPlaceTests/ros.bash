@@ -86,7 +86,7 @@ elif [ "$COMMAND" == "run_ros_color_publisher" ]; then
   fi
   echo "Starting to run $ROS color publisher every 30 seconds"
   count=0
-  while [[ $count -le 10 ]]
+  while [[ $count -le 5 ]]
   do
     sleep 30
     if [ "$ROS" == "ros1" ]; then
@@ -110,7 +110,7 @@ elif [ "$COMMAND" == "run_ros_pose_service_client" ]; then
   fi
   echo "Starting to run $ROS pose service client and send requests every 30 seconds"
   count=0
-  while [[ $count -le 10 ]]
+  while [[ $count -le 5 ]]
   do
     sleep 30
     if [ "$ROS" == "ros1" ]; then
