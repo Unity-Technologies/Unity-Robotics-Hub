@@ -86,9 +86,9 @@ elif [ "$COMMAND" == "run_ros_color_publisher" ]; then
   fi
   echo "Starting to run $ROS color publisher every 30 seconds"
   count=0
-  while [[ $count -le 5 ]]
+  while [[ $count -le 6 ]]
   do
-    sleep 30
+    sleep 5
     if [ "$ROS" == "ros1" ]; then
       rosrun unity_robotics_demo color_publisher.py
     elif [ "$ROS" == "ros2" ]; then
@@ -110,9 +110,9 @@ elif [ "$COMMAND" == "run_ros_pose_service_client" ]; then
   fi
   echo "Starting to run $ROS pose service client and send requests every 30 seconds"
   count=0
-  while [[ $count -le 5 ]]
+  while [[ $count -le 6 ]]
   do
-    sleep 30
+    sleep 5
     if [ "$ROS" == "ros1" ]; then
       rosservice call /obj_pose_srv Cube
     elif [ "$ROS" == "ros2" ]; then

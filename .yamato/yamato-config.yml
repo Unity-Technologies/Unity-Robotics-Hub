@@ -110,19 +110,24 @@ ros_{{rosDistro}}_integration:
       /bin/bash .yamato/PickAndPlaceTests/ros.bash start_ros $ROS &
       export PID=$!
       sleep 10  # Wait for ROS endpoint to stand up
+
+      utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests.RosIntegration_Publisher_Success
       
       /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_position_service $ROS &
       export POSITION_SERVICE_PID=$!
+      utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests.RosIntegration_ServiceClient_Success
+      /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $POSITION_SERVICE_PID
+
       /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_color_publisher $ROS &
       export COLOR_PUBLISHER_PID=$!
+      utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests.RosIntegration_Subscriber_Success
+      /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $COLOR_PUBLISHER_PID
+
       /bin/bash .yamato/PickAndPlaceTests/ros.bash run_ros_pose_service_client $ROS &
       export POSE_SERVICE_PID=$!
-      
-      utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests
-      
+      utr/utr --testproject=./tutorials/pick_and_place/PickAndPlaceProject --editor-location=.Editor --reruncount=0 --artifacts_path=test-results --suite=editor --platform=Editor --extra-editor-arg="-nographics" --testfilter IntegrationTests.RosIntegrationTests.RosIntegration_ServiceServer_Success
       /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $POSE_SERVICE_PID
-      /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $COLOR_PUBLISHER_PID
-      /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $POSITION_SERVICE_PID
+      
       /bin/bash .yamato/PickAndPlaceTests/ros.bash stop $ROS $PID
 
   triggers:
