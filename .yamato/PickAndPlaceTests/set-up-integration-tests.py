@@ -17,9 +17,17 @@ root_dir = os.path.join(script_dir, "..", "..", "tutorials", "pick_and_place")
 external_scripts_dir = os.path.join(root_dir, "Scripts")
 project_dir = os.path.join(root_dir, "PickAndPlaceProject")
 project_scripts_dir = os.path.join(project_dir, "Assets", "Scripts")
+external_ros_scripts_dir = os.path.join(script_dir, "..", "..", "tutorials", "ros_unity_integration", "unity_scripts")
 # project_settings_file = os.path.join(project_dir, "ProjectSettings", "ProjectSettings.asset")
 
 scripts_to_move = glob.glob(os.path.join(external_scripts_dir, "*.cs"))
+for external_script in scripts_to_move:
+    script_name = os.path.basename(external_script)
+    script_destination = os.path.join(project_scripts_dir, script_name)
+    print(f">>> Copying {external_script} to {script_destination}")
+    shutil.copyfile(external_script, script_destination)
+
+scripts_to_move = glob.glob(os.path.join(external_ros_scripts_dir, "*.cs"))
 for external_script in scripts_to_move:
     script_name = os.path.basename(external_script)
     script_destination = os.path.join(project_scripts_dir, script_name)

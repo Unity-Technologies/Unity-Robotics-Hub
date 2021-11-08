@@ -19,7 +19,8 @@ namespace MessageGenerationTests
         }
 
         // Relative path to the directory containing the catkin packages
-        static readonly string k_ROSDirectory = Path.GetFullPath(Path.Combine("..", "ROS", "src"));
+        static readonly string k_PickAndPlaceROSDirectory = Path.GetFullPath(Path.Combine("..", "ROS", "src"));
+        static readonly string k_ROSIntegrationDirectory = Path.GetFullPath(Path.Combine("..", "..", "ros_unity_integration", "ros_packages"));
         static string m_MessageGenOutputPath => MessageGenBrowserSettings.Get().outputPath;
 
         static void WarnIfAlreadyExists(string path, PathType pathType)
@@ -40,19 +41,21 @@ namespace MessageGenerationTests
         // Define more individual messages to run generation on within this test case enumerable
         static IEnumerable<TestCaseData> IndividualMessages()
         {
-            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "moveit_msgs", "msg", "RobotTrajectory.msg"));
+            yield return new TestCaseData(Path.Combine(k_PickAndPlaceROSDirectory, "moveit_msgs", "msg", "RobotTrajectory.msg"));
         }
 
         // Define directories of message files to be generated here
         static IEnumerable<TestCaseData> MessageDirectories()
         {
-            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "msg"));
+            yield return new TestCaseData(Path.Combine(k_PickAndPlaceROSDirectory, "niryo_moveit", "msg"));
+            yield return new TestCaseData(Path.Combine(k_ROSIntegrationDirectory, "unity_robotics_demo_msgs", "msg"));
         }
 
         // Define directories of service files to be generated here
         static IEnumerable<TestCaseData> ServiceDirectories()
         {
-            yield return new TestCaseData(Path.Combine(k_ROSDirectory, "niryo_moveit", "srv"));
+            yield return new TestCaseData(Path.Combine(k_PickAndPlaceROSDirectory, "niryo_moveit", "srv"));
+            yield return new TestCaseData(Path.Combine(k_ROSIntegrationDirectory, "unity_robotics_demo_msgs", "srv"));
         }
 
         [Test]
