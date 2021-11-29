@@ -1,0 +1,21 @@
+name: Sonarqube Scan
+
+on:
+    pull_request:
+
+jobs:
+    security:
+        runs-on:
+            - robotics-shared
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  # Disabling shallow clone is recommended for improving relevancy of reporting
+                  fetch-depth: 0
+
+            - name: Sonarqube Scanner Staging
+              uses: sonarsource/sonarcloud-github-action@master
+              env:
+                  SONARCLOUD_URL: ${{ secrets.SONARQUBE_ENDPOINT_URL_STG }}
+                  SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN_STG }}
