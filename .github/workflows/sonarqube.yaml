@@ -4,9 +4,20 @@ on:
     pull_request:
 
 jobs:
-    security:
+    # Cleanup self-hosted runner
+    cleanup:
         runs-on:
             - robotics-shared
+        steps:
+            - name: Cleanup
+              run: sudo rm -rf "${{ github.workspace }}"
+
+    # Sonarqube scans
+    sonarqube:
+        runs-on:
+            - robotics-shared
+        needs:
+            - cleanup
         steps:
             - name: Checkout
               uses: actions/checkout@v2
