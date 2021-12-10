@@ -18,6 +18,8 @@ Updated Pick-and-Place scripts for style conformity, updated custom msg formats 
 
 ### Added
 
+Added Sonarqube scanners.
+
 ### Changed
 
 ### Deprecated
