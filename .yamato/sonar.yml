@@ -10,8 +10,7 @@ csharp:
         - brew install mono corretto
         - curl https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/5.2.1.31210/sonar-scanner-msbuild-5.2.1.31210-net46.zip -o sonar-scanner-msbuild-net46.zip -L
         - unzip sonar-scanner-msbuild-net46.zip -d ~/sonar-scanner-msbuild
-        - chmod a+x ~/sonar-scanner-4.6.1.2450/bin/sonar-scanner
-
+        - chmod a+x ~/sonar-scanner-msbuild/sonar-scanner-4.6.1.2450/bin/sonar-scanner
         - .Editor/Unity.app/Contents/MacOS/Unity -projectPath ./tutorials/pick_and_place/PickAndPlaceProject -batchmode -quit -nographics -logFile - -executeMethod "UnityEditor.SyncVS.SyncSolution"
         - command: |
             cd tutorials/pick_and_place/PickAndPlaceProject
