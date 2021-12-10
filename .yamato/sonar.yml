@@ -23,9 +23,9 @@ csharp:
             cd $PROJECT_PATH
             for file in *.csproj; do sed -i.backup "s/^[[:blank:]]*<ReferenceOutputAssembly>false<\/ReferenceOutputAssembly>/<ReferenceOutputAssembly>true<\/ReferenceOutputAssembly>/g" $file; rm $file.backup; done
             cd $PROJECT_ROOT
-        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe begin /k:$SONARQUBE_PROJECT_KEY /d:sonar.host.url=$SONARQUBE_ENDPOINT_URL_STG /d:sonar.login=$SONARQUBE_TOKEN_STG /d:sonar.projectBaseDir=$SONARQUBE_PROJECT_BASE_DIR
+        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe begin /k:$SONARQUBE_PROJECT_KEY /d:sonar.host.url=$SONARQUBE_ENDPOINT_URL_PRD /d:sonar.login=$SONARQUBE_TOKEN_PRD /d:sonar.projectBaseDir=$SONARQUBE_PROJECT_BASE_DIR
         - msbuild $MSBUILD_SLN_PATH
-        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe end /d:sonar.login=$SONARQUBE_TOKEN_STG
+        - mono ~/sonar-scanner-msbuild/SonarScanner.MSBuild.exe end /d:sonar.login=$SONARQUBE_TOKEN_PRD
     triggers:
         cancel_old_ci: true
         expression: |
@@ -43,7 +43,7 @@ standard:
     commands:
         - curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-macosx.zip -o sonar-scanner-macosx.zip -L
         - unzip sonar-scanner-macosx.zip -d ~/sonar-scanner
-        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_STG -Dsonar.login=$SONARQUBE_TOKEN_STG
+        - ~/sonar-scanner/sonar-scanner-4.6.2.2472-macosx/bin/sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY -Dsonar.sources=. -Dsonar.host.url=$SONARQUBE_ENDPOINT_URL_PRD -Dsonar.login=$SONARQUBE_TOKEN_PRD
     triggers:
         cancel_old_ci: true
         expression: |
