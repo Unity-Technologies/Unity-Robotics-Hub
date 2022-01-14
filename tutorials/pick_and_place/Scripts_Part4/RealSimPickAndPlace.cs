@@ -71,8 +71,10 @@ public class RealSimPickAndPlace : MonoBehaviour
         // Get ROS connection static instance
         m_Ros = ROSConnection.GetOrCreateInstance();
         m_Ros.Subscribe<RobotMoveActionGoal>(rosRobotCommandsTopicName, ExecuteRobotCommands);
+        m_Ros.RegisterRosService<MoverServiceRequest, MoverServiceResponse>(rosJointPublishTopicName);
     }
 
+  
     /// <summary>
     ///     Close the gripper
     /// </summary>
@@ -133,7 +135,7 @@ public class RealSimPickAndPlace : MonoBehaviour
             request.joints_input.joints[i] = m_JointArticulationBodies[i].jointPosition[0];
         }
 
-        m_Ros.Publish(rosJointPublishTopicName, request);
+        m_Ros.SendServiceMessage<MoverServiceResponse>(rosJointPublishTopicName, request);
     }
 
     /// <summary>

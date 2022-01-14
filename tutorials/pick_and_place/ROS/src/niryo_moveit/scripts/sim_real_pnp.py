@@ -4,27 +4,21 @@ from __future__ import print_function
 
 import rospy
 
-import time
 import sys
 import copy
-import math
 import moveit_commander
 import actionlib
-
-import moveit_msgs.msg
+import threading
+import queue
 
 from niryo_one_msgs.msg import RobotMoveAction, ToolCommand, TrajectoryPlan
 from niryo_one_msgs.msg import RobotMoveGoal
 
-from moveit_msgs.msg import Constraints, JointConstraint, PositionConstraint, OrientationConstraint, BoundingVolume
 from sensor_msgs.msg import JointState
 from moveit_msgs.msg import RobotState
-import geometry_msgs.msg
-from geometry_msgs.msg import Quaternion, Pose
-from std_msgs.msg import String
-from moveit_commander.conversions import pose_to_list
 
-from niryo_moveit.srv import MoverServiceRequest
+from niryo_moveit.srv import MoverService, MoverServiceResponse
+
 
 joint_names = ['joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5', 'joint_6']
 
@@ -38,7 +32,11 @@ TOOL_ID = 11
 TOOL_COMMAND_ID = 6
 TRAJECTORY_COMMAND_ID = 7
 
-PICK_PLACE_HEIGHT_OFFSET = 0.065 
+PICK_PLACE_HEIGHT_OFFSET = 0.065
+
+_TOPIC = "niryo_one/commander/robot_action"
+_REQUESTS = queue.Queue(maxsize=1)
+_QUIT = threading.Event()
 
 # Between Melodic and Noetic, the return type of plan() changed. moveit_commander has no __version__ variable, so checking the python version as a proxy
 if sys.version_info >= (3, 0):
@@ -51,7 +49,7 @@ else:
 """
     Given the start angles of the robot, plan a trajectory that ends at the destination pose.
 """
-def plan_trajectory(move_group, destination_pose, start_joint_angles): 
+def plan_trajectory(move_group, destination_pose, start_joint_angles):
     current_joint_state = JointState()
     current_joint_state.name = joint_names
     current_joint_state.position = start_joint_angles
@@ -106,7 +104,7 @@ def send_tool_goal(client, gripper_command):
 
 """
     Creates a pick and place plan using the four states below.
-    
+
     1. Pre Grasp - position gripper directly above target object
     2. Grasp - lower gripper so that fingers are on either side of object
     3. Pick Up - raise gripper back to the pre grasp position
@@ -118,10 +116,14 @@ def send_tool_goal(client, gripper_command):
 
     https://github.com/ros-planning/moveit/blob/master/moveit_commander/src/moveit_commander/move_group.py
 """
+
 def plan_pick_and_place(req):
     print("Starting planning....")
-    client = actionlib.SimpleActionClient('niryo_one/commander/robot_action', RobotMoveAction)
-    client.wait_for_server()
+    client = actionlib.SimpleActionClient(_TOPIC, RobotMoveAction)
+    connected = client.wait_for_server(timeout=rospy.Duration(2))
+    if not connected:
+        rospy.logerr(f"Failed to connect to server at {_TOPIC}, will be unable to move robot. Aborting request.")
+        return
 
     group_name = "arm"
     move_group = moveit_commander.MoveGroupCommander(group_name)
@@ -167,12 +169,35 @@ def plan_pick_and_place(req):
 
     print("Finished executing action.")
 
+
+def wait_for_request():
+    while not _QUIT.is_set():
+        try:
+            request = _REQUESTS.get(timeout=0.1)
+            plan_pick_and_place(request)
+            _REQUESTS.task_done()
+        except queue.Empty:
+            continue
+
+
+def receive_request(req):
+    try:
+        _REQUESTS.put_nowait(req)
+    except queue.Full:
+        rospy.logwarn("Can't process another request right now; ignoring.")
+    # Return empty response because nobody on the other end is listening
+    return MoverServiceResponse()
+
+
 def listener():
     rospy.init_node('sim_real_pnp', anonymous=True)
 
-    rospy.Subscriber("sim_real_pnp", MoverServiceRequest, plan_pick_and_place)
-
+    rospy.Service("sim_real_pnp", MoverService, receive_request)
+    planning_thread = threading.Thread(target=wait_for_request)
+    planning_thread.start()
     rospy.spin()
+    _QUIT.set()
+
 
 if __name__ == '__main__':
     listener()
