@@ -24,38 +24,12 @@ Follow these steps to use ROS (melodic or noetic):
 
    ```bash
    source devel/setup.bash
-   roscore
-   ```
-
-   Once ROS Core has started, it will print `started core service [/rosout]` to the terminal window.
-
-3. In your previous terminal, run the following command, replacing the `<your IP address>` with your ROS machine's IP or hostname.
-
-    ```bash
-    rosparam set ROS_IP <your IP address>
-    ```
-
-   - If you're running ROS in a Docker container, you can just use `rosparam set ROS_IP 0.0.0.0`
-   - On Linux you can find out your IP address with the command `hostname -I`
-   - On MacOS you can find out your IP address with `ipconfig getifaddr en0`
-
-6. (Optional) By default, the server_endpoint will listen on port 10000, but this is also controlled by a parameter. If you need to change it, you can run the command `rosparam set ROS_TCP_PORT 10000`, replacing 10000 with the desired port number.
-
-7. Start the server endpoint with the following command:
-
-   ```bash
-    rosrun ros_tcp_endpoint default_server_endpoint.py
+   roslaunch ros_tcp_endpoint endpoint.launch
    ```
 
    Once the server_endpoint has started, it will print something similar to `[INFO] [1603488341.950794]: Starting server on 192.168.50.149:10000`.
 
-> Note, for this tutorial we have illustrated how to do everything manually, but for day-to-day use, we recommend starting the endpoint with a launch file. Replace all the above (including the roscore step) with the following command: `roslaunch ros_tcp_endpoint endpoint.launch`.
-> While using this launch file, your ROS_IP and ROS_TCP_PORT parameters are read from the file src/ros_tcp_endpoint/config/params.yaml. You can edit this file to adjust your settings - for example, this command will set the appropriate IP address for your machine:
-> `echo "ROS_IP: $(hostname -i)" > src/ros-tcp-endpoint/config/params.yaml`
-
-> Read more about rosparam YAML options [here](http://wiki.ros.org/rosparam).
->
-> Read more about the ROS Parameter Server [here](http://wiki.ros.org/Parameter%20Server).
+> Note, By default, the server_endpoint will listen on ip 0.0.0.0 (i.e. allowing all incoming addresses) and port 10000, but these settings are configurable. To override them, you can change the command to `roslaunch ros_tcp_endpoint endpoint.launch tcp_ip:=127.0.0.1 tcp_port:=10000` (obviously replacing 127.0.0.1 with your desired IP and 10000 with your desired port number.)
 
 ## <img src="images/ros2_icon.png" alt="ros2" width="46" height="28"/> ROS2 Environment
 
