@@ -170,6 +170,12 @@ def plan_trajectory(move_group, destination_pose, start_joint_angles):
 
     > Note: This may print out various error messages such as `Failed to find 3D sensor plugin`. These messages are safe to ignore as long as the final message to the console is `You can start planning now!`.
 
+	> Note: As with part 2, you can configure this launch file with a custom IP address or port:
+   ```bash
+   roslaunch niryo_moveit part_3.launch tcp_ip:=127.0.0.1 tcp_port:=10005
+   ```
+
+
 1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS, and watch the robot arm pick up and place the cube!
    - The target object and placement positions can be moved around during runtime for different trajectory calculations.
 

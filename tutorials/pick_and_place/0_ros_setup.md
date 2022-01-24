@@ -74,26 +74,6 @@ The ROS workspace is now ready to accept commands!
 
 1. If you have not already built and sourced the ROS workspace since importing the new ROS packages, navigate to your ROS workplace, and run `catkin_make && source devel/setup.bash`. Ensure there are no errors.
 
-1. The ROS parameters will need to be set to your configuration in order to allow the server endpoint to fetch values for the TCP connection, stored in `src/niryo_moveit/config/params.yaml`. From your ROS workspace, assign the ROS IP in this `yaml` file:
-
-    ```bash
-    echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml
-    ```
-
-    > Note: You can also manually assign this value by navigating to the `params.yaml` file and opening it for editing.
-
-    ```yaml
-    ROS_IP: <your ROS IP>
-    ```
-
-    e.g.
-
-    ```yaml
-    ROS_IP: 192.168.50.149
-    ```
-
-1. (Optional) By default, the server_endpoint will listen on port 10000, but this is also controlled by a parameter. If you need to change it, you can run the command `rosparam set ROS_TCP_PORT 10000`, replacing 10000 with the desired port number.
-
 The ROS workspace is now ready to accept commands!
 
 ---
@@ -102,8 +82,6 @@ The ROS workspace is now ready to accept commands!
 - Building the Docker image may throw an `Could not find a package configuration file provided by...` exception if one or more of the directories in ROS/ appears empty. Try downloading the submodules again via `git submodule update --init --recursive`.
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade packages.
-
-- If the ROS TCP handshake fails (e.g. `ROS-Unity server listening...` printed on the Unity side but no `ROS-Unity Handshake received` on the ROS side), the ROS IP may not have been set correctly in the params.yaml file. Try running `echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml` in a terminal from your ROS workspace.
 
 ---
 
