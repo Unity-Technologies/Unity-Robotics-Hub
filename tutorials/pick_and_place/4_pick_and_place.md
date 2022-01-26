@@ -337,15 +337,18 @@ void Start()
 ## Add niryo_moveit Package
 The Niryo One ROS stack is already installed on the robot and only the `niryo_moveit` package will need to be added.
 
-1. Update the `niryo_moveit/config/params.yml` file's `ROS_IP` parameter to match that of the Niryo One.
-
 1. Copy the `niryo_moveit` package to the `catkin_ws` directory on the Niryo One's catkin workspace at `/home/niryo/catkin_ws` and run the `catkin_make` command.
 
 > Using the SCP command to transfer the `niryo_moveit` package might look something like, `scp -r ~/PATH/TO/niryo_moveit niryo@NIRYO_IP_ADDRESS:/home/niryo/catkin_ws/src`
 
 # Execution
-1. Use the `part_4.launch` file to setup the ROS params and start the `server_endpoint` and `sim_real_pnp` scripts.
+1. Use the `part_4.launch` file to start the `server_endpoint` and `sim_real_pnp` scripts.
 	- `roslaunch niryo_moveit part_4.launch`
+
+	> Note: As with previous parts, you can configure this launch file with a custom IP address or port:
+   ```bash
+   roslaunch niryo_moveit part_4.launch tcp_ip:=127.0.0.1 tcp_port:=10005
+   ```
 
 1. Return to the Unity Editor and press Play. Press the UI Button to send the joint configurations to ROS on the Niryo One, and watch the robot arm move simultaneously in simulation and real life!
 

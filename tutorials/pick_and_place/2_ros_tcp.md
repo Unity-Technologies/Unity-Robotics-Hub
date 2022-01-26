@@ -174,14 +174,25 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
 
    > Note: Running `roslaunch` automatically starts [ROS Core](http://wiki.ros.org/roscore) if it is not already running.
 
-   > Note: This launch file has been copied below for reference. The server_endpoint and trajectory_subscriber nodes are launched from this file, and the ROS params (set up in [Part 0](0_ros_setup.md)) are loaded from this command. The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+   > Note: This launch file has been copied below for reference. The server_endpoint and trajectory_subscriber nodes are launched from this file. The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
 
    ```xml
-   <launch>
-      <rosparam file="$(find niryo_moveit)/config/params.yaml" command="load"/>
-      <node name="server_endpoint" pkg="niryo_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
-      <node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
-   </launch>
+	<launch>
+		<arg name="tcp_ip" default="0.0.0.0"/>
+		<arg name="tcp_port" default="10000"/>
+
+		<node name="server_endpoint" pkg="ros_tcp_endpoint" type="default_server_endpoint.py" args="--wait" output="screen" respawn="true">
+			<param name="tcp_ip" type="string" value="$(arg tcp_ip)"/>
+			<param name="tcp_port" type="int" value="$(arg tcp_port)"/>
+		</node>
+		<node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
+	</launch>
+   ```
+
+   > Note: To use a port other than 10000, or if you want to listen on a more restrictive ip address than 0.0.0.0 (e.g. for security reasons), you can pass those arguments into the roslaunch command like this:
+
+   ```bash
+   roslaunch niryo_moveit part_2.launch tcp_ip:=127.0.0.1 tcp_port:=10005
    ```
 
    This launch will print various messages to the console, including the set parameters and the nodes launched.
