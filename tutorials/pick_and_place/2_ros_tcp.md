@@ -81,7 +81,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. In this repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
-   > Note: The SourceDestinationPublisher script is one of the included files. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. The `Publish()` function is defined as follows:
+   > Note: The SourceDestinationPublisher script is one of the included files. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"/niryo_joints"`. The `Publish()` function is defined as follows:
 
    ```csharp
    public void Publish()
@@ -108,11 +108,11 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        m_Ros.Send(m_TopicName, sourceDestinationMessage);
+        m_Ros.Publish(m_TopicName, sourceDestinationMessage);
    }
    ```
 
-   > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`).
+   > This function first takes in the current joint target values. Then, it grabs the poses of the `m_Target` and the `m_TargetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `m_TopicName` (defined as `"/niryo_joints"`).
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's coordinate space has x Right, y Up, and z Forward (hence "RUF" coordinates); ROS has x Forward, y Left and z Up (hence "FLU"). So a Unity `(x,y,z)` coordinate is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are done by the `To<FLU>` function in the ROS-TCP-Connector package's [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md).
 
@@ -121,13 +121,13 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.
    > Note: Alternatively, you can drag the script from the Project window onto the Publisher object in the Hierarchy window.
 
-   ![](img/2_sourcedest.gif)
+   ![TBD_update_topic_name](img/2_sourcedest.gif)
 
 1. Note that this component shows empty member variables in the Inspector window, which need to be assigned.
 
    Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field.
 
-   ![](img/2_target.gif)
+   ![TBD_update_topic_name](img/2_target.gif)
 
 1. Next, the ROS TCP connection needs to be created. Select `Robotics -> ROS Settings` from the top menu bar.
 
