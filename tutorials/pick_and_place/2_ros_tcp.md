@@ -121,13 +121,13 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    Right click in the Hierarchy window and select "Create Empty" to add a new empty GameObject. Name it `Publisher`. Add the newly created SourceDestinationPublisher component to the Publisher GameObject by selecting the Publisher object. Click "Add Component" in the Inspector, and begin typing "SourceDestinationPublisher." Select the component when it appears.
    > Note: Alternatively, you can drag the script from the Project window onto the Publisher object in the Hierarchy window.
 
-   ![TBD_update_topic_name](img/2_sourcedest.gif)
+   ![](img/2_sourcedest.gif)
 
 1. Note that this component shows empty member variables in the Inspector window, which need to be assigned.
 
    Select the Target object in the Hierarchy and assign it to the `Target` field in the Publisher. Similarly, assign the TargetPlacement object to the `TargetPlacement` field. Assign the niryo_one robot to the `Niryo One` field.
 
-   ![TBD_update_topic_name](img/2_target.gif)
+   ![](img/2_target.gif)
 
 1. Next, the ROS TCP connection needs to be created. Select `Robotics -> ROS Settings` from the top menu bar.
 
