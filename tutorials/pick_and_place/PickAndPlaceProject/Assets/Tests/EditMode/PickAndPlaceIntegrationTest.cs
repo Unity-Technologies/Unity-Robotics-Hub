@@ -61,7 +61,7 @@ namespace IntegrationTests
 
         readonly ImportSettings k_UrdfImportSettings = new ImportSettings
         {
-            choosenAxis = ImportSettings.axisType.yAxis,
+            chosenAxis = ImportSettings.axisType.yAxis,
             convexMethod = ImportSettings.convexDecomposer.unity
         };
         #endregion

@@ -4,7 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Unity.Robotics.URDFImporter",
+        "Unity.Robotics.UrdfImporter",
         "Unity.Robotics.ROSTCPConnector",
         "Unity.Robotics.RosMessages",
         "Unity.Robotics.PickAndPlace"
