@@ -81,7 +81,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
 
 1. In this repo, navigate to `Unity-Robotics-Hub/tutorials/pick_and_place`. Select and copy the `Scripts` folder and contents into the `Assets` folder of your Unity project. You should now find two C# scripts in your project's `Assets/Scripts`.
 
-   > Note: The SourceDestinationPublisher script is one of the included files. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"SourceDestination_input"`. The `Publish()` function is defined as follows:
+   > Note: The SourceDestinationPublisher script is one of the included files. This script will communicate with ROS, grabbing the positions of the target and destination objects and sending it to the ROS Topic `"/niryo_joints"`. The `Publish()` function is defined as follows:
 
    ```csharp
    public void Publish()
@@ -108,11 +108,11 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
         };
 
         // Finally send the message to server_endpoint.py running in ROS
-        m_Ros.Send(m_TopicName, sourceDestinationMessage);
+        m_Ros.Publish(m_TopicName, sourceDestinationMessage);
    }
    ```
 
-   > This function first takes in the current joint target values. Then, it grabs the poses of the `target` and the `targetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `topicName` (defined as `"SourceDestination_input"`).
+   > This function first takes in the current joint target values. Then, it grabs the poses of the `m_Target` and the `m_TargetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `m_TopicName` (defined as `"/niryo_joints"`).
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's coordinate space has x Right, y Up, and z Forward (hence "RUF" coordinates); ROS has x Forward, y Left and z Up (hence "FLU"). So a Unity `(x,y,z)` coordinate is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are done by the `To<FLU>` function in the ROS-TCP-Connector package's [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md).
 
@@ -174,14 +174,25 @@ Most of the ROS setup has been provided via the `niryo_moveit` package. This sec
 
    > Note: Running `roslaunch` automatically starts [ROS Core](http://wiki.ros.org/roscore) if it is not already running.
 
-   > Note: This launch file has been copied below for reference. The server_endpoint and trajectory_subscriber nodes are launched from this file, and the ROS params (set up in [Part 0](0_ros_setup.md)) are loaded from this command. The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
+   > Note: This launch file has been copied below for reference. The server_endpoint and trajectory_subscriber nodes are launched from this file. The launch files for this project are available in the package's `launch` directory, i.e. `src/niryo_moveit/launch/`.
 
    ```xml
-   <launch>
-      <rosparam file="$(find niryo_moveit)/config/params.yaml" command="load"/>
-      <node name="server_endpoint" pkg="niryo_moveit" type="server_endpoint.py" args="--wait" output="screen" respawn="true" />
-      <node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
-   </launch>
+	<launch>
+		<arg name="tcp_ip" default="0.0.0.0"/>
+		<arg name="tcp_port" default="10000"/>
+
+		<node name="server_endpoint" pkg="ros_tcp_endpoint" type="default_server_endpoint.py" args="--wait" output="screen" respawn="true">
+			<param name="tcp_ip" type="string" value="$(arg tcp_ip)"/>
+			<param name="tcp_port" type="int" value="$(arg tcp_port)"/>
+		</node>
+		<node name="trajectory_subscriber" pkg="niryo_moveit" type="trajectory_subscriber.py" args="--wait" output="screen"/>
+	</launch>
+   ```
+
+   > Note: To use a port other than 10000, or if you want to listen on a more restrictive ip address than 0.0.0.0 (e.g. for security reasons), you can pass those arguments into the roslaunch command like this:
+
+   ```bash
+   roslaunch niryo_moveit part_2.launch tcp_ip:=127.0.0.1 tcp_port:=10005
    ```
 
    This launch will print various messages to the console, including the set parameters and the nodes launched.

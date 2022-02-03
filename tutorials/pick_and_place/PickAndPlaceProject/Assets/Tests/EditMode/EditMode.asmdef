@@ -2,14 +2,14 @@
     "name": "EditMode",
     "rootNamespace": "",
     "references": [
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:1da8e23352f14494396eac5033ba9894",
-        "GUID:625bfc588fb96c74696858f2c467e978",
-        "GUID:204b12c73a0ba074c888ec09a2713605",
-        "GUID:465c1207fffb96245a352265e7622205",
-        "GUID:b1ef917f7a8a86a4eb639ec2352edbf8",
-        "GUID:79169c04a5f9b014e919b69ac8df4286"
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Unity.Robotics.ROSTCPConnector.Editor",
+        "Unity.Robotics.ROSTCPConnector",
+        "Unity.Robotics.RosMessages",
+        "Unity.Robotics.UrdfImporter.Editor",
+        "Unity.Robotics.UrdfImporter",
+        "Unity.Robotics.PickAndPlace"
     ],
     "includePlatforms": [
         "Editor"

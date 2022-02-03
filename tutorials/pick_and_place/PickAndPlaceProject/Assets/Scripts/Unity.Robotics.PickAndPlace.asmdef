@@ -2,9 +2,11 @@
     "name": "Unity.Robotics.PickAndPlace",
     "rootNamespace": "",
     "references": [
-        "GUID:204b12c73a0ba074c888ec09a2713605",
-        "GUID:625bfc588fb96c74696858f2c467e978",
-        "GUID:b1ef917f7a8a86a4eb639ec2352edbf8"
+        "Unity.Robotics.RosMessages",
+        "Unity.Robotics.ROSTCPConnector",
+        "Unity.Robotics.UrdfImporter",
+        "Unity.Robotics.ROSTCPConnector.MessageGeneration",
+        "Unity.Robotics.ROSTCPConnector.Messages"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

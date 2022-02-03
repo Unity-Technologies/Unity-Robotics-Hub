@@ -192,7 +192,7 @@ public class Demo : MonoBehaviour
     {
         var urdfImportSettings = new ImportSettings
         {
-            choosenAxis = ImportSettings.axisType.yAxis,
+            chosenAxis = ImportSettings.axisType.yAxis,
             convexMethod = ImportSettings.convexDecomposer.unity
         };
 

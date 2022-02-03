@@ -1,0 +1,22 @@
+name: jira-link
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  jira-link:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: check pull request title and source branch name
+        run: |
+          echo "Checking pull request with title ${{ github.event.pull_request.title }} from source branch ${{ github.event.pull_request.head.ref }}"
+          if ! [[ "${{ github.event.pull_request.title }}" =~ ^AIRO-[0-9]+[[:space:]].*$ ]] && ! [[ "${{ github.event.pull_request.head.ref }}" =~ ^AIRO-[0-9]+.*$ ]]
+          then
+            echo -e "Please make sure one of the following is true:\n \
+            1. the pull request title starts with 'AIRO-xxxx ', e.g. 'AIRO-1024 My Pull Request'\n \
+            2. the source branch starts with 'AIRO-xxx', e.g. 'AIRO-1024-my-branch'"
+            exit 1
+          else
+            echo "Completed checking"
+          fi
