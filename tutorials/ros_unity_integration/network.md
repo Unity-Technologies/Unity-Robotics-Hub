@@ -33,7 +33,7 @@ The minimum settings required for Unity to communicate with ROS is to set the `R
 
 ## If Using Docker
 
-The container will need to be started with the default arguments to forward the ports used for communication between ROS and Unity. The `unity_endpoint` will listen on IP 0.0.0.0 (i.e. allowing all incoming addresses) and port 10000, but these settings are configurable. 
+The container will need to be started with the default arguments to forward the ports used for communication between ROS and Unity. The `unity_endpoint` will listen on IP 0.0.0.0 (i.e. allowing all incoming addresses) and port 10000, but these settings are configurable.
 
 ![](images/settings_ros_ip.png)
 
@@ -75,7 +75,7 @@ Confirm that:
 If issue still persists:
 
 - If on Windows you may need to [open ports for the firewall](#open-port-on-windows-firewall).
-- Ensure your Connector and Endpoint packages are using matching versions. You will see a `Incompatible ROS-TCP-Endpoint version...` message in your Unity console if these are not the same. 
+- Ensure your Connector and Endpoint packages are using matching versions. You will see a `Incompatible ROS-TCP-Endpoint version...` message in your Unity console if these are not the same.
   - You can verify which Connector version is being used in the `Window > Package Manager` window, and you can run `rosversion ros_tcp_endpoint` on the ROS side. Ensure these values match.
 
 ### 2. Can ROS send messages to Unity?
