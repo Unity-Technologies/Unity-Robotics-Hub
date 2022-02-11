@@ -212,9 +212,9 @@ ROS and Unity have now successfully connected!
 
 - `...failed because unknown error handler name 'rosmsg'` This is due to a bug in an outdated package version. Try running `sudo apt-get update && sudo apt-get upgrade` to upgrade.
 
-- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the ROS IP Address in the RosConnect in Unity, and that the `src/niryo_moveit/config/params.yaml` values are set correctly.
+- If Unity fails to find a network connection, ensure that the ROS IP address is entered correctly as the ROS IP Address in the ROS Settings in Unity. This should default to `127.0.0.1`.
 
-- If the ROS TCP handshake fails (e.g. `ROS-Unity server listening...` printed on the Unity side but no `ROS-Unity Handshake received` on the ROS side), the ROS IP may not have been set correctly in the params.yaml file. Try running `echo "ROS_IP: $(hostname -I)" > src/niryo_moveit/config/params.yaml` in a terminal from your ROS workspace.
+- If the ROS TCP handshake fails (e.g. no `Connection from 172.17.0.1` on the ROS side after starting the endpoint and entering Play in Unity), the ROS IP may not have been set correctly. The endpoint defaults to `0.0.0.0`, assuming a native or Docker setup. To override this, you can configure the address and/or port by passing them into the launchfile when you launch it, e.g. `roslaunch niryo_moveit part_2.launch tcp_ip:=127.0.0.1 tcp_port:=10005`.
 
 - If the UI buttons appear to be unresponsive, such as not responding to clicks, ensure there is an [EventSystem](https://docs.unity3d.com/2020.1/Documentation/Manual/UIE-Events.html) in the scene hierarchy. This should be added automatically when adding UI elements, but if it is not, you can add one to your scene from the Hierarchy window via `(+) > UI > Event System`. You can also access this dropdown from right-clicking in an empty area in the Hierarchy window.
 

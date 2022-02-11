@@ -16,7 +16,13 @@
 
 > It is possible to set both of these variables on the machines running Unity and ROS. The specifics of where and why each of these settings will be described below.
 
-On the ROS machine, these settings are set as a rosparam and will typically be set in a launch file like [this](ros_packages/unity_robotics_demo/launch/robo_demo.launch) or in a [param file](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/config/params.yaml) loaded by a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/launch/part_3.launch#L2). The param file can also be loaded manually by running the `rosparam load params.yaml` command.
+On the ROS machine, these settings can be set via arguments when running the endpoint's roslaunch like this:
+
+```
+roslaunch ros_tcp_endpoint endpoint.launch tcp_ip:=127.0.0.1 tcp_port:=10000
+```
+
+Or, if using a launchfile like in the Pick-and-Place demo, the settings can be passed as arguments in a launch file like [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/pick_and_place/ROS/src/niryo_moveit/launch/part_3.launch#L2-L3).
 
 On the Unity machine, these settings are set from the menu by going to `Robotics` -> `ROS Settings`
 
@@ -27,17 +33,7 @@ The minimum settings required for Unity to communicate with ROS is to set the `R
 
 ## If Using Docker
 
-The container will need to be started with the following arguments to forward the ports used for communication between ROS and Unity.
-
-`-p 10000:10000 -p 5005:5005`
-
-
-- On the ROS side, set `ROS_IP` to `0.0.0.0`.
-  ```bash
-  rosparam set ROS_IP 0.0.0.0
-  ```
-
-- On the Unity side, set `ROS_IP` to `127.0.0.1`.
+The container will need to be started with the default arguments to forward the ports used for communication between ROS and Unity. The `unity_endpoint` will listen on IP 0.0.0.0 (i.e. allowing all incoming addresses) and port 10000, but these settings are configurable.
 
 ![](images/settings_ros_ip.png)
 
@@ -49,17 +45,16 @@ The container will need to be started with the following arguments to forward th
 
 When play is pressed in the Editor, Unity will establish the connection to ROS using the ROS_IP.
 
-If Unity can communicate with ROS, you should see a heads-up display showing the connection in Unity Editor.
+If Unity can communicate with ROS, you should see a heads-up display showing the connection in Unity Editor's Game view.
 
 ![](images/troubleshoot_hud_success.png)
 
 The icon in front of ROS IP should be blue indicating the connection between Unity and ROS is successful.
 
 
-On ROS side, you should see a message printed to the console screen running the `server_endpoint.py` script, something similar to the following:
+On ROS side, you should see a message printed to the console screen running the server endpoint, something similar to the following:
 
 ```Connection from 172.17.0.1```
-
 
 If the previous message is not shown and either of the following errors are thrown instead:
 
@@ -73,13 +68,15 @@ SocketException: Connection refused
 
 Confirm that:
 
-- `server_endpoint` is running. On ROS side, you can run ```rosrun ros_tcp_endpoint default_server_endpoint.py```
+- The `unity_endpoint` is running. On ROS side, you can run ```rosrun ros_tcp_endpoint default_server_endpoint.py```
 - You can ping ROS machine from Unity machine
 	- From a terminal on the Unity machine, run the following command to confirm whether the ROS machine is reachable over the network. ```ping ROS_IP```
 
 If issue still persists:
 
 - If on Windows you may need to [open ports for the firewall](#open-port-on-windows-firewall).
+- Ensure your Connector and Endpoint packages are using matching versions. You will see a `Incompatible ROS-TCP-Endpoint version...` message in your Unity console if these are not the same.
+  - You can verify which Connector version is being used in the `Window > Package Manager` window, and you can run `rosversion ros_tcp_endpoint` on the ROS side. Ensure these values match.
 
 ### 2. Can ROS send messages to Unity?
 
@@ -87,7 +84,7 @@ After it is confirmed that Unity can communicate with ROS, publish a message to 
 
 You can confirm the connection status by checking the heads-up display in your Unity Scene after entering the Play mode.
 
-If an error is thrown in the `server_endpoint` console then ROS cannot connect to Unity.
+If an error is thrown in the `unity_endpoint` console then ROS cannot connect to Unity.
 
 If issue still persists:
 

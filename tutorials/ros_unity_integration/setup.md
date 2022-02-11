@@ -113,3 +113,7 @@ The instructions so far have set up the ROS-TCP-Connector package for general us
   ![](images/generate_messages_3.png)
 
   The generated files will be saved in the default directories `Assets/RosMessages/UnityRoboticsDemo/msg` and `Assets/RosMessages/UnityRoboticsDemo/srv`. Note, there is no difference between the message scripts generated in ROS1 and ROS2 mode. You don't need to regenerate messages when you switch between them.
+
+## Troubleshooting
+
+Check out the [ROS–Unity Integration Networking](network.md) document for more details on troubleshooting your connection.
