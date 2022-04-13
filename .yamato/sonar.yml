@@ -2,7 +2,7 @@ csharp:
     name: Sonarqube C# Scan
     agent:
         type: Unity::metal::macmini
-        image: package-ci/mac
+        image: package-ci/mac:v1.8.1-822785
         flavor: m1.mac
     variables:
         PROJECT_PATH: tutorials/pick_and_place/PickAndPlaceProject
@@ -36,7 +36,7 @@ standard:
     name: Sonarqube Standard Scan
     agent:
         type: Unity::metal::macmini
-        image: package-ci/mac
+        image: package-ci/mac:v1.8.1-822785
         flavor: m1.mac
     variables:
         SONARQUBE_PROJECT_KEY: ai-robotics-hub-standard
