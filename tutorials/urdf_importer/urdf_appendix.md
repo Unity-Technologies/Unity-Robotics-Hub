@@ -285,7 +285,6 @@ The joint control script determines the direction in which the joint needs to mo
             }
         }
     }
-}
 
 ```
 
