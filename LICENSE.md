@@ -1,4 +1,4 @@
-ROS TCP Connector copyright © 2021 Unity Technologies.
+Unity Robotics Hub copyright © 2020 Unity Technologies.
 
 This software is subject to, and made available under the Apache 2.0 license (the “License”). You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
 
