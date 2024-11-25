@@ -10,7 +10,6 @@ jobs:
     steps:
       - name: check pull request title and source branch name
         run: |
-          echo "Checking pull request with title ${{ github.event.pull_request.title }} from source branch ${{ github.event.pull_request.head.ref }}"
           if ! [[ "${{ github.event.pull_request.title }}" =~ ^AIRO-[0-9]+[[:space:]].*$ ]] && ! [[ "${{ github.event.pull_request.head.ref }}" =~ ^AIRO-[0-9]+.*$ ]]
           then
             echo -e "Please make sure one of the following is true:\n \
