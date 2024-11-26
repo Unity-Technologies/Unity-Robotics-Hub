@@ -101,8 +101,6 @@ ROS2 support is now available! You can get started by following [this tutorial](
 ## Community and Feedback
 
 The Unity Robotics projects are open-source and we encourage and welcome contributions.
-If you wish to contribute, be sure to review our [contribution guidelines](CONTRIBUTING.md)
-and [code of conduct](CODE_OF_CONDUCT.md).
 
 ## Support
 
@@ -120,4 +118,4 @@ To get notified about new updates and features, [sign up for our newsletter](htt
 [FAQs](faq.md)
 
 ## License
-[Apache License 2.0](LICENSE)
+[Apache License 2.0](LICENSE.md)
