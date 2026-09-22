@@ -75,3 +75,41 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
+
+---
+
+Component Name: Simulation Vehicle Controllers (com.unity.simulation.vehicle-controllers)
+
+License Type: Unity Package Distribution License
+
+```
+com.unity.simulation.vehicle-controllers copyright © 2022 Unity Technologies
+
+Licensed under the Unity Package Distribution License (see https://unity3d.com/legal/licenses/Unity_Package_Distribution_License ).
+
+Unless expressly provided otherwise, the software under this license is made available strictly on an “AS IS” BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. Please review the license for details on these and other terms and conditions.”
+```
+
+---
+
+Component Name: Franka Emika Panda Description (frankaemika/franka_ros, obtained via moveit/moveit_resources)
+
+License Type: Apache 2.0
+
+Copyright Franka Robotics GmbH (formerly Franka Emika GmbH)
+
+The URDF model and meshes in `Assets/URDF-Files/Panda/` were copied from the
+`franka_description` package and adapted for use with `moveit_resources`.
+
+```
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the
+specific language governing permissions and limitations under the License.
+```

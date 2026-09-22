@@ -1,121 +1,165 @@
-<p align="center"><img src="images/warehouse.gif"/></p>
-
 # Unity Robotics Hub
 
-<!-- [![Version](https://img.shields.io/github/v/tag/Unity-Technologies/Unity-Robotics-Hub)](https://github.com/Unity-Technologies/Unity-Robotics-Hub/releases) -->
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
 ![ROS](https://img.shields.io/badge/ros-melodic-brightgreen)
 ![ROS](https://img.shields.io/badge/ros-noetic-brightgreen)
-![ROS](https://img.shields.io/badge/ros2-foxy-brightgreen)
-![Unity](https://img.shields.io/badge/unity-2020.2+-brightgreen)
+![ROS](https://img.shields.io/badge/ros2-lyrical-brightgreen)
+![Unity](https://img.shields.io/badge/unity-6-brightgreen)
+
+<p align="center"><img src="imgs/robotics-reel.gif" width="1268"/></p>
 
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
-> The contents of this repository are in active development. Its features and API are subject to significant change as development progresses.
+---
+
+We've updated this repository with Simulation Pro, Unity's latest robotics package that provides a
+supported suite of features and capabilities for robotics simulation and training. This package has
+been built with feedback from Unity's robotics developers along with lessons learnt from robotics
+projects using Unity in production. With Simulation Pro, we're starting a new chapter for Unity's
+support for Robotics use cases. [Register your interest here to learn more](https://unity.com/contact-us?sfcid=701QK00000o0DGkYAM&sflsa=2026-09-dg-global-industry-simpro-robotics-contact-us&sfit=Digital+Twin&step=3&reason=Speak+to+Sales&topic=Industrial+Solutions).
+
+Simulation Pro is a new package that consolidates and innovates on previously disparate features
+and workflows for robotics development across Unity. Specifically, the package includes 4 key
+capabilities:
+
+- **URDF importer,** which enables a drag-and-drop experience for URDF files to be imported
+  directly into Unity
+- **Sensor simulation,** that helps you simulate Lidar, RGB-D and IMU sensors out of the box in
+  Unity.
+- **ROS-2 support,** which enables you to communicate with ROS-based hardware directly
+  from Unity.
+- **Headless Linux Build Target,** which enables you to achieve parallel simulation across any
+  hardware stack that you currently have.
+
+We've also developed an in-depth, hands-on [5 hour training program on Unity Academy](https://academy.unity.com/learn/course/introduction-to-unity-robotics-and-simulation) to help
+you get started with Simulation Pro. Simulation Pro will be supported for production on Unity 6.3
+and newer, and early access is now open to Unity Industry developers.
+
+You can also reference archived content on unsupported packages [here](ARCHIVE.md).
 
 ---
 
-We're currently working on lots of things! Please take a short moment fill out our [survey](https://unitysoftware.co1.qualtrics.com/jfe/form/SV_0ojVkDVW0nNrHkW) to help us identify what products and packages to build next.
+![Intro to Robotics GIF](imgs/amrgif.gif)
+
+# Introduction to Unity Robotics and Simulation Pro
+
+A written companion to the on-demand video course. Five modules covering the Simulation Pro package:
+importing a robot, exchanging ROS 2 messages, configuring simulated sensors, connecting to a live
+ROS 2 environment, and exporting the data the simulation produces.
+
+**Start here: [Module 1 — Introduction](docs/M1-Introduction.md)**
 
 ---
 
-## Introduction
+## What this course is for
 
-Simulation plays an important role in robotics development, and we’re here to ensure that roboticists can use Unity for these simulations. We're starting off with a set of tools to make it easier to use Unity with existing ROS-based workflows. Try out some of our samples below to get started quickly.
+Unity Robotics is a set of packages that turn Unity from a game engine into a **simulation engine**
+for robots. This course covers one of them, **Simulation Pro** — SimPro — which adds robotics
+functionality directly to the Unity Editor.
 
-## Getting Started
-### [Quick Installation Instructions](tutorials/quick_setup.md)
+The reason to simulate a robot in Unity is that the Editor already does the things a robot test rig
+needs. You can build an environment out of prefabs, drop a robot into it, feed that robot simulated
+sensor data, and watch how it behaves — before any of it touches hardware. Change the environment and
+run the same robot software again. Break things in a virtual living room instead of a real one.
 
-Brief steps on installing the Unity Robotics packages.
+By the end of the course you will have built a working simulation in which a Python node running on a
+separate machine navigates a robot around a Unity Scene using its LiDAR, and you will have exported
+images, point clouds, and logs from that simulation to disk.
 
-### [Pick-and-Place Tutorial](tutorials/pick_and_place/README.md)
+## Unity Academy
 
-A complete end-to-end demonstration, including how to set up the Unity environment, how to import a robot from URDF, and how to set up two-way communication with ROS for control.
+If you would rather follow along with the video tutorials, you can access
+them on the [Unity Academy](https://academy.unity.com/learn/course/introduction-to-unity-robotics-and-simulation) learning platform.
 
-### [Object Pose Estimation Tutorial](https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation)
+All courses are built by Unity’s own training experts and Unity trainers, 
+so you’re always learning from the source.
 
-A complete end-to-end demonstration in which we collect training data in Unity and use that data to train a deep neural network to predict the pose of a cube. This model is then deployed in a simulated robotic pick-and-place task.
+New and refreshed courses are added continuously to keep pace with Unity’s latest features and product releases.
 
-### [Articulations Robot Demo](https://github.com/Unity-Technologies/articulations-robot-demo)
+## Course learning objectives
 
-A robot simulation demonstrating Unity's new physics solver (no ROS dependency).
+By the end of this course you will be able to:
 
-### [**New!**] [Navigation 2 SLAM Example](https://github.com/Unity-Technologies/Robotics-Nav2-SLAM-Example)
+1. Explain the role of Unity in robotics simulation and identify the core components of the
+   Simulation Pro package.
+2. Import Simulation Pro into a Unity 6 project and bring in a robot using the URDF importer.
+3. Publish and receive ROS 2 messages.
+4. Configure the camera, LiDAR, and IMU sensors to generate simulated sensor data.
+5. Build a complete simulation that connects Unity to a live ROS 2 environment.
+6. Capture and export simulation output such as sensor images, point clouds, and logged data.
 
-An example simulation environment, integrated with ROS 2 and **[New!] Visualizations**, which enables the exercise of ROS 2's Navigation 2 and slam_toolbox packages using a simulated Turtlebot 3.
+## Who this is for
 
-## Documentation
+**Difficulty: Intermediate.** The course assumes you are comfortable in the Unity Editor and can read
+and write C#. No robotics or ROS 2 experience is assumed - the concepts are introduced as they come
+up.
 
-| Tutorial | Description |
+## The modules
+
+| Module | Covers | What you end up with |
+|---|---|---|
+| **[1 — Introduction](docs/M1-Introduction.md)** | Unity's role in robotics, the SimPro feature set, the URDF importer | A Unity 6 project with SimPro installed and a Panda arm imported from URDF, configured for stable physics |
+| **[2 — Messages](docs/M2-Messages.md)** | Nodes, topics, the publisher/subscriber pattern, SimPro message types, TF broadcasting | A publisher and subscriber exchanging messages over a Dummy Connection, and transform data broadcasting for every joint on the arm |
+| **[3 — Sensors](docs/M3-Sensors.md)** | Camera, fisheye, stereo depth, time of flight, three LiDAR implementations, IMU | Hands-on configuration and inspection of every sensor SimPro ships |
+| **[4 — Creating a Simulation](docs/M4-Creating-a-Simulation.md)** | Simulation time, coordinate systems, the ROS Endpoint Connector, differential drive | A complete simulation with a live ROS 2 connection and an `rclpy` node navigating the robot by LiDAR and odometry |
+| **[5 — Capturing Data](docs/M5-Capturing-Data.md)** | Image and point cloud savers, CSV logging | Images, point clouds, and CSV logs exported from the running simulation |
+
+Work through them in order. Each module builds on the project state left by the one before it.
+
+## Requirements
+
+| Requirement | Detail |
 |---|---|
-| [ROS–Unity Integration](tutorials/ros_unity_integration/README.md) | A set of component-level tutorials showing how to set up communication between ROS and Unity |
-| [URDF Importer](tutorials/urdf_importer/urdf_tutorial.md) | Steps on using the Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
-| [**New!**] [Visualizations](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/com.unity.robotics.visualizations/Documentation~/README.md) | Usage instructions for adding visualizations for incoming and outgoing ROS messages |
+| **Unity** | **6.3 or newer.** Simulation Pro is supported for production on Unity 6.3 and newer. |
+| **Simulation Pro** | Installed through the Package Manager. See Module 1, §2. |
+| **Samples** | Simulation Pro Basic and Prebuilt LiDAR Sensors. |
+| **Course assets** | The Panda URDF, the material fixer script, the AMR prefab, and the ROS 2 test files. |
+| **A ROS 2 environment** | **Modules 4 and 5 only.** The course uses Ubuntu 26.04 with ROS 2 Lyrical Luth on a virtual machine. |
 
-## Component Repos
+> **Setting up ROS 2 is out of scope.** This course does not cover installing or configuring ROS 2 or
+> the Unity TCP endpoint. If you want to follow Modules 4 and 5 on your own environment, 
+> the [ROS 2 Wiki](https://docs.ros.org/en/lyrical/) has the installation steps.
 
-| Repo | Functionality |
-|---|---|
-| [ROS TCP Endpoint](https://github.com/Unity-Technologies/ROS-TCP-Endpoint) | ROS node for sending/receiving messages from Unity |
-| [ROS TCP Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector) | Unity package for sending, receiving, and visualizing messages from ROS |
-| [URDF Importer](https://github.com/Unity-Technologies/URDF-Importer) | Unity package for loading [URDF](http://wiki.ros.org/urdf) files |
+## How to read these guides
 
+Each module file follows the same shape:
 
+- **Concept blocks** before each procedure, explaining what a thing is and how it works. These exist
+  so that when you deviate from the steps — different robot, different sensor, different Scene — you
+  can still reason about what to do.
+- **Numbered procedural sections** with settings tables for every value you need to enter.
+- **Checkpoints** after each meaningful section, listing observable states. If a checkpoint fails,
+  fix it before continuing; later steps assume it passed.
 
-## Additional Resources
+## What comes after
 
-### Blog Posts and Talks
+- **Robotics and physics fundamentals** — driving ArticulationBodies directly, in a later course in
+  this pathway.
+- **ROS 2 setup** — building the environment Modules 4 and 5 assume.
+- **Deployment.** The `rclpy` node in Module 4 is the same code that runs on physical hardware. Once
+  it works in a Unity room, the next step is a real one.
 
-- [**New!**] (October 4, 2021) Introducing: Unity Robotics Visualizations Package [blog post](https://blog.unity.com/manufacturing/Introducing-Unity-Robotics-Visualizations-Package)
-- (August 13, 2021) Advance your robot autonomy with ROS 2 and Unity [blog post](https://blog.unity.com/manufacturing/advance-your-robot-autonomy-with-ros-2-and-unity)
-- (March 2, 2021) Teaching robots to see with Unity [blog post](https://blogs.unity3d.com/2021/03/02/teaching-robots-to-see-with-unity/)
-- (November 19, 2020) Robotics simulation in Unity is as easy as 1, 2, 3! [blog post](https://blogs.unity3d.com/2020/11/19/robotics-simulation-in-unity-is-as-easy-as-1-2-3/)
-- (November 12, 2020)
-Unite Now 2020: Simulating Robots with ROS and Unity [video](https://resources.unity.com/unitenow/onlinesessions/simulating-robots-with-ros-and-unity)
-- (August 26, 2020)
-Announcing Unity Robotic Simulation [blog post](https://unity.com/solutions/automotive-transportation-manufacturing/robotics)
-- (May 20, 2020)
-Use articulation bodies to easily prototype industrial designs with realistic motion and behavior [blog post](https://blogs.unity3d.com/2020/05/20/use-articulation-bodies-to-easily-prototype-industrial-designs-with-realistic-motion-and-behavior/)
-
-### More from Unity
-
-- [Unity Industrial Simulation](https://unity.com/products/unity-simulation)
-- [Unity Computer Vision](https://unity.com/computer-vision)
-- [Unity ML-Agents Toolkit](https://github.com/Unity-Technologies/ml-agents)
-
-## New Physics Features in Unity
-### New Features
-- **Contact Modification API** This API will allow users to define custom contact reactions, such as ignoring subsets of contact points, in order to help simulate holes, slippery surfaces, soft contacts, and more. It is available in Unity versions **2021.2a12+**. [Read more about the new Contact Modification API](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/).
-- **Collision detection modes exposed for ArticulationBody: discrete, sweep-based CCD, and speculative CCD**. New continuous collision detection (CCD) modes will ensure that fast-moving objects collide with objects, instead of tunneling or passing through those objects, which can happen in the default “discrete” mode. This API is available in Unity versions **2020.3.5f1+**. [Read more about continuous collision detection](https://docs.unity3d.com/2020.3/Documentation/ScriptReference/ArticulationBody-collisionDetectionMode.html).
-
-### Coming Soon
-Here’s a peek into what our Physics Team is hard at work on…
-
-- **Wheel Collider shapes**. This feature will allow the user to specify the shape of the collider to be used for collision detection. Currently the collider shape is fixed to a cylinder, and collision detection is performed by casting a ray from the center of the cylinder. Custom shapes will improve the accuracy of simulating wheels over rough terrains, holes, etc. [Read more about Wheel Collider](https://docs.unity3d.com/Manual/class-WheelCollider.html).
-- **Force/Torque Sensor API**. This API will allow users to get the force and torque acting on an articulation body (useful for simulating a force/torque sensor!), as well as to get the motor torque applied by an articulation drive.
-- **Query primitives**. These simple, GameObject-less shapes allow for collision detection without requiring simulation (i.e., without calling Physics.Simulate). This feature will allow users to initialize objects in feasible locations, and can also be used for motion planning.
-
-## ROS 2
-ROS2 support is now available! You can get started by following [this tutorial](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md).
-
-## Community and Feedback
-
-The Unity Robotics projects are open-source and we encourage and welcome contributions.
+---
 
 ## Support
 
-For questions or discussions about Unity Robotics package installations or how to best set up and integrate your robotics projects, please create a new thread on the [Unity Robotics forum](https://forum.unity.com/forums/robotics.623/) and make sure to include as much detail as possible.
+For questions or discussions about Unity Robotics package installations or how to best set up and
+integrate your robotics projects, please create a new thread on the
+[Unity Robotics forum](https://forum.unity.com/forums/robotics.623/) and make sure to include as much
+detail as possible.
 
-For feature requests, bugs, or other issues, please file a [GitHub issue](https://github.com/Unity-Technologies/Unity-Robotics-Hub/issues) using the provided templates and the Robotics team will investigate as soon as possible.
-
-For any other questions or feedback, connect directly with the
-Robotics team at [unity-robotics@unity3d.com](mailto:unity-robotics@unity3d.com).
-
-## Newsletter
-To get notified about new updates and features, [sign up for our newsletter](https://create.unity3d.com/robotics-simulation-newsletter-sign-up)!
+For feature requests, bugs, or other issues, please file a
+[GitHub issue](https://github.com/Unity-Technologies/Unity-Robotics-Hub/issues) using the provided
+templates and the Robotics team will investigate as soon as possible.
 
 ## FAQs
+
 [FAQs](faq.md)
 
 ## License
+
 [Apache License 2.0](LICENSE.md)
+
+---
+
+*Course author: Sarah Applebaum. Reviewer: Isaac Seah.*

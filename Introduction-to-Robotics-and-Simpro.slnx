@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.Simulation.Vehicle-Controllers.csproj" />
+  <Project Path="Unity.Simulatiion.Vehicle-Controllers.Editor.csproj" />
+</Solution>
