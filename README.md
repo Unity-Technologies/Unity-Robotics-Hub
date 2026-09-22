@@ -3,8 +3,8 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
 ![ROS](https://img.shields.io/badge/ros-melodic-brightgreen)
 ![ROS](https://img.shields.io/badge/ros-noetic-brightgreen)
-![ROS](https://img.shields.io/badge/ros2-foxy-brightgreen)
-![Unity](https://img.shields.io/badge/unity-2020.2+-brightgreen)
+![ROS](https://img.shields.io/badge/ros2-lyrical-brightgreen)
+![Unity](https://img.shields.io/badge/unity-6-brightgreen)
 
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
@@ -108,7 +108,7 @@ Work through them in order. Each module builds on the project state left by the 
 
 | Requirement | Detail |
 |---|---|
-| **Unity** | **6.5.3**. Later 6.x versions should work, but 6.5.3 is the version the course was built and tested against. |
+| **Unity** | **6.3 or newer.** Simulation Pro is supported for production on Unity 6.3 and newer. |
 | **Simulation Pro** | Installed through the Package Manager. See Module 1, §2. |
 | **Samples** | Simulation Pro Basic and Prebuilt LiDAR Sensors. |
 | **Course assets** | The Panda URDF, the material fixer script, the AMR prefab, and the ROS 2 test files. |

@@ -79,7 +79,7 @@ three share data through the connector.
 Create a new Unity project. The course project is named `Introduction to Robotics and SimPro`, set to
 **Local project**, with no source control provider.
 
-The course was recorded on **Unity 6.5.3**. Use that version to follow along exactly.
+Simulation Pro is supported on **Unity 6.3 and newer**. Use 6.3 or later to follow along.
 
 ![New project settings in Unity Hub](../imgs/m1-new-project.png)
 
