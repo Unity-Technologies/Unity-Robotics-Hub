@@ -145,21 +145,13 @@ Each module file follows the same shape:
 
 For questions or discussions about Unity Robotics package installations or how to best set up and
 integrate your robotics projects, please create a new thread on the
-[Unity Robotics forum](https://forum.unity.com/forums/robotics.623/) and make sure to include as much
+[Unity Robotics forum](https://discussions.unity.com/t/unity-robotics-closing-the-sim2real-gap-with-simulation-pro/1736757) and make sure to include as much
 detail as possible.
 
 For feature requests, bugs, or other issues, please file a
 [GitHub issue](https://github.com/Unity-Technologies/Unity-Robotics-Hub/issues) using the provided
 templates and the Robotics team will investigate as soon as possible.
-
-## FAQs
-
-[FAQs](faq.md)
-
+---
 ## License
 
 [Apache License 2.0](LICENSE.md)
-
----
-
-*Course author: Sarah Applebaum. Reviewer: Isaac Seah.*
