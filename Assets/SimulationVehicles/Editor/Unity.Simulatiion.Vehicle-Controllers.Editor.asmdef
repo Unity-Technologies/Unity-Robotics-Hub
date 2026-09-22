@@ -1,0 +1,18 @@
+{
+    "name": "Unity.Simulatiion.Vehicle-Controllers.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a4e9aa2ad0c4549dab3b529d3913e020"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

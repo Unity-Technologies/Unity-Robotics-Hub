@@ -1,0 +1,29 @@
+{
+    "name": "Unity.Simulation.Vehicle-Controllers",
+    "rootNamespace": "Unity.Simulation.VehicleControllers",
+    "references": [
+        "GUID:6fae923750f05d648b015a1565bad1f2",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:0fda1816b0fc24415bac4a8032060556"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.simulation.foundation",
+            "expression": "",
+            "define": "UNITY_SIMULATION_FOUNDATION"
+        },
+        {
+            "name": "com.unity.simulationpro",
+            "expression": "",
+            "define": "UNITY_SIMULATIONPRO_FOUNDATION"
+        }
+    ],
+    "noEngineReferences": false
+}
