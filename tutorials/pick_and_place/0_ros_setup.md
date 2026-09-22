@@ -31,7 +31,7 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
     ```bash
     cd /PATH/TO/Unity-Robotics-Hub/tutorials/pick_and_place &&
     git submodule update --init --recursive &&
-    docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
+    sudo docker build -t unity-robotics:pick-and-place -f docker/Dockerfile .
     ```
 
     > Note: The provided Dockerfile uses the [ROS Melodic base Image](https://hub.docker.com/_/ros/). Building the image will install the necessary packages, copy the [provided ROS packages and submodules](ROS/) to the container, and build the catkin workspace.
@@ -39,7 +39,7 @@ git clone --recurse-submodules https://github.com/Unity-Technologies/Unity-Robot
 1. Start the newly built Docker container:
 
     ```docker
-    docker run -it --rm -p 10000:10000 unity-robotics:pick-and-place /bin/bash
+    sudo docker run -it --rm -p 10000:10000 unity-robotics:pick-and-place /bin/bash
     ```
 
     When this is complete, it will print: `Successfully tagged unity-robotics:pick-and-place`. This console should open into a bash shell at the ROS workspace root, e.g. `root@8d88ed579657:/catkin_ws#`.
