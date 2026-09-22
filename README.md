@@ -16,7 +16,7 @@ We've updated this repository with Simulation Pro, Unity's latest robotics packa
 supported suite of features and capabilities for robotics simulation and training. This package has
 been built with feedback from Unity's robotics developers along with lessons learnt from robotics
 projects using Unity in production. With Simulation Pro, we're starting a new chapter for Unity's
-support for Robotics use cases. [Register your interest here to learn more](REGISTER_INTEREST_URL).
+support for Robotics use cases. [Register your interest here to learn more](https://unity.com/contact-us?sfcid=701QK00000o0DGkYAM&sflsa=2026-09-dg-global-industry-simpro-robotics-contact-us&sfit=Digital+Twin&step=3&reason=Speak+to+Sales&topic=Industrial+Solutions).
 
 Simulation Pro is a new package that consolidates and innovates on previously disparate features
 and workflows for robotics development across Unity. Specifically, the package includes 4 key
