@@ -1,12 +1,45 @@
-![Intro to Robotics GIF](imgs/amrgif.gif)
+# Unity Robotics Hub
+
+[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
+![ROS](https://img.shields.io/badge/ros-melodic-brightgreen)
+![ROS](https://img.shields.io/badge/ros-noetic-brightgreen)
+![ROS](https://img.shields.io/badge/ros2-foxy-brightgreen)
+![Unity](https://img.shields.io/badge/unity-2020.2+-brightgreen)
+
+This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
 ---
 
-# Introduction to Unity Robotics and Simulation Pro
+We've updated this repository with Simulation Pro, Unity's latest robotics package that provides a
+supported suite of features and capabilities for robotics simulation and training. This package has
+been built with feedback from Unity's robotics developers along with lessons learnt from robotics
+projects using Unity in production. With Simulation Pro, we're starting a new chapter for Unity's
+support for Robotics use cases. [Register your interest here to learn more](REGISTER_INTEREST_URL).
 
-[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE.md)
-![Unity](https://img.shields.io/badge/unity-6.5.3-brightgreen)
-![ROS](https://img.shields.io/badge/ros2-lyrical-brightgreen)
+Simulation Pro is a new package that consolidates and innovates on previously disparate features
+and workflows for robotics development across Unity. Specifically, the package includes 4 key
+capabilities:
+
+- **URDF importer,** which enables a drag-and-drop experience for URDF files to be imported
+  directly into Unity
+- **Sensor simulation,** that helps you simulate Lidar, RGB-D and IMU sensors out of the box in
+  Unity.
+- **ROS-2 support,** which enables you to communicate with ROS-based hardware directly
+  from Unity.
+- **Headless Linux Build Target,** which enables you to achieve parallel simulation across any
+  hardware stack that you currently have.
+
+We've also developed an in-depth, hands-on [5 hour training program on Unity Academy](https://academy.unity.com/learn/course/introduction-to-unity-robotics-and-simulation) to help
+you get started with Simulation Pro. Simulation Pro will be supported for production on Unity 6.3
+and newer, and early access is now open to Unity Industry developers.
+
+You can also reference archived content on unsupported packages [here](ARCHIVE.md).
+
+---
+
+![Intro to Robotics GIF](imgs/amrgif.gif)
+
+# Introduction to Unity Robotics and Simulation Pro
 
 A written companion to the on-demand video course. Five modules covering the Simulation Pro package:
 importing a robot, exchanging ROS 2 messages, configuring simulated sensors, connecting to a live
@@ -105,14 +138,6 @@ Each module file follows the same shape:
   it works in a Unity room, the next step is a real one.
 
 ---
-
-## See archived content
-
-The previous Unity Robotics Hub — the ROS 1 / ROS 2 TCP-based workflow, the Pick-and-Place tutorial,
-the URDF Importer guide, and the component repo index — is still here and still maintained at its
-original paths.
-
-**[→ See archived content](ARCHIVE.md)**
 
 ## Support
 
