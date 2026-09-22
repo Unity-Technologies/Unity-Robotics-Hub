@@ -6,6 +6,8 @@
 ![ROS](https://img.shields.io/badge/ros2-lyrical-brightgreen)
 ![Unity](https://img.shields.io/badge/unity-6-brightgreen)
 
+<p align="center"><img src="imgs/robotics-reel.gif" width="100%"/></p>
+
 This is a central repository for tools, tutorials, resources, and documentation for robotic simulation in Unity.
 
 ---
