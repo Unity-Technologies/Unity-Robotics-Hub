@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APG TASK APP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .btn-grad { background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%); transition: 0.3s; }
+        .admin-grad { background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%); }
+        .loader { border-top-color: #22c55e; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="p-4">
+
+    <div id="authBox" class="max-w-md mx-auto mt-12 glass p-8 rounded-3xl shadow-2xl border border-white/10">
+        <div class="text-center mb-8">
+            <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                <i class="fas fa-tasks text-4xl text-green-500"></i>
+            </div>
+            <h2 class="text-3xl font-black tracking-tighter text-white">APG TASK <span class="text-green-500">APP</span></h2>
+            <p class="text-gray-400 text-xs mt-1 uppercase tracking-widest text-center">Premium Earning Portal</p>
+        </div>
+        
+        <div class="space-y-4">
+            <input id="email" type="email" placeholder="Gmail Address" class="w-full bg-slate-800/50 border border-slate-700 p-3 rounded-xl outline-none focus:border-green-500">
+            <input id="password" type="password" placeholder="Password" class="w-full bg-slate-800/50 border border-slate-700 p-3 rounded-xl outline-none focus:border-green-500">
+            <button onclick="handleAuth()" class="w-full btn-grad p-4 rounded-xl font-bold shadow-lg text-lg">Login / Sign Up</button>
+        </div>
+        <p class="text-[10px] text-center text-gray-500 mt-6 italic">Secure encrypted login active</p>
+    </div>
+
+    <div id="dashboard" class="max-w-md mx-auto mt-4 hidden">
+        <div class="flex justify-between items-center mb-6 px-2">
+            <div>
+                <h2 class="font-bold text-lg text-white">Dashboard</h2>
+                <p class="text-[10px] text-green-500 font-bold uppercase tracking-widest" id="userNameDisplay"></p>
+            </div>
+            <button onclick="logout()" class="bg-red-500/10 text-red-500 p-2 px-4 rounded-full text-xs font-bold border border-red-500/20">Lock ID</button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="glass p-5 rounded-3xl border-b-4 border-green-500">
+                <p class="text-[10px] text-gray-400 uppercase">Balance</p>
+                <p class="text-3xl font-black text-white" id="userCoins">0</p>
+            </div>
+            <div class="glass p-5 rounded-3xl border-b-4 border-blue-500">
+                <p class="text-[10px] text-gray-400 uppercase">Rate</p>
+                <p class="text-3xl font-black text-white"><span id="displayRate">4</span> <small class="text-xs">PKR</small></p>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-3xl text-center mb-6 relative overflow-hidden">
+            <div id="taskComplete" class="hidden absolute inset-0 bg-slate-950/95 flex flex-col items-center justify-center p-6 z-20">
+                <p class="font-bold text-xl text-yellow-500">All Tasks Done!</p>
+            </div>
+            <div id="verifying" class="hidden mb-4">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 h-10 w-10 mx-auto mb-2"></div>
+                <p class="text-xs text-green-400 animate-pulse">Verifying SMS Status...</p>
+            </div>
+            <p class="text-sm mb-6 font-bold" id="statusText">Status: Ready</p>
+            <button id="taskBtn" onclick="sendTask()" class="w-full btn-grad p-5 rounded-2xl font-black text-lg shadow-xl active:scale-95 transition-all">START TASK</button>
+        </div>
+
+        <div class="glass p-6 rounded-3xl border border-white/5 shadow-2xl">
+            <h3 class="font-bold mb-4 text-sm uppercase text-gray-300">Withdraw Funds</h3>
+            <div class="space-y-3">
+                <select id="accType" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-sm text-white outline-none">
+                    <option value="EasyPaisa">EasyPaisa</option>
+                    <option value="JazzCash">JazzCash</option>
+                </select>
+                <input id="accName" type="text" placeholder="Account Holder Name" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-sm outline-none">
+                <input id="accNumber" type="number" placeholder="Account Number" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-sm outline-none">
+                <button onclick="requestWithdraw()" class="w-full bg-green-600 hover:bg-green-500 p-3 rounded-xl font-bold transition-all mt-2">Submit Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="max-w-2xl mx-auto mt-4 hidden">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-black text-purple-400 italic">ADMIN CONTROL</h2>
+            <button onclick="logoutAdmin()" class="bg-red-500 text-white px-6 py-2 rounded-xl text-xs font-bold shadow-lg shadow-red-500/20">LOGOUT ADMIN</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+            <div class="glass p-6 rounded-3xl border border-purple-500/20">
+                <h3 class="font-bold mb-4 text-purple-400 uppercase text-xs">Task Settings</h3>
+                <label class="text-[9px] text-gray-400 font-bold uppercase">SMS Price (PKR)</label>
+                <input id="adminPrice" type="number" class="w-full bg-slate-900 p-3 rounded-xl mb-3 text-sm border border-slate-700 outline-none" placeholder="Price">
+                <label class="text-[9px] text-gray-400 font-bold uppercase">Task Message</label>
+                <textarea id="adminMsgInput" class="w-full bg-slate-900 p-3 rounded-xl h-20 mb-3 text-sm border border-slate-700 outline-none" placeholder="Message"></textarea>
+                <button onclick="saveAdminSettings()" class="admin-grad w-full p-3 rounded-xl font-bold">Apply Settings</button>
+            </div>
+            <div class="glass p-6 rounded-3xl border border-blue-500/20">
+                <h3 class="font-bold mb-4 text-blue-400 uppercase text-xs">Numbers Management</h3>
+                <input type="file" id="fileInput" accept=".txt" class="block w-full text-xs text-slate-500 mb-6">
+                <button onclick="uploadFile()" class="w-full bg-blue-600 p-3 rounded-xl font-bold">Update Number List</button>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-3xl border border-yellow-500/20 shadow-2xl">
+            <h3 class="font-bold mb-4 text-yellow-500 uppercase text-xs">Pending Withdrawals</h3>
+            <div id="adminWithdrawals" class="grid md:grid-cols-2 gap-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIG
+        const ADMIN_MAIL = "sudaiskhansudaiskhan449@gmail.com";
+        const ADMIN_PASS = "khan1234";
+
+        let users = JSON.parse(localStorage.getItem("apg_users")) || {};
+        let numbers = JSON.parse(localStorage.getItem("apg_numbers")) || [];
+        let withdraws = JSON.parse(localStorage.getItem("apg_withdraws")) || [];
+        let config = JSON.parse(localStorage.getItem("apg_config")) || { price: 4, message: "Hello! Join APG Task App." };
+        
+        let currentUser = localStorage.getItem("apg_session");
+        let timerActive = false;
+
+        // On Load Check (Only for Users, Not Admin)
+        window.onload = () => {
+            if(currentUser && currentUser !== ADMIN_MAIL) {
+                showDashboard();
+            } else {
+                // If last session was admin, force them to login again
+                localStorage.removeItem("apg_session");
+                document.getElementById('authBox').classList.remove('hidden');
+            }
+        };
+
+        function handleAuth() {
+            let email = document.getElementById('email').value.trim();
+            let pass = document.getElementById('password').value.trim();
+            if(!email || !pass) return alert("Please fill all details!");
+
+            // Admin Logic (No Session persistence for refresh)
+            if(email === ADMIN_MAIL && pass === ADMIN_PASS) {
+                showAdmin();
+                return;
+            }
+
+            // User Logic
+            if(!users[email]) {
+                users[email] = { password: pass, coins: 0, index: 0 };
+            } else if(users[email].password !== pass) {
+                return alert("Wrong password!");
+            }
+            
+            localStorage.setItem("apg_session", email);
+            currentUser = email;
+            saveData();
+            showDashboard();
+        }
+
+        function showDashboard() {
+            document.getElementById('authBox').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('userNameDisplay').innerText = currentUser;
+            document.getElementById('displayRate').innerText = config.price;
+            updateUserUI();
+        }
+
+        function showAdmin() {
+            document.getElementById('authBox').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('adminPanel').classList.remove('hidden');
+            document.getElementById('adminPrice').value = config.price;
+            document.getElementById('adminMsgInput').value = config.message;
+            renderAdmin();
+        }
+
+        function logout() {
+            localStorage.removeItem("apg_session");
+            location.reload();
+        }
+
+        function logoutAdmin() {
+            // Admin logout sirf window reload karega kyunke hum admin session save hi nahi kar rahe
+            location.reload();
+        }
+
+        function updateUserUI() {
+            if(!users[currentUser]) return;
+            document.getElementById('userCoins').innerText = users[currentUser].coins + " PKR";
+            if(numbers.length > 0 && users[currentUser].index >= numbers.length) {
+                document.getElementById('taskComplete').classList.remove('hidden');
+            } else {
+                document.getElementById('taskComplete').classList.add('hidden');
+            }
+        }
+
+        function sendTask() {
+            if(timerActive || numbers.length === 0) return alert("Check numbers or wait for timer.");
+            let targetNum = numbers[users[currentUser].index];
+            window.open(`https://wa.me/${targetNum}?text=${encodeURIComponent(config.message)}`, '_blank');
+
+            document.getElementById('taskBtn').classList.add('hidden');
+            document.getElementById('verifying').classList.remove('hidden');
+            document.getElementById('statusText').innerText = "Verifying...";
+
+            setTimeout(() => {
+                users[currentUser].coins += parseInt(config.price);
+                users[currentUser].index += 1;
+                saveData();
+                updateUserUI();
+                document.getElementById('verifying').classList.add('hidden');
+                document.getElementById('taskBtn').classList.remove('hidden');
+                startTimer(60); 
+            }, 5000);
+        }
+
+        function startTimer(sec) {
+            timerActive = true;
+            let btn = document.getElementById('taskBtn');
+            btn.classList.add('opacity-40', 'pointer-events-none');
+            let t = setInterval(() => {
+                sec--;
+                document.getElementById('statusText').innerHTML = `Next Task: <span class="text-red-500 font-bold">${sec}s</span>`;
+                if(sec <= 0) {
+                    clearInterval(t);
+                    timerActive = false;
+                    document.getElementById('statusText').innerHTML = `Status: Ready`;
+                    btn.classList.remove('opacity-40', 'pointer-events-none');
+                }
+            }, 1000);
+        }
+
+        function requestWithdraw() {
+            let type = document.getElementById('accType').value;
+            let name = document.getElementById('accName').value.trim();
+            let num = document.getElementById('accNumber').value.trim();
+            if(!name || !num) return alert("Enter account details!");
+            if(users[currentUser].coins < 100) return alert("Minimum 100 PKR required!");
+
+            withdraws.push({
+                email: currentUser,
+                amount: users[currentUser].coins,
+                method: type,
+                accName: name,
+                accNumber: num,
+                status: "Pending"
+            });
+            users[currentUser].coins = 0;
+            saveData();
+            updateUserUI();
+            alert("Withdrawal request sent!");
+            document.getElementById('accName').value = "";
+            document.getElementById('accNumber').value = "";
+        }
+
+        // ADMIN CORE
+        function renderAdmin() {
+            let wHtml = "";
+            withdraws.forEach((w, i) => {
+                if(w.status === "Pending") {
+                    wHtml += `<div class="bg-slate-800 p-4 rounded-2xl border border-white/10 text-xs">
+                        <div class="flex justify-between font-bold text-yellow-500 mb-2 uppercase">
+                            <span>${w.method}</span> <span>${w.amount} PKR</span>
+                        </div>
+                        <p class="text-gray-300"><b>A/C Name:</b> ${w.accName}</p>
+                        <p class="text-gray-300"><b>A/C Number:</b> ${w.accNumber}</p>
+                        <p class="text-gray-500 text-[10px] mt-1 italic">${w.email}</p>
+                        <button onclick="approveW(${i})" class="w-full bg-green-600 hover:bg-green-500 mt-3 py-2 rounded-lg font-bold transition-all uppercase tracking-tighter">Mark Paid</button>
+                    </div>`;
+                }
+            });
+            document.getElementById('adminWithdrawals').innerHTML = wHtml || "<p class='text-gray-500 text-xs col-span-2 text-center'>No pending requests</p>";
+        }
+
+        function approveW(i) {
+            withdraws[i].status = "Paid";
+            saveData();
+            renderAdmin();
+            alert("Payment Mark as Paid!");
+        }
+
+        function saveAdminSettings() {
+            config.price = document.getElementById('adminPrice').value || 4;
+            config.message = document.getElementById('adminMsgInput').value;
+            localStorage.setItem("apg_config", JSON.stringify(config));
+            alert("Settings Updated!");
+        }
+
+        function uploadFile() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return alert("Select file!");
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                numbers = e.target.result.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 5);
+                for(let u in users) users[u].index = 0;
+                saveData();
+                alert("Task List Updated!");
+                renderAdmin();
+            };
+            reader.readAsText(file);
+        }
+
+        function saveData() {
+            localStorage.setItem("apg_users", JSON.stringify(users));
+            localStorage.setItem("apg_numbers", JSON.stringify(numbers));
+            localStorage.setItem("apg_withdraws", JSON.stringify(withdraws));
+            localStorage.setItem("apg_config", JSON.stringify(config));
+        }
+    </script>
+</body>
+</html>
