@@ -112,7 +112,7 @@ To enable communication between Unity and ROS, a TCP endpoint running as a ROS n
    }
    ```
 
-   > This function first takes in the current joint target values. Then, it grabs the poses of the `m_Target` and the `m_TargetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Send()` to send this information to the ROS topic `m_TopicName` (defined as `"/niryo_joints"`).
+   > This function first takes in the current joint target values. Then, it grabs the poses of the `m_Target` and the `m_TargetPlacement` objects, adds them to the newly created message `sourceDestinationMessage`, and calls `Publish()` to send this information to the ROS topic `m_TopicName` (defined as `"/niryo_joints"`).
 
    > Note: Going from Unity world space to ROS world space requires a conversion. Unity's coordinate space has x Right, y Up, and z Forward (hence "RUF" coordinates); ROS has x Forward, y Left and z Up (hence "FLU"). So a Unity `(x,y,z)` coordinate is equivalent to the ROS `(z,-x,y)` coordinate. These conversions are done by the `To<FLU>` function in the ROS-TCP-Connector package's [ROSGeometry component](https://github.com/Unity-Technologies/ROS-TCP-Connector/blob/main/ROSGeometry.md).
 
