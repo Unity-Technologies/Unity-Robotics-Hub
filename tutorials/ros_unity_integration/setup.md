@@ -88,6 +88,7 @@ Follow these steps if using ROS2:
 4. <img src="images/ros2_icon.png" alt="ros2" width="23" height="14"/> Also in the ROS Settings window, ROS2 users should switch the protocol to ROS2 now.
 	![](images/ros2_protocol.png)
 
+5. Now, if you are not using the Unity Robotics Demo, you need to drag in the ROSConnectionPrefab into the Hierarchy for the connection to work.
 ## Install Unity Robotics Demo
 
 The instructions so far have set up the ROS-TCP-Connector package for general use. If you are specifically following one of the [ROS–Unity Integration tutorials](README.md), you'll need to do the following additional steps:
